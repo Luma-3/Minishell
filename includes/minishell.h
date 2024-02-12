@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/12 15:24:14 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/12 18:50:53 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-int	g_sig_return;
+# define FAILURE -1
+# define SUCCESS 0
+
+//int	g_sig_return;
+
+int	count_words(const char *prompt);
 
 #endif
