@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG -pthread CMakeFiles/check_nofork.dir/check_nofork.c.o -o check_nofork  ../src/libcheck.a -lm -lrt 

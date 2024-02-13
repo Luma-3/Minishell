@@ -1,0 +1,1312 @@
+The system is: Linux - 5.15.0-92-generic - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/cc 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is Clang, found in "/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/3.22.1/CompilerIdC/a.out"
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_8d404/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_8d404.dir/build.make CMakeFiles/cmTC_8d404.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_8d404.dir/CMakeCCompilerABI.c.o
+/usr/bin/cc   -v -MD -MT CMakeFiles/cmTC_8d404.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_8d404.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_8d404.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.22/Modules/CMakeCCompilerABI.c
+Ubuntu clang version 12.0.1-19ubuntu3
+Target: x86_64-pc-linux-gnu
+Thread model: posix
+InstalledDir: /usr/bin
+Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/10
+Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/11
+Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/12
+Found candidate GCC installation: /usr/lib/gcc/x86_64-linux-gnu/10
+Found candidate GCC installation: /usr/lib/gcc/x86_64-linux-gnu/11
+Found candidate GCC installation: /usr/lib/gcc/x86_64-linux-gnu/12
+Selected GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/12
+Candidate multilib: .;@m64
+Selected multilib: .;@m64
+ (in-process)
+ "/usr/lib/llvm-12/bin/clang" -cc1 -triple x86_64-pc-linux-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model static -mframe-pointer=all -fmath-errno -fno-rounding-math -mconstructor-aliases -munwind-tables -target-cpu x86-64 -tune-cpu generic -fno-split-dwarf-inlining -debugger-tuning=gdb -v -resource-dir /usr/lib/llvm-12/lib/clang/12.0.1 -dependency-file CMakeFiles/cmTC_8d404.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_8d404.dir/CMakeCCompilerABI.c.o -sys-header-deps -internal-isystem /usr/local/include -internal-isystem /usr/lib/llvm-12/lib/clang/12.0.1/include -internal-externc-isystem /usr/include/x86_64-linux-gnu -internal-externc-isystem /include -internal-externc-isystem /usr/include -fdebug-compilation-dir /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp -ferror-limit 19 -fgnuc-version=4.2.1 -faddrsig -o CMakeFiles/cmTC_8d404.dir/CMakeCCompilerABI.c.o -x c /usr/share/cmake-3.22/Modules/CMakeCCompilerABI.c
+clang -cc1 version 12.0.1 based upon LLVM 12.0.1 default target x86_64-pc-linux-gnu
+ignoring nonexistent directory "/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/local/include
+ /usr/lib/llvm-12/lib/clang/12.0.1/include
+ /usr/include/x86_64-linux-gnu
+ /usr/include
+End of search list.
+Linking C executable cmTC_8d404
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8d404.dir/link.txt --verbose=1
+/usr/bin/cc  -v CMakeFiles/cmTC_8d404.dir/CMakeCCompilerABI.c.o -o cmTC_8d404 
+Ubuntu clang version 12.0.1-19ubuntu3
+Target: x86_64-pc-linux-gnu
+Thread model: posix
+InstalledDir: /usr/bin
+Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/10
+Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/11
+Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/12
+Found candidate GCC installation: /usr/lib/gcc/x86_64-linux-gnu/10
+Found candidate GCC installation: /usr/lib/gcc/x86_64-linux-gnu/11
+Found candidate GCC installation: /usr/lib/gcc/x86_64-linux-gnu/12
+Selected GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/12
+Candidate multilib: .;@m64
+Selected multilib: .;@m64
+ "/usr/bin/ld" --build-id --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_8d404 /usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crt1.o /usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crti.o /usr/bin/../lib/gcc/x86_64-linux-gnu/12/crtbegin.o -L/usr/bin/../lib/gcc/x86_64-linux-gnu/12 -L/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu -L/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../../lib64 -L/lib/x86_64-linux-gnu -L/lib/../lib64 -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib64 -L/usr/lib/x86_64-linux-gnu/../../lib64 -L/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../.. -L/usr/lib/llvm-12/bin/../lib -L/lib -L/usr/lib CMakeFiles/cmTC_8d404.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/bin/../lib/gcc/x86_64-linux-gnu/12/crtend.o /usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crtn.o
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Parsed C implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/usr/local/include]
+    add: [/usr/lib/llvm-12/lib/clang/12.0.1/include]
+    add: [/usr/include/x86_64-linux-gnu]
+    add: [/usr/include]
+  end of search list found
+  collapse include dir [/usr/local/include] ==> [/usr/local/include]
+  collapse include dir [/usr/lib/llvm-12/lib/clang/12.0.1/include] ==> [/usr/lib/llvm-12/lib/clang/12.0.1/include]
+  collapse include dir [/usr/include/x86_64-linux-gnu] ==> [/usr/include/x86_64-linux-gnu]
+  collapse include dir [/usr/include] ==> [/usr/include]
+  implicit include dirs: [/usr/local/include;/usr/lib/llvm-12/lib/clang/12.0.1/include;/usr/include/x86_64-linux-gnu;/usr/include]
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_8d404/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_8d404.dir/build.make CMakeFiles/cmTC_8d404.dir/build]
+  ignore line: [gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_8d404.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/cc   -v -MD -MT CMakeFiles/cmTC_8d404.dir/CMakeCCompilerABI.c.o -MF CMakeFiles/cmTC_8d404.dir/CMakeCCompilerABI.c.o.d -o CMakeFiles/cmTC_8d404.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.22/Modules/CMakeCCompilerABI.c]
+  ignore line: [Ubuntu clang version 12.0.1-19ubuntu3]
+  ignore line: [Target: x86_64-pc-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /usr/bin]
+  ignore line: [Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/10]
+  ignore line: [Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/11]
+  ignore line: [Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/12]
+  ignore line: [Found candidate GCC installation: /usr/lib/gcc/x86_64-linux-gnu/10]
+  ignore line: [Found candidate GCC installation: /usr/lib/gcc/x86_64-linux-gnu/11]
+  ignore line: [Found candidate GCC installation: /usr/lib/gcc/x86_64-linux-gnu/12]
+  ignore line: [Selected GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/12]
+  ignore line: [Candidate multilib: .]
+  ignore line: [@m64]
+  ignore line: [Selected multilib: .]
+  ignore line: [@m64]
+  ignore line: [ (in-process)]
+  ignore line: [ "/usr/lib/llvm-12/bin/clang" -cc1 -triple x86_64-pc-linux-gnu -emit-obj -mrelax-all --mrelax-relocations -disable-free -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model static -mframe-pointer=all -fmath-errno -fno-rounding-math -mconstructor-aliases -munwind-tables -target-cpu x86-64 -tune-cpu generic -fno-split-dwarf-inlining -debugger-tuning=gdb -v -resource-dir /usr/lib/llvm-12/lib/clang/12.0.1 -dependency-file CMakeFiles/cmTC_8d404.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_8d404.dir/CMakeCCompilerABI.c.o -sys-header-deps -internal-isystem /usr/local/include -internal-isystem /usr/lib/llvm-12/lib/clang/12.0.1/include -internal-externc-isystem /usr/include/x86_64-linux-gnu -internal-externc-isystem /include -internal-externc-isystem /usr/include -fdebug-compilation-dir /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp -ferror-limit 19 -fgnuc-version=4.2.1 -faddrsig -o CMakeFiles/cmTC_8d404.dir/CMakeCCompilerABI.c.o -x c /usr/share/cmake-3.22/Modules/CMakeCCompilerABI.c]
+  ignore line: [clang -cc1 version 12.0.1 based upon LLVM 12.0.1 default target x86_64-pc-linux-gnu]
+  ignore line: [ignoring nonexistent directory "/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /usr/local/include]
+  ignore line: [ /usr/lib/llvm-12/lib/clang/12.0.1/include]
+  ignore line: [ /usr/include/x86_64-linux-gnu]
+  ignore line: [ /usr/include]
+  ignore line: [End of search list.]
+  ignore line: [Linking C executable cmTC_8d404]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8d404.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/cc  -v CMakeFiles/cmTC_8d404.dir/CMakeCCompilerABI.c.o -o cmTC_8d404 ]
+  ignore line: [Ubuntu clang version 12.0.1-19ubuntu3]
+  ignore line: [Target: x86_64-pc-linux-gnu]
+  ignore line: [Thread model: posix]
+  ignore line: [InstalledDir: /usr/bin]
+  ignore line: [Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/10]
+  ignore line: [Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/11]
+  ignore line: [Found candidate GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/12]
+  ignore line: [Found candidate GCC installation: /usr/lib/gcc/x86_64-linux-gnu/10]
+  ignore line: [Found candidate GCC installation: /usr/lib/gcc/x86_64-linux-gnu/11]
+  ignore line: [Found candidate GCC installation: /usr/lib/gcc/x86_64-linux-gnu/12]
+  ignore line: [Selected GCC installation: /usr/bin/../lib/gcc/x86_64-linux-gnu/12]
+  ignore line: [Candidate multilib: .]
+  ignore line: [@m64]
+  ignore line: [Selected multilib: .]
+  ignore line: [@m64]
+  link line: [ "/usr/bin/ld" --build-id --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_8d404 /usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crt1.o /usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crti.o /usr/bin/../lib/gcc/x86_64-linux-gnu/12/crtbegin.o -L/usr/bin/../lib/gcc/x86_64-linux-gnu/12 -L/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu -L/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../../lib64 -L/lib/x86_64-linux-gnu -L/lib/../lib64 -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib64 -L/usr/lib/x86_64-linux-gnu/../../lib64 -L/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../.. -L/usr/lib/llvm-12/bin/../lib -L/lib -L/usr/lib CMakeFiles/cmTC_8d404.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/bin/../lib/gcc/x86_64-linux-gnu/12/crtend.o /usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crtn.o]
+    arg [/usr/bin/ld] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_8d404] ==> ignore
+    arg [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crt1.o] ==> obj [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crt1.o]
+    arg [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crti.o] ==> obj [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crti.o]
+    arg [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/crtbegin.o] ==> obj [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/crtbegin.o]
+    arg [-L/usr/bin/../lib/gcc/x86_64-linux-gnu/12] ==> dir [/usr/bin/../lib/gcc/x86_64-linux-gnu/12]
+    arg [-L/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu] ==> dir [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu]
+    arg [-L/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../../lib64] ==> dir [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../../lib64]
+    arg [-L/lib/x86_64-linux-gnu] ==> dir [/lib/x86_64-linux-gnu]
+    arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+    arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
+    arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+    arg [-L/usr/lib/x86_64-linux-gnu/../../lib64] ==> dir [/usr/lib/x86_64-linux-gnu/../../lib64]
+    arg [-L/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../..] ==> dir [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../..]
+    arg [-L/usr/lib/llvm-12/bin/../lib] ==> dir [/usr/lib/llvm-12/bin/../lib]
+    arg [-L/lib] ==> dir [/lib]
+    arg [-L/usr/lib] ==> dir [/usr/lib]
+    arg [CMakeFiles/cmTC_8d404.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/crtend.o] ==> obj [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/crtend.o]
+    arg [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crtn.o] ==> obj [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crtn.o]
+  collapse obj [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crt1.o] ==> [/usr/lib/x86_64-linux-gnu/crt1.o]
+  collapse obj [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crti.o] ==> [/usr/lib/x86_64-linux-gnu/crti.o]
+  collapse obj [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/crtbegin.o] ==> [/usr/lib/gcc/x86_64-linux-gnu/12/crtbegin.o]
+  collapse obj [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/crtend.o] ==> [/usr/lib/gcc/x86_64-linux-gnu/12/crtend.o]
+  collapse obj [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu/crtn.o] ==> [/usr/lib/x86_64-linux-gnu/crtn.o]
+  collapse library dir [/usr/bin/../lib/gcc/x86_64-linux-gnu/12] ==> [/usr/lib/gcc/x86_64-linux-gnu/12]
+  collapse library dir [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../../lib64] ==> [/usr/lib64]
+  collapse library dir [/lib/x86_64-linux-gnu] ==> [/lib/x86_64-linux-gnu]
+  collapse library dir [/lib/../lib64] ==> [/lib64]
+  collapse library dir [/usr/lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+  collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+  collapse library dir [/usr/lib/x86_64-linux-gnu/../../lib64] ==> [/usr/lib64]
+  collapse library dir [/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../..] ==> [/usr/lib]
+  collapse library dir [/usr/lib/llvm-12/bin/../lib] ==> [/usr/lib/llvm-12/lib]
+  collapse library dir [/lib] ==> [/lib]
+  collapse library dir [/usr/lib] ==> [/usr/lib]
+  implicit libs: [gcc;gcc_s;c;gcc;gcc_s]
+  implicit objs: [/usr/lib/x86_64-linux-gnu/crt1.o;/usr/lib/x86_64-linux-gnu/crti.o;/usr/lib/gcc/x86_64-linux-gnu/12/crtbegin.o;/usr/lib/gcc/x86_64-linux-gnu/12/crtend.o;/usr/lib/x86_64-linux-gnu/crtn.o]
+  implicit dirs: [/usr/lib/gcc/x86_64-linux-gnu/12;/usr/lib/x86_64-linux-gnu;/usr/lib64;/lib/x86_64-linux-gnu;/lib64;/usr/lib;/usr/lib/llvm-12/lib;/lib]
+  implicit fwks: []
+
+
+Determining if files ;sys/types.h exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_f64ef/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_f64ef.dir/build.make CMakeFiles/cmTC_f64ef.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f64ef.dir/HAVE_SYS_TYPES_H.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_f64ef.dir/HAVE_SYS_TYPES_H.c.o -MF CMakeFiles/cmTC_f64ef.dir/HAVE_SYS_TYPES_H.c.o.d -o CMakeFiles/cmTC_f64ef.dir/HAVE_SYS_TYPES_H.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckIncludeFiles/HAVE_SYS_TYPES_H.c
+Linking C executable cmTC_f64ef
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f64ef.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_f64ef.dir/HAVE_SYS_TYPES_H.c.o -o cmTC_f64ef 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if files sys/types.h;errno.h exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_b009f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_b009f.dir/build.make CMakeFiles/cmTC_b009f.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_b009f.dir/HAVE_ERRNO_H.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_b009f.dir/HAVE_ERRNO_H.c.o -MF CMakeFiles/cmTC_b009f.dir/HAVE_ERRNO_H.c.o.d -o CMakeFiles/cmTC_b009f.dir/HAVE_ERRNO_H.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckIncludeFiles/HAVE_ERRNO_H.c
+Linking C executable cmTC_b009f
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b009f.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_b009f.dir/HAVE_ERRNO_H.c.o -o cmTC_b009f 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if files sys/types.h;errno.h;inttypes.h exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_bdb9d/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_bdb9d.dir/build.make CMakeFiles/cmTC_bdb9d.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_bdb9d.dir/HAVE_INTTYPES_H.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_bdb9d.dir/HAVE_INTTYPES_H.c.o -MF CMakeFiles/cmTC_bdb9d.dir/HAVE_INTTYPES_H.c.o.d -o CMakeFiles/cmTC_bdb9d.dir/HAVE_INTTYPES_H.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckIncludeFiles/HAVE_INTTYPES_H.c
+Linking C executable cmTC_bdb9d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bdb9d.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_bdb9d.dir/HAVE_INTTYPES_H.c.o -o cmTC_bdb9d 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if files sys/types.h;errno.h;inttypes.h;limits.h exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_8e1a6/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_8e1a6.dir/build.make CMakeFiles/cmTC_8e1a6.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_8e1a6.dir/HAVE_LIMITS_H.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_8e1a6.dir/HAVE_LIMITS_H.c.o -MF CMakeFiles/cmTC_8e1a6.dir/HAVE_LIMITS_H.c.o.d -o CMakeFiles/cmTC_8e1a6.dir/HAVE_LIMITS_H.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckIncludeFiles/HAVE_LIMITS_H.c
+Linking C executable cmTC_8e1a6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8e1a6.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_8e1a6.dir/HAVE_LIMITS_H.c.o -o cmTC_8e1a6 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if files sys/types.h;errno.h;inttypes.h;limits.h;regex.h exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_25f6d/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_25f6d.dir/build.make CMakeFiles/cmTC_25f6d.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_25f6d.dir/HAVE_REGEX_H.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_25f6d.dir/HAVE_REGEX_H.c.o -MF CMakeFiles/cmTC_25f6d.dir/HAVE_REGEX_H.c.o.d -o CMakeFiles/cmTC_25f6d.dir/HAVE_REGEX_H.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckIncludeFiles/HAVE_REGEX_H.c
+Linking C executable cmTC_25f6d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_25f6d.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_25f6d.dir/HAVE_REGEX_H.c.o -o cmTC_25f6d 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if files sys/types.h;errno.h;inttypes.h;limits.h;regex.h;signal.h exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_1b8bb/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_1b8bb.dir/build.make CMakeFiles/cmTC_1b8bb.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1b8bb.dir/HAVE_SIGNAL_H.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_1b8bb.dir/HAVE_SIGNAL_H.c.o -MF CMakeFiles/cmTC_1b8bb.dir/HAVE_SIGNAL_H.c.o.d -o CMakeFiles/cmTC_1b8bb.dir/HAVE_SIGNAL_H.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckIncludeFiles/HAVE_SIGNAL_H.c
+Linking C executable cmTC_1b8bb
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1b8bb.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_1b8bb.dir/HAVE_SIGNAL_H.c.o -o cmTC_1b8bb 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if files sys/types.h;errno.h;inttypes.h;limits.h;regex.h;signal.h;stdarg.h exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_3752f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_3752f.dir/build.make CMakeFiles/cmTC_3752f.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_3752f.dir/HAVE_STDARG_H.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_3752f.dir/HAVE_STDARG_H.c.o -MF CMakeFiles/cmTC_3752f.dir/HAVE_STDARG_H.c.o.d -o CMakeFiles/cmTC_3752f.dir/HAVE_STDARG_H.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckIncludeFiles/HAVE_STDARG_H.c
+Linking C executable cmTC_3752f
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3752f.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_3752f.dir/HAVE_STDARG_H.c.o -o cmTC_3752f 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if files sys/types.h;errno.h;inttypes.h;limits.h;regex.h;signal.h;stdarg.h;stdint.h exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_9d117/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_9d117.dir/build.make CMakeFiles/cmTC_9d117.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9d117.dir/HAVE_STDINT_H.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_9d117.dir/HAVE_STDINT_H.c.o -MF CMakeFiles/cmTC_9d117.dir/HAVE_STDINT_H.c.o.d -o CMakeFiles/cmTC_9d117.dir/HAVE_STDINT_H.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckIncludeFiles/HAVE_STDINT_H.c
+Linking C executable cmTC_9d117
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9d117.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_9d117.dir/HAVE_STDINT_H.c.o -o cmTC_9d117 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if files sys/types.h;errno.h;inttypes.h;limits.h;regex.h;signal.h;stdarg.h;stdint.h;stdlib.h exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_3ac67/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_3ac67.dir/build.make CMakeFiles/cmTC_3ac67.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_3ac67.dir/HAVE_STDLIB_H.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_3ac67.dir/HAVE_STDLIB_H.c.o -MF CMakeFiles/cmTC_3ac67.dir/HAVE_STDLIB_H.c.o.d -o CMakeFiles/cmTC_3ac67.dir/HAVE_STDLIB_H.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckIncludeFiles/HAVE_STDLIB_H.c
+Linking C executable cmTC_3ac67
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3ac67.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_3ac67.dir/HAVE_STDLIB_H.c.o -o cmTC_3ac67 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if files sys/types.h;errno.h;inttypes.h;limits.h;regex.h;signal.h;stdarg.h;stdint.h;stdlib.h;string.h exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_497ce/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_497ce.dir/build.make CMakeFiles/cmTC_497ce.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_497ce.dir/HAVE_STRING_H.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_497ce.dir/HAVE_STRING_H.c.o -MF CMakeFiles/cmTC_497ce.dir/HAVE_STRING_H.c.o.d -o CMakeFiles/cmTC_497ce.dir/HAVE_STRING_H.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckIncludeFiles/HAVE_STRING_H.c
+Linking C executable cmTC_497ce
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_497ce.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_497ce.dir/HAVE_STRING_H.c.o -o cmTC_497ce 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if files sys/types.h;errno.h;inttypes.h;limits.h;regex.h;signal.h;stdarg.h;stdint.h;stdlib.h;string.h;strings.h exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_7c6a6/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_7c6a6.dir/build.make CMakeFiles/cmTC_7c6a6.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7c6a6.dir/HAVE_STRINGS_H.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_7c6a6.dir/HAVE_STRINGS_H.c.o -MF CMakeFiles/cmTC_7c6a6.dir/HAVE_STRINGS_H.c.o.d -o CMakeFiles/cmTC_7c6a6.dir/HAVE_STRINGS_H.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckIncludeFiles/HAVE_STRINGS_H.c
+Linking C executable cmTC_7c6a6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7c6a6.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_7c6a6.dir/HAVE_STRINGS_H.c.o -o cmTC_7c6a6 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if files sys/types.h;errno.h;inttypes.h;limits.h;regex.h;signal.h;stdarg.h;stdint.h;stdlib.h;string.h;strings.h;sys/time.h exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_dde1f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_dde1f.dir/build.make CMakeFiles/cmTC_dde1f.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_dde1f.dir/HAVE_SYS_TIME_H.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_dde1f.dir/HAVE_SYS_TIME_H.c.o -MF CMakeFiles/cmTC_dde1f.dir/HAVE_SYS_TIME_H.c.o.d -o CMakeFiles/cmTC_dde1f.dir/HAVE_SYS_TIME_H.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckIncludeFiles/HAVE_SYS_TIME_H.c
+Linking C executable cmTC_dde1f
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_dde1f.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_dde1f.dir/HAVE_SYS_TIME_H.c.o -o cmTC_dde1f 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if files sys/types.h;errno.h;inttypes.h;limits.h;regex.h;signal.h;stdarg.h;stdint.h;stdlib.h;string.h;strings.h;sys/time.h;time.h exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_a1ac2/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_a1ac2.dir/build.make CMakeFiles/cmTC_a1ac2.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a1ac2.dir/HAVE_TIME_H.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_a1ac2.dir/HAVE_TIME_H.c.o -MF CMakeFiles/cmTC_a1ac2.dir/HAVE_TIME_H.c.o.d -o CMakeFiles/cmTC_a1ac2.dir/HAVE_TIME_H.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckIncludeFiles/HAVE_TIME_H.c
+Linking C executable cmTC_a1ac2
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a1ac2.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_a1ac2.dir/HAVE_TIME_H.c.o -o cmTC_a1ac2 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if files sys/types.h;errno.h;inttypes.h;limits.h;regex.h;signal.h;stdarg.h;stdint.h;stdlib.h;string.h;strings.h;sys/time.h;time.h;unistd.h exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_46a5d/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_46a5d.dir/build.make CMakeFiles/cmTC_46a5d.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_46a5d.dir/HAVE_UNISTD_H.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_46a5d.dir/HAVE_UNISTD_H.c.o -MF CMakeFiles/cmTC_46a5d.dir/HAVE_UNISTD_H.c.o.d -o CMakeFiles/cmTC_46a5d.dir/HAVE_UNISTD_H.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckIncludeFiles/HAVE_UNISTD_H.c
+Linking C executable cmTC_46a5d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_46a5d.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_46a5d.dir/HAVE_UNISTD_H.c.o -o cmTC_46a5d 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if files sys/types.h;errno.h;inttypes.h;limits.h;regex.h;signal.h;stdarg.h;stdint.h;stdlib.h;string.h;strings.h;sys/time.h;time.h;unistd.h;pthread.h exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_1d9ad/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_1d9ad.dir/build.make CMakeFiles/cmTC_1d9ad.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1d9ad.dir/HAVE_PTHREAD.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_1d9ad.dir/HAVE_PTHREAD.c.o -MF CMakeFiles/cmTC_1d9ad.dir/HAVE_PTHREAD.c.o.d -o CMakeFiles/cmTC_1d9ad.dir/HAVE_PTHREAD.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckIncludeFiles/HAVE_PTHREAD.c
+Linking C executable cmTC_1d9ad
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1d9ad.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_1d9ad.dir/HAVE_PTHREAD.c.o -o cmTC_1d9ad 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function fork exists passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_f5927/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_f5927.dir/build.make CMakeFiles/cmTC_f5927.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f5927.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=fork -std=gnu99 -MD -MT CMakeFiles/cmTC_f5927.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_f5927.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_f5927.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+Linking C executable cmTC_f5927
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f5927.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=fork CMakeFiles/cmTC_f5927.dir/CheckFunctionExists.c.o -o cmTC_f5927 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function getline exists passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_68c0d/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_68c0d.dir/build.make CMakeFiles/cmTC_68c0d.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_68c0d.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=getline -std=gnu99 -MD -MT CMakeFiles/cmTC_68c0d.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_68c0d.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_68c0d.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+Linking C executable cmTC_68c0d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_68c0d.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=getline CMakeFiles/cmTC_68c0d.dir/CheckFunctionExists.c.o -o cmTC_68c0d 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function getpid exists passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_55d3b/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_55d3b.dir/build.make CMakeFiles/cmTC_55d3b.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_55d3b.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=getpid -std=gnu99 -MD -MT CMakeFiles/cmTC_55d3b.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_55d3b.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_55d3b.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+Linking C executable cmTC_55d3b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_55d3b.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=getpid CMakeFiles/cmTC_55d3b.dir/CheckFunctionExists.c.o -o cmTC_55d3b 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function gettimeofday exists passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_27cc8/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_27cc8.dir/build.make CMakeFiles/cmTC_27cc8.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_27cc8.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=gettimeofday -std=gnu99 -MD -MT CMakeFiles/cmTC_27cc8.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_27cc8.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_27cc8.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+Linking C executable cmTC_27cc8
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_27cc8.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=gettimeofday CMakeFiles/cmTC_27cc8.dir/CheckFunctionExists.c.o -o cmTC_27cc8 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function localtime_r exists passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_d308a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_d308a.dir/build.make CMakeFiles/cmTC_d308a.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d308a.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=localtime_r -std=gnu99 -MD -MT CMakeFiles/cmTC_d308a.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_d308a.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_d308a.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+Linking C executable cmTC_d308a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d308a.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=localtime_r CMakeFiles/cmTC_d308a.dir/CheckFunctionExists.c.o -o cmTC_d308a 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function malloc exists passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_3ba5f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_3ba5f.dir/build.make CMakeFiles/cmTC_3ba5f.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_3ba5f.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=malloc -std=gnu99 -MD -MT CMakeFiles/cmTC_3ba5f.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_3ba5f.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_3ba5f.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+/usr/share/cmake-3.22/Modules/CheckFunctionExists.c:7:3: warning: incompatible redeclaration of library function 'malloc' [-Wincompatible-library-redeclaration]
+  CHECK_FUNCTION_EXISTS(void);
+  ^
+<command line>:1:31: note: expanded from here
+#define CHECK_FUNCTION_EXISTS malloc
+                              ^
+/usr/share/cmake-3.22/Modules/CheckFunctionExists.c:7:3: note: 'malloc' is a builtin with type 'void *(unsigned long)'
+<command line>:1:31: note: expanded from here
+#define CHECK_FUNCTION_EXISTS malloc
+                              ^
+1 warning generated.
+Linking C executable cmTC_3ba5f
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3ba5f.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=malloc CMakeFiles/cmTC_3ba5f.dir/CheckFunctionExists.c.o -o cmTC_3ba5f 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function mkstemp exists passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_b0f61/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_b0f61.dir/build.make CMakeFiles/cmTC_b0f61.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_b0f61.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=mkstemp -std=gnu99 -MD -MT CMakeFiles/cmTC_b0f61.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_b0f61.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_b0f61.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+Linking C executable cmTC_b0f61
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b0f61.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=mkstemp CMakeFiles/cmTC_b0f61.dir/CheckFunctionExists.c.o -o cmTC_b0f61 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function realloc exists passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_403da/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_403da.dir/build.make CMakeFiles/cmTC_403da.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_403da.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=realloc -std=gnu99 -MD -MT CMakeFiles/cmTC_403da.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_403da.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_403da.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+/usr/share/cmake-3.22/Modules/CheckFunctionExists.c:7:3: warning: incompatible redeclaration of library function 'realloc' [-Wincompatible-library-redeclaration]
+  CHECK_FUNCTION_EXISTS(void);
+  ^
+<command line>:1:31: note: expanded from here
+#define CHECK_FUNCTION_EXISTS realloc
+                              ^
+/usr/share/cmake-3.22/Modules/CheckFunctionExists.c:7:3: note: 'realloc' is a builtin with type 'void *(void *, unsigned long)'
+<command line>:1:31: note: expanded from here
+#define CHECK_FUNCTION_EXISTS realloc
+                              ^
+1 warning generated.
+Linking C executable cmTC_403da
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_403da.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=realloc CMakeFiles/cmTC_403da.dir/CheckFunctionExists.c.o -o cmTC_403da 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function setenv exists passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_ac06f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ac06f.dir/build.make CMakeFiles/cmTC_ac06f.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ac06f.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=setenv -std=gnu99 -MD -MT CMakeFiles/cmTC_ac06f.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_ac06f.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_ac06f.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+Linking C executable cmTC_ac06f
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ac06f.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=setenv CMakeFiles/cmTC_ac06f.dir/CheckFunctionExists.c.o -o cmTC_ac06f 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function sigaction exists passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_0dabc/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_0dabc.dir/build.make CMakeFiles/cmTC_0dabc.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0dabc.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=sigaction -std=gnu99 -MD -MT CMakeFiles/cmTC_0dabc.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_0dabc.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_0dabc.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+Linking C executable cmTC_0dabc
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0dabc.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=sigaction CMakeFiles/cmTC_0dabc.dir/CheckFunctionExists.c.o -o cmTC_0dabc 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function strdup exists passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_b3bd7/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_b3bd7.dir/build.make CMakeFiles/cmTC_b3bd7.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_b3bd7.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=strdup -std=gnu99 -MD -MT CMakeFiles/cmTC_b3bd7.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_b3bd7.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_b3bd7.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+/usr/share/cmake-3.22/Modules/CheckFunctionExists.c:7:3: warning: incompatible redeclaration of library function 'strdup' [-Wincompatible-library-redeclaration]
+  CHECK_FUNCTION_EXISTS(void);
+  ^
+<command line>:1:31: note: expanded from here
+#define CHECK_FUNCTION_EXISTS strdup
+                              ^
+/usr/share/cmake-3.22/Modules/CheckFunctionExists.c:7:3: note: 'strdup' is a builtin with type 'char *(const char *)'
+<command line>:1:31: note: expanded from here
+#define CHECK_FUNCTION_EXISTS strdup
+                              ^
+1 warning generated.
+Linking C executable cmTC_b3bd7
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b3bd7.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=strdup CMakeFiles/cmTC_b3bd7.dir/CheckFunctionExists.c.o -o cmTC_b3bd7 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function strsignal exists passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_91dbf/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_91dbf.dir/build.make CMakeFiles/cmTC_91dbf.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_91dbf.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=strsignal -std=gnu99 -MD -MT CMakeFiles/cmTC_91dbf.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_91dbf.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_91dbf.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+Linking C executable cmTC_91dbf
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_91dbf.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=strsignal CMakeFiles/cmTC_91dbf.dir/CheckFunctionExists.c.o -o cmTC_91dbf 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function alarm exists passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_78218/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_78218.dir/build.make CMakeFiles/cmTC_78218.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_78218.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=alarm -std=gnu99 -MD -MT CMakeFiles/cmTC_78218.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_78218.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_78218.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+Linking C executable cmTC_78218
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_78218.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=alarm CMakeFiles/cmTC_78218.dir/CheckFunctionExists.c.o -o cmTC_78218 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function regcomp exists passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_68aac/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_68aac.dir/build.make CMakeFiles/cmTC_68aac.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_68aac.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=regcomp -std=gnu99 -MD -MT CMakeFiles/cmTC_68aac.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_68aac.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_68aac.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+Linking C executable cmTC_68aac
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_68aac.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=regcomp CMakeFiles/cmTC_68aac.dir/CheckFunctionExists.c.o -o cmTC_68aac 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function regexec exists passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_d77d2/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_d77d2.dir/build.make CMakeFiles/cmTC_d77d2.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d77d2.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=regexec -std=gnu99 -MD -MT CMakeFiles/cmTC_d77d2.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_d77d2.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_d77d2.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+Linking C executable cmTC_d77d2
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d77d2.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=regexec CMakeFiles/cmTC_d77d2.dir/CheckFunctionExists.c.o -o cmTC_d77d2 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function snprintf exists passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_96cb8/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_96cb8.dir/build.make CMakeFiles/cmTC_96cb8.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_96cb8.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=snprintf -std=gnu99 -MD -MT CMakeFiles/cmTC_96cb8.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_96cb8.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_96cb8.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+/usr/share/cmake-3.22/Modules/CheckFunctionExists.c:7:3: warning: incompatible redeclaration of library function 'snprintf' [-Wincompatible-library-redeclaration]
+  CHECK_FUNCTION_EXISTS(void);
+  ^
+<command line>:1:31: note: expanded from here
+#define CHECK_FUNCTION_EXISTS snprintf
+                              ^
+/usr/share/cmake-3.22/Modules/CheckFunctionExists.c:7:3: note: 'snprintf' is a builtin with type 'int (char *, unsigned long, const char *, ...)'
+<command line>:1:31: note: expanded from here
+#define CHECK_FUNCTION_EXISTS snprintf
+                              ^
+1 warning generated.
+Linking C executable cmTC_96cb8
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_96cb8.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=snprintf CMakeFiles/cmTC_96cb8.dir/CheckFunctionExists.c.o -o cmTC_96cb8 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function vsnprintf exists passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_44e60/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_44e60.dir/build.make CMakeFiles/cmTC_44e60.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_44e60.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=vsnprintf -std=gnu99 -MD -MT CMakeFiles/cmTC_44e60.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_44e60.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_44e60.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+/usr/share/cmake-3.22/Modules/CheckFunctionExists.c:7:3: warning: incompatible redeclaration of library function 'vsnprintf' [-Wincompatible-library-redeclaration]
+  CHECK_FUNCTION_EXISTS(void);
+  ^
+<command line>:1:31: note: expanded from here
+#define CHECK_FUNCTION_EXISTS vsnprintf
+                              ^
+/usr/share/cmake-3.22/Modules/CheckFunctionExists.c:7:3: note: 'vsnprintf' is a builtin with type 'int (char *, unsigned long, const char *, struct __va_list_tag *)'
+<command line>:1:31: note: expanded from here
+#define CHECK_FUNCTION_EXISTS vsnprintf
+                              ^
+1 warning generated.
+Linking C executable cmTC_44e60
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_44e60.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=vsnprintf CMakeFiles/cmTC_44e60.dir/CheckFunctionExists.c.o -o cmTC_44e60 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the snprintf exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_bd674/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_bd674.dir/build.make CMakeFiles/cmTC_bd674.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_bd674.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_bd674.dir/CheckSymbolExists.c.o -MF CMakeFiles/cmTC_bd674.dir/CheckSymbolExists.c.o.d -o CMakeFiles/cmTC_bd674.dir/CheckSymbolExists.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_bd674
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bd674.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_bd674.dir/CheckSymbolExists.c.o -o cmTC_bd674 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+File /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef snprintf
+  return ((int*)(&snprintf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the vsnprintf exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_eac99/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_eac99.dir/build.make CMakeFiles/cmTC_eac99.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_eac99.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_eac99.dir/CheckSymbolExists.c.o -MF CMakeFiles/cmTC_eac99.dir/CheckSymbolExists.c.o.d -o CMakeFiles/cmTC_eac99.dir/CheckSymbolExists.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_eac99
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_eac99.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_eac99.dir/CheckSymbolExists.c.o -o cmTC_eac99 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+File /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef vsnprintf
+  return ((int*)(&vsnprintf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Performing C SOURCE FILE Test HAVE_PTHREADS_FLAG succeeded with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_ebe66/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ebe66.dir/build.make CMakeFiles/cmTC_ebe66.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ebe66.dir/src.c.o
+/usr/bin/cc -DHAVE_PTHREADS_FLAG  -pthread -std=gnu99 -MD -MT CMakeFiles/cmTC_ebe66.dir/src.c.o -MF CMakeFiles/cmTC_ebe66.dir/src.c.o.d -o CMakeFiles/cmTC_ebe66.dir/src.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_ebe66
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ebe66.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_ebe66.dir/src.c.o -o cmTC_ebe66 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+int main(void) { return 0; }
+Determining if the INT64_MAX exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_3ba73/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_3ba73.dir/build.make CMakeFiles/cmTC_3ba73.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_3ba73.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_3ba73.dir/CheckSymbolExists.c.o -MF CMakeFiles/cmTC_3ba73.dir/CheckSymbolExists.c.o.d -o CMakeFiles/cmTC_3ba73.dir/CheckSymbolExists.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_3ba73
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3ba73.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_3ba73.dir/CheckSymbolExists.c.o -o cmTC_3ba73 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+File /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <limits.h>
+#include <stdint.h>
+#include <inttypes.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef INT64_MAX
+  return ((int*)(&INT64_MAX))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the INT64_MIN exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_22ce3/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_22ce3.dir/build.make CMakeFiles/cmTC_22ce3.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_22ce3.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_22ce3.dir/CheckSymbolExists.c.o -MF CMakeFiles/cmTC_22ce3.dir/CheckSymbolExists.c.o.d -o CMakeFiles/cmTC_22ce3.dir/CheckSymbolExists.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_22ce3
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_22ce3.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_22ce3.dir/CheckSymbolExists.c.o -o cmTC_22ce3 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+File /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <limits.h>
+#include <stdint.h>
+#include <inttypes.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef INT64_MIN
+  return ((int*)(&INT64_MIN))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the UINT32_MAX exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_6bacd/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_6bacd.dir/build.make CMakeFiles/cmTC_6bacd.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6bacd.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_6bacd.dir/CheckSymbolExists.c.o -MF CMakeFiles/cmTC_6bacd.dir/CheckSymbolExists.c.o.d -o CMakeFiles/cmTC_6bacd.dir/CheckSymbolExists.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_6bacd
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6bacd.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_6bacd.dir/CheckSymbolExists.c.o -o cmTC_6bacd 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+File /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <limits.h>
+#include <stdint.h>
+#include <inttypes.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef UINT32_MAX
+  return ((int*)(&UINT32_MAX))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the UINT64_MAX exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_8dd4a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_8dd4a.dir/build.make CMakeFiles/cmTC_8dd4a.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_8dd4a.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_8dd4a.dir/CheckSymbolExists.c.o -MF CMakeFiles/cmTC_8dd4a.dir/CheckSymbolExists.c.o.d -o CMakeFiles/cmTC_8dd4a.dir/CheckSymbolExists.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_8dd4a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8dd4a.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_8dd4a.dir/CheckSymbolExists.c.o -o cmTC_8dd4a 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+File /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <limits.h>
+#include <stdint.h>
+#include <inttypes.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef UINT64_MAX
+  return ((int*)(&UINT64_MAX))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the SIZE_MAX exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_cb46d/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_cb46d.dir/build.make CMakeFiles/cmTC_cb46d.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_cb46d.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_cb46d.dir/CheckSymbolExists.c.o -MF CMakeFiles/cmTC_cb46d.dir/CheckSymbolExists.c.o.d -o CMakeFiles/cmTC_cb46d.dir/CheckSymbolExists.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_cb46d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cb46d.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_cb46d.dir/CheckSymbolExists.c.o -o cmTC_cb46d 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+File /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <limits.h>
+#include <stdint.h>
+#include <inttypes.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef SIZE_MAX
+  return ((int*)(&SIZE_MAX))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the SSIZE_MAX exist passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_ba37a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ba37a.dir/build.make CMakeFiles/cmTC_ba37a.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ba37a.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_ba37a.dir/CheckSymbolExists.c.o -MF CMakeFiles/cmTC_ba37a.dir/CheckSymbolExists.c.o.d -o CMakeFiles/cmTC_ba37a.dir/CheckSymbolExists.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_ba37a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ba37a.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_ba37a.dir/CheckSymbolExists.c.o -o cmTC_ba37a 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+File /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <limits.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef SSIZE_MAX
+  return ((int*)(&SSIZE_MAX))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the include file stddef.h exists passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_45fe1/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_45fe1.dir/build.make CMakeFiles/cmTC_45fe1.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_45fe1.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_45fe1.dir/CheckIncludeFile.c.o -MF CMakeFiles/cmTC_45fe1.dir/CheckIncludeFile.c.o.d -o CMakeFiles/cmTC_45fe1.dir/CheckIncludeFile.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_45fe1
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_45fe1.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_45fe1.dir/CheckIncludeFile.c.o -o cmTC_45fe1 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of short passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_7eb55/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_7eb55.dir/build.make CMakeFiles/cmTC_7eb55.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7eb55.dir/SIZE_OF_SHORT.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_7eb55.dir/SIZE_OF_SHORT.c.o -MF CMakeFiles/cmTC_7eb55.dir/SIZE_OF_SHORT.c.o.d -o CMakeFiles/cmTC_7eb55.dir/SIZE_OF_SHORT.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/SIZE_OF_SHORT.c
+Linking C executable cmTC_7eb55
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7eb55.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_7eb55.dir/SIZE_OF_SHORT.c.o -o cmTC_7eb55 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of int passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_2f4b4/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_2f4b4.dir/build.make CMakeFiles/cmTC_2f4b4.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2f4b4.dir/SIZE_OF_INT.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_2f4b4.dir/SIZE_OF_INT.c.o -MF CMakeFiles/cmTC_2f4b4.dir/SIZE_OF_INT.c.o.d -o CMakeFiles/cmTC_2f4b4.dir/SIZE_OF_INT.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/SIZE_OF_INT.c
+Linking C executable cmTC_2f4b4
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2f4b4.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_2f4b4.dir/SIZE_OF_INT.c.o -o cmTC_2f4b4 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of long passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_ab80a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ab80a.dir/build.make CMakeFiles/cmTC_ab80a.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ab80a.dir/SIZE_OF_LONG.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_ab80a.dir/SIZE_OF_LONG.c.o -MF CMakeFiles/cmTC_ab80a.dir/SIZE_OF_LONG.c.o.d -o CMakeFiles/cmTC_ab80a.dir/SIZE_OF_LONG.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/SIZE_OF_LONG.c
+Linking C executable cmTC_ab80a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ab80a.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_ab80a.dir/SIZE_OF_LONG.c.o -o cmTC_ab80a 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of long long passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_b3293/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_b3293.dir/build.make CMakeFiles/cmTC_b3293.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_b3293.dir/SIZE_OF_LONG_LONG.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_b3293.dir/SIZE_OF_LONG_LONG.c.o -MF CMakeFiles/cmTC_b3293.dir/SIZE_OF_LONG_LONG.c.o.d -o CMakeFiles/cmTC_b3293.dir/SIZE_OF_LONG_LONG.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/SIZE_OF_LONG_LONG.c
+Linking C executable cmTC_b3293
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b3293.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_b3293.dir/SIZE_OF_LONG_LONG.c.o -o cmTC_b3293 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of unsigned short passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_9aad2/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_9aad2.dir/build.make CMakeFiles/cmTC_9aad2.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9aad2.dir/SIZE_OF_UNSIGNED_SHORT.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_9aad2.dir/SIZE_OF_UNSIGNED_SHORT.c.o -MF CMakeFiles/cmTC_9aad2.dir/SIZE_OF_UNSIGNED_SHORT.c.o.d -o CMakeFiles/cmTC_9aad2.dir/SIZE_OF_UNSIGNED_SHORT.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/SIZE_OF_UNSIGNED_SHORT.c
+Linking C executable cmTC_9aad2
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9aad2.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_9aad2.dir/SIZE_OF_UNSIGNED_SHORT.c.o -o cmTC_9aad2 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of unsigned passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_5c6a9/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_5c6a9.dir/build.make CMakeFiles/cmTC_5c6a9.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_5c6a9.dir/SIZE_OF_UNSIGNED.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_5c6a9.dir/SIZE_OF_UNSIGNED.c.o -MF CMakeFiles/cmTC_5c6a9.dir/SIZE_OF_UNSIGNED.c.o.d -o CMakeFiles/cmTC_5c6a9.dir/SIZE_OF_UNSIGNED.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/SIZE_OF_UNSIGNED.c
+Linking C executable cmTC_5c6a9
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5c6a9.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_5c6a9.dir/SIZE_OF_UNSIGNED.c.o -o cmTC_5c6a9 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of unsigned long passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_d1768/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_d1768.dir/build.make CMakeFiles/cmTC_d1768.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d1768.dir/SIZE_OF_UNSIGNED_LONG.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_d1768.dir/SIZE_OF_UNSIGNED_LONG.c.o -MF CMakeFiles/cmTC_d1768.dir/SIZE_OF_UNSIGNED_LONG.c.o.d -o CMakeFiles/cmTC_d1768.dir/SIZE_OF_UNSIGNED_LONG.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/SIZE_OF_UNSIGNED_LONG.c
+Linking C executable cmTC_d1768
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d1768.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_d1768.dir/SIZE_OF_UNSIGNED_LONG.c.o -o cmTC_d1768 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of unsigned long long passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_9e549/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_9e549.dir/build.make CMakeFiles/cmTC_9e549.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9e549.dir/SIZE_OF_UNSIGNED_LONG_LONG.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_9e549.dir/SIZE_OF_UNSIGNED_LONG_LONG.c.o -MF CMakeFiles/cmTC_9e549.dir/SIZE_OF_UNSIGNED_LONG_LONG.c.o.d -o CMakeFiles/cmTC_9e549.dir/SIZE_OF_UNSIGNED_LONG_LONG.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/SIZE_OF_UNSIGNED_LONG_LONG.c
+Linking C executable cmTC_9e549
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9e549.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_9e549.dir/SIZE_OF_UNSIGNED_LONG_LONG.c.o -o cmTC_9e549 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of int16_t passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_2c0f1/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_2c0f1.dir/build.make CMakeFiles/cmTC_2c0f1.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2c0f1.dir/INT16_T.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_2c0f1.dir/INT16_T.c.o -MF CMakeFiles/cmTC_2c0f1.dir/INT16_T.c.o.d -o CMakeFiles/cmTC_2c0f1.dir/INT16_T.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/INT16_T.c
+Linking C executable cmTC_2c0f1
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2c0f1.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_2c0f1.dir/INT16_T.c.o -o cmTC_2c0f1 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of int32_t passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_c66b9/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_c66b9.dir/build.make CMakeFiles/cmTC_c66b9.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c66b9.dir/INT32_T.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_c66b9.dir/INT32_T.c.o -MF CMakeFiles/cmTC_c66b9.dir/INT32_T.c.o.d -o CMakeFiles/cmTC_c66b9.dir/INT32_T.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/INT32_T.c
+Linking C executable cmTC_c66b9
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c66b9.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_c66b9.dir/INT32_T.c.o -o cmTC_c66b9 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of int64_t passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_a9a8d/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_a9a8d.dir/build.make CMakeFiles/cmTC_a9a8d.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a9a8d.dir/INT64_T.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_a9a8d.dir/INT64_T.c.o -MF CMakeFiles/cmTC_a9a8d.dir/INT64_T.c.o.d -o CMakeFiles/cmTC_a9a8d.dir/INT64_T.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/INT64_T.c
+Linking C executable cmTC_a9a8d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a9a8d.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_a9a8d.dir/INT64_T.c.o -o cmTC_a9a8d 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of intmax_t passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_ccefd/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ccefd.dir/build.make CMakeFiles/cmTC_ccefd.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ccefd.dir/INTMAX_T.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_ccefd.dir/INTMAX_T.c.o -MF CMakeFiles/cmTC_ccefd.dir/INTMAX_T.c.o.d -o CMakeFiles/cmTC_ccefd.dir/INTMAX_T.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/INTMAX_T.c
+Linking C executable cmTC_ccefd
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ccefd.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_ccefd.dir/INTMAX_T.c.o -o cmTC_ccefd 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of uint8_t passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_af7a0/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_af7a0.dir/build.make CMakeFiles/cmTC_af7a0.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_af7a0.dir/UINT8_T.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_af7a0.dir/UINT8_T.c.o -MF CMakeFiles/cmTC_af7a0.dir/UINT8_T.c.o.d -o CMakeFiles/cmTC_af7a0.dir/UINT8_T.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/UINT8_T.c
+Linking C executable cmTC_af7a0
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_af7a0.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_af7a0.dir/UINT8_T.c.o -o cmTC_af7a0 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of uint16_t passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_ec891/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ec891.dir/build.make CMakeFiles/cmTC_ec891.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ec891.dir/UINT16_T.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_ec891.dir/UINT16_T.c.o -MF CMakeFiles/cmTC_ec891.dir/UINT16_T.c.o.d -o CMakeFiles/cmTC_ec891.dir/UINT16_T.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/UINT16_T.c
+Linking C executable cmTC_ec891
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ec891.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_ec891.dir/UINT16_T.c.o -o cmTC_ec891 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of uint32_t passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_69437/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_69437.dir/build.make CMakeFiles/cmTC_69437.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_69437.dir/UINT32_T.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_69437.dir/UINT32_T.c.o -MF CMakeFiles/cmTC_69437.dir/UINT32_T.c.o.d -o CMakeFiles/cmTC_69437.dir/UINT32_T.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/UINT32_T.c
+Linking C executable cmTC_69437
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_69437.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_69437.dir/UINT32_T.c.o -o cmTC_69437 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of uint64_t passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_ec84e/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ec84e.dir/build.make CMakeFiles/cmTC_ec84e.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ec84e.dir/UINT64_T.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_ec84e.dir/UINT64_T.c.o -MF CMakeFiles/cmTC_ec84e.dir/UINT64_T.c.o.d -o CMakeFiles/cmTC_ec84e.dir/UINT64_T.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/UINT64_T.c
+Linking C executable cmTC_ec84e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ec84e.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_ec84e.dir/UINT64_T.c.o -o cmTC_ec84e 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of uintmax_t passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_61f7a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_61f7a.dir/build.make CMakeFiles/cmTC_61f7a.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_61f7a.dir/UINTMAX_T.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_61f7a.dir/UINTMAX_T.c.o -MF CMakeFiles/cmTC_61f7a.dir/UINTMAX_T.c.o.d -o CMakeFiles/cmTC_61f7a.dir/UINTMAX_T.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/UINTMAX_T.c
+Linking C executable cmTC_61f7a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_61f7a.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_61f7a.dir/UINTMAX_T.c.o -o cmTC_61f7a 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of clock_t passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_a462c/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_a462c.dir/build.make CMakeFiles/cmTC_a462c.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a462c.dir/CLOCK_T.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_a462c.dir/CLOCK_T.c.o -MF CMakeFiles/cmTC_a462c.dir/CLOCK_T.c.o.d -o CMakeFiles/cmTC_a462c.dir/CLOCK_T.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/CLOCK_T.c
+Linking C executable cmTC_a462c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a462c.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_a462c.dir/CLOCK_T.c.o -o cmTC_a462c 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of clockid_t passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_03c24/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_03c24.dir/build.make CMakeFiles/cmTC_03c24.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_03c24.dir/CLOCKID_T.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_03c24.dir/CLOCKID_T.c.o -MF CMakeFiles/cmTC_03c24.dir/CLOCKID_T.c.o.d -o CMakeFiles/cmTC_03c24.dir/CLOCKID_T.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/CLOCKID_T.c
+Linking C executable cmTC_03c24
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_03c24.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_03c24.dir/CLOCKID_T.c.o -o cmTC_03c24 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of size_t passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_eb88c/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_eb88c.dir/build.make CMakeFiles/cmTC_eb88c.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_eb88c.dir/SIZE_T.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_eb88c.dir/SIZE_T.c.o -MF CMakeFiles/cmTC_eb88c.dir/SIZE_T.c.o.d -o CMakeFiles/cmTC_eb88c.dir/SIZE_T.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/SIZE_T.c
+Linking C executable cmTC_eb88c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_eb88c.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_eb88c.dir/SIZE_T.c.o -o cmTC_eb88c 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of ssize_t passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_208b5/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_208b5.dir/build.make CMakeFiles/cmTC_208b5.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_208b5.dir/SSIZE_T.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_208b5.dir/SSIZE_T.c.o -MF CMakeFiles/cmTC_208b5.dir/SSIZE_T.c.o.d -o CMakeFiles/cmTC_208b5.dir/SSIZE_T.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/SSIZE_T.c
+Linking C executable cmTC_208b5
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_208b5.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_208b5.dir/SSIZE_T.c.o -o cmTC_208b5 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of pid_t passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_4fe2a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_4fe2a.dir/build.make CMakeFiles/cmTC_4fe2a.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4fe2a.dir/PID_T.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_4fe2a.dir/PID_T.c.o -MF CMakeFiles/cmTC_4fe2a.dir/PID_T.c.o.d -o CMakeFiles/cmTC_4fe2a.dir/PID_T.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/PID_T.c
+Linking C executable cmTC_4fe2a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4fe2a.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_4fe2a.dir/PID_T.c.o -o cmTC_4fe2a 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of timer_t passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_6ac25/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_6ac25.dir/build.make CMakeFiles/cmTC_6ac25.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6ac25.dir/TIMER_T.c.o
+/usr/bin/cc   -std=gnu99 -MD -MT CMakeFiles/cmTC_6ac25.dir/TIMER_T.c.o -MF CMakeFiles/cmTC_6ac25.dir/TIMER_T.c.o.d -o CMakeFiles/cmTC_6ac25.dir/TIMER_T.c.o -c /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CheckTypeSize/TIMER_T.c
+Linking C executable cmTC_6ac25
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6ac25.dir/link.txt --verbose=1
+/usr/bin/cc CMakeFiles/cmTC_6ac25.dir/TIMER_T.c.o -o cmTC_6ac25 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function floor exists in the m passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_56981/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_56981.dir/build.make CMakeFiles/cmTC_56981.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_56981.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=floor -std=gnu99 -MD -MT CMakeFiles/cmTC_56981.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_56981.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_56981.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+/usr/share/cmake-3.22/Modules/CheckFunctionExists.c:7:3: warning: incompatible redeclaration of library function 'floor' [-Wincompatible-library-redeclaration]
+  CHECK_FUNCTION_EXISTS(void);
+  ^
+<command line>:1:31: note: expanded from here
+#define CHECK_FUNCTION_EXISTS floor
+                              ^
+/usr/share/cmake-3.22/Modules/CheckFunctionExists.c:7:3: note: 'floor' is a builtin with type 'double (double)'
+<command line>:1:31: note: expanded from here
+#define CHECK_FUNCTION_EXISTS floor
+                              ^
+1 warning generated.
+Linking C executable cmTC_56981
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_56981.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=floor CMakeFiles/cmTC_56981.dir/CheckFunctionExists.c.o -o cmTC_56981  -lm 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function clock_gettime exists in the rt passed with the following output:
+Change Dir: /home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_2d3af/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_2d3af.dir/build.make CMakeFiles/cmTC_2d3af.dir/build
+gmake[1]: Entering directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2d3af.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=clock_gettime -std=gnu99 -MD -MT CMakeFiles/cmTC_2d3af.dir/CheckFunctionExists.c.o -MF CMakeFiles/cmTC_2d3af.dir/CheckFunctionExists.c.o.d -o CMakeFiles/cmTC_2d3af.dir/CheckFunctionExists.c.o -c /usr/share/cmake-3.22/Modules/CheckFunctionExists.c
+Linking C executable cmTC_2d3af
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2d3af.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=clock_gettime CMakeFiles/cmTC_2d3af.dir/CheckFunctionExists.c.o -o cmTC_2d3af  -lrt 
+gmake[1]: Leaving directory '/home/jbrousse/Downloads/check-0.15.2/build/CMakeFiles/CMakeTmp'
+
+
+

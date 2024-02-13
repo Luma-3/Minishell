@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG -pthread CMakeFiles/check_nofork_teardown.dir/check_nofork_teardown.c.o -o check_nofork_teardown  ../src/libcheck.a -lm -lrt 
