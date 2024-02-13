@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:10:35 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/13 13:40:18 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:12:25 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@ static int	verif_flag(const char *first_arg)
 	return (false);
 }
 
-static int	print_args(const char **args)
+static void	print_args(const char **args)
 {
 	int	i;
 
 	i = 0;
 	while (args[i])
 	{
-		ft_putstr_fd(args[i], STDOUT_FILENO);
+		ft_putstr_fd((char *)args[i], STDOUT_FILENO);
+		ft_putchar_fd(' ', STDOUT_FILENO);
 		i++;
 	}
 }
