@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anthony <anthony@student.42.fr>            +#+  +:+       +#+         #
+#    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/02/13 15:01:07 by anthony          ###   ########.fr        #
+#    Updated: 2024/02/14 15:55:05 by antgabri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,9 @@ INCLUDE			=	$(addprefix -I, $(INCLUDE_LIST))
 SRC_DIR				=	sources/
 
 SRC_PARSING_DIR		=	parsing/
-SRC_PARSING_LIST	=	prompt_parsing.c
+SRC_PARSING_LIST	=	prompt_parsing.c	\
+						count_letter.c		\
+						place_cursor.c		
 SRC_PARSING			=	$(addprefix $(SRC_PARSING_DIR), $(SRC_PARSING_LIST))
 
 
