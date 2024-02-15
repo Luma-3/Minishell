@@ -6,7 +6,7 @@
 /*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:30:38 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/14 18:21:40 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/15 11:09:27 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ static int	count_word_letter(const char *prompt, int i)
 	int	nb_letters;
 
 	nb_letters = 0;
-	while (prompt[i] != '\0' && ft_iswhitespace(prompt[i]) == false)
+	while (prompt[i] != '\0' && ft_iswhitespace(prompt[i]) == false
+		&& prompt[i] != '\'' && prompt[i] != '\"')
 	{
 		nb_letters++;
 		i++;

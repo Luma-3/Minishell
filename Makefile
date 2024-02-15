@@ -6,7 +6,7 @@
 #    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/02/14 15:55:05 by antgabri         ###   ########.fr        #
+#    Updated: 2024/02/15 11:55:21 by antgabri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,8 @@ SRC_DIR				=	sources/
 SRC_PARSING_DIR		=	parsing/
 SRC_PARSING_LIST	=	prompt_parsing.c	\
 						count_letter.c		\
-						place_cursor.c		
+						place_cursor.c		\
+						alloc_tab.c
 SRC_PARSING			=	$(addprefix $(SRC_PARSING_DIR), $(SRC_PARSING_LIST))
 
 

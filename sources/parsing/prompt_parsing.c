@@ -6,7 +6,7 @@
 /*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:33:39 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/14 18:22:33 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:19:48 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,13 @@
 
 static int	quote_delimiter(const char *prompt, char delimiter, int i)
 {
-	int	tmp;
-
-	tmp = i;
 	while (prompt[i] != delimiter)
 	{
 		if (prompt[i] == '\0')
 			return (FAILURE);
 		i++;
 	}
-	if (i > tmp + 1)
-		return (i);
-	else
-		return (tmp);
+	return (i);
 }
 
 /***
@@ -61,16 +55,19 @@ int	count_words(const char *prompt)
 		while (ft_iswhitespace(prompt[i]) == true && prompt[i])
 			i++;
 		if (prompt[i] == '\'' || prompt[i] == '\"')
+		{
 			i = quote_delimiter(prompt, prompt[i], i + 1);
+			if (i > start + 1)
+				nb_words++;
+		}
 		else
 		{
 			while (prompt[i + 1] && ft_iswhitespace(prompt[i]) == false)
 				i++;
+			nb_words++;
 		}
 		if (i == -1)
 			return (FAILURE);
-		else if (i > start + 1)
-			nb_words++;
 	}
 	return (nb_words);
 }
