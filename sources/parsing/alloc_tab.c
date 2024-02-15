@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_tab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:48:17 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/15 12:09:48 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:22:43 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,25 @@ static char	*copy_data(char *tab, const char *prompt,
 	int position, int nb_letters)
 {
 	int		j;
+	char	char1_word;
 
 	j = 0;
-	if (prompt[position] == '\'' || prompt[position] == '\"')
+	while (ft_iswhitespace(prompt[position]) == true)
+		position++;
+	char1_word = prompt[position];
+	while (isquote_type(prompt[position]) == true)
 		position++;
 	while (j < nb_letters)
 	{
-		tab[j] = prompt[position];
-		j++;
-		position++;
+		if (isquote_type(char1_word) == false
+			&& isquote_type(prompt[position]) == true)
+			position++;
+		else
+		{
+			tab[j] = prompt[position];
+			j++;
+			position++;
+		}
 	}
 	tab[j] = '\0';
 	return (tab);
@@ -56,10 +66,10 @@ static char	**insert_data(char **tab, const char *prompt, int nb_words)
 	return (tab);
 }
 
-/***
+/**
  * @brief Malloc le double tableau de char
- * @return SUCCESS ou FAILURE
- */
+ * @return NULL if alloc failed pointer on tab if alloc success
+*/
 char	**alloc_tab(char *prompt)
 {
 	char	**tab;

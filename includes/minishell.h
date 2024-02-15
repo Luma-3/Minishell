@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/15 12:02:25 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:52:56 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ int		count_words(const char *prompt);
 int		count_letters(const char *prompt, int i);
 int		place_cursor(const char *prompt, int i);
 char	**alloc_tab(char *prompt);
+int		isquote_type(char c);
 #endif

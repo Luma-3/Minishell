@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
+#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/02/15 11:55:21 by antgabri         ###   ########.fr        #
+#    Updated: 2024/02/15 16:55:37 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ SRC_PARSING_DIR		=	parsing/
 SRC_PARSING_LIST	=	prompt_parsing.c	\
 						count_letter.c		\
 						place_cursor.c		\
-						alloc_tab.c
+						alloc_tab.c			\
+						parser_utils.c
 SRC_PARSING			=	$(addprefix $(SRC_PARSING_DIR), $(SRC_PARSING_LIST))
 
 

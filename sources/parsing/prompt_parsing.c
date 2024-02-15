@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:33:39 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/15 12:19:48 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:22:09 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ static int	quote_delimiter(const char *prompt, char delimiter, int i)
 	return (i);
 }
 
-/***
-*@brief Compte le nombre de mots dans la chaine 
-de caractère en evitant de compter
-les espaces entre les quotes et les quotes vides
-*@return le nombre de mots
+/**
+ * @brief Compte le nombre de mots dans la chaine 
+ * de caractère en evitant de compter
+ * les espaces entre les quotes et les quotes vides
+ * @return le nombre de mots
 */
 int	count_words(const char *prompt)
 {
@@ -54,7 +54,7 @@ int	count_words(const char *prompt)
 		start = i;
 		while (ft_iswhitespace(prompt[i]) == true && prompt[i])
 			i++;
-		if (prompt[i] == '\'' || prompt[i] == '\"')
+		if (isquote_type(prompt[i]) == true)
 		{
 			i = quote_delimiter(prompt, prompt[i], i + 1);
 			if (i > start + 1)
@@ -66,8 +66,6 @@ int	count_words(const char *prompt)
 				i++;
 			nb_words++;
 		}
-		if (i == -1)
-			return (FAILURE);
 	}
 	return (nb_words);
 }
