@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/16 17:23:07 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:12:03 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@
 # include <errno.h>
 # include <termios.h>
 # include <curses.h>
-# include "libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+
+# include "libft.h"
+# include "env.h"
 # include <sys/wait.h>
 
 # define FAILURE -1

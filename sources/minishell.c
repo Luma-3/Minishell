@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/16 18:00:05 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:10:00 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,21 @@ void	read_input(void)
 	}
 }
 
+void	print_env(void *str)
+{
+	printf("%s\n", (char *)str);
+}
+
 int	main(int ac, char **av)
 {
+	t_list	*env_list;
+	char 	**env_test;
+
 	(void)av;
 	if (ac != 1)
 		return (EXIT_FAILURE); //TODO prompt error message
 	//TODO BEAU
+	env_list = copy_env(envp);
 	read_input();
 	return (EXIT_SUCCESS);
 }
