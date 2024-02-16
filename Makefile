@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/02/12 18:57:30 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/02/16 13:31:44 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@
 ################
 
 
-CC = cc
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g3
 
 ################
@@ -44,7 +44,11 @@ INCLUDE			=	$(addprefix -I, $(INCLUDE_LIST))
 SRC_DIR				=	sources/
 
 SRC_PARSING_DIR		=	parsing/
-SRC_PARSING_LIST	=	prompt_parsing.c
+SRC_PARSING_LIST	=	count_word.c		\
+						count_letter.c		\
+						place_cursor.c		\
+						alloc_tab.c			\
+						parser_utils.c
 SRC_PARSING			=	$(addprefix $(SRC_PARSING_DIR), $(SRC_PARSING_LIST))
 
 
@@ -93,7 +97,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(OBJ_DIR)
 
 $(NAME): $(OBJ_LIST) 
 	@echo "$(COLOR_BLUE)Compile $(NAME)$(COLOR_RESET)"
-	@$(CC) $(CFLAGS) -lreadline -lcurses $(OBJ_LIST) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ_LIST) $(LIBFT) -o $(NAME) -lreadline -lcurses
 
 clean:
 	@echo "$(COLOR_RED)Delete objects$(COLOR_RESET)"

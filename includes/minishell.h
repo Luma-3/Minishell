@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/12 18:50:53 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:52:56 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@
 
 //int	g_sig_return;
 
-int	count_words(const char *prompt);
-
+int		count_words(const char *prompt);
+int		count_letters(const char *prompt, int i);
+int		place_cursor(const char *prompt, int i);
+char	**alloc_tab(char *prompt);
+int		isquote_type(char c);
 #endif
