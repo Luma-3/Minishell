@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/15 16:52:56 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:23:07 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@
 # include "libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/wait.h>
 
 # define FAILURE -1
 # define SUCCESS 0
 
+# define ERROR_FORMAT "Minishell error"
 //int	g_sig_return;
 
 int		count_words(const char *prompt);
@@ -39,4 +41,7 @@ int		count_letters(const char *prompt, int i);
 int		place_cursor(const char *prompt, int i);
 char	**alloc_tab(char *prompt);
 int		isquote_type(char c);
+
+char	*get_path(char **tab);
+void	print_error_message(void);
 #endif

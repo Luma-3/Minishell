@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/15 15:15:41 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:00:05 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ void	read_input(void)
 				printf("%s\n", tab[i]);
 				i++;
 			}
+			prompt = get_path(tab);
+			if (prompt != NULL)
+			{
+				
+			}
+				printf("%s\n", prompt);
 		}
 	}
 }

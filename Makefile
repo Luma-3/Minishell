@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
+#    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/02/16 13:31:44 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/02/16 16:22:53 by antgabri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,14 +46,18 @@ SRC_DIR				=	sources/
 SRC_PARSING_DIR		=	parsing/
 SRC_PARSING_LIST	=	count_word.c		\
 						count_letter.c		\
-						place_cursor.c		\
 						alloc_tab.c			\
 						parser_utils.c
 SRC_PARSING			=	$(addprefix $(SRC_PARSING_DIR), $(SRC_PARSING_LIST))
 
+SRC_EXEC_DIR		=	exec/
+SRC_EXEC_LIST		=	get_path.c	\
+						print_error_message.c	
+SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 
 SRC_LIST			=	minishell.c	\
-						$(SRC_PARSING)
+						$(SRC_PARSING) \
+						$(SRC_EXEC)
 SRC					=	$(addprefix $(SRC_DIR), $(SRC_LIST))
 
 ##################
