@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/15 16:52:56 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/16 15:14:33 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@
 # include <errno.h>
 # include <termios.h>
 # include <curses.h>
-# include "libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+
+# include "libft.h"
+# include "env.h"
 
 # define FAILURE -1
 # define SUCCESS 0
