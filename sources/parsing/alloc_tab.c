@@ -6,11 +6,21 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:48:17 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/15 17:22:43 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:30:14 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	free_tab(char **tab, int index)
+{
+	while (index >= 0)
+	{
+		free(tab[index]);
+		index--;
+	}
+	free(tab);
+}
 
 static char	*copy_data(char *tab, const char *prompt,
 	int position, int nb_letters)
@@ -55,9 +65,12 @@ static char	**insert_data(char **tab, const char *prompt, int nb_words)
 		printf("nb_letters = %d\n", nb_letters);
 		if (nb_letters != 0)
 		{
-			tab[index] = malloc(sizeof(char) * (nb_letters + 1));
+			tab[index] = (char *)ft_calloc(nb_letters + 1, sizeof(char));
 			if (tab[index] == NULL)
-				return (NULL);//TODO free tab
+			{
+				free_tab(tab, index);
+				return (NULL);
+			}
 			tab[index] = copy_data(tab[index], prompt, position, nb_letters);
 			index++;
 		}
@@ -80,7 +93,7 @@ char	**alloc_tab(char *prompt)
 	printf("nb_words = %d\n", nb_words);
 	if (nb_words == FAILURE)
 		return (NULL);
-	tab = malloc(sizeof(char *) * (nb_words + 1));
+	tab = (char **)ft_calloc(nb_words + 1, sizeof(char *));
 	if (tab == NULL)
 		return (NULL);
 	tab[nb_words] = NULL;
