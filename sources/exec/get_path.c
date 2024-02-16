@@ -6,7 +6,7 @@
 /*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:47:27 by Monsieur_Ca       #+#    #+#             */
-/*   Updated: 2024/02/16 18:01:42 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:37:30 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,17 @@ static char	*get_command_path(char **path, char **tab)
 	return (path_command);
 }
 
-char	*get_path(char **tab)
+char	*get_path(char **tab, t_list *env)
 {
 	char	*path_command;
 	char	**path;
 	int		index;
 
 	index = 0;
-	path = ft_split(getenv("PATH"), ':');
+	path = ft_split(ms_getenv(env, "PATH"), ':');
 	index = find_command_path(path, tab[0]);
-	printf("index = %d\n", index);
 	if (index == FAILURE)
-		return (printf("C'est casse\n"), NULL);
+		return (NULL);
 	path_command = get_command_path(path, tab);
 	if (path_command == NULL)
 		return (NULL);

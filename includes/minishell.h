@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/16 18:12:03 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:55:27 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -44,6 +45,7 @@ int		place_cursor(const char *prompt, int i);
 char	**alloc_tab(char *prompt);
 int		isquote_type(char c);
 
-char	*get_path(char **tab);
+char	*get_path(char **tab, t_list *env);
 void	print_error_message(void);
+int	exec(char **tab, char *path, t_list *env);
 #endif

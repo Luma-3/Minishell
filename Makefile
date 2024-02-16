@@ -3,19 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
+#    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/02/16 18:11:34 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/02/16 18:35:52 by antgabri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-
 
 ################
 ##  COMPILE	  ##
 ################
-
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g3
@@ -54,14 +51,16 @@ SRC_ENV_DIR			=	env/
 SRC_ENV_LIST		=	transform_env.c		\
 						env_utils.c
 SRC_ENV				=	$(addprefix $(SRC_ENV_DIR), $(SRC_ENV_LIST))
+
 SRC_EXEC_DIR		=	exec/
-SRC_EXEC_LIST		=	get_path.c	\
-						print_error_message.c	
+SRC_EXEC_LIST		=	get_path.c				\
+						print_error_message.c	\
+						exec.c
 SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 
 SRC_LIST			=	minishell.c			\
 						$(SRC_PARSING)		\
-						$(SRC_ENV) \
+						$(SRC_ENV) 			\
 						$(SRC_EXEC)
 SRC					=	$(addprefix $(SRC_DIR), $(SRC_LIST))
 

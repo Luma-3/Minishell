@@ -3,41 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/16 18:10:00 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:38:08 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	read_input(void)
+void	read_input(t_list *env_list)
 {
 	char	*prompt;
-	int		i;
 	char	**tab;
 
-	i = 0;
 	while (true)
 	{
-		i = 0;
 		prompt = readline("minishell > ");
 		if (prompt != NULL && prompt[0] != '\0')
 		{
 			tab = alloc_tab(prompt);
 			free(prompt);
-			while (tab[i])
-			{
-				printf("%s\n", tab[i]);
-				i++;
-			}
-			prompt = get_path(tab);
+			prompt = get_path(tab, env_list);
 			if (prompt != NULL)
 			{
-				
+				exec(tab, prompt, env_list);
 			}
-				printf("%s\n", prompt);
 		}
 	}
 }
@@ -47,16 +38,15 @@ void	print_env(void *str)
 	printf("%s\n", (char *)str);
 }
 
-int	main(int ac, char **av)
+int	main(int ac, char **av, char **envp)
 {
 	t_list	*env_list;
-	char 	**env_test;
 
 	(void)av;
 	if (ac != 1)
 		return (EXIT_FAILURE); //TODO prompt error message
 	//TODO BEAU
 	env_list = copy_env(envp);
-	read_input();
+	read_input(env_list);
 	return (EXIT_SUCCESS);
 }
