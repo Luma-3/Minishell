@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/16 18:01:53 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:10:00 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ void	read_input(void)
 				printf("%s\n", tab[i]);
 				i++;
 			}
+			prompt = get_path(tab);
+			if (prompt != NULL)
+			{
+				
+			}
+				printf("%s\n", prompt);
 		}
 	}
 }
@@ -41,7 +47,7 @@ void	print_env(void *str)
 	printf("%s\n", (char *)str);
 }
 
-int	main(int ac, char **av, char **envp)
+int	main(int ac, char **av)
 {
 	t_list	*env_list;
 	char 	**env_test;

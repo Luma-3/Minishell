@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/16 15:14:33 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:12:03 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@
 
 # include "libft.h"
 # include "env.h"
+# include <sys/wait.h>
 
 # define FAILURE -1
 # define SUCCESS 0
 
+# define ERROR_FORMAT "Minishell error"
 //int	g_sig_return;
 
 int		count_words(const char *prompt);
@@ -41,4 +43,7 @@ int		count_letters(const char *prompt, int i);
 int		place_cursor(const char *prompt, int i);
 char	**alloc_tab(char *prompt);
 int		isquote_type(char c);
+
+char	*get_path(char **tab);
+void	print_error_message(void);
 #endif
