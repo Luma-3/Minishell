@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/21 13:35:26 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:17:04 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -39,13 +38,19 @@
 # define ERROR_FORMAT "Minishell error"
 //int	g_sig_return;
 
+typedef struct s_child
+{
+	int		fd_pipe[2];
+	pid_t	pid;
+}	t_child;
+
 int		count_words(const char *prompt);
 int		count_letters(const char *prompt, int i);
 int		place_cursor(const char *prompt, int i);
 char	**alloc_tab(char *prompt);
 int		isquote_type(char c);
 
-char	*get_path(char **tab, t_list *env, int i);
+char	*get_path(t_list *env, char *tab);
 void	print_error_message(void);
 int		exec(t_list *env, char *prompt);
 int		verif_arg(char *prompt);

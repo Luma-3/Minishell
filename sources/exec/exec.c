@@ -3,52 +3,81 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:00:16 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/21 13:53:34 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:50:57 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	exec_prog(char **tab, char **env_tab, int i)
+static int	nb_pipe(char **tab)
 {
-	char	cwd[4096];
-	char	*path_prog;
+	int	i;
 
-	printf("GO to exec_prog\n");
-	if (getcwd(cwd, sizeof(cwd)) == NULL) {
-		perror("getcwd failed");
-		return (FAILURE);
-	}
-	path_prog = ft_strdup(cwd);
-	char *temp = ft_strtrim(tab[i], ".");
-	path_prog = ft_strjoin(path_prog, temp);
-	free(temp);
-	if (access(path_prog, F_OK | X_OK) == -1)
+	i = 0;
+	while (tab[i])
 	{
-		printf("access failed\n");
-		print_error_message();
-		free(path_prog);
-		return (FAILURE);
+		i++;
 	}
-	else if (execve(path_prog, &tab[i], env_tab) == -1)
-	{
-		print_error_message();
-		free(path_prog);
-		return (FAILURE);
-	}
-	free(path_prog);
-	printf("exec_prog done\n");
-	return (SUCCESS);
+	return (i);
 }
 
-static int	exec_command(char **tab, char *path, char **env_tab)
+static t_child	*change_fd_pipe(char **tab, t_child *child)
 {
-	printf("GO to exec_command\n");
-	printf("path = %s\n", path);
-	if (execve(path, tab, env_tab) == -1)
+	int	i;
+
+	i = 0;
+	printf("GO TO change_fd_pipe\n");
+	child = malloc(sizeof(t_child) * nb_pipe(tab));
+	if (child == NULL)
+		return (NULL);
+	while (i < nb_pipe(tab))
+	{
+		pipe(child[i].fd_pipe);
+		if (i != 0)
+		{
+			dup2(child[i - 1].fd_pipe[0], STDIN_FILENO);
+			close(child[i - 1].fd_pipe[0]);
+		}
+		if (i + 1 != nb_pipe(tab))
+		{
+			dup2(child[i].fd_pipe[1], STDOUT_FILENO);
+			close(child[i].fd_pipe[1]);
+		}
+		i++;
+	}
+	return (child);
+}
+
+static t_child	*init_child_alone(t_child *child)
+{
+	printf("GO TO init_child_alone\n");
+	child = malloc(sizeof(t_child));
+	if (child == NULL)
+		return (NULL);
+	child->fd_pipe[0] = 0;
+	child->fd_pipe[1] = 1;
+	return (child);
+}
+
+static int	exec_command(char *tab, t_list *env)
+{
+	char	*path_command;
+	char	**env_tab;
+	char	**command;
+
+	printf("GO TO exec_command\n");
+	path_command = get_path(env, tab);
+	printf("PATH_COMMAND = %s\n", path_command);
+	if (path_command == NULL)
+		return (FAILURE);
+	command = ft_split(tab, ' ');
+	if (command == NULL)
+		return (FAILURE);
+	env_tab = env_to_tab(env);
+	if (execve(path_command, command, env_tab) == -1)
 	{
 		print_error_message();
 		return (FAILURE);
@@ -58,32 +87,47 @@ static int	exec_command(char **tab, char *path, char **env_tab)
 
 int	exec(t_list *env, char *prompt)
 {
-	pid_t	pid;
-	char	**env_tab;
+	t_child	*child;
 	char	**tab;
-	char	*path;
+	int		i;
 
-	tab = ft_split(prompt, ' ');
-	path = get_path(tab, env, 0);
-	env_tab = env_to_tab(env);
-	pid = fork();
-	if (pid < 0)
-		return (print_error_message(), FAILURE);
-	else if (pid == 0)
+	child = NULL;
+	i = 0;
+	tab = ft_split(prompt, '|');
+	printf("TAB[0] = %s\n", tab[0]);
+	printf("TAB[1] = %s\n", tab[1]);
+	if (tab[1] != NULL)
+		child = change_fd_pipe(tab, child);
+	else
+		child = init_child_alone(child);
+	printf("CHILD IS READY\n");
+	printf("nombre de pipe = %d\n", nb_pipe(tab));
+	while (i < nb_pipe(tab))
 	{
-		if (tab[0][0] == '/')
+		printf("CHILD[%d] is alive\n", i);
+		child[i].pid = fork();
+		if (child[i].pid < 0)
+			return (print_error_message(), FAILURE);
+		else if (child[i].pid == 0)
 		{
-			if (exec_command(tab, path, env_tab) == -1)
-				return (FAILURE);
+			printf("CHILD[%d] is going to exec\n", i);
+			if (exec_command(tab[i], env) == FAILURE)
+			{
+				if (i != 0)
+					close(child[i - 1].fd_pipe[0]);
+				if (i + 1 != nb_pipe(tab))
+					close(child[i].fd_pipe[1]);
+				exit(EXIT_FAILURE);
+			}
 		}
-		else if (tab[0][0] == '.')
-			exec_prog(tab, env_tab, 0);
-		else
-		{
-			if (exec_command(tab, path, env_tab) == -1)
-				return (FAILURE);
-		}	
+		i++;
+		waitpid(child[i].pid, NULL, 0);
 	}
-	waitpid(pid, NULL, 0);
+	while (i < nb_pipe(tab))
+	{
+		close(child[i].fd_pipe[0]);
+		close(child[i].fd_pipe[1]);
+		i++;
+	}
 	return (SUCCESS);
 }
