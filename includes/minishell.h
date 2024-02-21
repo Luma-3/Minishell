@@ -6,7 +6,7 @@
 /*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/16 18:55:27 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:35:26 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int		place_cursor(const char *prompt, int i);
 char	**alloc_tab(char *prompt);
 int		isquote_type(char c);
 
-char	*get_path(char **tab, t_list *env);
+char	*get_path(char **tab, t_list *env, int i);
 void	print_error_message(void);
-int	exec(char **tab, char *path, t_list *env);
+int		exec(t_list *env, char *prompt);
+int		verif_arg(char *prompt);
 #endif

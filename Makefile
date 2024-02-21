@@ -6,7 +6,7 @@
 #    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/02/16 18:35:52 by antgabri         ###   ########.fr        #
+#    Updated: 2024/02/21 13:40:28 by antgabri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,8 @@ SRC_ENV				=	$(addprefix $(SRC_ENV_DIR), $(SRC_ENV_LIST))
 SRC_EXEC_DIR		=	exec/
 SRC_EXEC_LIST		=	get_path.c				\
 						print_error_message.c	\
-						exec.c
+						exec.c				\
+						verif_arg.c			
 SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 
 SRC_LIST			=	minishell.c			\
@@ -96,6 +97,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSING_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_ENV_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)
 
 $(LIBFT):
 	@make -sC $(LIBFT_DIR)
