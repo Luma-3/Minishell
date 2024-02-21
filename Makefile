@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
+#    By: monsieurc <monsieurc@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/02/21 13:40:28 by antgabri         ###   ########.fr        #
+#    Updated: 2024/02/22 00:55:28 by monsieurc        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,8 @@ SRC_EXEC_DIR		=	exec/
 SRC_EXEC_LIST		=	get_path.c				\
 						print_error_message.c	\
 						exec.c				\
-						verif_arg.c			
+						verif_arg.c			\
+						exec_utils.c	
 SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 
 SRC_LIST			=	minishell.c			\
