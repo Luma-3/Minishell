@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/21 19:25:35 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/21 20:33:04 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	read_input(t_list *env)
 				if (exec(env, prompt) == FAILURE)
 					printf("ERROR_FORMAT\n");
 			}
+			printf("GO TO FREE\n");
 			free(prompt);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:00:16 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/21 19:50:57 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/21 20:32:31 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ static int	exec_command(char *tab, t_list *env)
 	}
 	return (SUCCESS);
 }
-
 int	exec(t_list *env, char *prompt)
 {
 	t_child	*child;
@@ -123,11 +122,7 @@ int	exec(t_list *env, char *prompt)
 		i++;
 		waitpid(child[i].pid, NULL, 0);
 	}
-	while (i < nb_pipe(tab))
-	{
-		close(child[i].fd_pipe[0]);
-		close(child[i].fd_pipe[1]);
-		i++;
-	}
+	free(child);
+	free(tab);
 	return (SUCCESS);
 }
