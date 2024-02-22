@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:00:16 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/22 14:30:37 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/22 18:16:59 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,39 @@ static int	exec_command(char *tab, t_list *env)
 	return (SUCCESS);
 }
 
-int	launch_child(t_child *child, int nb_pipe, char **tab, t_list *env)
+static int	launch_child(t_child *child, int count_pipe, char **tab, t_list *env)
 {
 	int	i;
 
 	i = 0;
-	while (i < nb_pipe)
+	while (i < nb_pipe(tab))
 	{
 		child[i].pid = fork();
 		if (child[i].pid < 0)
 			return (FAILURE);
 		else if (child[i].pid == 0)
 		{
-			child = dup_in_out_child(child, i, nb_pipe);
-			if (child == NULL)
-				return (FAILURE);
+			if (count_pipe > 0)
+			{
+				child = dup_in_out_child(child, i, count_pipe + 1);
+				if (child == NULL)
+					return (FAILURE);
+			}
 			if (exec_command(tab[i], env) == FAILURE)
 				return (FAILURE);
 			exit(SUCCESS);
 		}
 		else
-			close_fd_error(child, i, nb_pipe);
+		{
+			if (count_pipe > 0)
+				close_fd_error(child, i, count_pipe + 1);
+			waitpid(child[i].pid, NULL, 0);
+		}
 		i++;
 	}
-	close_pipe(child, nb_pipe);
-	wait_child(child, nb_pipe);
+	if (count_pipe > 0)
+		close_pipe(child, nb_pipe(tab));
+	wait_child(child, nb_pipe(tab));
 	return (SUCCESS);
 }
 
@@ -63,16 +71,26 @@ int	exec(t_list *env, char *prompt)
 	t_child	*child;
 	char	**tab;
 	int		i;
+	int		count_pipe;
 
 	child = NULL;
 	i = 0;
 	tab = ft_split(ft_strtrim(prompt, " "), '|');
 	if (tab == NULL)
 		return (FAILURE);
+	count_pipe = nb_pipe(tab) - 1;
+	while (is_there_token(tab, i) != FAILURE)
+	{
+		i = is_there_token(tab, i);
+		if (i != FAILURE)
+			tab = place_new_split(tab, i);
+		i++;
+	}
+	i = 0;
 	child = init_child(child, nb_pipe(tab));
 	if (child == NULL)
 		return (FAILURE);
-	while (i < nb_pipe(tab))
+	while (i < count_pipe)
 	{
 		if (pipe(child[i].fd_pipe) == -1)
 		{
@@ -81,7 +99,7 @@ int	exec(t_list *env, char *prompt)
 		}
 		i++;
 	}
-	if (launch_child(child, nb_pipe(tab), tab, env) == FAILURE)
+	if (launch_child(child, count_pipe, tab, env) == FAILURE)
 		return (FAILURE);
 	free(child);
 	return (SUCCESS);

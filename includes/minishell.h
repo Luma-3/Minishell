@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/22 14:23:31 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/22 17:34:33 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,13 @@ int		**init_pipe_fd(int **pipe_fd, int nb_child);
 int		close_pipe(t_child *child, int nb_child);
 int		wait_child(t_child *child, int nb_child);
 void	close_fd_error(t_child *child, int i, int nb_pipe);
+
+//HANDLE TOKEN
+char	**ft_copy_tab(char **temp);
+int		is_there_token(char **tab, int i);
+// int		verif_token(char **tab, int i);
+char	**ft_copy_tab_split(char **tab, int i);
+int		ft_search_token(char *tab, char *token);
+char	**place_new_split(char **tab, int i);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/22 14:18:01 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/22 18:23:15 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	read_input(t_list *env)
 
 	while (true)
 	{
-		prompt = readline("minishell > ");
+		prompt = readline("minishell de LA TEAAM > ");
 		if (prompt != NULL && prompt[0] != '\0')
 		{
 			if (strcmp(prompt, "exit") == 0)

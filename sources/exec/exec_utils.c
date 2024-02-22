@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 00:43:26 by monsieurc         #+#    #+#             */
-/*   Updated: 2024/02/22 14:23:22 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/22 17:59:32 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,17 @@
 int	nb_pipe(char **tab)
 {
 	int	i;
+	int	count;
 
+	count = 0;
 	i = 0;
 	while (tab[i])
 	{
+		if (ft_strchr(tab[i], '|') != 0)
+			count++;
 		i++;
 	}
-	return (i);
+	return (i + count);
 }
 
 t_child	*dup_in_out_child(t_child *child, int i, int nb_child)
@@ -68,7 +72,6 @@ int	close_pipe(t_child *child, int nb_child)
 		}
 		i++;
 	}
-	perror("close finish : ");
 	return (SUCCESS);
 }
 
