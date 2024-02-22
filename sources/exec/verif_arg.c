@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: monsieurc <monsieurc@student.42.fr>        +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:19:12 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/22 00:53:57 by monsieurc        ###   ########.fr       */
+/*   Updated: 2024/02/22 14:28:02 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,18 @@ static int	verif_token(char *prompt, char token)
 	{
 		if (prompt[i] == token)
 		{
-			while(prompt[i] == token)
+			while (prompt[i] == token)
 				i++;
-			while(ft_iswhitespace(prompt[i])== true)
-			{	
-		 		if (prompt[i + 1] == '\0')
+			if (prompt[i + 1] == '\0')
+				return (FAILURE);
+			while (ft_iswhitespace(prompt[i]) == true)
+			{
+				if (prompt[i + 1] == '\0')
 					return (FAILURE);
 				i++;
 			}
 		}
-			i++;	
+		i++;
 	}
 	return (SUCCESS);
 }

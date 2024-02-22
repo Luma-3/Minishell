@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: monsieurc <monsieurc@student.42.fr>        +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/22 00:53:20 by monsieurc        ###   ########.fr       */
+/*   Updated: 2024/02/22 14:23:31 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ int		verif_arg(char *prompt);
 
 //EXEC_UTILS
 int		nb_pipe(char **tab);
-int		dup_in_out_child(t_child *child, int i, int nb_child);
-
+t_child	*dup_in_out_child(t_child *child, int i, int nb_child);
+t_child	*init_child(t_child *child, int nb_child);
+int		**init_pipe_fd(int **pipe_fd, int nb_child);
+int		close_pipe(t_child *child, int nb_child);
+int		wait_child(t_child *child, int nb_child);
+void	close_fd_error(t_child *child, int i, int nb_pipe);
 #endif
