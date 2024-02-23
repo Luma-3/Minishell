@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_copy_tab.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 15:19:34 by anthony           #+#    #+#             */
-/*   Updated: 2024/02/22 18:01:25 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/23 17:30:22 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ char	**ft_copy_tab(char **temp)
 
 	len = 0;
 	i = 0;
-	while (temp[len])
+	while (temp && temp[len])
 		len++;
 	new_tab = malloc(sizeof(char *) * (len + 1));
 	if (new_tab == NULL)
 		return (NULL);
-	while (temp[i])
+	while (temp && temp[i])
 	{
 		new_tab[i] = ft_strdup(temp[i]);
 		i++;
@@ -61,10 +61,12 @@ char	**ft_copy_tab_split(char **tab, int i)
 	int		k;
 	int		nb_token;
 	char	**new_tab;
+	char	*temp;
 	int		pos_after_token;
 
 	j = 0;
 	k = 0;
+	temp = NULL;
 	pos_after_token = 0;
 	nb_token = ft_search_token(tab[i], "&&");
 	new_tab = malloc(sizeof(char *) * (ft_strlen(tab[i]) + nb_token + 1));
@@ -72,24 +74,25 @@ char	**ft_copy_tab_split(char **tab, int i)
 		return (NULL);
 	while (tab[j])
 	{
-		new_tab[k] = ft_strdup(tab[j]);
 		if (j == i)
 		{
 			while (k < j + nb_token + 1)
 			{
-				new_tab[k] = ft_strdup(ft_copy_until_token(tab[i], "&&", pos_after_token));
-				pos_after_token = pos_after_token + ft_strlen(new_tab[k]) + 2;
+				temp = ft_copy_until_token(tab[i], "&&", pos_after_token);
+				pos_after_token = pos_after_token + ft_strlen(temp) + 2;
+				new_tab[k] = temp;
 				k++;
 			}
 			j++;
 		}
 		else
 		{
+			temp = ft_strdup(tab[j]);
+			new_tab[k] = temp;
 			j++;
 			k++;
 		}
 	}
 	new_tab[k] = NULL;
-	// free(tab);
 	return (new_tab);
 }

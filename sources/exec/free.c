@@ -1,23 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error_message.c                              :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 16:20:43 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/23 13:48:48 by antgabri         ###   ########.fr       */
+/*   Created: 2024/02/23 14:17:05 by antgabri          #+#    #+#             */
+/*   Updated: 2024/02/23 16:45:03 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_error_message(void)
+void	free_tab_exec(char **tab)
 {
-	perror(ERROR_FORMAT);
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	if (tab)
+		free(tab);
 }
 
-void	print_error_arg(char token)
-{
-	printf("parse error near '%c'\n", token);
-}
+// void	free_child(t_child *child, int nb_child)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (i < nb_child)
+// 	{
+// 		free(child[i]);
+// 		i++;
+// 	}
+// 	free(child);
+// }
