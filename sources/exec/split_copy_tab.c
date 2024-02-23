@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_copy_tab.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 15:19:34 by anthony           #+#    #+#             */
-/*   Updated: 2024/02/23 17:30:22 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/23 19:23:08 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,17 @@ static char	*ft_copy_until_token(char *tab, char *token, int i)
 	return (temp);
 }
 
-char	**ft_copy_tab_split(char **tab, int i)
+char	**ft_copy_tab_split(char **tab, int i, int pos_after_token)
 {
 	int		j;
 	int		k;
 	int		nb_token;
 	char	**new_tab;
 	char	*temp;
-	int		pos_after_token;
 
 	j = 0;
 	k = 0;
 	temp = NULL;
-	pos_after_token = 0;
 	nb_token = ft_search_token(tab[i], "&&");
 	new_tab = malloc(sizeof(char *) * (ft_strlen(tab[i]) + nb_token + 1));
 	if (new_tab == NULL)

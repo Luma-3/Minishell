@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:47:27 by Monsieur_Ca       #+#    #+#             */
-/*   Updated: 2024/02/23 15:11:12 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/23 19:06:21 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	test_path_access(char *tab)
-{
-	if (access(tab, X_OK | F_OK) == 0)
-		return (SUCCESS);
-	return (FAILURE);
-}
-
-static int	test_exec_prog(char *tab)
-{
-	if (access(tab, X_OK | F_OK) == 0)
-		return (SUCCESS);
-	return (FAILURE);
-}
 
 static char	*get_path_binary(char *tab)
 {
@@ -44,16 +30,27 @@ static char	*get_path_binary(char *tab)
 	return (path_prog);
 }
 
+static char	*create_path(char *path, char *arg)
+{
+	char	*temp1;
+	char	*temp2;
+
+	temp1 = ft_strdup(path);
+	temp2 = ft_strjoin(temp1, "/");
+	free(temp1);
+	temp1 = ft_strjoin(temp2, arg);
+	free(temp2);
+	return (temp1);
+}
+
 static char	*get_path_command(char *tab, t_list *env)
 {
 	char	**path_command;
 	char	**arg_tab;
 	char	*temp1;
-	char	*temp2;
 	int		i;
 
 	i = 0;
-	temp2 = NULL;
 	temp1 = ms_getenv(env, "PATH");
 	path_command = ft_split(temp1, ':');
 	if (path_command == NULL)
@@ -64,18 +61,13 @@ static char	*get_path_command(char *tab, t_list *env)
 		return (free_tab_exec(path_command), NULL);
 	while (path_command[i])
 	{
-		temp1 = ft_strdup(path_command[i]);
-		temp2 = ft_strjoin(temp1, "/");
-		free(temp1);
-		temp1 = ft_strjoin(temp2, arg_tab[0]);
-		free(temp2);
+		temp1 = create_path(path_command[i], arg_tab[0]);
 		if (test_exec_prog(temp1) == SUCCESS)
 			return (free_tab_exec(path_command), free_tab_exec(arg_tab), temp1);
 		free(temp1);
 		i++;
 	}
-	return (free_tab_exec(path_command),
-		free_tab_exec(arg_tab), NULL);
+	return (free_tab_exec(path_command), free_tab_exec(arg_tab), NULL);
 }
 
 char	*get_path(t_list *env, char *tab)

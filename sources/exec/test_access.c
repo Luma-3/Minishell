@@ -1,43 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_utils.c                                       :+:      :+:    :+:   */
+/*   test_access.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 00:43:26 by monsieurc         #+#    #+#             */
-/*   Updated: 2024/02/23 18:58:18 by anthony          ###   ########.fr       */
+/*   Created: 2024/02/23 19:06:08 by anthony           #+#    #+#             */
+/*   Updated: 2024/02/23 19:08:13 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	nb_pipe(char **tab)
+int	test_path_access(char *tab)
 {
-	int	i;
-	int	count;
-
-	count = 0;
-	i = 0;
-	while (tab[i])
-	{
-		if (ft_strchr(tab[i], '|') != 0)
-			count++;
-		i++;
-	}
-	return (i + count);
+	if (access(tab, X_OK | F_OK) == 0)
+		return (SUCCESS);
+	return (FAILURE);
 }
 
-int	wait_child(t_child *child, int nb_child)
+int	test_exec_prog(char *tab)
 {
-	int	i;
-
-	i = 0;
-	while (i < nb_child)
-	{
-		if (waitpid(child[i].pid, NULL, 0) == -1)
-			return (FAILURE);
-		i++;
-	}
-	return (SUCCESS);
+	if (access(tab, X_OK | F_OK) == 0)
+		return (SUCCESS);
+	return (FAILURE);
 }

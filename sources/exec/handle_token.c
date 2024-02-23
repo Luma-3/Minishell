@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:41:07 by anthony           #+#    #+#             */
-/*   Updated: 2024/02/23 17:27:31 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/23 19:22:51 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,16 @@ int	is_there_token(char **tab, int i)
 char	**handle_token(char **tab, int i)
 {
 	char	**temp;
+	int		pos;
 
-	temp = NULL;
+	pos = 0;
 	temp = ft_copy_tab(tab);
 	while (tab[i])
 	{
 		if (ft_strnstr(tab[i], "&&", ft_strlen(tab[i])) != NULL)
 		{
-			temp = ft_copy_tab_split(tab, i);
+			free_tab_exec(temp);
+			temp = ft_copy_tab_split(tab, i, pos);
 			tab = ft_copy_tab(temp);
 			i = 0;
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/23 14:22:37 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/23 19:19:28 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int			exec_command(char *tab, t_list *env);
 void		print_error_message(void);
 void		print_error_arg(char token);
 
-
 //EXEC_UTILS
 int			nb_pipe(char **tab);
 int			wait_child(t_child *child, int nb_child);
@@ -78,11 +77,15 @@ t_child		*connect_pipe(t_child *child, int count_pipe);
 t_child		*dup_in_out_child(t_child *child, int i, int count_pipe);
 void		close_pipe(t_child *child, int i, int nb_pipe);
 
-// int		verif_token(char **tab, int i);
+//
 char		**ft_copy_tab_split(char **tab, int i);
 int			ft_search_token(char *tab, char *token);
 char		**place_new_split(char **tab, int i);
 
+//ACCESS
+int			test_exec_prog(char *tab);
+int			test_path_access(char *tab);
+
 //FREE
-void	free_tab_exec(char **tab);
+void		free_tab_exec(char **tab);
 #endif

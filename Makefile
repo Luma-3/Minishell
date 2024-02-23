@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
+#    By: anthony <anthony@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/02/23 14:21:41 by antgabri         ###   ########.fr        #
+#    Updated: 2024/02/23 19:17:52 by anthony          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,8 @@ SRC_EXEC_LIST		=	get_path.c				\
 						split_copy_tab.c	\
 						exec_command.c		\
 						handle_pipe.c		\
-						free.c				
+						free.c				\
+						test_access.c		
 SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 
 SRC_LIST			=	minishell.c			\

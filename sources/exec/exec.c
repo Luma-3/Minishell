@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:00:16 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/23 17:34:35 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:38:30 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ int	exec(t_list *env, char *prompt)
 	child = init_child(child, nb_pipe(tab));
 	if (child == NULL)
 		return (free_tab_exec(tab), FAILURE);
-	// free_tab_exec(tab_temp);
+	if (tab != tab_temp)
+		free_tab_exec(tab_temp);
 	child = connect_pipe(child, count_pipe);
 	if (child == NULL)
 		return (free_tab_exec(tab), free(child), FAILURE);
