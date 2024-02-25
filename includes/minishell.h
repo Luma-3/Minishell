@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: monsieurc <monsieurc@student.42.fr>        +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/25 12:39:22 by monsieurc        ###   ########.fr       */
+/*   Updated: 2024/02/25 15:56:20 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ char		*get_path(t_list *env, char *tab);
 int			verif_arg(char *prompt);
 
 //EXEC
-int			exec_build(t_list *env, char *prompt);
 int			exec(t_list *env, char *prompt);
 int			exec_command(char *tab, t_list *env);
 
@@ -65,7 +64,7 @@ void		print_error_arg(char token);
 void		print_error_display(void);
 
 //EXEC_UTILS
-int			nb_pipe(char **tab);
+int			nb_array(char **tab);
 int			wait_child(t_child *child, int nb_child);
 
 //HANDLE TOKEN
