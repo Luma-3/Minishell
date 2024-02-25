@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: monsieurc <monsieurc@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 00:43:26 by monsieurc         #+#    #+#             */
-/*   Updated: 2024/02/23 18:58:18 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/25 12:31:09 by monsieurc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	nb_pipe(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		if (ft_strchr(tab[i], '|') != 0)
+		if (tab[i] != NULL && ft_strchr(tab[i], '|') != 0)
 			count++;
 		i++;
 	}

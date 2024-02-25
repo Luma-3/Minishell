@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: monsieurc <monsieurc@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/23 14:15:53 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/25 12:07:37 by monsieurc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void	read_input(t_list *env)
 	}
 }
 
-static int	presentation_art(t_list *env)
+static int	presentation_display(t_list *env)
 {
 	char	*tab;
 	pid_t	pid;
 
-	tab = ft_strdup("toilet -t -f future --gay -F border Welcome to MINISHELL");
+	tab = ft_strdup("toilet -t -f future --gay -F border Welcome in MINISHELL");
 	pid = fork();
 	if (pid < 0)
 	{
@@ -53,7 +53,10 @@ static int	presentation_art(t_list *env)
 	else if (pid == 0)
 	{
 		if (exec_command(tab, env) == FAILURE)
+		{
+			print_error_display();
 			exit(FAILURE);
+		}
 		exit(SUCCESS);
 	}
 	else
@@ -76,10 +79,8 @@ int	main(int ac, char **av, char **envp)
 	if (ac != 1)
 		return (EXIT_FAILURE);
 	env = copy_env(envp);
-	presentation_art(env);
+	presentation_display(env);
 	read_input(env);
 	return (EXIT_SUCCESS);
 }
-	//TODO prompt error message
-	//TODO BEAU
 	//FORK DES LE DEBUT POUR LE SIGNAL

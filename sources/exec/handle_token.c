@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: monsieurc <monsieurc@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:41:07 by anthony           #+#    #+#             */
-/*   Updated: 2024/02/23 19:22:51 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/25 12:33:11 by monsieurc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ char	**handle_token(char **tab, int i)
 			tab = ft_copy_tab(temp);
 			i = 0;
 		}
-		i++;
+		else
+			i++;
 	}
 	free_tab_exec(temp);
 	return (tab);

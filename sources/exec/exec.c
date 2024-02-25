@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: monsieurc <monsieurc@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:00:16 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/23 18:38:30 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/25 12:38:54 by monsieurc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,14 @@ int	exec(t_list *env, char *prompt)
 
 	child = NULL;
 	prompt = ft_strtrim(prompt, " ");
+	//FREE MEMOIRE ALLOUE AVANT SI TRIM SUPPRIME DES CARACTERES
 	tab_temp = ft_split(prompt, '|');
 	if (tab_temp == NULL)
 		return (FAILURE);
 	free(prompt);
 	count_pipe = nb_pipe(tab_temp) - 1;
 	tab = handle_token(tab_temp, 0);
+	//COUPER LA FOCNTION EN DEUX ICI
 	child = init_child(child, nb_pipe(tab));
 	if (child == NULL)
 		return (free_tab_exec(tab), FAILURE);

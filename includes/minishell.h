@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: monsieurc <monsieurc@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/23 19:19:28 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/25 12:39:22 by monsieurc        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,14 @@ char		*get_path(t_list *env, char *tab);
 int			verif_arg(char *prompt);
 
 //EXEC
+int			exec_build(t_list *env, char *prompt);
 int			exec(t_list *env, char *prompt);
 int			exec_command(char *tab, t_list *env);
+
+//PRINT_ERROR
 void		print_error_message(void);
 void		print_error_arg(char token);
+void		print_error_display(void);
 
 //EXEC_UTILS
 int			nb_pipe(char **tab);
@@ -78,7 +82,7 @@ t_child		*dup_in_out_child(t_child *child, int i, int count_pipe);
 void		close_pipe(t_child *child, int i, int nb_pipe);
 
 //
-char		**ft_copy_tab_split(char **tab, int i);
+char		**ft_copy_tab_split(char **tab, int i, int pos_after_token);
 int			ft_search_token(char *tab, char *token);
 char		**place_new_split(char **tab, int i);
 
