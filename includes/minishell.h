@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/25 15:56:20 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/26 10:52:20 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,28 +44,26 @@ typedef struct s_child
 	pid_t	pid;
 }	t_child;
 
+//PARSING
 int			count_words(const char *prompt);
 int			count_letters(const char *prompt, int i);
 int			place_cursor(const char *prompt, int i);
 char		**alloc_tab(char *prompt);
 int			isquote_type(char c);
 
-//PARSING
+//GET PATH
 char		*get_path(t_list *env, char *tab);
+
+//TEST PATH / ACCESS
+int			test_exec_prog(char *tab);
+int			test_path_access(char *tab);
+
+//VERIF
 int			verif_arg(char *prompt);
 
 //EXEC
 int			exec(t_list *env, char *prompt);
 int			exec_command(char *tab, t_list *env);
-
-//PRINT_ERROR
-void		print_error_message(void);
-void		print_error_arg(char token);
-void		print_error_display(void);
-
-//EXEC_UTILS
-int			nb_array(char **tab);
-int			wait_child(t_child *child, int nb_child);
 
 //HANDLE TOKEN
 char		**ft_copy_tab(char **temp);
@@ -76,19 +74,25 @@ int			is_there_token(char **tab, int i);
 
 //HANDLE PIPE
 t_child		*init_child(t_child *child, int nb_child);
-t_child		*connect_pipe(t_child *child, int count_pipe);
-t_child		*dup_in_out_child(t_child *child, int i, int count_pipe);
+t_child		*create_pipe(t_child *child, int count_pipe);
+t_child		*connect_pipe(t_child *child, int i, int nb_child);
 void		close_pipe(t_child *child, int i, int nb_pipe);
 
-//
+//HANDLE TOKEN 
 char		**ft_copy_tab_split(char **tab, int i, int pos_after_token);
 int			ft_search_token(char *tab, char *token);
 char		**place_new_split(char **tab, int i);
 
-//ACCESS
-int			test_exec_prog(char *tab);
-int			test_path_access(char *tab);
+//EXEC_UTILS
+int			nb_array(char **tab);
+int			wait_child(t_child *child, int nb_child);
 
 //FREE
 void		free_tab_exec(char **tab);
+
+//PRINT_ERROR
+void		print_error_message(void);
+void		print_error_arg(char token);
+void		print_error_display(void);
+
 #endif

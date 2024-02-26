@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_pipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:03:33 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/23 20:12:46 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/26 10:45:23 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	close_pipe(t_child *child, int i, int nb_pipe)
 	}
 }
 
-t_child	*connect_pipe(t_child *child, int count_pipe)
+t_child	*create_pipe(t_child *child, int count_pipe)
 {
 	int	i;
 
@@ -43,7 +43,7 @@ t_child	*connect_pipe(t_child *child, int count_pipe)
 	return (child);
 }
 
-t_child	*dup_in_out_child(t_child *child, int i, int nb_child)
+t_child	*connect_pipe(t_child *child, int i, int nb_child)
 {
 	if (i != 0)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:00:16 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/25 17:14:50 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/26 10:45:47 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	launch_child(t_child *child,
 		{
 			if (count_pipe > 0)
 			{
-				child = dup_in_out_child(child, i, count_pipe + 1);
+				child = connect_pipe(child, i, count_pipe + 1);
 				if (child == NULL)
 					return (FAILURE);
 			}
@@ -52,10 +52,10 @@ static int	launch_child(t_child *child,
 static int	prepare_launch(char **tab, t_list *env,
 	t_child *child, int count_pipe)
 {
-	int	count_arg;
+	// int	count_arg;
 
-	count_arg = nb_array(tab);
-	child = connect_pipe(child, count_pipe); //CHANGER NOM P0UR CREATE_PIPE
+	// count_arg = nb_array(tab);
+	child = create_pipe(child, count_pipe);
 	if (child == NULL)
 		return (free_tab_exec(tab), free(child), FAILURE);
 	if (launch_child(child, count_pipe, tab, env) == FAILURE)
@@ -83,7 +83,11 @@ int	exec(t_list *env, char *prompt)
 	count_arg = nb_array(tab);
 	child = init_child(child, count_arg);
 	if (child == NULL)
-		return (free_tab_exec(tab), FAILURE); //FREE TAB TEMP, FAILURE)
+	{
+		if (tab != tab_temp)
+			free_tab_exec(tab_temp);
+		return (free_tab_exec(tab), FAILURE);
+	}
 	if (tab != tab_temp)
 		free_tab_exec(tab_temp);
 	if (prepare_launch(tab, env, child, count_pipe) == FAILURE)
