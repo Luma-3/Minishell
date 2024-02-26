@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 17:37:01 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/26 18:03:58 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:39:11 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ int	handle_cmd(t_prompt *prompt, t_child *childs, bool input_redir, int index_ch
 		if (exec_command(tab_cmd, prompt->env) == FAILURE)
 			return (1);
 	}
-	waitpid(childs[index_child].pid, NULL, 0);
 	return (SUCCESS);
 }
