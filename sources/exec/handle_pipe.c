@@ -3,67 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   handle_pipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:03:33 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/26 10:45:23 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:40:41 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	close_pipe(t_child *child, int i, int nb_pipe)
+void	dup2_read(t_child *childs, int index_child)
 {
-	if (i != 0)
-	{
-		if (close(child[i - 1].fd_pipe[0]) == -1)
-			perror("close");
-	}
-	if (i + 1 != nb_pipe)
-	{
-		if (close(child[i].fd_pipe[1]) == -1)
-			perror("close");
-	}
+	close(childs[index_child].pipe_fd[WRITE]);
+	dup2(childs[index_child].pipe_fd[READ], STDIN_FILENO);
+	close(childs[index_child].pipe_fd[READ]);
 }
 
-t_child	*create_pipe(t_child *child, int count_pipe)
+static void	dup2_write(t_child *childs, int index_child)
 {
-	int	i;
-
-	i = 0;
-	while (i < count_pipe)
-	{
-		if (pipe(child[i].fd_pipe) == -1)
-		{
-			perror("pipe");
-			return (NULL);
-		}
-		i++;
-	}
-	return (child);
+	close(childs[index_child].pipe_fd[READ]);
+	dup2(childs[index_child].pipe_fd[WRITE], STDOUT_FILENO);
+	close(childs[index_child].pipe_fd[WRITE]); // 
 }
 
-t_child	*connect_pipe(t_child *child, int i, int nb_child)
+int handle_pipe(t_prompt *prompt, t_child *childs, bool input_redir, int index_child)
 {
-	if (i != 0)
+	char **tab_cmd;
+
+	input_redir = true;
+	if (pipe(childs[index_child].pipe_fd) == FAILURE)
+		return (FAILURE);
+	childs[index_child].pid = fork();
+	if (childs[index_child].pid < 0)
+		return (FAILURE);
+	else if (childs[index_child].pid == 0)
 	{
-		close(child[i - 1].fd_pipe[1]);
-		if (dup2(child[i - 1].fd_pipe[0], STDIN_FILENO) == -1)
-		{
-			perror("dup2 STDIN_FILENO");
-			return (NULL);
-		}
-		close(child[i - 1].fd_pipe[0]);
+		dup2_write(childs, index_child);
+		if (input_redir == true)
+			dup2_read(childs, index_child - 1);
+		tab_cmd = ft_copy_tab(prompt->tab, prompt->current_index, prompt->pos_after_token - 2);
+		if (tab_cmd == NULL)
+			return (FAILURE);
+		if (exec_command(tab_cmd, prompt->env) == FAILURE)
+			return (FAILURE);
 	}
-	if (i + 1 != nb_child)
-	{
-		close(child[i].fd_pipe[0]);
-		if (dup2(child[i].fd_pipe[1], STDOUT_FILENO) == -1)
-		{
-			perror("dup2 STDOUT_FILENO");
-			return (NULL);
-		}
-		close(child[i].fd_pipe[1]);
-	}
-	return (child);
+	return (SUCCESS);
 }

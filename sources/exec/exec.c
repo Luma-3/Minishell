@@ -3,94 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:00:16 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/26 10:45:47 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:51:50 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	handle_parent_process(t_child *child, int i, int count_pipe)
+int	launch_child(t_prompt *prompt)
 {
-	if (count_pipe > 0)
-		close_pipe(child, i, count_pipe + 1);
-	waitpid(child[i].pid, NULL, 0);
-}
+	int		token;
+	int		index_child;
+	bool	input_redir;
+	t_child *childs;
 
-static int	launch_child(t_child *child,
-	int count_pipe, char **tab, t_list *env)
-{
-	int	i;
-
-	i = 0;
-	while (i < nb_array(tab))
+	input_redir = false;
+	index_child = 0;
+	childs = NULL;
+	childs = init_child(childs, prompt->nb_cmd);
+	while (prompt->tab[prompt->current_index])
 	{
-		child[i].pid = fork();
-		if (child[i].pid < 0)
-			return (FAILURE);
-		else if (child[i].pid == 0)
+		token = detect_token(prompt);
+		printf("token = %d\n", token);
+		if (token == T_PIPE)
 		{
-			if (count_pipe > 0)
-			{
-				child = connect_pipe(child, i, count_pipe + 1);
-				if (child == NULL)
-					return (FAILURE);
-			}
-			if (exec_command(tab[i], env) == FAILURE)
-				exit(FAILURE);
-			exit(SUCCESS);
+			handle_pipe(prompt, childs, input_redir, index_child);
 		}
 		else
-			handle_parent_process(child, i, count_pipe);
-		i++;
+		{
+			//handle_cmd(prompt, childs, input_redir, index_child);
+			printf ("error = %d \n", handle_cmd(prompt, childs, input_redir, index_child));
+			input_redir = false;
+		}
+		printf("current_index = %d\n", prompt->current_index);
+		printf("pos_after_token = %d\n", prompt->pos_after_token);\
+		printf("input_redir = %d\n", input_redir);
+		index_child++;
+		prompt->current_index = prompt->pos_after_token;
 	}
-	return (SUCCESS);
-}
-
-static int	prepare_launch(char **tab, t_list *env,
-	t_child *child, int count_pipe)
-{
-	// int	count_arg;
-
-	// count_arg = nb_array(tab);
-	child = create_pipe(child, count_pipe);
-	if (child == NULL)
-		return (free_tab_exec(tab), free(child), FAILURE);
-	if (launch_child(child, count_pipe, tab, env) == FAILURE)
-		return (free_tab_exec(tab), free(child), FAILURE);
-	else
-		return (free_tab_exec(tab), free(child), SUCCESS);
-}
-
-int	exec(t_list *env, char *prompt)
-{
-	t_child	*child;
-	char	**tab;
-	char	**tab_temp;
-	int		count_arg;
-	int		count_pipe;
-
-	child = NULL;
-	prompt = ft_strtrim(prompt, " ");
-	tab_temp = ft_split(prompt, '|');
-	if (tab_temp == NULL)
-		return (FAILURE);
-	free(prompt);
-	count_pipe = nb_array(tab_temp) - 1;
-	tab = handle_token(tab_temp, 0);
-	count_arg = nb_array(tab);
-	child = init_child(child, count_arg);
-	if (child == NULL)
-	{
-		if (tab != tab_temp)
-			free_tab_exec(tab_temp);
-		return (free_tab_exec(tab), FAILURE);
-	}
-	if (tab != tab_temp)
-		free_tab_exec(tab_temp);
-	if (prepare_launch(tab, env, child, count_pipe) == FAILURE)
-		return (FAILURE);
 	return (SUCCESS);
 }

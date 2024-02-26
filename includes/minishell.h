@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/26 10:52:20 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:44:01 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,35 @@
 # define FAILURE -1
 # define SUCCESS 0
 
+# define READ 0
+# define WRITE 1
+
+# define T_NONE 1
+# define T_OR 2
+# define T_AND 3
+# define T_PIPE 4
+
+
 # define ERROR_FORMAT "Minishell error"
 //int	g_sig_return;
 
 typedef struct s_child
 {
-	int		fd_pipe[2];
+	int pipe_fd[2];
 	pid_t	pid;
-}	t_child;
+	
+}			t_child;
+
+typedef struct s_prompt
+{
+	char	*prompt;
+	char 	**tab;
+	t_list	*env;
+	int 	current_index;
+	int 	pos_after_token;
+	int		nb_pipe;
+	int		nb_cmd;
+}			t_prompt;
 
 //PARSING
 int			count_words(const char *prompt);
@@ -50,6 +71,9 @@ int			count_letters(const char *prompt, int i);
 int			place_cursor(const char *prompt, int i);
 char		**alloc_tab(char *prompt);
 int			isquote_type(char c);
+
+//PARSER_INIT
+int			parser_init(t_prompt *prompt, char *input, t_list *env);
 
 //GET PATH
 char		*get_path(t_list *env, char *tab);
@@ -62,26 +86,20 @@ int			test_path_access(char *tab);
 int			verif_arg(char *prompt);
 
 //EXEC
-int			exec(t_list *env, char *prompt);
-int			exec_command(char *tab, t_list *env);
+int			launch_child(t_prompt *prompt);
+int			exec_command(char **tab_cmd, t_list *env);
 
 //HANDLE TOKEN
-char		**ft_copy_tab(char **temp);
-char		**handle_token(char **tab, int i);
+int			detect_token(t_prompt *prompt);
 int			verif_token(char *prompt, char token);
-int			ft_search_token(char *tab, char *token);
-int			is_there_token(char **tab, int i);
 
 //HANDLE PIPE
 t_child		*init_child(t_child *child, int nb_child);
-t_child		*create_pipe(t_child *child, int count_pipe);
-t_child		*connect_pipe(t_child *child, int i, int nb_child);
-void		close_pipe(t_child *child, int i, int nb_pipe);
 
-//HANDLE TOKEN 
-char		**ft_copy_tab_split(char **tab, int i, int pos_after_token);
-int			ft_search_token(char *tab, char *token);
-char		**place_new_split(char **tab, int i);
+//HANDLE CMD
+int 		handle_pipe(t_prompt *prompt, t_child *childs, bool input_redir, int index_child);
+int			handle_cmd(t_prompt *prompt, t_child *childs, bool input_redir, int index_child);
+
 
 //EXEC_UTILS
 int			nb_array(char **tab);
@@ -94,5 +112,8 @@ void		free_tab_exec(char **tab);
 void		print_error_message(void);
 void		print_error_arg(char token);
 void		print_error_display(void);
+
+// IO REDIRECTION
+void	dup2_read(t_child *childs, int index_child);
 
 #endif

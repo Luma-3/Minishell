@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_token.c                                     :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 14:41:07 by anthony           #+#    #+#             */
-/*   Updated: 2024/02/26 15:13:38 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/02/16 14:04:59 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/02/16 18:59:16 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "built_in.h"
 
-int	detect_token(t_prompt *prompt)
+int	ms_pwd(void)
 {
-	prompt->pos_after_token = prompt->current_index;
-	while (prompt->tab[prompt->pos_after_token])
-	{
-		if (ft_strncmp(prompt->tab[prompt->pos_after_token], "|", 2) == 0)
-		{
-			prompt->pos_after_token++;
-			return (T_PIPE);
-		}
-		prompt->pos_after_token++;
-	}
-	return (T_NONE);
+	char	*cwd;
+
+	cwd = NULL;
+	cwd = getcwd(cwd, 0);
+	if (!cwd)
+		return (errno);
+	ft_putendl_fd(cwd, STDOUT_FILENO);
+	free(cwd);
+	return (EXIT_SUCCESS);
 }
