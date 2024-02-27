@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:24:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/26 18:02:19 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:20:42 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int count_pattern_tab(char **tab, char *pattern)
+static int	count_pattern_tab(char **tab, char *pattern)
 {
 	int	count;
 	int	i;
 	int	size_pattern;
-	
+
 	i = 0;
 	count = 0;
 	size_pattern = ft_strlen(pattern);
@@ -54,6 +54,8 @@ int	parser_init(t_prompt *prompt, char *input, t_list *env)
 	prompt->nb_pipe = count_pattern_tab(prompt->tab, "|");
 	prompt->nb_cmd = count_pattern_tab(prompt->tab, "||"); 
 	prompt->nb_cmd += count_pattern_tab(prompt->tab, "&&"); 
+	prompt->before_and = 0;
+	prompt->after_and = 0;
 	prompt->nb_cmd += prompt->nb_pipe + 1;
 	prompt->env = env;
 	//print_prompt(prompt);

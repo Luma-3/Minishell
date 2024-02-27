@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/26 17:44:01 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:21:23 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,12 @@ typedef struct s_child
 typedef struct s_prompt
 {
 	char	*prompt;
-	char 	**tab;
+	char	**tab;
 	t_list	*env;
-	int 	current_index;
-	int 	pos_after_token;
+	int		current_index;
+	int		pos_after_token;
+	int		before_and;
+	int		after_and;
 	int		nb_pipe;
 	int		nb_cmd;
 }			t_prompt;

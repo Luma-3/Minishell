@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:00:16 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/27 14:43:02 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:38:33 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ int	launch_child(t_prompt *prompt)
 			handle_pipe(prompt, childs, input_redir, index_child);
 			input_redir = true;
 		}
+		else if (token == T_AND)
+		{
+			prompt->before_and = prompt->current_index;
+			handle_and(prompt, childs, input_redir, index_child);
+			input_redir = false;
+		}
 		else
 		{
 			handle_cmd(prompt, childs, input_redir, index_child);
@@ -40,5 +46,6 @@ int	launch_child(t_prompt *prompt)
 		prompt->current_index = prompt->pos_after_token;
 	}
 	wait_child(childs, prompt->nb_cmd);
+	free(childs);
 	return (SUCCESS);
 }
