@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 14:00:31 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/27 16:58:54 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/02/27 17:02:01 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/02/27 17:07:39 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int cd(char *path)
+#include "minishell.h"
+
+int test_builtins(char *prompt)
 {
-	if (chdir(path) == -1)
-	{
-		perror("cd");
-		return (1);
-	}
-	return (0);	
+	if 
 }
