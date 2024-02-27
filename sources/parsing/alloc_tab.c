@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:48:17 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/16 13:30:14 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/26 13:47:39 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static char	**insert_data(char **tab, const char *prompt, int nb_words)
 	while (prompt[position] && index < nb_words)
 	{
 		nb_letters = count_letters(prompt, position);
-		printf("nb_letters = %d\n", nb_letters);
 		if (nb_letters != 0)
 		{
 			tab[index] = (char *)ft_calloc(nb_letters + 1, sizeof(char));
@@ -90,7 +89,6 @@ char	**alloc_tab(char *prompt)
 
 	tab = NULL;
 	nb_words = count_words(prompt);
-	printf("nb_words = %d\n", nb_words);
 	if (nb_words == FAILURE)
 		return (NULL);
 	tab = (char **)ft_calloc(nb_words + 1, sizeof(char *));

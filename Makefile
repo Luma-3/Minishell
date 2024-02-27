@@ -6,16 +6,13 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/02/16 13:31:44 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/02/26 17:43:18 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-
 
 ################
 ##  COMPILE	  ##
 ################
-
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g3
@@ -46,14 +43,35 @@ SRC_DIR				=	sources/
 SRC_PARSING_DIR		=	parsing/
 SRC_PARSING_LIST	=	count_word.c		\
 						count_letter.c		\
-						place_cursor.c		\
 						alloc_tab.c			\
-						parser_utils.c
+						parser_utils.c		\
+						parser.c
 SRC_PARSING			=	$(addprefix $(SRC_PARSING_DIR), $(SRC_PARSING_LIST))
 
+SRC_ENV_DIR			=	env/
+SRC_ENV_LIST		=	transform_env.c		\
+						env_utils.c
+SRC_ENV				=	$(addprefix $(SRC_ENV_DIR), $(SRC_ENV_LIST))
 
-SRC_LIST			=	minishell.c	\
-						$(SRC_PARSING)
+SRC_EXEC_DIR		=	exec/
+SRC_EXEC_LIST		=	get_path.c				\
+						print_error_message.c	\
+						handle_cmd.c			\
+						exec.c				\
+						verif_arg.c			\
+						exec_utils.c		\
+						init_child.c		\
+						handle_token.c		\
+						exec_command.c		\
+						handle_pipe.c		\
+						free.c				\
+						test_access.c		
+SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
+
+SRC_LIST			=	minishell.c			\
+						$(SRC_PARSING)		\
+						$(SRC_ENV) 			\
+						$(SRC_EXEC)
 SRC					=	$(addprefix $(SRC_DIR), $(SRC_LIST))
 
 ##################
@@ -87,6 +105,8 @@ all: $(LIBFT) $(NAME)
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSING_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_ENV_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)
 
 $(LIBFT):
 	@make -sC $(LIBFT_DIR)
