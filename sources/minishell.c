@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/26 17:12:41 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:42:30 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	read_input(t_list *env)
 			}
 			parser_init(&prompt, input, env); // to verify
 			launch_child(&prompt); // to verify
-			perror("exec");
+			//perror("exec");
 			free(input);
 		}
 	}

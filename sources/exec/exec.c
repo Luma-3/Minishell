@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:00:16 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/26 19:39:20 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:43:02 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,10 @@ int	launch_child(t_prompt *prompt)
 		if (token == T_PIPE)
 		{
 			handle_pipe(prompt, childs, input_redir, index_child);
-			perror("handle pipe");
+			input_redir = true;
 		}
 		else
 		{
-			printf("input_redir = %d\n", input_redir);
 			handle_cmd(prompt, childs, input_redir, index_child);
 			input_redir = false;
 		}

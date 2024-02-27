@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_pipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:03:33 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/26 19:36:21 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:17:07 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	handle_pipe(t_prompt *prompt, t_child *childs, bool input_redir, int index_c
 {
 	char	**tab_cmd;
 
-	input_redir = true;
 	if (pipe(childs[index_child].pipe_fd) == FAILURE)
 		return (FAILURE);
 	childs[index_child].pid = fork();
@@ -45,13 +44,20 @@ int	handle_pipe(t_prompt *prompt, t_child *childs, bool input_redir, int index_c
 	else if (childs[index_child].pid == 0)
 	{
 		dup2_write(childs, index_child);
-		if (input_redir == true && index_child > 0)
+		if (input_redir == true)
 			dup2_read(childs, index_child - 1);
-		tab_cmd = ft_copy_tab(prompt->tab, prompt->current_index, prompt->pos_after_token - 2);
+		tab_cmd = ft_copy_tab(prompt->tab, prompt->current_index, prompt->pos_after_token - 1);
 		if (tab_cmd == NULL)
 			return (FAILURE);
 		if (exec_command(tab_cmd, prompt->env) == FAILURE)
 			return (FAILURE);
+	}
+	if (input_redir == true)
+	{
+		if (close(childs[index_child - 1].pipe_fd[READ]) == FAILURE)
+			perror("close 5");
+		if (close(childs[index_child - 1].pipe_fd[WRITE]) == FAILURE)
+			perror("close 6");
 	}
 	return (SUCCESS);
 }
