@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:39:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 16:07:13 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 21:29:07 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int			exec_command(char **tab_cmd, t_list *env);
 //PATH HANDLING
 
 char		*get_path(t_list *env, char *tab);
+
+void 		close_pipe(t_child *childs, int index_child);
 
 int			nb_array(char **tab);
 int			wait_child(t_child *child, int nb_child);

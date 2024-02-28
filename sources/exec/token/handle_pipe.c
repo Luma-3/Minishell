@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_pipe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:03:33 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/28 17:49:45 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/28 21:31:07 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,25 @@ int	handle_pipe(t_prompt *prompt, t_child *childs,
 		if (exec_command(tab_cmd, prompt->env) == FAILURE)
 			return (FAILURE);
 	}
+	if (input_redir)
+		close_pipe(childs, index_child - 1);
 	return (SUCCESS);
+}
+
+void close_pipe(t_child *childs, int index_child)
+{
+	if (close(childs[index_child].pipe_fd[READ]) == FAILURE)
+		perror("close 5");
+	if (close(childs[index_child].pipe_fd[WRITE]) == FAILURE)
+		perror("close 6");
 }
 
 void	dup2_read_pipe(t_child *childs, int index_child)
 {
-	if (dup2(childs[index_child].pipe_fd[READ], STDIN_FILENO) == FAILURE)
-		perror("dup2 1");
 	if (close(childs[index_child].pipe_fd[WRITE]) == FAILURE)
 		perror("close 1");
+	if (dup2(childs[index_child].pipe_fd[READ], STDIN_FILENO) == FAILURE)
+		perror("dup2 1");
 	if (close(childs[index_child].pipe_fd[READ]) == FAILURE)
 		perror("close 2");
 }

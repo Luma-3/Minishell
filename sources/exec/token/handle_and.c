@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:07:16 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/28 15:41:46 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 21:31:36 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,7 @@ int	handle_and(t_prompt *prompt, t_child *childs,
 			exit (FAILURE);
 		exit (SUCCESS);
 	}
+	if (input_redir)
+		close_pipe(childs, index_child - 1);
 	return (handle_parent_process(childs, index_child));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_std.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 17:37:01 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 17:50:19 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/28 21:30:04 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ int	handle_std(t_prompt *prompt, t_child *childs,
 		if (exec_command(tab_cmd, prompt->env) == FAILURE)
 			return (FAILURE);
 	}
+	if (input_redir)
+		close_pipe(childs, index_child - 1);
 	return (SUCCESS);
 }
