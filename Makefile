@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/02/26 17:43:18 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/02/28 11:08:57 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,10 +68,19 @@ SRC_EXEC_LIST		=	get_path.c				\
 						test_access.c		
 SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 
+SRC_BUILTINS_DIR	=	builtins/
+SRC_BUILTINS_LIST	=	cd.c			\
+						echo.c			\
+						pwd.c			\
+						unset.c
+SRC_BUILTINS		=	$(addprefix $(SRC_BUILTINS_DIR), $(SRC_BUILTINS_LIST))
+
+
 SRC_LIST			=	minishell.c			\
 						$(SRC_PARSING)		\
 						$(SRC_ENV) 			\
-						$(SRC_EXEC)
+						$(SRC_EXEC)			\
+						$(SRC_BUILTINS)
 SRC					=	$(addprefix $(SRC_DIR), $(SRC_LIST))
 
 ##################
@@ -107,6 +116,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSING_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_ENV_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_BUILTINS_DIR)
 
 $(LIBFT):
 	@make -sC $(LIBFT_DIR)

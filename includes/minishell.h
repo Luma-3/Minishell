@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/26 17:44:01 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 10:25:36 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@
 # include <curses.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/wait.h>
 
 # include "libft.h"
 # include "env.h"
-# include <sys/wait.h>
+# include "ms_builtins.h"
 
 # define FAILURE -1
 # define SUCCESS 0

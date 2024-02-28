@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "minishell.h": "c",
-        "algorithm": "c"
+        "algorithm": "c",
+        "builtins.h": "c"
     }
 }

@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in.h                                         :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 13:11:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/16 18:58:40 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/02/16 14:04:59 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/02/28 11:50:38 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN_H
-# define BUILT_IN_H
+#include "ms_builtins.h"
 
-# include <stdbool.h>
-# include <errno.h>
+int	ms_pwd(const char *prompt, const char **args, t_list *envp)
+{
+	char	*cwd;
 
-# include "libft.h"
-
-int	ms_echo(const char **args);
-
-int	ms_pwd(void);
-
-#endif
+	cwd = NULL;
+	cwd = getcwd(cwd, 0);
+	if (!cwd)
+		return (errno);
+	ft_putendl_fd(cwd, STDOUT_FILENO);
+	free(cwd);
+	return (EXIT_SUCCESS);
+}

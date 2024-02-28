@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 14:00:31 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/27 16:58:54 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/02/28 11:09:43 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/02/28 11:50:26 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int cd(char *path)
+#include "ms_builtins.h"
+
+static void	print_env(t_list *envp)
 {
-	if (chdir(path) == -1)
+	while (envp)
 	{
-		perror("cd");
-		return (1);
+		ft_putendl_fd(envp->content, STDOUT_FILENO);
+		envp = envp->next;
 	}
-	return (0);	
+}
+
+int	ms_env(const char *prompt, const char **args, t_list *envp)
+{
+	print_env(envp);
+	return (EXIT_SUCCESS);
 }

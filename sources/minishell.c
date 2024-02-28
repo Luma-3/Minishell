@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/27 14:42:30 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:09:26 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int	main(int ac, char **av, char **envp)
 	if (ac != 1)
 		return (EXIT_FAILURE);
 	env = copy_env(envp);
-	//presentation_display(env);
 	read_input(env);
 	return (EXIT_SUCCESS);
 }

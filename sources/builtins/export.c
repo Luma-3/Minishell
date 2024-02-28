@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 14:04:59 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/16 18:59:16 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/02/28 11:16:34 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/02/28 11:50:35 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "built_in.h"
+#include "ms_builtins.h"
+#include "env.h"
 
-int	ms_pwd(void)
+int	ms_export(const char *prompt, const char **args, t_list *envp)
 {
-	char	*cwd;
+	int		i;
+	char 	*delimiter;
 
-	cwd = NULL;
-	cwd = getcwd(cwd, 0);
-	if (!cwd)
-		return (errno);
-	ft_putendl_fd(cwd, STDOUT_FILENO);
-	free(cwd);
+	i = 0;
+	while (args[i])
+	{
+		delimiter = ft_strchr(args[i], '=');
+		if (delimiter)
+		{
+			*delimiter = '\0';
+			ms_setenv(envp, args[i], NULL);
+		}
+		i++;
+	}
 	return (EXIT_SUCCESS);
 }
