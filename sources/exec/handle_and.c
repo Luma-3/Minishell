@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:07:16 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/28 01:10:15 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/28 11:47:02 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,8 @@ int	skip_next_cmd(t_prompt *prompt)
 	return (FAILURE);
 }
 
-int	handle_parent_process(t_child *childs,
-	bool input_redir, int index_child)
+int	handle_parent_process(t_child *childs, int index_child)
 {
-	if (input_redir == true)
-	{
-		if (close(childs[index_child - 1].pipe_fd[READ]) == FAILURE)
-			perror("close 5");
-		if (close(childs[index_child - 1].pipe_fd[WRITE]) == FAILURE)
-			perror("close 6");
-	}
 	waitpid(childs[index_child].pid, &childs[index_child].status, 0);
 	if (childs[index_child].status != 0)
 	{
@@ -68,12 +60,5 @@ int	handle_and(t_prompt *prompt, t_child *childs,
 			exit (FAILURE);
 		exit (SUCCESS);
 	}
-	return (handle_parent_process(childs, input_redir, index_child));
+	return (handle_parent_process(childs, index_child));
 }
-
-// if (WEXITSTATUS(childs[index_child].status) == FAILURE)
-	// {
-	// 	childs[index_child].status = -2;
-	// 	return (FAILURE);
-	// }
-	// childs[index_child].status = -2;

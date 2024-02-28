@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:00:16 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/28 01:27:43 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/28 11:48:54 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,13 @@ int	launch_child(t_prompt *prompt)
 		token = detect_token(prompt);
 		dispatch_token(prompt, childs, token, index_child);
 		index_child++;
+		if (prompt->input_redir == true)
+		{
+			if (close(childs[index_child - 1].pipe_fd[READ]) == FAILURE)
+				perror("close 5");
+			if (close(childs[index_child - 1].pipe_fd[WRITE]) == FAILURE)
+				perror("close 6");
+		}
 		prompt->current_index = prompt->pos_after_token;
 	}
 	wait_child(childs, prompt->nb_cmd);

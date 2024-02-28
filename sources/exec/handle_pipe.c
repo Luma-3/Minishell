@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:03:33 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/28 01:11:55 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/28 11:48:17 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ static void	dup2_write(t_child *childs, int index_child)
 		perror("close 4");
 }
 
-static void	close_pipe(t_child *childs, int index_child)
-{
-	if (close(childs[index_child - 1].pipe_fd[READ]) == FAILURE)
-		perror("close 7");
-	if (close(childs[index_child - 1].pipe_fd[WRITE]) == FAILURE)
-		perror("close 8");
-}
+// static void	close_pipe(t_child *childs, int index_child)
+// {
+// 	if (close(childs[index_child - 1].pipe_fd[READ]) == FAILURE)
+// 		perror("close 7");
+// 	if (close(childs[index_child - 1].pipe_fd[WRITE]) == FAILURE)
+// 		perror("close 8");
+// }
 
 int	handle_pipe(t_prompt *prompt, t_child *childs,
 	bool input_redir, int index_child)
@@ -62,7 +62,5 @@ int	handle_pipe(t_prompt *prompt, t_child *childs,
 		if (exec_command(tab_cmd, prompt->env) == FAILURE)
 			return (FAILURE);
 	}
-	if (input_redir == true)
-		close_pipe(childs, index_child);
 	return (SUCCESS);
 }

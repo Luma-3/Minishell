@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 17:37:01 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 01:12:42 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/28 11:47:11 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,6 @@ int	handle_cmd(t_prompt *prompt, t_child *childs,
 			return (FAILURE);
 		if (exec_command(tab_cmd, prompt->env) == FAILURE)
 			return (FAILURE);
-	}
-	if (input_redir == true)
-	{
-		if (close(childs[index_child - 1].pipe_fd[READ]) == FAILURE)
-			perror("close 5");
-		if (close(childs[index_child - 1].pipe_fd[WRITE]) == FAILURE)
-			perror("close 6");
 	}
 	return (SUCCESS);
 }

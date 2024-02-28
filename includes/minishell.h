@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 01:01:39 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/28 11:45:50 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ int			handle_cmd(t_prompt *prompt, t_child *childs, bool input_redir, int index_
 //HANDLE AND
 int			skip_next_cmd(t_prompt *prompt);
 int			handle_and(t_prompt *prompt, t_child *childs, bool input_redir, int index_child);
-int			handle_parent_process(t_child *childs, bool input_redir, int index_child);
+int			handle_parent_process(t_child *childs, int index_child);
+
 //HANDLE OR
 int			skip_next_choice(t_prompt *prompt);
 int			handle_or(t_prompt *prompt, t_child *childs, bool input_redir, int index_child);
