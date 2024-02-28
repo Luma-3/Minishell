@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:00:16 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/28 15:45:17 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 17:50:15 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ int	launch_child(t_prompt *prompt)
 	{
 		token = detect_token(prompt);
 		dispatch_token(prompt, childs, token, index_child);
-		index_child++;
-		if (prompt->input_redir == true)
+		if (prompt->input_redir == true && index_child > 0)
 		{
 			if (close(childs[index_child - 1].pipe_fd[READ]) == FAILURE)
 				perror("close 5");
 			if (close(childs[index_child - 1].pipe_fd[WRITE]) == FAILURE)
 				perror("close 6");
 		}
+		index_child++;
 		prompt->current_index = prompt->pos_after_token;
 	}
 	wait_child(childs, prompt->nb_cmd);
