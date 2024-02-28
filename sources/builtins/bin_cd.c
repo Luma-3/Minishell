@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   bin_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:00:31 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 12:11:19 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:54:43 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_builtins.h"
 
-int ms_cd(const char *prompt, const char **args, t_list *envp)
+int ms_cd(const char *prompt, char **args, t_list *envp)
 {
+	(void)prompt;
+	(void)envp;
 	if (chdir(args[1]) == -1)
 	{
 		perror("cd");

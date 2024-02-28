@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   buitins.c                                          :+:      :+:    :+:   */
+/*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:33:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 12:10:05 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:51:50 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int exec_builtins(const char **tab_cmd, t_prompt *prompt_struct)
 	init_builtins(builtins);
 	while (builtins[i].name != NULL)
 	{
-		if (ft_strcmp(builtins[i].name, tab_cmd[0]) == 0)
+		if (ft_strncmp(builtins[i].name, tab_cmd[0], ft_strlen(tab_cmd[0])) == 0)
 			return (builtins[i].func(prompt_struct->prompt, tab_cmd, prompt_struct->env));
 		i++;
 	}
@@ -50,7 +50,7 @@ int is_builtins(const char *cmd)
 	init_builtins(builtins);
 	while (builtins[i].name != NULL)
 	{
-		if (ft_strcmp(builtins->name, cmd) == 0)
+		if (ft_strncmp(builtins->name, cmd, ft_strlen(cmd)) == 0)
 			return (true);
 		i++;
 	}

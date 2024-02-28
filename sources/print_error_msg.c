@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   print_error_msg.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 11:27:38 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 11:50:30 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/02/16 16:20:43 by antgabri          #+#    #+#             */
+/*   Updated: 2024/02/28 15:37:26 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_builtins.h"
-#include "env.h"
+#include "minishell.h"
 
-int	ms_exit(const char *prompt, const char **args, t_list *envp)
+void	print_error_message(void)
 {
-	ft_lstclear(&envp, free);
-	(void)args;
-	// clear prompt | free prompt | etc ...
-	exit(EXIT_SUCCESS);
+	perror(ERROR_FORMAT);
+}
+
+void	print_error_arg(char token)
+{
+	printf("parse error near '%c'\n", token);
+}
+
+void	print_error_display(void)
+{
+	printf("minishell: toilet command not found\n");
+	printf("You can install it with 'sudo apt install toilet'\n");
+	printf("Restart minishell and now you have a beautiful display\n");
 }

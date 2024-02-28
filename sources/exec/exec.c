@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:00:16 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/28 15:22:38 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:45:17 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,29 @@ static void	dispatch_token(t_prompt *prompt,
 	}
 	else
 	{
-		if (handle_cmd(prompt, childs, prompt->input_redir, index_child) == FAILURE)
+		if (handle_std(prompt, childs, prompt->input_redir, index_child) == FAILURE)
 			perror("minishell");
 		prompt->input_redir = false;
 	}
+}
+
+static t_child	*init_child(t_child *child, int nb_child)
+{
+	int	i;
+
+	i = 0;
+	child = malloc(sizeof(t_child) * nb_child);
+	if (child == NULL)
+		return (NULL);
+	while (i < nb_child)
+	{
+		child[i].pid = 0;
+		child[i].status = 0;
+		child[i].pipe_fd[0] = 0;
+		child[i].pipe_fd[1] = 1;
+		i++;
+	}
+	return (child);
 }
 
 int	launch_child(t_prompt *prompt)

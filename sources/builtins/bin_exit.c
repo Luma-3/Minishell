@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   bin_exit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 11:09:43 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 11:50:26 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/02/28 11:27:38 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/02/28 15:56:26 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_builtins.h"
+#include "env.h"
 
-static void	print_env(t_list *envp)
+int	ms_exit(const char *prompt, char **args, t_list *envp)
 {
-	while (envp)
-	{
-		ft_putendl_fd(envp->content, STDOUT_FILENO);
-		envp = envp->next;
-	}
-}
-
-int	ms_env(const char *prompt, const char **args, t_list *envp)
-{
-	print_env(envp);
-	return (EXIT_SUCCESS);
+	ft_lstclear(&envp, free);
+	(void)args;
+	(void)prompt;
+	// clear prompt | free prompt | etc ...
+	exit(EXIT_SUCCESS);
 }

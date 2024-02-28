@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 23:02:54 by anthony           #+#    #+#             */
-/*   Updated: 2024/02/28 12:55:11 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:41:46 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	handle_or(t_prompt *prompt, t_child *childs,
 	else if (childs[index_child].pid == 0)
 	{
 		if (input_redir == true)
-			dup2_read(childs, index_child - 1);
+			dup2_read_pipe(childs, index_child - 1);
 		tab_cmd = ft_copy_tab(prompt->tab,
 				prompt->current_index, prompt->pos_after_token - 1);
 		if (tab_cmd == NULL)

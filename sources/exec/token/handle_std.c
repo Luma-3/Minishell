@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_cmd.c                                       :+:      :+:    :+:   */
+/*   handle_std.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 17:37:01 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 12:55:15 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:41:46 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	handle_cmd(t_prompt *prompt, t_child *childs,
+int	handle_std(t_prompt *prompt, t_child *childs,
 	bool input_redir, int index_child)
 {
 	char	**tab_cmd;
@@ -23,7 +23,7 @@ int	handle_cmd(t_prompt *prompt, t_child *childs,
 	else if (childs[index_child].pid == 0)
 	{
 		if (input_redir == true)
-			dup2_read(childs, index_child - 1);
+			dup2_read_pipe(childs, index_child - 1);
 		tab_cmd = ft_copy_tab(prompt->tab,
 				prompt->current_index, prompt->pos_after_token);
 		if (tab_cmd == NULL)

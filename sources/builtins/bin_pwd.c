@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   bin_pwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:04:59 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 11:50:38 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:56:41 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_builtins.h"
 
-int	ms_pwd(const char *prompt, const char **args, t_list *envp)
+int	ms_pwd(const char *prompt, char **args, t_list *envp)
 {
 	char	*cwd;
 
+	(void)prompt;
+	(void)args;
+	(void)envp;
 	cwd = NULL;
 	cwd = getcwd(cwd, 0);
 	if (!cwd)

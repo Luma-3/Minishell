@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   bin_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 10:40:50 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 11:50:41 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/02/28 11:09:43 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/02/28 15:56:20 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_builtins.h"
-#include "env.h"
 
-int	ms_unset(const char *prompt, const char **args, t_list *envp)
+static void	print_env(t_list *envp)
 {
-	while (*args)
+	while (envp)
 	{
-		ms_unsetenv(envp, *args);
-		args++;
+		ft_putendl_fd(envp->content, STDOUT_FILENO);
+		envp = envp->next;
 	}
+}
+
+int	ms_env(const char *prompt, char **args, t_list *envp)
+{
+	(void)prompt;
+	(void)args;
+	print_env(envp);
 	return (EXIT_SUCCESS);
 }

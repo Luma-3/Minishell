@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_exec_token.c                                :+:      :+:    :+:   */
+/*   exec_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:41:07 by anthony           #+#    #+#             */
-/*   Updated: 2024/02/28 14:58:49 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:34:45 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	dispatch_token(t_prompt *prompt,
 	}
 	else
 	{
-		if (handle_cmd(prompt, childs, prompt->input_redir, index_child) == FAILURE)
+		if (handle_std(prompt, childs, prompt->input_redir, index_child) == FAILURE)
 			perror("minishell");
 		prompt->input_redir = false;
 	}

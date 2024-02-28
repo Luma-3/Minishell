@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anthony <anthony@student.42.fr>            +#+  +:+       +#+         #
+#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/02/27 23:07:59 by anthony          ###   ########.fr        #
+#    Updated: 2024/02/28 15:53:03 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,13 +40,16 @@ INCLUDE			=	$(addprefix -I, $(INCLUDE_LIST))
 
 SRC_DIR				=	sources/
 
-SRC_PARSING_DIR		=	parsing/
-SRC_PARSING_LIST	=	count_word.c		\
-						count_letter.c		\
-						alloc_tab.c			\
-						parser_utils.c		\
-						parser.c
-SRC_PARSING			=	$(addprefix $(SRC_PARSING_DIR), $(SRC_PARSING_LIST))
+SRC_BUILTINS_DIR	=	builtins/
+SRC_BUILTINS_LIST	=	bin_cd.c		\
+						bin_echo.c		\
+						bin_env.c		\
+						bin_exit.c		\
+						bin_export.c	\
+						bin_pwd.c		\
+						bin_unset.c		\
+						builtins.c
+SRC_BUILTINS		=	$(addprefix $(SRC_BUILTINS_DIR), $(SRC_BUILTINS_LIST))
 
 SRC_ENV_DIR			=	env/
 SRC_ENV_LIST		=	transform_env.c		\
@@ -54,23 +57,35 @@ SRC_ENV_LIST		=	transform_env.c		\
 SRC_ENV				=	$(addprefix $(SRC_ENV_DIR), $(SRC_ENV_LIST))
 
 SRC_EXEC_DIR		=	exec/
-SRC_EXEC_LIST		=	get_path.c				\
-						print_error_message.c	\
-						handle_cmd.c			\
-						exec.c				\
-						verif_arg.c			\
-						exec_utils.c		\
-						init_child.c		\
-						handle_token.c		\
-						exec_command.c		\
-						handle_pipe.c		\
-						free.c				\
-						test_access.c		\
+
+SRC_TOKEN_DIR		=	token/
+SRC_TOKEN_LIST		=	exec_token.c		\
 						handle_and.c		\
-						handle_or.c			
+						handle_or.c			\
+						handle_pipe.c		\
+						handle_std.c
+SRC_TOKEN			=	$(addprefix $(SRC_TOKEN_DIR), $(SRC_TOKEN_LIST))
+
+SRC_EXEC_LIST		=	exec_command.c		\
+						exec_utils.c		\
+						exec.c				\
+						get_path.c			\
+						$(SRC_TOKEN)
 SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 
+SRC_PARSING_DIR		=	parsing/
+SRC_PARSING_LIST	=	alloc_tab.c			\
+						count_letter.c		\
+						count_word.c		\
+						parser_utils.c		\
+						parser.c			\
+						verif_arg.c
+SRC_PARSING			=	$(addprefix $(SRC_PARSING_DIR), $(SRC_PARSING_LIST))
+
 SRC_LIST			=	minishell.c			\
+						print_error_msg.c	\
+						test_access.c		\
+						$(SRC_BUILTINS)		\
 						$(SRC_PARSING)		\
 						$(SRC_ENV) 			\
 						$(SRC_EXEC)
@@ -106,9 +121,11 @@ all: $(LIBFT) $(NAME)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_PARSING_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_BUILTINS_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_ENV_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_EXEC)$(SRC_TOKEN_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_PARSING_DIR)
 
 $(LIBFT):
 	@make -sC $(LIBFT_DIR)

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 15:24:53 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:49:17 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,14 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/wait.h>
+// TODO: remove unecessary includes
 
+# include "convention.h"
 # include "libft.h"
-# include "env.h"
 # include "core_data.h"
 
-# define FAILURE -1
-# define SUCCESS 0
+# include "env.h"
 
-# define READ 0
-# define WRITE 1
-
-# define T_NONE 1
-# define T_OR 2
-# define T_AND 3
-# define T_PIPE 4
 
 # define ERROR_FORMAT "Minishell error"
 //int	g_sig_return;
@@ -80,12 +73,10 @@ int			launch_child(t_prompt *prompt);
 // int			detect_token(t_prompt *prompt);
 // int			verif_token(char *prompt, char token);
 
-//HANDLE PIPE
-t_child		*init_child(t_child *child, int nb_child);
 
 //HANDLE CMD
 // int 		handle_pipe(t_prompt *prompt, t_child *childs, bool input_redir, int index_child);
-// int			handle_cmd(t_prompt *prompt, t_child *childs, bool input_redir, int index_child);
+// int			handle_std(t_prompt *prompt, t_child *childs, bool input_redir, int index_child);
 
 //HANDLE AND
 // int			skip_next_cmd(t_prompt *prompt);
@@ -106,6 +97,6 @@ void		print_error_arg(char token);
 void		print_error_display(void);
 
 // IO REDIRECTION
-void	dup2_read(t_child *childs, int index_child);
+// void	dup2_read_pipe(t_child *childs, int index_child);
 
 #endif
