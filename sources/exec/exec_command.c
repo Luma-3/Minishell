@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:06:49 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/27 14:39:44 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 01:22:55 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	exec_command(char **tab_cmd, t_list *env)
 		return (free(tab_cmd), FAILURE);
 	env_tab = env_to_tab(env);
 	if (execve(path_command, tab_cmd, env_tab) == -1)
+	{
 		return (free(path_command), free(tab_cmd), FAILURE);
+	}
 	return (SUCCESS);
 }

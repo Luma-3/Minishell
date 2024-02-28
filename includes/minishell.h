@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/27 16:21:23 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/28 01:01:39 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,14 @@
 # define T_AND 3
 # define T_PIPE 4
 
-
 # define ERROR_FORMAT "Minishell error"
 //int	g_sig_return;
 
 typedef struct s_child
 {
-	int pipe_fd[2];
+	int		pipe_fd[2];
+	int		status;
 	pid_t	pid;
-	
 }			t_child;
 
 typedef struct s_prompt
@@ -59,10 +58,9 @@ typedef struct s_prompt
 	char	*prompt;
 	char	**tab;
 	t_list	*env;
+	bool	input_redir;
 	int		current_index;
 	int		pos_after_token;
-	int		before_and;
-	int		after_and;
 	int		nb_pipe;
 	int		nb_cmd;
 }			t_prompt;
@@ -102,7 +100,13 @@ t_child		*init_child(t_child *child, int nb_child);
 int 		handle_pipe(t_prompt *prompt, t_child *childs, bool input_redir, int index_child);
 int			handle_cmd(t_prompt *prompt, t_child *childs, bool input_redir, int index_child);
 
-
+//HANDLE AND
+int			skip_next_cmd(t_prompt *prompt);
+int			handle_and(t_prompt *prompt, t_child *childs, bool input_redir, int index_child);
+int			handle_parent_process(t_child *childs, bool input_redir, int index_child);
+//HANDLE OR
+int			skip_next_choice(t_prompt *prompt);
+int			handle_or(t_prompt *prompt, t_child *childs, bool input_redir, int index_child);
 //EXEC_UTILS
 int			nb_array(char **tab);
 int			wait_child(t_child *child, int nb_child);

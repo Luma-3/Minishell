@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_child.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:51:10 by anthony           #+#    #+#             */
-/*   Updated: 2024/02/26 15:57:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:00:11 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_child	*init_child(t_child *child, int nb_child)
 	while (i < nb_child)
 	{
 		child[i].pid = 0;
+		child[i].status = 0;
 		child[i].pipe_fd[0] = 0;
 		child[i].pipe_fd[1] = 1;
 		i++;

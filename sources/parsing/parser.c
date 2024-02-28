@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:24:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/27 16:20:42 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/28 01:05:29 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ int	parser_init(t_prompt *prompt, char *input, t_list *env)
 	prompt->nb_pipe = count_pattern_tab(prompt->tab, "|");
 	prompt->nb_cmd = count_pattern_tab(prompt->tab, "||"); 
 	prompt->nb_cmd += count_pattern_tab(prompt->tab, "&&"); 
-	prompt->before_and = 0;
-	prompt->after_and = 0;
 	prompt->nb_cmd += prompt->nb_pipe + 1;
 	prompt->env = env;
+	prompt->pos_after_token = 0;
+	prompt->input_redir = false;
 	//print_prompt(prompt);
 	return (SUCCESS);
 }
