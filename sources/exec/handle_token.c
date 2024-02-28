@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:41:07 by anthony           #+#    #+#             */
-/*   Updated: 2024/02/26 15:13:38 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/27 23:13:04 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@ int	detect_token(t_prompt *prompt)
 		{
 			prompt->pos_after_token++;
 			return (T_PIPE);
+		}
+		else if (ft_strncmp(prompt->tab[prompt->pos_after_token], "&&", 2) == 0)
+		{
+			prompt->pos_after_token++;
+			return (T_AND);
+		}
+		else if (ft_strncmp(prompt->tab[prompt->pos_after_token], "||", 2) == 0)
+		{
+			prompt->pos_after_token++;
+			return (T_OR);
 		}
 		prompt->pos_after_token++;
 	}

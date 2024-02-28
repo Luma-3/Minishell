@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/02/28 11:08:57 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/02/28 12:36:08 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,9 @@ SRC_EXEC_LIST		=	get_path.c				\
 						exec_command.c		\
 						handle_pipe.c		\
 						free.c				\
-						test_access.c		
+						test_access.c		\
+						handle_and.c		\
+						handle_or.c			
 SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 
 SRC_BUILTINS_DIR	=	builtins/
