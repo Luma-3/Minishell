@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_access.c                                      :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 19:06:08 by anthony           #+#    #+#             */
-/*   Updated: 2024/02/26 11:29:36 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/02/28 11:16:34 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/02/28 11:50:35 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "ms_builtins.h"
+#include "env.h"
 
-int	test_path_access(char *tab)
+int	ms_export(const char *prompt, const char **args, t_list *envp)
 {
-	if (access(tab, X_OK | F_OK) == 0)
-		return (SUCCESS);
-	return (FAILURE);
-}
+	int		i;
+	char 	*delimiter;
 
-int	test_exec_prog(char *tab)
-{
-	if (access(tab, X_OK | F_OK) == 0)
-		return (SUCCESS);
-	return (FAILURE);
+	i = 0;
+	while (args[i])
+	{
+		delimiter = ft_strchr(args[i], '=');
+		if (delimiter)
+		{
+			*delimiter = '\0';
+			ms_setenv(envp, args[i], NULL);
+		}
+		i++;
+	}
+	return (EXIT_SUCCESS);
 }

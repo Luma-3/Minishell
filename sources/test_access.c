@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   test_access.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 14:04:59 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/16 18:59:16 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/02/23 19:06:08 by anthony           #+#    #+#             */
+/*   Updated: 2024/02/28 15:01:04 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "built_in.h"
+#include "redirection.h"
 
-int	ms_pwd(void)
+int	test_path_access(char *tab)
 {
-	char	*cwd;
+	if (access(tab, F_OK) == 0)
+		return (SUCCESS);
+	return (FAILURE);
+}
 
-	cwd = NULL;
-	cwd = getcwd(cwd, 0);
-	if (!cwd)
-		return (errno);
-	ft_putendl_fd(cwd, STDOUT_FILENO);
-	free(cwd);
-	return (EXIT_SUCCESS);
+int	test_exec_prog(char *tab)
+{
+	if (access(tab, X_OK) == 0)
+		return (SUCCESS);
+	return (FAILURE);
 }

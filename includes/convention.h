@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_command.c                                     :+:      :+:    :+:   */
+/*   convention.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 12:06:49 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/28 15:25:58 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/02/16 16:56:07 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/02/28 14:53:16 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#ifndef CONVENTION_H
+# define CONVENTION_H
 
-int	exec_command(char **tab_cmd, t_list *env)
-{
-	char	*path_command;
-	char	**env_tab;
+# define FAILURE -1
+# define SUCCESS 0
 
-	path_command = get_path(env, tab_cmd[0]);
-	if (path_command == NULL)
-		return (free(tab_cmd), FAILURE);
-	env_tab = env_to_tab(env);
-	if (execve(path_command, tab_cmd, env_tab) == -1)
-		return (free(path_command), free(tab_cmd), FAILURE);
-	return (SUCCESS);
-}
+# define READ 0
+# define WRITE 1
+
+#endif	// CONVENTION_H

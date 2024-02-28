@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "minishell.h": "c",
-        "algorithm": "c"
+        "algorithm": "c",
+        "parser.h": "c",
+        "exec.h": "c"
     }
 }

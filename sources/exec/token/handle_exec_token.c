@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   handle_exec_token.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 18:00:16 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/28 15:22:38 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/02/22 14:41:07 by anthony           #+#    #+#             */
+/*   Updated: 2024/02/28 14:58:49 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-#include "minishell.h"
 
-static void	dispatch_token(t_prompt *prompt,
+int	handle_parent_process(t_child *childs, int index_child)
+{
+	waitpid(childs[index_child].pid, &childs[index_child].status, 0);
+	if (childs[index_child].status != 0)
+	{
+		childs[index_child].status = -2;
+		return (FAILURE);
+	}
+	else
+		childs[index_child].status = -2;
+	return (SUCCESS);
+}
+
+void	dispatch_token(t_prompt *prompt,
 	t_child *childs, int token, int index_child)
 {
 	if (token == T_PIPE)
@@ -43,30 +55,27 @@ static void	dispatch_token(t_prompt *prompt,
 	}
 }
 
-int	launch_child(t_prompt *prompt)
+int	detect_token(t_prompt *prompt)
 {
-	int		token;
-	int		index_child;
-	t_child	*childs;
-
-	index_child = 0;
-	childs = NULL;
-	childs = init_child(childs, prompt->nb_cmd);
-	while (prompt->tab[prompt->current_index])
+	prompt->pos_after_token = prompt->current_index;
+	while (prompt->tab[prompt->pos_after_token])
 	{
-		token = detect_token(prompt);
-		dispatch_token(prompt, childs, token, index_child);
-		index_child++;
-		if (prompt->input_redir == true)
+		if (ft_strncmp(prompt->tab[prompt->pos_after_token], "|", 2) == 0)
 		{
-			if (close(childs[index_child - 1].pipe_fd[READ]) == FAILURE)
-				perror("close 5");
-			if (close(childs[index_child - 1].pipe_fd[WRITE]) == FAILURE)
-				perror("close 6");
+			prompt->pos_after_token++;
+			return (T_PIPE);
 		}
-		prompt->current_index = prompt->pos_after_token;
+		else if (ft_strncmp(prompt->tab[prompt->pos_after_token], "&&", 2) == 0)
+		{
+			prompt->pos_after_token++;
+			return (T_AND);
+		}
+		else if (ft_strncmp(prompt->tab[prompt->pos_after_token], "||", 2) == 0)
+		{
+			prompt->pos_after_token++;
+			return (T_OR);
+		}
+		prompt->pos_after_token++;
 	}
-	wait_child(childs, prompt->nb_cmd);
-	free(childs);
-	return (SUCCESS);
+	return (T_NONE);
 }

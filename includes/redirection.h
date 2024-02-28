@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_command.c                                     :+:      :+:    :+:   */
+/*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 12:06:49 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/28 15:25:58 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/02/28 15:00:24 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/02/28 15:03:16 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
+#ifndef REDIRECTION_H
+# define REDIRECTION_H
 
-int	exec_command(char **tab_cmd, t_list *env)
-{
-	char	*path_command;
-	char	**env_tab;
+# include "convention.h"
+# include "unistd.h"
 
-	path_command = get_path(env, tab_cmd[0]);
-	if (path_command == NULL)
-		return (free(tab_cmd), FAILURE);
-	env_tab = env_to_tab(env);
-	if (execve(path_command, tab_cmd, env_tab) == -1)
-		return (free(path_command), free(tab_cmd), FAILURE);
-	return (SUCCESS);
-}
+int			test_exec_prog(char *tab);
+int			test_path_access(char *tab);
+
+#endif

@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:24:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 01:05:29 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/28 15:20:08 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "parser.h"
 #include "minishell.h"
 
 static int	count_pattern_tab(char **tab, char *pattern)

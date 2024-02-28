@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_and.c                                       :+:      :+:    :+:   */
+/*   handle_or.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/27 16:07:16 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/28 11:47:02 by anthony          ###   ########.fr       */
+/*   Created: 2024/02/27 23:02:54 by anthony           #+#    #+#             */
+/*   Updated: 2024/02/28 12:55:11 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
-int	skip_next_cmd(t_prompt *prompt)
+int	skip_next_choice(t_prompt *prompt)
 {
 	while (prompt->tab[prompt->pos_after_token] != NULL)
 	{
-		if (prompt->tab[prompt->pos_after_token][0] == '|' &&
-			prompt->tab[prompt->pos_after_token][1] == '|')
+		if (prompt->tab[prompt->pos_after_token][0] == '&' &&
+			prompt->tab[prompt->pos_after_token][1] == '&')
 		{
 			prompt->pos_after_token++;
 			return (SUCCESS);
@@ -27,20 +27,7 @@ int	skip_next_cmd(t_prompt *prompt)
 	return (FAILURE);
 }
 
-int	handle_parent_process(t_child *childs, int index_child)
-{
-	waitpid(childs[index_child].pid, &childs[index_child].status, 0);
-	if (childs[index_child].status != 0)
-	{
-		childs[index_child].status = -2;
-		return (FAILURE);
-	}
-	else
-		childs[index_child].status = -2;
-	return (SUCCESS);
-}
-
-int	handle_and(t_prompt *prompt, t_child *childs,
+int	handle_or(t_prompt *prompt, t_child *childs,
 	bool input_redir, int index_child)
 {
 	char	**tab_cmd;

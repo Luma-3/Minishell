@@ -6,11 +6,11 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:10:35 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/16 18:54:30 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:50:22 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "built_in.h"
+#include "ms_builtins.h"
 
 static int	verif_flag(const char *first_arg)
 {
@@ -34,7 +34,7 @@ static void	print_args(const char **args)
 	}
 }
 
-int	ms_echo(const char **args)
+int	ms_echo(const char *prompt, const char **args, t_list *envp)
 {
 	bool	have_flag;
 

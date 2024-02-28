@@ -6,15 +6,15 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:47:27 by Monsieur_Ca       #+#    #+#             */
-/*   Updated: 2024/02/27 14:05:52 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:26:48 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
 static char	*get_path_binary(char *tab)
 {
-	char	cwd[4096];
+	char	cwd[4096]; // TODO: replace By another method
 	char	*path_prog;
 	char	*temp;
 
@@ -58,16 +58,16 @@ static char	*get_path_command(char *tab, t_list *env)
 	free(temp1);
 	arg_tab = ft_split(tab, ' ');
 	if (arg_tab == NULL)
-		return (free_tab_exec(path_command), NULL);
+		return (ft_rm_split(path_command), NULL);
 	while (path_command[i])
 	{
 		temp1 = create_path(path_command[i], arg_tab[0]);
 		if (test_exec_prog(temp1) == SUCCESS)
-			return (free_tab_exec(path_command), free_tab_exec(arg_tab), temp1);
+			return (ft_rm_split(path_command), ft_rm_split(arg_tab), temp1);
 		free(temp1);
 		i++;
 	}
-	return (free_tab_exec(path_command), free_tab_exec(arg_tab), NULL);
+	return (ft_rm_split(path_command), ft_rm_split(arg_tab), NULL);
 }
 
 char	*get_path(t_list *env, char *tab)

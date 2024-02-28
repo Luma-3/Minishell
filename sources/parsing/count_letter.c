@@ -6,11 +6,11 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:30:38 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/16 11:24:30 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:19:28 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parser.h"
 
 /**
  * @brief Verifie si les quotes du debut se ferment bien dans la suite de 

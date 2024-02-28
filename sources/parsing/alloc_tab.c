@@ -6,11 +6,11 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:48:17 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/26 13:47:39 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:19:31 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parser.h"
 
 static void	free_tab(char **tab, int index)
 {

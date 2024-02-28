@@ -6,11 +6,11 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:42:27 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/16 13:19:43 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:19:23 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parser.h"
 /**
  * @brief Test if char is a quote type (double quote or single quote)
  * 

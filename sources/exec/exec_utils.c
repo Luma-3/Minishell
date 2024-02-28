@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 00:43:26 by monsieurc         #+#    #+#             */
-/*   Updated: 2024/02/28 01:12:29 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/28 15:25:55 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "exec.h"
 
 int	nb_array(char **tab)
 {

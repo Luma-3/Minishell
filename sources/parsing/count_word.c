@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt_parsing.c                                   :+:      :+:    :+:   */
+/*   count_word.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:33:39 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/16 13:19:20 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:19:25 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parser.h"
 
 static int	verif_quote_delimiter(const char *prompt, char delimiter, int i)
 {

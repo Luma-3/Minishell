@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in.h                                         :+:      :+:    :+:   */
+/*   core_data.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 13:11:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/16 18:58:40 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/02/28 14:51:11 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN_H
-# define BUILT_IN_H
-
-# include <stdbool.h>
-# include <errno.h>
+#ifndef CORE_DATA_H
+# define CORE_DATA_H
 
 # include "libft.h"
 
-int	ms_echo(const char **args);
+typedef struct s_child
+{
+	int		pipe_fd[2];
+	int		status;
+	pid_t	pid;
+}			t_child;
 
-int	ms_pwd(void);
+typedef struct s_prompt
+{
+	char	*prompt;
+	char	**tab;
+	t_list	*env;
+	bool	input_redir;
+	int		current_index;
+	int		pos_after_token;
+	int		nb_pipe;
+	int		nb_cmd;
+}			t_prompt;
 
 #endif

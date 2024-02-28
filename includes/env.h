@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:01:25 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/16 17:53:49 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:20:28 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define ENV_H
 
 # include "libft.h"
-# include "norm.h"
+# include "convention.h"
 
 /**
  * @brief Copy the envp into a t_list.

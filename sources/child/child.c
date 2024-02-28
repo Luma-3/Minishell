@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_child.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 09:51:10 by anthony           #+#    #+#             */
-/*   Updated: 2024/02/27 18:00:11 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/28 12:49:14 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,24 @@ t_child	*init_child(t_child *child, int nb_child)
 		i++;
 	}
 	return (child);
+}
+
+void	dup2_read(t_child *childs, int index_child)
+{
+	if (dup2(childs[index_child].pipe_fd[READ], STDIN_FILENO) == FAILURE)
+		perror("dup2 1");
+	if (close(childs[index_child].pipe_fd[WRITE]) == FAILURE)
+		perror("close 1");
+	if (close(childs[index_child].pipe_fd[READ]) == FAILURE)
+		perror("close 2");
+}
+
+void	dup2_write(t_child *childs, int index_child)
+{
+	if (dup2(childs[index_child].pipe_fd[WRITE], STDOUT_FILENO) == FAILURE)
+		perror("dup2 2");
+	if (close(childs[index_child].pipe_fd[READ]) == FAILURE)
+		perror("close 3");
+	if (close(childs[index_child].pipe_fd[WRITE]) == FAILURE)
+		perror("close 4");
 }
