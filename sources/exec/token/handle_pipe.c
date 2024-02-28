@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:03:33 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/28 15:42:26 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:16:16 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int	handle_pipe(t_prompt *prompt, t_child *childs,
 void	dup2_read_pipe(t_child *childs, int index_child)
 {
 	if (dup2(childs[index_child].pipe_fd[READ], STDIN_FILENO) == FAILURE)
-		perror("dup2 1");
+		{perror("dup2 1");
+		printf(" fd = %d\n", childs[index_child].pipe_fd[READ]);}
 	if (close(childs[index_child].pipe_fd[WRITE]) == FAILURE)
 		perror("close 1");
 	if (close(childs[index_child].pipe_fd[READ]) == FAILURE)

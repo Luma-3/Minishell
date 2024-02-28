@@ -6,11 +6,12 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:47:27 by Monsieur_Ca       #+#    #+#             */
-/*   Updated: 2024/02/28 15:26:48 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:06:37 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "redirection.h"
 
 static char	*get_path_binary(char *tab)
 {

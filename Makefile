@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/02/28 15:53:03 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/02/28 16:08:33 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -124,7 +124,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)$(SRC_BUILTINS_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_ENV_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_EXEC)$(SRC_TOKEN_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)$(SRC_TOKEN_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSING_DIR)
 
 $(LIBFT):

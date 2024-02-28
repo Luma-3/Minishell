@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:01:25 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 15:20:28 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:01:04 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,16 @@ char	*ms_getenv(t_list *env, const char *name);
  * @return SUCCESS if the variable has been set, FAILURE otherwise.
 */
 int		ms_setenv(t_list *env, const char *name, const char *value);
+
+
+/**
+ * @brief Unset the env value from the env list.
+ * 
+ * @param env The env list
+ * @param name The name of the env variable
+ * 
+ * @return SUCCESS if the variable has been unset, FAILURE otherwise.
+*/
+int	ms_unsetenv(t_list *env, const char *name);
 
 #endif

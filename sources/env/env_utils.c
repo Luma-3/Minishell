@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:09:50 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/16 17:33:56 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:00:14 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,27 @@ int	ms_setenv(t_list *env, const char *name, const char *value)
 	if (!new_var)
 		return (FAILURE);
 	ft_lstadd_back(&env, new_var);
+	free(format_name);
+	return (FAILURE);
+}
+
+int	ms_unsetenv(t_list *env, const char *name)
+{
+	char	*format_name;
+	
+	format_name = ft_strjoin(name, "=");
+	if (!format_name)
+		return (FAILURE);
+	while (env)
+	{
+		if (ft_strncmp(env->content, format_name, ft_strlen(format_name)) == 0)
+		{
+			ft_lstdelone(env, free);
+			free(format_name);
+			return (SUCCESS);
+		}
+		env = env->next;
+	}
 	free(format_name);
 	return (FAILURE);
 }

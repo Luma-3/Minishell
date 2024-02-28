@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:39:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 15:43:58 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:07:13 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 # define EXEC_H
 
 # include <stdbool.h>
+# include <sys/wait.h>
+# include <errno.h>
+# include <stdio.h>
 
 # include "convention.h"
 # include "libft.h"
 # include "core_data.h"
+# include "env.h"
 
 /*--------------------------*/
 /*          TOKEN           */

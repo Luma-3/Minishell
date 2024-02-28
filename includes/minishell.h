@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 15:49:17 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:15:08 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,67 +36,18 @@
 
 # include "env.h"
 
-
 # define ERROR_FORMAT "Minishell error"
 //int	g_sig_return;
-
-
-//PARSING
-// int			count_words(const char *prompt);
-// int			count_letters(const char *prompt, int i);
-// int			place_cursor(const char *prompt, int i);
-// char		**alloc_tab(char *prompt);
-// int			isquote_type(char c);
-
-//PARSER_INIT
 
 // DONE 
 int			parser_init(t_prompt *prompt, char *input, t_list *env);
 
 int			launch_child(t_prompt *prompt);
 
-//GET PATH
-// char		*get_path(t_list *env, char *tab);
-
-//TEST PATH / ACCESS
-// int			test_exec_prog(char *tab);
-// int			test_path_access(char *tab);
-
-//VERIF
-// int			verif_arg(char *prompt);
-
-//EXEC
-// int			launch_child(t_prompt *prompt);
-// int			exec_command(char **tab_cmd, t_list *env);
-
-//HANDLE TOKEN
-// int			detect_token(t_prompt *prompt);
-// int			verif_token(char *prompt, char token);
-
-
-//HANDLE CMD
-// int 		handle_pipe(t_prompt *prompt, t_child *childs, bool input_redir, int index_child);
-// int			handle_std(t_prompt *prompt, t_child *childs, bool input_redir, int index_child);
-
-//HANDLE AND
-// int			skip_next_cmd(t_prompt *prompt);
-// int			handle_and(t_prompt *prompt, t_child *childs, bool input_redir, int index_child);
-// int			handle_parent_process(t_child *childs, int index_child);
-
-//HANDLE OR
-// int			skip_next_choice(t_prompt *prompt);
-// int			handle_or(t_prompt *prompt, t_child *childs, bool input_redir, int index_child);
-//EXEC_UTILS
-// int			nb_array(char **tab);
-// int			wait_child(t_child *child, int nb_child);
-
-
 //PRINT_ERROR
 void		print_error_message(void);
 void		print_error_arg(char token);
 void		print_error_display(void);
 
-// IO REDIRECTION
-// void	dup2_read_pipe(t_child *childs, int index_child);
 
 #endif

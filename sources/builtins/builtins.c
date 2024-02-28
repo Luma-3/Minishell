@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:33:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 15:51:50 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:01:59 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void init_builtins(t_builtin *builtins)
 	builtins[7] = (t_builtin){NULL, NULL};
 }
 
-int exec_builtins(const char **tab_cmd, t_prompt *prompt_struct)
+int exec_builtins(char **tab_cmd, t_prompt *prompt_struct)
 {
 	t_builtin	builtins[NB_BUILTINS + 1];
 	int			i;
