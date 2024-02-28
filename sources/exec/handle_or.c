@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 23:02:54 by anthony           #+#    #+#             */
-/*   Updated: 2024/02/28 00:56:37 by anthony          ###   ########.fr       */
+/*   Updated: 2024/02/28 11:54:22 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ int	handle_or(t_prompt *prompt, t_child *childs,
 			exit (FAILURE);
 		exit (SUCCESS);
 	}
-	return (handle_parent_process(childs, input_redir, index_child));
+	return (handle_parent_process(childs, index_child));
 }
