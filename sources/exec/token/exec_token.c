@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:41:07 by anthony           #+#    #+#             */
-/*   Updated: 2024/02/28 15:34:45 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/29 10:50:09 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,36 +23,6 @@ int	handle_parent_process(t_child *childs, int index_child)
 	else
 		childs[index_child].status = -2;
 	return (SUCCESS);
-}
-
-void	dispatch_token(t_prompt *prompt,
-	t_child *childs, int token, int index_child)
-{
-	if (token == T_PIPE)
-	{
-		handle_pipe(prompt, childs, prompt->input_redir, index_child);
-		prompt->input_redir = true;
-	}
-	else if (token == T_AND)
-	{
-		if (handle_and(prompt, childs,
-				prompt->input_redir, index_child) == FAILURE)
-			skip_next_cmd(prompt);
-		prompt->input_redir = false;
-	}
-	else if (token == T_OR)
-	{
-		if (handle_or(prompt, childs,
-				prompt->input_redir, index_child) == SUCCESS)
-			skip_next_choice(prompt);
-		prompt->input_redir = false;
-	}
-	else
-	{
-		if (handle_std(prompt, childs, prompt->input_redir, index_child) == FAILURE)
-			perror("minishell");
-		prompt->input_redir = false;
-	}
 }
 
 int	detect_token(t_prompt *prompt)

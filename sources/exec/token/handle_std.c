@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 17:37:01 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 21:30:04 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/29 10:43:26 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	handle_std(t_prompt *prompt, t_child *childs,
 		if (tab_cmd == NULL)
 			return (FAILURE);
 		if (exec_command(tab_cmd, prompt->env) == FAILURE)
-			return (FAILURE);
+			exit(EXIT_FAILURE);
 	}
 	if (input_redir)
 		close_pipe(childs, index_child - 1);

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:00:16 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/28 21:28:08 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:06:02 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	launch_child(t_prompt *prompt)
 	while (prompt->tab[prompt->current_index])
 	{
 		token = detect_token(prompt);
+		// handle exit
 		dispatch_token(prompt, childs, token, index_child);
 		index_child++;
 		prompt->current_index = prompt->pos_after_token;
