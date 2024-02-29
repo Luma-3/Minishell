@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 15:22:02 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:58:05 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,23 @@ void	read_input(t_list *env)
 				free(input);
 				exit(EXIT_SUCCESS);
 			}
-			parser_init(&prompt, input, env);// to verify
-			launch_child(&prompt);
-			ft_rm_split(prompt.tab);
-			free(input);
+			if (parser_init(&prompt, input, env) == FAILURE)
+			{
+				free(input);
+				printf("Error quote not close\n");
+			}
+			else
+			{
+				int i = 0;
+				while (prompt.tab[i])
+				{
+					printf("tab[%d] = %s\n", i, prompt.tab[i]);
+					i++;
+				}
+				launch_child(&prompt);
+				ft_rm_split(prompt.tab);
+				free(input);
+			}
 		}
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:47:27 by Monsieur_Ca       #+#    #+#             */
-/*   Updated: 2024/02/28 16:06:37 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:55:55 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static char	*create_path(char *path, char *arg)
 static char	*get_path_command(char *tab, t_list *env)
 {
 	char	**path_command;
-	char	**arg_tab;
 	char	*temp1;
 	int		i;
 
@@ -57,18 +56,15 @@ static char	*get_path_command(char *tab, t_list *env)
 	if (path_command == NULL)
 		return (NULL);
 	free(temp1);
-	arg_tab = ft_split(tab, ' ');
-	if (arg_tab == NULL)
-		return (ft_rm_split(path_command), NULL);
 	while (path_command[i])
 	{
-		temp1 = create_path(path_command[i], arg_tab[0]);
+		temp1 = create_path(path_command[i], tab);
 		if (test_exec_prog(temp1) == SUCCESS)
-			return (ft_rm_split(path_command), ft_rm_split(arg_tab), temp1);
+			return (ft_rm_split(path_command), temp1);
 		free(temp1);
 		i++;
 	}
-	return (ft_rm_split(path_command), ft_rm_split(arg_tab), NULL);
+	return (ft_rm_split(path_command), NULL);
 }
 
 char	*get_path(t_list *env, char *tab)

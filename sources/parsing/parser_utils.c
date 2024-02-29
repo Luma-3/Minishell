@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:42:27 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 15:19:23 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:18:24 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include "minishell.h"
 /**
  * @brief Test if char is a quote type (double quote or single quote)
  * 
@@ -29,27 +30,47 @@ int	isquote_type(char c)
 /**
  * @brief Place le curseur sur le debut du prochain mot
  */
-int	place_cursor(const char *prompt, int i)
+int	place_cursor_after_word(const char *prompt, int i)
+{
+	char	quote_type;
+
+	quote_type = 0;
+	while (ft_iswhitespace(prompt[i]) == true && prompt[i])
+		i++;
+	while (prompt[i] && ft_iswhitespace(prompt[i]) == false)
+	{
+		if (isquote_type(prompt[i]) == true && quote_type == 0)
+		{
+			printf("Delimiteur = %c\n", prompt[i]);
+			if (verif_quote_delimiter(prompt, prompt[i], i + 1) == FAILURE)
+			{
+				printf("Verify quote count word place cursor after word\n");
+				return (FAILURE);
+			}
+			quote_type = prompt[i];
+			i++;
+			while (prompt[i] && prompt[i] != quote_type)
+				i++;
+			return (i + 1);
+		}
+		else if (isquote_type(prompt[i]) == true && quote_type != 0)
+		{
+			quote_type = 0;
+			i++;
+		}
+		else
+			i++;
+	}
+	return (i);
+}
+
+int	place_cursor_after_quote(const char *prompt, int i)
 {
 	char	c;
 
 	c = prompt[i];
-	while (prompt[i] && ft_iswhitespace(prompt[i]) == true)
+	i++;
+	while (prompt[i] && prompt[i] != c)
 		i++;
-	if (c == '\'' || c == '\"')
-	{
-		while (prompt[i + 1] != c)
-			i++;
-		return (i + 2);
-	}
-	else
-	{
-		while (prompt[i] && ft_iswhitespace(prompt[i]) == false)
-		{
-			i++;
-			if (prompt[i] == '\0')
-				return (i);
-		}
-	}
 	return (i + 1);
 }

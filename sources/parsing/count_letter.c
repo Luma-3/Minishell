@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   count_letter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:30:38 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/28 15:19:28 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:32:58 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,24 @@ static int	count_letter_between_quote(const char *prompt,
 */
 static int	count_word_letter(const char *prompt, int i)
 {
-	int	nb_letters;
+	int		nb_letters;
+	char	quote_type;
 
 	nb_letters = 0;
+	quote_type = 0;
 	while (prompt[i] != '\0' && ft_iswhitespace(prompt[i]) == false)
 	{
-		if (isquote_type(prompt[i]) == false)
-			nb_letters++;
+		if (isquote_type(prompt[i]) == true && verif_quote_delimiter(prompt, prompt[i], i + 1) == SUCCESS)
+		{
+			quote_type = prompt[i];
+			i++;
+			while (prompt[i] != quote_type)
+			{
+				nb_letters++;
+				i++;
+			}
+		}
+		nb_letters++;
 		i++;
 	}
 	return (nb_letters);

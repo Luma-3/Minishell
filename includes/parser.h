@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 15:23:49 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:06:40 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,12 @@ int			count_letters(const char *prompt, int i);
 /**
  * @brief Place the cursor at the start of the next word
 */
-int			place_cursor(const char *prompt, int i);
+int			place_cursor_after_word(const char *prompt, int i);
 
+/**
+ * @brief Place the cursor at the start of the next quote
+*/
+int			place_cursor_after_quote(const char *prompt, int i);
 /**
  * @brief Malloc le double tableau de char
  * 
@@ -51,6 +55,12 @@ char		**alloc_tab(char *prompt);
  * @return true if is quote type, false is isn't quote type
 */
 int			isquote_type(char c);
+
+/**
+ * @brief Verifie si les quotes du debut se ferment bien dans la suite de 
+ * la chaine
+*/
+int			verif_quote_delimiter(const char *prompt, char delimiter, int i);
 
 int			verif_arg(char *prompt);
 
