@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   count_word.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:33:39 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/29 15:24:44 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:21:25 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	count_words(const char *prompt)
 			i = place_cursor_after_quote(prompt, i);
 		else
 			i = place_cursor_after_word(prompt, i);
-		printf("i = %d\n", i);
+		// printf("i = %d\n", i);
 	}
 	return (nb_words);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_tab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:48:17 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/29 15:11:06 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:20:04 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*copy_data(char *tab, const char *prompt,
 	j = 0;
 	quote_type = 0;
 	(void)nb_letters;
-	printf("Go to copy data\n");
+	// printf("Go to copy data\n");
 	while (ft_iswhitespace(prompt[position]) == true)
 		position++;
 	if (isquote_type(prompt[position]) == true)
@@ -80,7 +80,7 @@ static char	**insert_data(char **tab, const char *prompt, int nb_words)
 	while (prompt[position] && index < nb_words)
 	{
 		nb_letters = count_letters(prompt, position);
-		printf("nb_letters = %d\n", nb_letters);
+		// printf("nb_letters = %d\n", nb_letters);
 		if (nb_letters != 0)
 		{
 			tab[index] = (char *)ft_calloc(nb_letters + 1, sizeof(char));
@@ -113,7 +113,7 @@ char	**alloc_tab(char *prompt)
 	nb_words = count_words(prompt);
 	if (nb_words == FAILURE)
 		return (NULL);
-	printf("nb_words = %d\n", nb_words);
+	// printf("nb_words = %d\n", nb_words);
 	tab = (char **)ft_calloc(nb_words + 1, sizeof(char *));
 	if (tab == NULL)
 		return (NULL);
