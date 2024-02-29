@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:33:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 16:01:59 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:29:18 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,22 @@ static void init_builtins(t_builtin *builtins)
 	builtins[4] = (t_builtin){"unset", ms_unset};
 	builtins[5] = (t_builtin){"env", ms_env};
 	builtins[6] = (t_builtin){"exit", ms_exit};
-	builtins[7] = (t_builtin){NULL, NULL};
 }
 
 int exec_builtins(char **tab_cmd, t_prompt *prompt_struct)
 {
-	t_builtin	builtins[NB_BUILTINS + 1];
+	t_builtin	builtins[NB_BUILTINS];
 	int			i;
 
 	i = 0;
 	init_builtins(builtins);
-	while (builtins[i].name != NULL)
+	while (i < NB_BUILTINS)
 	{
 		if (ft_strncmp(builtins[i].name, tab_cmd[0], ft_strlen(tab_cmd[0])) == 0)
-			return (builtins[i].func(prompt_struct->prompt, tab_cmd, prompt_struct->env));
+		{
+			builtins[i].func(prompt_struct->prompt, tab_cmd, prompt_struct->env);
+			return (EXIT_SUCCESS);
+		}
 		i++;
 	}
 	return (EXIT_FAILURE);
@@ -43,14 +45,14 @@ int exec_builtins(char **tab_cmd, t_prompt *prompt_struct)
 
 int is_builtins(const char *cmd)
 {
-	t_builtin	builtins[NB_BUILTINS + 1];
+	t_builtin	builtins[NB_BUILTINS];
 	int 		i;
 
 	i = 0;
 	init_builtins(builtins);
-	while (builtins[i].name != NULL)
+	while (i < NB_BUILTINS)
 	{
-		if (ft_strncmp(builtins->name, cmd, ft_strlen(cmd)) == 0)
+		if (ft_strncmp(builtins[i].name, cmd, ft_strlen(cmd)) == 0)
 			return (true);
 		i++;
 	}

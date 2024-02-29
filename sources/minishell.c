@@ -6,14 +6,14 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 15:22:02 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:31:58 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
-void	read_input(t_list *env)
+void	read_input(t_list **env)
 {
 	char		*input;
 	t_prompt	prompt;
@@ -25,7 +25,7 @@ void	read_input(t_list *env)
 		{
 			if (ft_strncmp(input, "exit", ft_strlen(input)) == 0)
 			{
-				ft_lstclear(&env, free);
+				ft_lstclear(env, free);
 				free(input);
 				exit(EXIT_SUCCESS);
 			}
@@ -37,7 +37,7 @@ void	read_input(t_list *env)
 	}
 }
 
-static int	presentation_display(t_list *env)
+static int	presentation_display(t_list **env)
 {
 	t_prompt	command;
 
@@ -61,8 +61,8 @@ int	main(int ac, char **av, char **envp)
 	if (ac != 1)
 		return (EXIT_FAILURE);
 	env = copy_env(envp);
-	presentation_display(env);
-	read_input(env);
+	presentation_display(&env);
+	read_input(&env);
 	return (EXIT_SUCCESS);
 }
 	//FORK DES LE DEBUT POUR LE SIGNAL

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 14:51:11 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:25:25 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_prompt
 {
 	char	*prompt;
 	char	**tab;
-	t_list	*env;
+	t_list	**env;
 	bool	input_redir;
 	int		current_index;
 	int		pos_after_token;
