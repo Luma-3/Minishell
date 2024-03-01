@@ -6,21 +6,70 @@
 /*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/01 16:52:30 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/01 18:06:12 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "color.h"
 
+static char	*ft_get_hostname(t_list *env)
+{
+	char	*tmp;
+	char	*tmp2;
+
+	tmp = ms_getenv(env, "LOGNAME");
+	if (tmp == NULL)
+		tmp = ms_getenv(env, "USER");
+	tmp2 = ft_strjoin(tmp, "@");
+	free(tmp);
+	tmp = ft_strjoin(CYAN, tmp2);
+	free(tmp2);
+	tmp2 = ft_strjoin(tmp, RESET);
+	free(tmp);
+	return (tmp2);
+}
+
+static char	*ft_get_cwd(t_list *env)
+{
+	char	*tmp;
+	char	*tmp2;
+
+	tmp = ms_getenv(env, "PWD");
+	tmp2 = ft_strjoin(BLUE, tmp);
+	free(tmp);
+	tmp = ft_strjoin(tmp2, "$> ");
+	free(tmp2);
+	tmp2 = ft_strjoin(tmp, RESET);
+	free(tmp);
+	return (tmp2);
+}
+
+static char	*ft_create_prompt(t_list *env)
+{
+	char	*display_hostname;
+	char	*display_path;
+	char	*display_prompt;
+
+	display_hostname = ft_get_hostname(env);
+	display_path = ft_get_cwd(env);
+
+	display_prompt = ft_strjoin(display_hostname, display_path);
+	free(display_hostname);
+	free(display_path);
+	return (display_prompt);
+}
 
 void	read_input(t_list **env)
 {
 	char		*input;
 	t_prompt	prompt;
+	char		*display_message;
 
 	while (true)
 	{
-		input = readline("minishell > ");
+		display_message = ft_create_prompt(*env);
+		input = readline(display_message);
 		if (input != NULL && input[0] != '\0')
 		{
 			if (ft_strncmp(input, "exit", ft_strlen(input)) == 0)
