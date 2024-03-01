@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/02/29 13:17:33 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/01 15:41:35 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,13 +83,18 @@ SRC_PARSING_LIST	=	alloc_tab.c			\
 						verif_arg.c
 SRC_PARSING			=	$(addprefix $(SRC_PARSING_DIR), $(SRC_PARSING_LIST))
 
+SRC_SIGNAL_DIR		=	signal/
+SRC_SIGNAL_LIST		=	signal.c
+SRC_SIGNAL			=	$(addprefix $(SRC_SIGNAL_DIR), $(SRC_SIGNAL_LIST))
+
 SRC_LIST			=	minishell.c			\
 						print_error_msg.c	\
 						test_access.c		\
 						$(SRC_BUILTINS)		\
 						$(SRC_PARSING)		\
 						$(SRC_ENV) 			\
-						$(SRC_EXEC)
+						$(SRC_EXEC)			\
+						$(SRC_SIGNAL)
 SRC					=	$(addprefix $(SRC_DIR), $(SRC_LIST))
 
 ##################
@@ -127,6 +132,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)$(SRC_TOKEN_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSING_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_SIGNAL_DIR)
 
 $(LIBFT):
 	@make -sC $(LIBFT_DIR)

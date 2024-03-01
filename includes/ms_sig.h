@@ -1,38 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core_data.h                                        :+:      :+:    :+:   */
+/*   ms_sig.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/01 15:03:57 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/03/01 14:02:45 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/03/01 15:41:50 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CORE_DATA_H
-# define CORE_DATA_H
+#ifndef MS_SIG_H
+# define MS_SIG_H
 
-# include "libft.h"
-# include <stdbool.h>
+# include <signal.h>
 
-typedef struct s_child
-{
-	int		pipe_fd[2];
-	int		status;
-	pid_t	pid;
-}			t_child;
+void init_signal(void);
 
-typedef struct s_prompt
-{
-	char	*prompt;
-	char	**tab;
-	t_list	**env;
-	bool	input_redir;
-	int		current_index;
-	int		pos_after_token;
-	int		nb_pipe;
-	int		nb_cmd;
-}			t_prompt;
-
-#endif
+#endif // MS_SIG_H
