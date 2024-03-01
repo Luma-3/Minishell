@@ -6,11 +6,12 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 23:02:54 by anthony           #+#    #+#             */
-/*   Updated: 2024/02/29 10:42:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/01 10:39:38 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "ms_builtins.h"
 
 int	skip_next_choice(t_prompt *prompt)
 {
@@ -43,6 +44,8 @@ int	handle_or(t_prompt *prompt, t_child *childs,
 				prompt->current_index, prompt->pos_after_token - 1);
 		if (tab_cmd == NULL)
 			return (FAILURE);
+		if (is_builtins(tab_cmd[0]) == true)
+			return (exec_builtins(tab_cmd, prompt));
 		if (exec_command(tab_cmd, prompt->env) == FAILURE)
 			exit (EXIT_FAILURE);
 	}

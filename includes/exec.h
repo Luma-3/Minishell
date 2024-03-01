@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:39:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 21:29:07 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:39:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		handle_or(t_prompt *prompt, t_child *childs, bool input_redir, int index_ch
 /*--------------------------*/
 
 // int		launch_child(t_prompt *prompt);
-int			exec_command(char **tab_cmd, t_list *env);
+int			exec_command(char **tab_cmd, t_list **env);
 
 //PATH HANDLING
 

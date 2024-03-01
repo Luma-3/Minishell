@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 16:15:08 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:27:33 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 //int	g_sig_return;
 
 // DONE 
-int			parser_init(t_prompt *prompt, char *input, t_list *env);
+int			parser_init(t_prompt *prompt, char *input, t_list **env);
 
 int			launch_child(t_prompt *prompt);
 

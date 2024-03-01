@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:24:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 15:20:08 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:25:12 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	count_pattern_tab(char **tab, char *pattern)
 // 	printf("nb_pipe = %d\n", prompt->nb_pipe);
 // }
 
-int	parser_init(t_prompt *prompt, char *input, t_list *env)
+int	parser_init(t_prompt *prompt, char *input, t_list **env)
 {
 	prompt->tab = alloc_tab(input);
 	if (prompt->tab == NULL)

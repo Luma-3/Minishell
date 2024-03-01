@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/02/28 16:08:33 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/02/29 13:17:33 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,8 @@ SRC_BUILTINS_LIST	=	bin_cd.c		\
 						bin_export.c	\
 						bin_pwd.c		\
 						bin_unset.c		\
-						builtins.c
+						builtins.c		\
+						echo_utils.c
 SRC_BUILTINS		=	$(addprefix $(SRC_BUILTINS_DIR), $(SRC_BUILTINS_LIST))
 
 SRC_ENV_DIR			=	env/
