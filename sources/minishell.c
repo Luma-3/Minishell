@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/01 16:52:30 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/01 17:01:38 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+#include "ms_sig.h"
 
 void	read_input(t_list **env)
 {
@@ -21,7 +21,13 @@ void	read_input(t_list **env)
 	while (true)
 	{
 		input = readline("minishell > ");
-		if (input != NULL && input[0] != '\0')
+		if (input == NULL)
+		{
+			printf("\n");
+			ft_lstclear(env, free);
+			exit(EXIT_SUCCESS);
+		}
+		if (input[0] != '\0')
 		{
 			if (ft_strncmp(input, "exit", ft_strlen(input)) == 0)
 			{
@@ -67,6 +73,8 @@ int	main(int ac, char **av, char **envp)
 	t_list	*env;
 
 	(void)av;
+	printf("\033]0;MINISHELL\007");
+	init_signal();
 	if (ac != 1)
 		return (EXIT_FAILURE);
 	env = copy_env(envp);

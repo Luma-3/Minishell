@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:00:16 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/01 15:03:17 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/01 17:00:55 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static t_child	*init_child(t_child *child, int nb_child)
 	int	i;
 
 	i = 0;
-	child = malloc(sizeof(t_child) * nb_child);
+	child = malloc(sizeof(t_child) * (nb_child + 1));
 	if (child == NULL)
 		return (NULL);
 	while (i < nb_child)
@@ -59,6 +59,7 @@ static t_child	*init_child(t_child *child, int nb_child)
 		child[i].pipe_fd[1] = 1;
 		i++;
 	}
+	child[i].pid = -255;
 	return (child);
 }
 
@@ -66,7 +67,7 @@ int	launch_child(t_prompt *prompt)
 {
 	int		token;
 	int		index_child;
-	t_child	*childs;
+	static t_child	*childs;
 
 	index_child = 0;
 	childs = NULL;

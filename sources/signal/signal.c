@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core_data.h                                        :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/01 15:03:57 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/03/01 14:03:56 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/03/01 15:53:56 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CORE_DATA_H
-# define CORE_DATA_H
+#include "ms_sig.h"
+#include "core_data.h"
 
-# include "libft.h"
-# include <stdbool.h>
-
-typedef struct s_child
+void sigint_handler(int sig)
 {
-	int		pipe_fd[2];
-	int		status;
-	pid_t	pid;
-}			t_child;
+	static t_child *childs;
+	int i;
 
-typedef struct s_prompt
+	
+	i = 0;
+	if (childs != NULL && sig == SIGINT)
+	{
+		while (childs[i].pid != -255)
+		{
+			if (childs[i].pid != 0)
+				kill(childs[i].pid, SIGKILL);
+		}
+	}
+}
+
+void init_signal(void)
 {
-	char	*prompt;
-	char	**tab;
-	t_list	**env;
-	bool	input_redir;
-	int		current_index;
-	int		pos_after_token;
-	int		nb_pipe;
-	int		nb_cmd;
-}			t_prompt;
-
-#endif
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sigint_handler);
+}
