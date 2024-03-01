@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:09:50 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 16:00:14 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/01 11:30:46 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	ms_unsetenv(t_list *env, const char *name)
 	{
 		if (ft_strncmp(env->content, format_name, ft_strlen(format_name)) == 0)
 		{
-			ft_lstdelone(env, free);
+			// ft_lstdelone(env, free);
 			free(format_name);
 			return (SUCCESS);
 		}

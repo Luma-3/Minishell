@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_tab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:48:17 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/29 17:20:04 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/01 11:13:56 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,46 +23,40 @@ static void	free_tab(char **tab, int index)
 	free(tab);
 }
 
-static char	*copy_data(char *tab, const char *prompt,
-	int position, int nb_letters)
+static char	*copy_quote_in_word(char *tab, const char
+	*prompt, char quote_type, int j)
+{
+	while (prompt && *prompt != quote_type)
+	{
+		tab[j++] = *prompt++;
+	}
+	tab[j] = '\0';
+	return (tab);
+}
+
+static char	*copy_data(char *tab, const char *prompt, int position)
 {
 	int		j;
 	char	quote_type;
 
 	j = 0;
 	quote_type = 0;
-	(void)nb_letters;
-	// printf("Go to copy data\n");
 	while (ft_iswhitespace(prompt[position]) == true)
 		position++;
 	if (isquote_type(prompt[position]) == true)
-	{
-		quote_type = prompt[position];
-		position++;
-	}
+		quote_type = prompt[position++];
 	while (prompt[position] && ft_iswhitespace(prompt[position]) == false)
 	{
-		if (quote_type != 0 && isquote_type(prompt[position]) == true
-			&& prompt[position] == quote_type)
-			break ;
+		if (quote_type != 0)
+			return (copy_quote_in_word(tab, &prompt[position], quote_type, j));
 		else if (quote_type == 0 && isquote_type(prompt[position]) == true)
 		{
 			quote_type = prompt[position];
 			position++;
-			while (prompt[position] && prompt[position] != quote_type)
-			{
-				tab[j] = prompt[position];
-				j++;
-				position++;
-			}
-			break ;
+			return (copy_quote_in_word(tab, &prompt[position], quote_type, j));
 		}
 		else
-		{
-			tab[j] = prompt[position];
-			j++;
-			position++;
-		}
+			tab[j++] = prompt[position++];
 	}
 	tab[j] = '\0';
 	return (tab);
@@ -80,16 +74,12 @@ static char	**insert_data(char **tab, const char *prompt, int nb_words)
 	while (prompt[position] && index < nb_words)
 	{
 		nb_letters = count_letters(prompt, position);
-		// printf("nb_letters = %d\n", nb_letters);
 		if (nb_letters != 0)
 		{
 			tab[index] = (char *)ft_calloc(nb_letters + 1, sizeof(char));
 			if (tab[index] == NULL)
-			{
-				free_tab(tab, index);
-				return (NULL);
-			}
-			tab[index] = copy_data(tab[index], prompt, position, nb_letters);
+				return (free_tab(tab, index), NULL);
+			tab[index] = copy_data(tab[index], prompt, position);
 			index++;
 		}
 		if (isquote_type(prompt[position]) == true)
@@ -101,7 +91,7 @@ static char	**insert_data(char **tab, const char *prompt, int nb_words)
 }
 
 /**
- * @brief Malloc le double tableau de char
+ * @brief Malloc double char tab and copy data in it
  * @return NULL if alloc failed pointer on tab if alloc success
 */
 char	**alloc_tab(char *prompt)
@@ -113,7 +103,6 @@ char	**alloc_tab(char *prompt)
 	nb_words = count_words(prompt);
 	if (nb_words == FAILURE)
 		return (NULL);
-	// printf("nb_words = %d\n", nb_words);
 	tab = (char **)ft_calloc(nb_words + 1, sizeof(char *));
 	if (tab == NULL)
 		return (NULL);

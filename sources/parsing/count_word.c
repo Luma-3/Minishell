@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   count_word.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:33:39 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/29 17:21:25 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/01 11:29:33 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	is_empty_quote(const char *prompt, char delimiter, int i)
 	return (false);
 }
 
-static int	count_words_without_quote(const char *prompt, int i) 
+static int	count_words_without_quote(const char *prompt, int i)
 {
 	char	quote_type;
 
@@ -48,9 +48,7 @@ static int	count_words_without_quote(const char *prompt, int i)
 			quote_type = prompt[i];
 			i++;
 			while (prompt[i] && prompt[i] != quote_type)
-			{
 				i++;
-			}
 			break ;
 		}
 		else
@@ -59,12 +57,18 @@ static int	count_words_without_quote(const char *prompt, int i)
 	return (SUCCESS);
 }
 
+static int	verify_quote(const char *prompt, int i)
+{
+	if (verif_quote_delimiter(prompt, prompt[i], i + 1) == FAILURE)
+		return (FAILURE);
+	if (is_empty_quote(prompt, prompt[i], i + 1) == true)
+		return (true);
+	return (false);
+}
+
 /**
- * @brief Compte le nombre de mots dans la chaine 
- * de caractère en evitant de compter
- * les espaces entre les quotes et les quotes vides
- * @return le nombre de mots
-*/
+ * @brief Count the number of words in a prompt
+ */
 int	count_words(const char *prompt)
 {
 	int	nb_words;
@@ -74,14 +78,12 @@ int	count_words(const char *prompt)
 	nb_words = 0;
 	while (prompt[i] != '\0')
 	{
-		while (ft_iswhitespace(prompt[i]) == true && prompt[i])
-			i++;
+		i = ft_skip_whitespaces(prompt, i);
 		if (isquote_type(prompt[i]) == true)
 		{
-			if (verif_quote_delimiter(prompt, prompt[i], i + 1) == FAILURE)
+			if (verify_quote(prompt, i) == FAILURE)
 				return (FAILURE);
-			if (is_empty_quote(prompt, prompt[i], i + 1) == true)
-				nb_words++;
+			nb_words++;
 		}
 		else
 		{
@@ -91,9 +93,7 @@ int	count_words(const char *prompt)
 		}
 		if (isquote_type(prompt[i]) == true)
 			i = place_cursor_after_quote(prompt, i);
-		else
-			i = place_cursor_after_word(prompt, i);
-		// printf("i = %d\n", i);
+		i = place_cursor_after_word(prompt, i);
 	}
 	return (nb_words);
 }

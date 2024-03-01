@@ -6,7 +6,7 @@
 /*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:42:27 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/29 15:18:24 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/01 11:15:08 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	isquote_type(char c)
 }
 
 /**
- * @brief Place le curseur sur le debut du prochain mot
+ * @brief Place cursor after a word
  */
 int	place_cursor_after_word(const char *prompt, int i)
 {
@@ -41,14 +41,9 @@ int	place_cursor_after_word(const char *prompt, int i)
 	{
 		if (isquote_type(prompt[i]) == true && quote_type == 0)
 		{
-			printf("Delimiteur = %c\n", prompt[i]);
 			if (verif_quote_delimiter(prompt, prompt[i], i + 1) == FAILURE)
-			{
-				printf("Verify quote count word place cursor after word\n");
 				return (FAILURE);
-			}
-			quote_type = prompt[i];
-			i++;
+			quote_type = prompt[i++];
 			while (prompt[i] && prompt[i] != quote_type)
 				i++;
 			return (i + 1);
