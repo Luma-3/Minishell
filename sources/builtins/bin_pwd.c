@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_pwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:04:59 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/29 15:35:36 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/01 16:33:32 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ int	ms_pwd(const char *prompt, char **args, t_list **envp)
 		return (errno);
 	ft_putendl_fd(cwd, STDOUT_FILENO);
 	free(cwd);
-	return (EXIT_SUCCESS);
+	exit (EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/01 11:41:29 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/01 16:52:30 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ void	read_input(t_list **env)
 			if (ft_strncmp(input, "exit", ft_strlen(input)) == 0)
 			{
 				ft_lstclear(env, free);
+				rl_clear_history();
 				free(input);
 				exit(EXIT_SUCCESS);
 			}
+			ft_add_history(input, *env);
 			if (parser_init(&prompt, input, env) == FAILURE)
 			{
 				free(input);
@@ -36,12 +38,6 @@ void	read_input(t_list **env)
 			}
 			else
 			{
-				int i = 0;
-				while (prompt.tab[i])
-				{
-					printf("tab[%d] = %s\n", i, prompt.tab[i]);
-					i++;
-				}
 				launch_child(&prompt);
 				ft_rm_split(prompt.tab);
 				free(input);
@@ -74,6 +70,7 @@ int	main(int ac, char **av, char **envp)
 	if (ac != 1)
 		return (EXIT_FAILURE);
 	env = copy_env(envp);
+	ft_create_history(env);
 	presentation_display(&env);
 	read_input(&env);
 	return (EXIT_SUCCESS);

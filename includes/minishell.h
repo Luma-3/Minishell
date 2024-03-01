@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/29 15:27:33 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/01 16:51:43 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@
 int			parser_init(t_prompt *prompt, char *input, t_list **env);
 
 int			launch_child(t_prompt *prompt);
+
+//HISTORY
+void		ft_add_history(char *input, t_list *env);
+void		ft_create_history(t_list *env);
 
 //PRINT_ERROR
 void		print_error_message(void);

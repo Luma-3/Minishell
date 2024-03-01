@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
+#    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/02/29 13:17:33 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/01 15:41:43 by antgabri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,13 +83,18 @@ SRC_PARSING_LIST	=	alloc_tab.c			\
 						verif_arg.c
 SRC_PARSING			=	$(addprefix $(SRC_PARSING_DIR), $(SRC_PARSING_LIST))
 
+SRC_HISTORY_DIR		=	history/
+SRC_HISTORY_LIST	=	handle_history.c 
+SRC_HISTORY			=	$(addprefix $(SRC_HISTORY_DIR), $(SRC_HISTORY_LIST))
+				
 SRC_LIST			=	minishell.c			\
 						print_error_msg.c	\
 						test_access.c		\
 						$(SRC_BUILTINS)		\
 						$(SRC_PARSING)		\
 						$(SRC_ENV) 			\
-						$(SRC_EXEC)
+						$(SRC_EXEC)			\
+						$(SRC_HISTORY)
 SRC					=	$(addprefix $(SRC_DIR), $(SRC_LIST))
 
 ##################
@@ -127,6 +132,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)$(SRC_TOKEN_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSING_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_HISTORY_DIR)
 
 $(LIBFT):
 	@make -sC $(LIBFT_DIR)
@@ -142,7 +148,7 @@ $(NAME): $(OBJ_LIST)
 clean:
 	@echo "$(COLOR_RED)Delete objects$(COLOR_RESET)"
 	@rm -rf $(OBJ_DIR) $(NORM_LOG)
-	@make clean -sC $(LIBFT_DIR)
+	@make clean -sC $(LIBFT_DIR) 
 
 fclean: clean
 	@echo "$(COLOR_RED)Delete $(NAME)$(COLOR_RESET)"
