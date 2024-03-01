@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:10:35 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/29 15:36:18 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/01 11:48:29 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ static int skip_to_arg(const char *prompt, bool have_flag)
 		if (have_flag == true && ft_strncmp(&prompt[i], "-n", 2) == 0)
 		{
 			i += 2;
-			return (i + ft_count_whitespaces(&prompt[i]));
+			return (ft_skip_whitespaces(prompt, i));
 		}
 		else if (have_flag == false && ft_strncmp(&prompt[i], "echo", 4) == 0)
 		{
 			i += 4;
-			return (i + ft_count_whitespaces(&prompt[i]));
+			return (ft_skip_whitespaces(prompt, i));
 		}
 		i++;
 	}
