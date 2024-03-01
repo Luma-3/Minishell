@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:24:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/29 15:25:12 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/01 11:40:51 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,11 @@ int	parser_init(t_prompt *prompt, char *input, t_list **env)
 	prompt->prompt = input;
 	prompt->current_index = 0;
 	prompt->nb_pipe = count_pattern_tab(prompt->tab, "|");
-	prompt->nb_cmd = count_pattern_tab(prompt->tab, "||"); 
-	prompt->nb_cmd += count_pattern_tab(prompt->tab, "&&"); 
+	prompt->nb_cmd = count_pattern_tab(prompt->tab, "||");
+	prompt->nb_cmd += count_pattern_tab(prompt->tab, "&&");
 	prompt->nb_cmd += prompt->nb_pipe + 1;
 	prompt->env = env;
 	prompt->pos_after_token = 0;
 	prompt->input_redir = false;
-	//print_prompt(prompt);
 	return (SUCCESS);
 }

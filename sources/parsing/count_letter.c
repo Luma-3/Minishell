@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   count_letter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:30:38 by antgabri          #+#    #+#             */
-/*   Updated: 2024/02/28 15:19:28 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/01 11:15:54 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
 /**
- * @brief Verifie si les quotes du debut se ferment bien dans la suite de 
- * la chaine
+ * @brief Check if the delimiter stop is present in the prompt
 */
 static int	count_quote_around_word(const char *prompt, char delimiter, int i)
 {
@@ -28,7 +27,7 @@ static int	count_quote_around_word(const char *prompt, char delimiter, int i)
 }
 
 /**
- * @brief Compte le nombre de lettres entre les quotes
+ * @brief CCount the number of letters between quotes
 */
 static int	count_letter_between_quote(const char *prompt,
 	char delimiter, int i)
@@ -45,25 +44,36 @@ static int	count_letter_between_quote(const char *prompt,
 }
 
 /**
- * @brief Compte le nombre de lettres dans un mot qui n'a pas de quotes
+ * @brief Count the number of letters in a word
 */
 static int	count_word_letter(const char *prompt, int i)
 {
-	int	nb_letters;
+	int		nb_letters;
+	char	quote_type;
 
 	nb_letters = 0;
+	quote_type = 0;
 	while (prompt[i] != '\0' && ft_iswhitespace(prompt[i]) == false)
 	{
-		if (isquote_type(prompt[i]) == false)
-			nb_letters++;
+		if (isquote_type(prompt[i]) == true
+			&& verif_quote_delimiter(prompt, prompt[i], i + 1) == SUCCESS)
+		{
+			quote_type = prompt[i];
+			i++;
+			while (prompt[i] != quote_type)
+			{
+				nb_letters++;
+				i++;
+			}
+		}
+		nb_letters++;
 		i++;
 	}
 	return (nb_letters);
 }
 
 /**
- * @brief Regarde la premier lettre de la chaine de 
- * caractère et envoie dans la bonne fonction pour compter les lettres
+ * @brief Check the fisrt character of the word and count the number of letters
 */
 int	count_letters(const char *prompt, int i)
 {
