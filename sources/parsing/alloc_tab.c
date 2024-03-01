@@ -6,13 +6,10 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:48:17 by antgabri          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/03/01 16:29:20 by antgabri         ###   ########.fr       */
-=======
-/*   Updated: 2024/03/01 16:16:19 by jbrousse         ###   ########.fr       */
->>>>>>> Dev
+/*   Updated: 2024/03/01 17:06:18 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "parser.h"
 #include "minishell.h"
