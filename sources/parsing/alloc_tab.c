@@ -6,10 +6,9 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:48:17 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/01 17:06:18 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/01 17:30:11 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "parser.h"
 #include "minishell.h"
