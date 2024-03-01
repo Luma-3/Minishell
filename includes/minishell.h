@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/29 15:27:33 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/01 15:35:55 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include <signal.h>
 # include <dirent.h>
 # include <string.h>
 # include <errno.h>
@@ -27,7 +26,6 @@
 # include <curses.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <sys/wait.h>
 // TODO: remove unecessary includes
 
 # include "convention.h"

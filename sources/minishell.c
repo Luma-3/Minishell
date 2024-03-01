@@ -6,12 +6,12 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/01 11:41:29 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/01 15:53:39 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+#include "ms_sig.h"
 
 void	read_input(t_list **env)
 {
@@ -21,7 +21,13 @@ void	read_input(t_list **env)
 	while (true)
 	{
 		input = readline("minishell > ");
-		if (input != NULL && input[0] != '\0')
+		if (input == NULL)
+		{
+			printf("\n");
+			ft_lstclear(env, free);
+			exit(EXIT_SUCCESS);
+		}
+		if (input[0] != '\0')
 		{
 			if (ft_strncmp(input, "exit", ft_strlen(input)) == 0)
 			{
@@ -36,12 +42,6 @@ void	read_input(t_list **env)
 			}
 			else
 			{
-				int i = 0;
-				while (prompt.tab[i])
-				{
-					printf("tab[%d] = %s\n", i, prompt.tab[i]);
-					i++;
-				}
 				launch_child(&prompt);
 				ft_rm_split(prompt.tab);
 				free(input);
@@ -71,6 +71,8 @@ int	main(int ac, char **av, char **envp)
 	t_list	*env;
 
 	(void)av;
+	printf("\033]0;MINISHELL\007");
+	init_signal();
 	if (ac != 1)
 		return (EXIT_FAILURE);
 	env = copy_env(envp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_tab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:48:17 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/01 11:13:56 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/01 16:16:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static char	**insert_data(char **tab, const char *prompt, int nb_words)
 		if (isquote_type(prompt[position]) == true)
 			position += nb_letters + 2;
 		else
-			position += nb_letters + 1;
+			position += nb_letters;
 	}
 	return (tab);
 }
