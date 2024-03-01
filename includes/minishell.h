@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/01 16:51:43 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/01 17:02:41 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include <signal.h>
 # include <dirent.h>
 # include <string.h>
 # include <errno.h>
@@ -27,7 +26,6 @@
 # include <curses.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <sys/wait.h>
 // TODO: remove unecessary includes
 
 # include "convention.h"

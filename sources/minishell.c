@@ -6,7 +6,7 @@
 /*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/01 18:06:12 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/01 18:16:22 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ int	main(int ac, char **av, char **envp)
 	t_list	*env;
 
 	(void)av;
+	printf("\033]0;MINISHELL\007");
+	init_signal();
 	if (ac != 1)
 		return (EXIT_FAILURE);
 	env = copy_env(envp);
