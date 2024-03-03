@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:33:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/29 15:29:18 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/03 15:39:05 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ int exec_builtins(char **tab_cmd, t_prompt *prompt_struct)
 		if (ft_strncmp(builtins[i].name, tab_cmd[0], ft_strlen(tab_cmd[0])) == 0)
 		{
 			builtins[i].func(prompt_struct->prompt, tab_cmd, prompt_struct->env);
+			ft_rm_split(tab_cmd); //CHANGEMENT
 			return (EXIT_SUCCESS);
 		}
 		i++;
 	}
+	ft_rm_split(tab_cmd);//CHANGEMENT
 	return (EXIT_FAILURE);
 }
 

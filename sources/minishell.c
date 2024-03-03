@@ -3,61 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/01 18:16:22 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/03 16:53:11 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "color.h"
 
-static char	*ft_get_hostname(t_list *env)
+void	print_env(void *str)
 {
-	char	*tmp;
-	char	*tmp2;
-
-	tmp = ms_getenv(env, "LOGNAME");
-	if (tmp == NULL)
-		tmp = ms_getenv(env, "USER");
-	tmp2 = ft_strjoin(tmp, "@");
-	free(tmp);
-	tmp = ft_strjoin(CYAN, tmp2);
-	free(tmp2);
-	tmp2 = ft_strjoin(tmp, RESET);
-	free(tmp);
-	return (tmp2);
+	printf("%s\n", (char *)str);
 }
 
-static char	*ft_get_cwd(t_list *env)
+static void	ft_exit(t_list *env, char *input, char *display_message)
 {
-	char	*tmp;
-	char	*tmp2;
-
-	tmp = ms_getenv(env, "PWD");
-	tmp2 = ft_strjoin(BLUE, tmp);
-	free(tmp);
-	tmp = ft_strjoin(tmp2, "$> ");
-	free(tmp2);
-	tmp2 = ft_strjoin(tmp, RESET);
-	free(tmp);
-	return (tmp2);
-}
-
-static char	*ft_create_prompt(t_list *env)
-{
-	char	*display_hostname;
-	char	*display_path;
-	char	*display_prompt;
-
-	display_hostname = ft_get_hostname(env);
-	display_path = ft_get_cwd(env);
-
-	display_prompt = ft_strjoin(display_hostname, display_path);
-	free(display_hostname);
-	free(display_path);
-	return (display_prompt);
+	if (ft_strncmp(input, "exit", ft_strlen(input)) == 0)
+	{
+		ft_lstclear(&env, free);
+		rl_clear_history();
+		free(input);
+		free(display_message);
+		exit(EXIT_SUCCESS);
+	}
+	return ;
 }
 
 void	read_input(t_list **env)
@@ -66,49 +36,25 @@ void	read_input(t_list **env)
 	t_prompt	prompt;
 	char		*display_message;
 
+	display_message = NULL;
 	while (true)
 	{
-		display_message = ft_create_prompt(*env);
+		display_message = handle_position(*env, display_message);
 		input = readline(display_message);
 		if (input != NULL && input[0] != '\0')
 		{
-			if (ft_strncmp(input, "exit", ft_strlen(input)) == 0)
-			{
-				ft_lstclear(env, free);
-				rl_clear_history();
-				free(input);
-				exit(EXIT_SUCCESS);
-			}
+			ft_exit(*env, input, display_message);
 			ft_add_history(input, *env);
 			if (parser_init(&prompt, input, env) == FAILURE)
-			{
-				free(input);
-				printf("Error quote not close\n");
-			}
+				perror("Minishell error");
 			else
 			{
 				launch_child(&prompt);
 				ft_rm_split(prompt.tab);
-				free(input);
 			}
+			free(input);
 		}
 	}
-}
-
-static int	presentation_display(t_list **env)
-{
-	t_prompt	command;
-
-	parser_init(&command,
-		"toilet -tf future --gay -F border Welcome in MINISHELL", env);
-	launch_child(&command);
-	ft_rm_split(command.tab);
-	return (SUCCESS);
-}
-
-void	print_env(void *str)
-{
-	printf("%s\n", (char *)str);
 }
 
 int	main(int ac, char **av, char **envp)
