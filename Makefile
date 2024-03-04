@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/01 17:02:29 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/04 15:30:21 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,12 @@ SRC_EXEC_LIST		=	exec_command.c		\
 						$(SRC_TOKEN)
 SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 
+SRC_NEW_PARSER_DIR	=	new_parser/
+SRC_NEW_PARSER_LIST	=	bin_tree.c			\
+						read_line.c			\
+						ats.c
+SRC_NEW_PARSER		=	$(addprefix $(SRC_NEW_PARSER_DIR), $(SRC_NEW_PARSER_LIST))
+
 SRC_PARSING_DIR		=	parsing/
 SRC_PARSING_LIST	=	alloc_tab.c			\
 						count_letter.c		\
@@ -98,8 +104,9 @@ SRC_LIST			=	minishell.c			\
 						$(SRC_PARSING)		\
 						$(SRC_ENV) 			\
 						$(SRC_EXEC)			\
-						$(SRC_HISTORY)			\
-						$(SRC_SIGNAL)
+						$(SRC_HISTORY)		\
+						$(SRC_SIGNAL)		\
+						$(SRC_NEW_PARSER)
 SRC					=	$(addprefix $(SRC_DIR), $(SRC_LIST))
 
 ##################
@@ -136,6 +143,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)$(SRC_ENV_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)$(SRC_TOKEN_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_NEW_PARSER_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSING_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_HISTORY_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_SIGNAL_DIR)

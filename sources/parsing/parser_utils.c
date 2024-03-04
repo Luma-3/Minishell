@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:42:27 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/01 11:15:08 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/04 12:12:45 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,15 @@ int	isquote_type(char c)
 	}
 	return (false);
 }
+int	 place_cursor_after_token(const char *prompt, int i)
+{
+	char c;
 
+	c = prompt[i];
+	while (prompt[i] == c)
+		i++;
+	return (i);
+}
 /**
  * @brief Place cursor after a word
  */

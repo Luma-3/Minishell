@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/01 18:01:21 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/04 17:14:30 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ int			place_cursor_after_word(const char *prompt, int i);
  * @brief Place the cursor at the start of the next quote
 */
 int			place_cursor_after_quote(const char *prompt, int i);
+
+/**
+ * @brief Place the cursor at the start of the next token
+*/
+int	 		place_cursor_after_token(const char *prompt, int i);
 /**
  * @brief Malloc le double tableau de char
  * 
@@ -70,23 +75,54 @@ int			verif_arg(char *prompt);
 //////////////// WARNING: THIS PART IS NOT COMPLETED YET /////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
 
-typedef struct s_binary_tree
-{
-	char				*data;
-	union parser_data	*left;
-	union parser_data	*right;
-}				t_binary_tree;
+#define WEIGHT_REDIR 0
+#define WEIGHT_CMD 1
+#define WEIGHT_AND 3
+#define WEIGHT_OR 3
+#define WEIGHT_PIPE 2
 
-typedef struct s_redirection
+typedef struct s_redir
 {
-	int 	type;
-	int 	fd;
-}				t_redirection;
+	char	*file;
+	int		type;
+	int		fd;
+}			t_redir;
 
-union parser_data
+typedef	struct s_token
 {
-	t_redirection	*redirection;
-	t_binary_tree	*binary_tree;
-};
+	char	*cmd;
+}			t_token;
+typedef union u_tree_data
+{
+	t_token	*token;
+	t_redir	*redir;
+}			t_tree_data;
+
+typedef struct s_bin_tree
+{
+	union u_tree_data		data;
+	struct s_bin_tree	*left;
+	struct s_bin_tree	*right;
+}						t_bin_tree;
+
+
+
+void	print_inorder(t_bin_tree *root);
+
+t_bin_tree	*create_node(union u_tree_data data);
+
+void	insert_node(t_bin_tree **root, union u_tree_data data, int (*cmp)(union u_tree_data, union u_tree_data));
+
+int	compare_token(union u_tree_data data1, union u_tree_data data2);
+
+t_bin_tree	*read_line(const char *prompt, int *index_read);
+
+int is_pipe(const char *prompt, int index);
+
+t_bin_tree	*create_ats(t_bin_tree **root, const char *prompt, int index_offset);
+
+void	copy_token(const char *prompt, t_bin_tree **root, int start, int end);
+
+void	clear_tree(t_bin_tree *root);
 
 #endif // PARSER_H
