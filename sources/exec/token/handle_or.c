@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_or.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 23:02:54 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/03 16:45:27 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/04 11:11:07 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ int	handle_or(t_prompt *prompt, t_child *childs,
 		if (tab_cmd == NULL)
 			return (FAILURE);
 		if (is_builtins(tab_cmd[0]) == true)
-			return (exec_builtins(tab_cmd, prompt));
+		{
+			if (exec_builtins(tab_cmd, prompt) == FAILURE)
+				exit (EXIT_FAILURE);
+			exit (EXIT_SUCCESS);
+		}
 		if (exec_command(tab_cmd, prompt->env) == FAILURE)
 			exit (EXIT_FAILURE);
 		exit (EXIT_SUCCESS);

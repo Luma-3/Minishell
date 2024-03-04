@@ -4,6 +4,7 @@
         "algorithm": "c",
         "parser.h": "c",
         "exec.h": "c",
-        "libft.h": "c"
+        "libft.h": "c",
+        "cstdlib": "c"
     }
 }
