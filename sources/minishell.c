@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/04 17:48:46 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:48:02 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void print_tree(WINDOW *win, t_bin_tree *root, int y, int x, int depth) {
     if (root == NULL) return;
 
     // Affiche le nœud actuel
-    mvwprintw(win, y, x, "%s", root->data.token->cmd);
+    mvwprintw(win, y, x, "%s", root->data->cmd);
 
     // Affiche les enfants (gauche et droit)
     if (root->left != NULL) {
@@ -31,13 +31,22 @@ void print_tree(WINDOW *win, t_bin_tree *root, int y, int x, int depth) {
     }
 }
 
+static void init_ats(t_ats *ats) 
+{
+	t_queue	*queue;
+	t_bin_tree	*root;
+
+	root = NULL;
+	queue = ft_init_queue();
+	ats->queue = queue;
+	ats->root = root;
+}
+
 void	read_input(t_list **env)
 {
 	char		*input;
-	t_prompt	prompt;
-	t_bin_tree	*root;
+	t_ats		ats;
 
-	(void)prompt;
 	while (true)
 	{
 		input = readline("minishell > ");
@@ -49,7 +58,7 @@ void	read_input(t_list **env)
 		}
 		if (input[0] != '\0')
 		{
-			root = NULL;
+			init_ats(&ats);
 			// if (ft_strncmp(input, "exit", ft_strlen(input)) == 0)
 			// {
 			// 	ft_lstclear(env, free);
@@ -69,23 +78,22 @@ void	read_input(t_list **env)
 			// 	ft_rm_split(prompt.tab);
 			// 	free(input);
 			// }
-			initscr();
-			curs_set(FALSE);
+			// initscr();
+			// curs_set(FALSE);
 
-			WINDOW *win = newwin(100, 100, 0, 0);
+			// WINDOW *win = newwin(100, 100, 0, 0);
+			create_ats(input, &ats);
 
-			create_ats(&root, input, 0);
+			// print_tree(win, ats.root, 1, 60, 8);
 
-			print_tree(win, root, 1, 60, 8);
-
-			wrefresh(win);
-			getch();
-			delwin(win);
-			endwin();
-			refresh();
+			// wrefresh(win);
+			// getch();
+			// delwin(win);
+			// endwin();
+			// refresh();
 			
-			//print_inorder(root);
-			clear_tree(root);
+			print_inorder(ats.root);
+			clear_tree(ats.root);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/04 17:14:30 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:56:11 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,54 +75,74 @@ int			verif_arg(char *prompt);
 //////////////// WARNING: THIS PART IS NOT COMPLETED YET /////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
 
-#define WEIGHT_REDIR 0
 #define WEIGHT_CMD 1
+#define WEIGHT_PIPE 2
 #define WEIGHT_AND 3
 #define WEIGHT_OR 3
-#define WEIGHT_PIPE 2
 
-typedef struct s_redir
-{
-	char	*file;
-	int		type;
-	int		fd;
-}			t_redir;
+#define REDIR_IN 1
+#define REDIR_OUT 2
+#define REDIR_OUT_APPEND 3
+#define REDIR_HEREDOC 4
 
 typedef	struct s_token
 {
+	int		nb_redir;
 	char	*cmd;
 }			t_token;
-typedef union u_tree_data
-{
-	t_token	*token;
-	t_redir	*redir;
-}			t_tree_data;
 
 typedef struct s_bin_tree
 {
-	union u_tree_data		data;
+	t_token				*data;
 	struct s_bin_tree	*left;
 	struct s_bin_tree	*right;
 }						t_bin_tree;
 
+typedef	struct s_ats
+{
+	t_bin_tree	*root;
+	t_queue		*queue;
+}				t_ats;
 
+// queue
 
-void	print_inorder(t_bin_tree *root);
+typedef struct s_queue_redir
+{
+	int		key;
+	int		type_redir;
+	char 	*file_name;
+}			t_queue_redir;
 
-t_bin_tree	*create_node(union u_tree_data data);
+/// read_line.c
 
-void	insert_node(t_bin_tree **root, union u_tree_data data, int (*cmp)(union u_tree_data, union u_tree_data));
+void	take_part_to_ats(const char *prompt, t_bin_tree **root, int start, int end);
 
-int	compare_token(union u_tree_data data1, union u_tree_data data2);
+t_ats	*read_line(const char *prompt, t_ats *ats);
 
-t_bin_tree	*read_line(const char *prompt, int *index_read);
+// read_line_utils.c
+
+int place_cursor_after_parenthesis(const char *prompt, int index);
+
+int	is_parenthesis(const char token);
 
 int is_pipe(const char *prompt, int index);
 
-t_bin_tree	*create_ats(t_bin_tree **root, const char *prompt, int index_offset);
+int is_token(char token);
 
-void	copy_token(const char *prompt, t_bin_tree **root, int start, int end);
+// bin_tree.c
+
+void	print_inorder(t_bin_tree *root);
+
+t_bin_tree	*create_node(t_token *data);
+
+void	insert_node(t_bin_tree **root, t_token *data, int (*cmp)(t_token *, t_token *));
+
+int	compare_token(t_token *data1, t_token *data2);
 
 void	clear_tree(t_bin_tree *root);
+
+// ats.c
+
+void	create_ats(const char *prompt, t_ats *ats);
 
 #endif // PARSER_H

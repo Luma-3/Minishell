@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/04 15:30:21 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/05 16:46:09 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,6 +77,7 @@ SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 SRC_NEW_PARSER_DIR	=	new_parser/
 SRC_NEW_PARSER_LIST	=	bin_tree.c			\
 						read_line.c			\
+						read_line_utils.c	\
 						ats.c
 SRC_NEW_PARSER		=	$(addprefix $(SRC_NEW_PARSER_DIR), $(SRC_NEW_PARSER_LIST))
 

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:10:14 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/04 17:46:44 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:09:27 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void	print_inorder(t_bin_tree *root)
 	if (!root)
 		return ;
 	print_inorder(root->left);
-	printf("%s\n", root->data.token->cmd); // TODO Modif
+	printf("%s\n", root->data->cmd); // TODO Modif
 	print_inorder(root->right);
 }
 
-t_bin_tree	*create_node(union u_tree_data data)
+t_bin_tree	*create_node(t_token *data)
 {
 	t_bin_tree	*node;
 	node = (t_bin_tree *)malloc(sizeof(t_bin_tree));
@@ -45,12 +45,12 @@ static int	find_weight(const char *data)
 	return (WEIGHT_CMD);
 }
 
-int	compare_token(union u_tree_data data1, union u_tree_data data2)
+int	compare_token(t_token *data1, t_token *data2)
 {
-	return (find_weight(data1.token->cmd) - find_weight(data2.token->cmd));
+	return (find_weight(data1->cmd) - find_weight(data2->cmd));
 }
 
-void	insert_node(t_bin_tree **root, union u_tree_data data, int (*cmp)(union u_tree_data, union u_tree_data))
+void	insert_node(t_bin_tree **root, t_token *data, int (*cmp)(t_token *, t_token *))
 {
 	t_bin_tree	*node;
 
@@ -82,8 +82,7 @@ void	clear_tree(t_bin_tree *root)
 		return ;
 	clear_tree(root->left);
 	clear_tree(root->right);
-	free(root->data.token->cmd);
-	free(root->data.token);
+	free(root->data);
 	free(root);
 }
 
