@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/05 16:48:02 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/06 17:15:27 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,14 @@ void print_tree(WINDOW *win, t_bin_tree *root, int y, int x, int depth) {
     }
 }
 
-static void init_ats(t_ats *ats) 
+static void init_ats(t_ats *ats, char *prompt) 
 {
 	t_queue	*queue;
 	t_bin_tree	*root;
 
 	root = NULL;
 	queue = ft_init_queue();
+	ats->prompt = prompt;
 	ats->queue = queue;
 	ats->root = root;
 }
@@ -58,7 +59,7 @@ void	read_input(t_list **env)
 		}
 		if (input[0] != '\0')
 		{
-			init_ats(&ats);
+			init_ats(&ats, input);
 			// if (ft_strncmp(input, "exit", ft_strlen(input)) == 0)
 			// {
 			// 	ft_lstclear(env, free);
@@ -82,9 +83,9 @@ void	read_input(t_list **env)
 			// curs_set(FALSE);
 
 			// WINDOW *win = newwin(100, 100, 0, 0);
-			create_ats(input, &ats);
+			create_ats(&ats);
 
-			// print_tree(win, ats.root, 1, 60, 8);
+			//print_tree(win, ats.root, 1, 60, 8);
 
 			// wrefresh(win);
 			// getch();
@@ -94,6 +95,7 @@ void	read_input(t_list **env)
 			
 			print_inorder(ats.root);
 			clear_tree(ats.root);
+			ft_clear_queue(ats.queue, free);
 		}
 	}
 }
@@ -113,6 +115,8 @@ void	print_env(void *str)
 {
 	printf("%s\n", (char *)str);
 }
+
+#include "redirection.h"
 
 int	main(int ac, char **av, char **envp)
 {

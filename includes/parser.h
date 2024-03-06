@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/06 10:56:11 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/06 17:04:35 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_bin_tree
 
 typedef	struct s_ats
 {
+	char		*prompt;
 	t_bin_tree	*root;
 	t_queue		*queue;
 }				t_ats;
@@ -113,11 +114,15 @@ typedef struct s_queue_redir
 	char 	*file_name;
 }			t_queue_redir;
 
+typedef struct s_queue_heredoc
+{
+	char 	*delimiter;
+	char	*content;
+}			t_queue_heredoc;
+
 /// read_line.c
 
-void	take_part_to_ats(const char *prompt, t_bin_tree **root, int start, int end);
-
-t_ats	*read_line(const char *prompt, t_ats *ats);
+t_ats	*read_line(t_ats *ats);
 
 // read_line_utils.c
 
@@ -128,6 +133,8 @@ int	is_parenthesis(const char token);
 int is_pipe(const char *prompt, int index);
 
 int is_token(char token);
+
+int skip_quote_parenthesis(const char *prompt, int index);
 
 // bin_tree.c
 
@@ -143,6 +150,6 @@ void	clear_tree(t_bin_tree *root);
 
 // ats.c
 
-void	create_ats(const char *prompt, t_ats *ats);
+void	create_ats(t_ats *ats);
 
 #endif // PARSER_H

@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/05 16:46:09 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/06 13:17:27 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,6 +93,11 @@ SRC_PARSING			=	$(addprefix $(SRC_PARSING_DIR), $(SRC_PARSING_LIST))
 SRC_HISTORY_DIR		=	history/
 SRC_HISTORY_LIST	=	handle_history.c 
 SRC_HISTORY			=	$(addprefix $(SRC_HISTORY_DIR), $(SRC_HISTORY_LIST))
+
+SRC_REDIR_DIR		=	redirection/
+SRC_REDIR_LIST		=	heredoc.c
+SRC_REDIR			=	$(addprefix $(SRC_REDIR_DIR), $(SRC_REDIR_LIST))
+
 				
 SRC_SIGNAL_DIR		=	signal/
 SRC_SIGNAL_LIST		=	signal.c
@@ -106,6 +111,7 @@ SRC_LIST			=	minishell.c			\
 						$(SRC_ENV) 			\
 						$(SRC_EXEC)			\
 						$(SRC_HISTORY)		\
+						$(SRC_REDIR)		\
 						$(SRC_SIGNAL)		\
 						$(SRC_NEW_PARSER)
 SRC					=	$(addprefix $(SRC_DIR), $(SRC_LIST))
@@ -147,6 +153,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)$(SRC_NEW_PARSER_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSING_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_HISTORY_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_REDIR_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_SIGNAL_DIR)
 
 $(LIBFT):
