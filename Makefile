@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
+#    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/05 16:46:09 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/06 11:02:04 by antgabri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -156,7 +156,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(OBJ_DIR)
 	@echo "$(COLOR_BLUE)Compile $<$(COLOR_RESET)"
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
-$(NAME): $(OBJ_LIST) 
+$(NAME): $(OBJ_LIST)
 	@echo "$(COLOR_BLUE)Compile $(NAME)$(COLOR_RESET)"
 	@$(CC) $(CFLAGS) $(OBJ_LIST) $(LIBFT) -o $(NAME) -lreadline -lcurses
 

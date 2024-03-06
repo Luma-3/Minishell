@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/01 17:02:41 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:16:05 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ int			launch_child(t_prompt *prompt);
 //HISTORY
 void		ft_add_history(char *input, t_list *env);
 void		ft_create_history(t_list *env);
+
+//VERIF ARG
+int			verif_arg(char *prompt);
 
 //PRINT_ERROR
 void		print_error_message(void);
