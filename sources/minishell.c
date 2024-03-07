@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 11:01:56 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:13:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ void	read_input(t_list **env)
 		if (input[0] != '\0')
 		{
 			init_ats(&ats, input);
+			ft_add_history(input, *env);
+			if (verif_arg(input) == FAILURE)
+				free(input);
+			else
+			{
 			// if (ft_strncmp(input, "exit", ft_strlen(input)) == 0)
 			// {
 			// 	ft_lstclear(env, free);
@@ -67,7 +72,6 @@ void	read_input(t_list **env)
 			// 	free(input);
 			// 	exit(EXIT_SUCCESS);
 			// }
-			// ft_add_history(input, *env);
 			// if (parser_init(&prompt, input, env) == FAILURE)
 			// {
 			// 	free(input);
@@ -81,21 +85,18 @@ void	read_input(t_list **env)
 			// }
 			// initscr();
 			// curs_set(FALSE);
-
 			// WINDOW *win = newwin(100, 100, 0, 0);
 			create_ats(&ats);
-
 			//print_tree(win, ats.root, 1, 60, 8);
-
 			// wrefresh(win);
 			// getch();
 			// delwin(win);
 			// endwin();
 			// refresh();
-			
 			print_inorder(ats.root);
 			clear_tree(ats.root);
 			ft_clear_queue(ats.queue, free);
+			}
 		}
 	}
 }
