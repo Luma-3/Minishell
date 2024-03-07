@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 12:21:58 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:23:53 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,140 +16,90 @@
 # include <stdbool.h>
 
 # include "convention.h"
+# include "core_data.h"
 # include "libft.h"
 
-/**
- * @brief Count the number of words in a string
- * 
- * @return the number of words
-*/
+# define WEIGHT_CMD 1
+# define WEIGHT_PIPE 2
+# define WEIGHT_AND 3
+# define WEIGHT_OR 3
+
+# define REDIR_IN 1
+# define REDIR_OUT 2
+# define REDIR_OUT_APPEND 3
+# define REDIR_HEREDOC 4
+
+/////////////////////////
+////// PRE PARSER //////
+/////////////////////////
+
+int			verif_arg(const char *prompt);
+
+/////////////////////////
+////// POST PARSER //////
+/////////////////////////
+
 int			count_words(const char *prompt);
 
-/**
- * @brief Count the number of letters in a word
- * 
- * @return the number of letters
-*/
-int			count_letters(const char *prompt, int i);
+int			count_letters(const char *start_word);
 
-/**
- * @brief Place the cursor at the start of the next word
-*/
-int			place_cursor_after_word(const char *prompt, int i);
-
-/**
- * @brief Place the cursor at the start of the next quote
-*/
-int			place_cursor_after_quote(const char *prompt, int i);
-
-/**
- * @brief Place the cursor at the start of the next token
-*/
-int	 		place_cursor_after_token(const char *prompt, int i);
-/**
- * @brief Malloc le double tableau de char
- * 
- * @return NULL if alloc failed pointer on tab if alloc success
-*/
 char		**alloc_tab(char *prompt);
 
-/**
- * @brief Test if char is a quote type (double quote or single quote)
- * 
- * @param c char to test
- * @return true if is quote type, false is isn't quote type
-*/
-int			is_quote_type(char c);
+int			post_parser(t_bin_tree	*root);
 
-/**
- * @brief Verifie si les quotes du debut se ferment bien dans la suite de 
- * la chaine
-*/
-int			verif_quote_delimiter(const char *prompt, char delimiter, int i);
+///////////////////////////
+////// ATOMIC PARSER //////
+///////////////////////////
 
-int			verif_arg(char *prompt);
+int			skip_quote_parenthesis(const char *prompt, int index);
 
+int			create_ats(t_ats *ats);
 
-
-//////////////////////////////  NEW_PARSER  //////////////////////////////////////////
-//////////////// WARNING: THIS PART IS NOT COMPLETED YET /////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////
-
-#define WEIGHT_CMD 1
-#define WEIGHT_PIPE 2
-#define WEIGHT_AND 3
-#define WEIGHT_OR 3
-
-#define REDIR_IN 1
-#define REDIR_OUT 2
-#define REDIR_OUT_APPEND 3
-#define REDIR_HEREDOC 4
-
-typedef	struct s_token
-{
-	int		nb_redir;
-	char	*cmd;
-}			t_token;
-
-typedef struct s_bin_tree
-{
-	t_token				*data;
-	struct s_bin_tree	*left;
-	struct s_bin_tree	*right;
-}						t_bin_tree;
-
-typedef	struct s_ats
-{
-	char		*prompt;
-	t_bin_tree	*root;
-	t_queue		*queue;
-}				t_ats;
-
-// queue
-
-typedef struct s_queue_redir
-{
-	int		key;
-	int		type_redir;
-	char 	*file_name;
-}			t_queue_redir;
-
-typedef struct s_queue_heredoc
-{
-	char 	*delimiter;
-	char	*content;
-}			t_queue_heredoc;
-
-/// read_line.c
-
-t_ats	*create_ats(t_ats *ats);
-
-// read_line_utils.c
-
-int place_cursor_after_parenthesis(const char *prompt, int index);
-
-int	is_parenthesis(const char token);
-
-int is_pipe(const char *prompt, int index);
-
-int is_token(char token);
-
-int skip_quote_parenthesis(const char *prompt, int index);
+int			parse_ats(char *prompt, t_ats *ats, bool check_arg);
 
 // bin_tree.c
 
-void	print_inorder(t_bin_tree *root);
+void		print_inorder(t_bin_tree *root);
 
 t_bin_tree	*create_node(t_token *data);
 
-void	insert_node(t_bin_tree **root, t_token *data, int (*cmp)(t_token *, t_token *));
+void		insert_node(t_bin_tree **root, t_token *data,
+				int (*cmp)(t_token *, t_token *));
 
-int	compare_token(t_token *data1, t_token *data2);
+int			compare_token(t_token *data1, t_token *data2);
 
-void	clear_tree(t_bin_tree *root);
+void		clear_tree(t_bin_tree *root);
 
-// ats.c
+// ats_copy_cmd.c
 
-void	create_ats(t_ats *ats);
+int			copy_pipeline(t_ats *ats, int i_read, int *i_copy, int *nb_redir);
+
+int			copy_cmd_token(t_ats *ats, int *nb_redir, int i_read, int *i_copy);
+
+//////////////////////////
+////// PARSER UTILS //////
+//////////////////////////
+
+// place_cursor.c
+
+int			place_cursor_parenthesis(const char *prompt, int index);
+
+int			place_cursor_quote(const char *prompt, int i);
+
+int			place_cursor_quote(const char *prompt, int i);
+
+int			place_cursor_after_token(const char *prompt, int i);
+
+// is_type.c
+
+int			is_parenthesis(const char token);
+
+int			is_pipe(const char *prompt, int index);
+
+int			is_token(char token);
+
+int			is_redir_type(const char *prompt, int index);
+
+int			is_quote_type(char c);
 
 #endif // PARSER_H

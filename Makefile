@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/07 11:20:48 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/07 17:11:56 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,21 +74,32 @@ SRC_EXEC_LIST		=	exec_command.c		\
 						$(SRC_TOKEN)
 SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 
-SRC_NEW_PARSER_DIR	=	new_parser/
-SRC_NEW_PARSER_LIST	=	bin_tree.c			\
-						read_line.c			\
-						read_line_utils.c	\
-						ats.c
-SRC_NEW_PARSER		=	$(addprefix $(SRC_NEW_PARSER_DIR), $(SRC_NEW_PARSER_LIST))
 
-SRC_PARSING_DIR		=	parsing/
-SRC_PARSING_LIST	=	alloc_tab.c			\
-						count_letter.c		\
-						count_word.c		\
-						parser_utils.c		\
-						parser.c			\
-						verif_arg.c
-SRC_PARSING			=	$(addprefix $(SRC_PARSING_DIR), $(SRC_PARSING_LIST))
+SRC_PARSER_DIR			=	parser/
+
+SRC_PRE_PARSER_DIR		=	pre_parser/
+SRC_PRE_PARSER_LIST		=	verif_arg.c
+SRC_PRE_PARSER			=	$(addprefix $(SRC_PRE_PARSER_DIR), $(SRC_PRE_PARSER_LIST))
+
+SRC_ATS_DIR				=	ats/
+SRC_ATS_LIST			=	ats.c			\
+							ats_copy_cmd.c	\
+							bin_tree.c
+SRC_ATS					=	$(addprefix $(SRC_ATS_DIR), $(SRC_ATS_LIST))
+
+SRC_POST_PARSER_DIR		=	post_parser/
+SRC_POST_PARSER_LIST	=	post_parser.c	\
+							alloc_tab.c		\
+							count_utils.c
+SRC_POST_PARSER			=	$(addprefix $(SRC_POST_PARSER_DIR), $(SRC_POST_PARSER_LIST))
+
+SRC_PARSER_LIST			=	is_type.c			\
+							place_cursor.c		\
+							$(SRC_ATS)			\
+							$(SRC_POST_PARSER)	\
+							$(SRC_PRE_PARSER)
+SRC_PARSER				=	$(addprefix $(SRC_PARSER_DIR), $(SRC_PARSER_LIST))
+
 
 SRC_HISTORY_DIR		=	history/
 SRC_HISTORY_LIST	=	handle_history.c 
@@ -109,13 +120,12 @@ SRC_LIST			=	minishell.c				\
 						presentation_display.c	\
 						presentation_position.c	\
 						$(SRC_BUILTINS)			\
-						$(SRC_PARSING)			\
+						$(SRC_PARSER)			\
 						$(SRC_ENV) 				\
 						$(SRC_EXEC)				\
 						$(SRC_HISTORY)		\
 						$(SRC_REDIR)		\
-						$(SRC_SIGNAL)		\
-						$(SRC_NEW_PARSER)
+						$(SRC_SIGNAL)
 SRC					=	$(addprefix $(SRC_DIR), $(SRC_LIST))
 
 ##################
@@ -152,8 +162,10 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)$(SRC_ENV_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)$(SRC_TOKEN_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_NEW_PARSER_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_PARSING_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(SRC_ATS_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(SRC_POST_PARSER_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(SRC_PRE_PARSER_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_HISTORY_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_REDIR_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_SIGNAL_DIR)

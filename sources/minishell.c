@@ -6,30 +6,12 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 12:24:37 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:39:24 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
-
-void	print_env(void *str)
-{
-	printf("%s\n", (char *)str);
-}
-
-// static void	ft_exit(t_list *env, char *input, char *display_message)
-// {
-// 	if (ft_strncmp(input, "exit", ft_strlen(input)) == 0)
-// 	{
-// 		ft_lstclear(&env, free);
-// 		rl_clear_history();
-// 		free(input);
-// 		free(display_message);
-// 		exit(EXIT_SUCCESS);
-// 	}
-// 	return ;
-// }
 
 // void	print_tree(WINDOW *win, t_bin_tree *root, int y, int x, int depth) {
 // 	if (root == NULL) return;
@@ -48,9 +30,9 @@ void	print_env(void *str)
 // 	}
 // }
 
-static void init_ats(t_ats *ats, char *prompt) 
+static void	init_ats(t_ats *ats, char *prompt)
 {
-	t_queue	*queue;
+	t_queue		*queue;
 	t_bin_tree	*root;
 
 	root = NULL;
@@ -59,6 +41,7 @@ static void init_ats(t_ats *ats, char *prompt)
 	ats->queue = queue;
 	ats->root = root;
 }
+
 
 void	read_input(t_list **env)
 {
@@ -75,10 +58,6 @@ void	read_input(t_list **env)
 		{
 			init_ats(&ats, input);
 			ft_add_history(input, *env);
-			if (verif_arg(input) == FAILURE)
-				free(input);
-			else
-			{
 			// if (ft_strncmp(input, "exit", ft_strlen(input)) == 0)
 			// {
 			// 	ft_lstclear(env, free);
@@ -100,17 +79,15 @@ void	read_input(t_list **env)
 			// initscr();
 			// curs_set(FALSE);
 			// WINDOW *win = newwin(100, 100, 0, 0);
-			create_ats(&ats);
 			//print_tree(win, ats.root, 1, 60, 8);
 			// wrefresh(win);
 			// getch();
 			// delwin(win);
 			// endwin();
 			// refresh();
-			print_inorder(ats.root);
+			parse_ats(input, &ats, true);
 			clear_tree(ats.root);
 			ft_clear_queue(ats.queue, free);
-			}
 		}
 	}
 }
@@ -126,7 +103,7 @@ int	main(int ac, char **av, char **envp)
 		return (EXIT_FAILURE);
 	env = copy_env(envp);
 	ft_create_history(env);
-	presentation_display(&env);
+	//presentation_display(&env);
 	read_input(&env);
 	return (EXIT_SUCCESS);
 }

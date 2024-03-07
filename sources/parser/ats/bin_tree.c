@@ -6,21 +6,12 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:10:14 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 11:58:09 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:16:24 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "minishell.h"
-
-void	print_inorder(t_bin_tree *root)
-{
-	if (!root)
-		return ;
-	print_inorder(root->left);
-	printf("%s\n", root->data->cmd);
-	print_inorder(root->right);
-}
 
 t_bin_tree	*create_node(t_token *data)
 {

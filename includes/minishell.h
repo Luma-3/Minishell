@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 11:21:50 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 13:44:11 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,12 @@
 //int	g_sig_return;
 
 // DONE 
-int			parser_init(t_prompt *prompt, char *input, t_list **env);
 
 int			launch_child(t_prompt *prompt);
 
 //HISTORY
 void		ft_add_history(char *input, t_list *env);
 void		ft_create_history(t_list *env);
-
-//VERIF ARG
-int			verif_arg(char *prompt);
 
 //PRESENTATION_DISPLAY
 char		*ft_create_prompt(t_list *env);

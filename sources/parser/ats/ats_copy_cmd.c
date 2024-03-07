@@ -6,25 +6,11 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 12:20:21 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:15:50 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-static t_token	*init_node(const char *cmd, int size_cmd, int nb_redir)
-{
-	t_token	*token;
-
-	if (size_cmd == 0)
-		return (NULL);
-	token = (t_token *)malloc(sizeof(t_token));
-	if (!token)
-		return (NULL);
-	token->cmd = copy_whitout_parenthesis(cmd, size_cmd);
-	token->nb_redir = nb_redir;
-	return (token);
-}
 
 static char	*copy_whitout_parenthesis(const char *cmd, int size_cmd)
 {
@@ -43,6 +29,23 @@ static char	*copy_whitout_parenthesis(const char *cmd, int size_cmd)
 	return (new_cmd);
 }
 
+static t_token	*init_node(const char *cmd, int size_cmd, int nb_redir,
+							bool post_parser)
+{
+	t_token	*token;
+
+	if (size_cmd == 0)
+		return (NULL);
+	token = (t_token *)malloc(sizeof(t_token));
+	if (!token)
+		return (NULL);
+	token->cmd = copy_whitout_parenthesis(cmd, size_cmd);
+	token->nb_redir = nb_redir;
+	token->post_parser = post_parser;
+	token->argv = NULL;
+	return (token);
+}
+
 int	copy_pipeline(t_ats *ats, int i_read, int *i_copy, int *nb_redir)
 {
 	t_token	*data;
@@ -53,7 +56,10 @@ int	copy_pipeline(t_ats *ats, int i_read, int *i_copy, int *nb_redir)
 		i_read = skip_quote_parenthesis(ats->prompt, i_read);
 		i_read++;
 	}
-	data = init_node(&(ats->prompt[*i_copy]), i_read - *i_copy, nb_redir);
+	data = init_node(&(ats->prompt[*i_copy]), i_read - *i_copy, *nb_redir,
+			false);
+	if (data == NULL)
+		return (FAILURE);
 	insert_node(&(ats->root), data, compare_token);
 	*i_copy = i_read;
 	*nb_redir = 0;
@@ -64,7 +70,8 @@ int	copy_cmd_token(t_ats *ats, int *nb_redir, int i_read, int *i_copy)
 {
 	t_token		*data;
 
-	data = init_node(&(ats->prompt[*i_copy]), i_read - *i_copy, *nb_redir);
+	data = init_node(&(ats->prompt[*i_copy]), i_read - *i_copy, *nb_redir,
+			true);
 	if (data != NULL)
 	{
 		insert_node(&(ats->root), data, compare_token);
@@ -75,7 +82,9 @@ int	copy_cmd_token(t_ats *ats, int *nb_redir, int i_read, int *i_copy)
 		return (i_read);
 	}
 	i_read = place_cursor_after_token(ats->prompt, i_read);
-	data = init_node(&(ats->prompt[*i_copy]), i_read - *i_copy, 0);
+	data = init_node(&(ats->prompt[*i_copy]), i_read - *i_copy, 0, false);
+	if (data == NULL)
+		return (FAILURE);
 	insert_node(&(ats->root), data, compare_token);
 	*i_copy = i_read;
 	*nb_redir = 0;

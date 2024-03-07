@@ -6,13 +6,13 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:55:46 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 11:56:09 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:00:45 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int	place_cursor_after_parenthesis(const char *prompt, int index)
+int	place_cursor_parenthesis(const char *prompt, int index)
 {
 	int		parenthesis;
 
@@ -20,15 +20,37 @@ int	place_cursor_after_parenthesis(const char *prompt, int index)
 	index++;
 	while (prompt[index] && parenthesis != 0)
 	{
-		if (prompt[index] == '(')
+		if (prompt[index++] == '(')
 		{
 			parenthesis++;
 		}
-		else if (prompt[index] == ')')
+		else if (prompt[index++] == ')')
 		{
 			parenthesis--;
 		}
-		index++;
+		else
+			index++;
 	}
 	return (index);
+}
+
+int	place_cursor_quote(const char *prompt, int i)
+{
+	char	c;
+
+	c = prompt[i];
+	i++;
+	while (prompt[i] && prompt[i] != c)
+		i++;
+	return (i);
+}
+
+int	place_cursor_after_token(const char *prompt, int i)
+{
+	char	c;
+
+	c = prompt[i];
+	while (prompt[i] == c)
+		i++;
+	return (i);
 }

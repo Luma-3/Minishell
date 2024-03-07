@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/07 12:25:18 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 13:31:09 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,13 @@ char	*ft_create_prompt(t_list *env)
 	return (display_prompt);
 }
 
-int	presentation_display(t_list **env)
-{
-	t_prompt	command;
+// int	presentation_display(t_list **env)
+// {
+// 	t_prompt	command;
 
-	parser_init(&command,
-		"toilet -tf future --gay -F border Welcome in MINISHELL", env);
-	launch_child(&command);
-	ft_rm_split(command.tab);
-	return (SUCCESS);
-}
+// 	//parser_init(&command,
+// 	//	"toilet -tf future --gay -F border Welcome in MINISHELL", env);
+// 	launch_child(&command);
+// 	ft_rm_split(command.tab);
+// 	return (SUCCESS);
+// }

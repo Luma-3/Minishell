@@ -6,13 +6,19 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:19:12 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/07 12:22:50 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:38:36 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include <stdio.h>
 
-static int	verif_if_quote_closed(char *prompt)
+static void	print_error_arg(char token)
+{
+	printf("parse error near '%c'\n", token); // TODO STDERR
+}
+
+static int	verif_if_quote_closed(const char *prompt)
 {
 	int		i;
 	bool	quote;
@@ -38,7 +44,7 @@ static int	verif_if_quote_closed(char *prompt)
 	return (SUCCESS);
 }
 
-static int	verif_if_parenthesis_closed(char *prompt)
+static int	verif_if_parenthesis_closed(const char *prompt)
 {
 	int	i;
 	int	parenthesis;
@@ -48,7 +54,7 @@ static int	verif_if_parenthesis_closed(char *prompt)
 	while (prompt[i])
 	{
 		if (is_quote_type(prompt[i]) == true)
-			i = place_cursor_after_quote(prompt, i);
+			i = place_cursor_quote(prompt, i);
 		else if (prompt[i] == '(')
 			parenthesis++;
 		else if (prompt[i] == ')')
@@ -60,7 +66,7 @@ static int	verif_if_parenthesis_closed(char *prompt)
 	return (SUCCESS);
 }
 
-static int	verif_token_separation(char *prompt)
+static int	verif_token_separation(const char *prompt)
 {
 	int		i;
 	char	token;
@@ -88,7 +94,7 @@ static int	verif_token_separation(char *prompt)
 	return (SUCCESS);
 }
 
-int	verif_arg(char *prompt)
+int	verif_arg(const char *prompt)
 {
 	if (verif_if_quote_closed(prompt) == FAILURE)
 		return (FAILURE);

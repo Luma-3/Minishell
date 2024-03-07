@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error_msg.c                                  :+:      :+:    :+:   */
+/*   post_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 16:20:43 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/07 13:29:17 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/03/07 12:46:36 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/03/07 17:21:50 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parser.h"
+#include "minishell.h" // TODO remove
 
-void	print_error_message(void)
+int	post_parser(t_bin_tree	*root)
 {
-	perror(ERROR_FORMAT);
-}
-
-void	print_error_display(void)
-{
-	printf("minishell: toilet command not found\n");
-	printf("You can install it with 'sudo apt install toilet'\n");
-	printf("Restart minishell and now you have a beautiful display\n");
+	if (root == NULL)
+		return (SUCCESS);
+	if (root->data->post_parser == true)
+	{	
+		root->data->argv = alloc_tab(root->data->cmd);
+		if (root->data->argv == NULL)
+			return (FAILURE);
+	}
+	post_parser(root->left);
+	post_parser(root->right);
+	return (SUCCESS);
 }

@@ -6,20 +6,11 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 12:22:15 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:23:10 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-static int	skip_quote_parenthesis(const char *prompt, int index)
-{
-	if (is_quote_type(prompt[index]) == true)
-		index = place_cursor_after_quote(prompt, index);
-	if (is_parenthesis(prompt[index]) == true)
-		index = place_cursor_after_parenthesis(prompt, index);
-	return (index);
-}
 
 static int	take_redir(const char *prompt, t_queue *queue, int *i_read)
 {
@@ -36,11 +27,11 @@ static int	take_redir(const char *prompt, t_queue *queue, int *i_read)
 		*i_read += 2;
 	else
 		*i_read += 1;
-	i_read = ft_skip_whitespaces(prompt, i_read);
+	*i_read = ft_skip_whitespaces(prompt, *i_read);
 	while (prompt[*i_read + i] && ft_iswhitespace(prompt[*i_read + i]) == false)
 		i++;
 	data->file_name = ft_strndup(&prompt[*i_read], i);
-	i_read += i;
+	*i_read += i;
 	return (1);
 }
 
@@ -52,17 +43,26 @@ static int	pipeline_is_solo(const char *prompt)
 	while (prompt[i] || prompt[i] == '|')
 	{
 		i = skip_quote_parenthesis(prompt, i);
+		if (prompt[i] == '\0')
+			return (true);
 		if (is_token(prompt[i]) == true && is_pipe(prompt, i) == false)
 			return (false);
 		else
 			i++;
 	}
-	if (prompt[i] == '\0')
-		return (true);
-	return (false);
+	return (true);
 }
 
-t_ats	*create_ats(t_ats *ats)
+int	skip_quote_parenthesis(const char *prompt, int index)
+{
+	if (is_quote_type(prompt[index]) == true)
+		index = place_cursor_quote(prompt, index);
+	if (prompt[index] == '(')
+		index = place_cursor_parenthesis(prompt, index);
+	return (index);
+}
+
+int	create_ats(t_ats *ats)
 {
 	int		i_copy;
 	int		i_read;
@@ -78,13 +78,33 @@ t_ats	*create_ats(t_ats *ats)
 		i_read = skip_quote_parenthesis(ats->prompt, i_read);
 		if (is_redir_type(ats->prompt, i_read) != 0)
 			nb_redir += take_redir(ats->prompt, ats->queue, &i_read);
-		if (is_solo == false && is_pipe(ats->prompt, i_read) == true)
+		else if (is_solo == false && is_pipe(ats->prompt, i_read) == true)
 			i_read = copy_pipeline(ats, i_read, &i_copy, &nb_redir);
 		else if (is_token(ats->prompt[i_read]) == true)
 			i_read = copy_cmd_token(ats, &nb_redir, i_read, &i_copy);
 		else
 			i_read++;
+		if (nb_redir == -1 || i_read == -1)
+			return (FAILURE);
 	}
-	copy_cmd_token(ats, nb_redir, i_read, &i_copy);
-	return (ats);
+	copy_cmd_token(ats, &nb_redir, i_read, &i_copy);
+	return (SUCCESS);
+}
+
+int	parse_ats(char *prompt, t_ats *ats, bool check_arg)
+{
+	if (check_arg == true)
+	{
+		if (verif_arg(prompt) == FAILURE)
+			return (FAILURE);
+	}
+	if (create_ats(ats) == FAILURE)
+		return (free(prompt), FAILURE);
+	if (post_parser(ats->root) == FAILURE)
+	{
+		clear_tree(ats->root);
+		ft_clear_queue(ats->queue, free);
+		return (free(prompt), FAILURE);
+	}
+	return (SUCCESS); // TODO : Free function to add !!!!!!!!!!!!!!!!!!!!!!!!!!
 }
