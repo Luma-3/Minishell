@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/06 17:47:50 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 10:45:51 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,23 @@ int	take_redir(const char *prompt, t_queue *queue, int index_read)
 	return (index_read + i);
 }
 
+static char *copy_whitout_parenthesis(const char *cmd, int size_cmd)
+{
+	char	*new_cmd;
+	char	*tmp;
+	int		i;
+	
+	new_cmd = ft_strndup(cmd, size_cmd);
+	i = ft_skip_whitespaces(new_cmd, 0);
+	if (new_cmd[i] != '(')
+		return (new_cmd);
+	tmp = ft_strtrim(new_cmd, " \t\n\v\f\r");
+	free(new_cmd);
+	new_cmd = ft_strndup(tmp + 1, ft_strlen(tmp) - 2);
+	free(tmp);
+	return (new_cmd);
+}
+
 static t_token *init_token_node(const char *cmd, int size_cmd, int nb_redir)
 {
 	t_token	*token;
@@ -60,7 +77,7 @@ static t_token *init_token_node(const char *cmd, int size_cmd, int nb_redir)
 	token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
 		return (NULL);
-	token->cmd = ft_strndup(cmd, size_cmd);
+	token->cmd = copy_whitout_parenthesis(cmd, size_cmd);
 	token->nb_redir = nb_redir;
 	return (token);
 }
