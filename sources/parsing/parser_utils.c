@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 16:42:27 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/04 12:12:45 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:54:56 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,7 @@
  * @param c char to test
  * @return true if is quote type, false is isn't quote type
 */
-int	isquote_type(char c)
-{
-	if (c == '\'' || c == '\"')
-	{
-		return (true);
-	}
-	return (false);
-}
+
 int	 place_cursor_after_token(const char *prompt, int i)
 {
 	char c;
@@ -47,7 +40,7 @@ int	place_cursor_after_word(const char *prompt, int i)
 		i++;
 	while (prompt[i] && ft_iswhitespace(prompt[i]) == false)
 	{
-		if (isquote_type(prompt[i]) == true && quote_type == 0)
+		if (is_quote_type(prompt[i]) == true && quote_type == 0)
 		{
 			if (verif_quote_delimiter(prompt, prompt[i], i + 1) == FAILURE)
 				return (FAILURE);
@@ -56,7 +49,7 @@ int	place_cursor_after_word(const char *prompt, int i)
 				i++;
 			return (i + 1);
 		}
-		else if (isquote_type(prompt[i]) == true && quote_type != 0)
+		else if (is_quote_type(prompt[i]) == true && quote_type != 0)
 		{
 			quote_type = 0;
 			i++;

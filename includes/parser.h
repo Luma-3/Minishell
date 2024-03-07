@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/06 17:04:35 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 12:21:58 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char		**alloc_tab(char *prompt);
  * @param c char to test
  * @return true if is quote type, false is isn't quote type
 */
-int			isquote_type(char c);
+int			is_quote_type(char c);
 
 /**
  * @brief Verifie si les quotes du debut se ferment bien dans la suite de 
@@ -122,7 +122,7 @@ typedef struct s_queue_heredoc
 
 /// read_line.c
 
-t_ats	*read_line(t_ats *ats);
+t_ats	*create_ats(t_ats *ats);
 
 // read_line_utils.c
 

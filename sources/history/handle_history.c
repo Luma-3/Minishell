@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_history.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:39:31 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/03 15:35:46 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/07 12:28:20 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	ft_create_history(t_list *env)
 	char	*temp;
 	char	*input;
 
-	temp = NULL;
 	home = ms_getenv(env, "HOME");
 	if (home == NULL)
 		return ;

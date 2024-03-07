@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:04:47 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/06 14:37:19 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 12:26:37 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 static char	*create_heredoc(char *heredoc_content, const char *line)
 {
-	char *line_n;
-	char *tmp;
-	
+	char	*line_n;
+	char	*tmp;
+
 	line_n = ft_strjoin(line, "\n");
 	if (heredoc_content == NULL)
 	{
@@ -35,7 +35,8 @@ static char	*create_heredoc(char *heredoc_content, const char *line)
 
 static void	heredoc_error(const char *delimiter)
 {
-	ft_putstr_fd("minishell: warning: here-document delimited by end-of-file (wanted `", STDERR_FILENO);
+	ft_putstr_fd("minishell: warning: here-document \
+		delimited by end-of-file (wanted `", STDERR_FILENO);
 	ft_putstr_fd((char *)delimiter, STDERR_FILENO);
 	ft_putstr_fd("')\n", STDERR_FILENO);
 }
@@ -43,8 +44,8 @@ static void	heredoc_error(const char *delimiter)
 char	*open_heredoc(const char *delimiter)
 {
 	char	*line;
-	char 	*heredoc_name;
-	char 	*heredoc_content;
+	char	*heredoc_name;
+	char	*heredoc_content;
 
 	heredoc_name = ft_strjoin(delimiter, " > ");
 	heredoc_content = NULL;
@@ -67,7 +68,7 @@ char	*open_heredoc(const char *delimiter)
 	return (heredoc_content);
 }
 
-void create_enqueue_heredoc(t_queue *heredoc_queue, char *delimiter)
+void	create_enqueue_heredoc(t_queue *heredoc_queue, char *delimiter)
 {
 	char			*heredoc_content;
 	t_queue_heredoc	*heredoc;

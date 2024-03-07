@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   place_cursor.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/01 14:03:56 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 12:27:26 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/03/07 11:55:46 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/03/07 11:56:09 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ms_sig.h"
-#include "core_data.h"
+#include "parser.h"
 
-void	sigint_handler(int sig)
+int	place_cursor_after_parenthesis(const char *prompt, int index)
 {
-	static t_child	*childs;
-	int				i;
+	int		parenthesis;
 
-	i = 0;
-	if (childs != NULL && sig == SIGINT)
+	parenthesis = 1;
+	index++;
+	while (prompt[index] && parenthesis != 0)
 	{
-		while (childs[i].pid != -255)
+		if (prompt[index] == '(')
 		{
-			if (childs[i].pid != 0)
-				kill(childs[i].pid, SIGKILL);
+			parenthesis++;
 		}
+		else if (prompt[index] == ')')
+		{
+			parenthesis--;
+		}
+		index++;
 	}
-}
-
-void	init_signal(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, sigint_handler);
+	return (index);
 }

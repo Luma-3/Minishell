@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:48:17 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/07 11:20:27 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:54:56 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ static char	*copy_data(char *tab, const char *prompt, int position)
 	quote_type = 0;
 	while (ft_iswhitespace(prompt[position]) == true)
 		position++;
-	if (isquote_type(prompt[position]) == true)
+	if (is_quote_type(prompt[position]) == true)
 		quote_type = prompt[position++];
 	while (prompt[position] && ft_iswhitespace(prompt[position]) == false)
 	{
 		if (quote_type != 0)
 			return (copy_quote_in_word(tab, &prompt[position], quote_type, j));
-		else if (quote_type == 0 && isquote_type(prompt[position]) == true)
+		else if (quote_type == 0 && is_quote_type(prompt[position]) == true)
 		{
 			quote_type = prompt[position];
 			position++;
@@ -83,7 +83,7 @@ static char	**insert_data(char **tab, const char *prompt, int nb_words)
 			tab[index] = copy_data(tab[index], prompt, position);
 			index++;
 		}
-		if (isquote_type(prompt[position]) == true)
+		if (is_quote_type(prompt[position]) == true)
 			position += nb_letters + 2;
 		else
 			position += nb_letters;

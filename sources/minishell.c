@@ -6,30 +6,30 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 11:20:08 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 12:24:37 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parser.h"
 
 void	print_env(void *str)
 {
 	printf("%s\n", (char *)str);
 }
 
-static void	ft_exit(t_list *env, char *input, char *display_message)
-{
-	if (ft_strncmp(input, "exit", ft_strlen(input)) == 0)
-	{
-		ft_lstclear(&env, free);
-		rl_clear_history();
-		free(input);
-		free(display_message);
-		exit(EXIT_SUCCESS);
-	}
-	return ;
-}
-#include "parser.h"
+// static void	ft_exit(t_list *env, char *input, char *display_message)
+// {
+// 	if (ft_strncmp(input, "exit", ft_strlen(input)) == 0)
+// 	{
+// 		ft_lstclear(&env, free);
+// 		rl_clear_history();
+// 		free(input);
+// 		free(display_message);
+// 		exit(EXIT_SUCCESS);
+// 	}
+// 	return ;
+// }
 
 // void	print_tree(WINDOW *win, t_bin_tree *root, int y, int x, int depth) {
 // 	if (root == NULL) return;

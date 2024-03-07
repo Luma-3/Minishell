@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   presentation_display.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/07 10:51:12 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/07 12:25:18 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	diff_position(char *display_message)
 	free(new_position);
 	return (false);
 }
-
 
 static char	*ft_get_hostname(t_list *env)
 {

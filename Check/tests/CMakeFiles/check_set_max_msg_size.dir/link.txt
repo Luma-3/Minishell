@@ -1,1 +1,0 @@
-/usr/bin/cc -O3 -DNDEBUG -pthread CMakeFiles/check_set_max_msg_size.dir/check_set_max_msg_size.c.o -o check_set_max_msg_size  ../src/libcheck.a -lm -lrt 

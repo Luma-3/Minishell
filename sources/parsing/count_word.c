@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   count_word.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:33:39 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/01 11:29:33 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:54:56 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ static int	count_words_without_quote(const char *prompt, int i)
 	quote_type = 0;
 	while (prompt[i] && ft_iswhitespace(prompt[i]) == false)
 	{
-		if (quote_type != 0 && isquote_type(prompt[i]) == true
+		if (quote_type != 0 && is_quote_type(prompt[i]) == true
 			&& prompt[i] == quote_type)
 			break ;
-		else if (quote_type == 0 && isquote_type(prompt[i]) == true)
+		else if (quote_type == 0 && is_quote_type(prompt[i]) == true)
 		{
 			quote_type = prompt[i];
 			i++;
@@ -79,7 +79,7 @@ int	count_words(const char *prompt)
 	while (prompt[i] != '\0')
 	{
 		i = ft_skip_whitespaces(prompt, i);
-		if (isquote_type(prompt[i]) == true)
+		if (is_quote_type(prompt[i]) == true)
 		{
 			if (verify_quote(prompt, i) == FAILURE)
 				return (FAILURE);
@@ -91,7 +91,7 @@ int	count_words(const char *prompt)
 				return (FAILURE);
 			nb_words++;
 		}
-		if (isquote_type(prompt[i]) == true)
+		if (is_quote_type(prompt[i]) == true)
 			i = place_cursor_after_quote(prompt, i);
 		i = place_cursor_after_word(prompt, i);
 	}
