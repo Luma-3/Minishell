@@ -6,7 +6,7 @@
 /*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/04 11:03:32 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/07 10:51:12 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	diff_position(char *display_message)
 		return (ft_rm_split(old_position), false);
 	getcwd(new_position, 100);
 	if (ft_strncmp(old_position[1], new_position,
-		ft_strlen(old_position[1])) != 0)
+			ft_strlen(old_position[1])) != 0)
 	{
 		ft_rm_split(old_position);
 		return (free(new_position), true);
