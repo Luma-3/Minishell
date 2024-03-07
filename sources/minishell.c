@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/06 17:15:27 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:01:56 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 #include "ms_sig.h"
 #include "parser.h"
 
-void print_tree(WINDOW *win, t_bin_tree *root, int y, int x, int depth) {
-    if (root == NULL) return;
+// void	print_tree(WINDOW *win, t_bin_tree *root, int y, int x, int depth) {
+// 	if (root == NULL) return;
 
-    // Affiche le nœud actuel
-    mvwprintw(win, y, x, "%s", root->data->cmd);
+// 	// Affiche le nœud actuel
+// 	mvwprintw(win, y, x, "%s", root->data.token->cmd);
 
-    // Affiche les enfants (gauche et droit)
-    if (root->left != NULL) {
-        mvwaddch(win, y + 1, x - depth, '/');
-        print_tree(win, root->left, y + 2, x - depth - 1, depth / 2);
-    }
-    if (root->right != NULL) {
-        mvwaddch(win, y + 1, x + depth, '\\');
-        print_tree(win, root->right, y + 2, x + depth + 1, depth / 2);
-    }
-}
+// 	// Affiche les enfants (gauche et droit)
+// 	if (root->left != NULL) {
+// 		mvwaddch(win, y + 1, x - depth, '/');
+// 		print_tree(win, root->left, y + 2, x - depth - 1, depth / 2);
+// 	}
+// 	if (root->right != NULL) {
+// 		mvwaddch(win, y + 1, x + depth, '\\');
+// 		print_tree(win, root->right, y + 2, x + depth + 1, depth / 2);
+// 	}
+// }
 
 static void init_ats(t_ats *ats, char *prompt) 
 {
