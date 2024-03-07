@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 17:23:10 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:03:10 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int	parse_ats(char *prompt, t_ats *ats, bool check_arg)
 	{
 		if (verif_arg(prompt) == FAILURE)
 			return (FAILURE);
+		handle_heredoc(prompt, ats);
 	}
 	if (create_ats(ats) == FAILURE)
 		return (free(prompt), FAILURE);

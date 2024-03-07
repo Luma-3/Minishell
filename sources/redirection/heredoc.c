@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:04:47 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 12:26:37 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:50:18 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	heredoc_error(const char *delimiter)
 	ft_putstr_fd("')\n", STDERR_FILENO);
 }
 
-char	*open_heredoc(const char *delimiter)
+static char	*open_heredoc(const char *delimiter)
 {
 	char	*line;
 	char	*heredoc_name;
@@ -77,7 +77,7 @@ void	create_enqueue_heredoc(t_queue *heredoc_queue, char *delimiter)
 	heredoc = (t_queue_heredoc *)malloc(sizeof(t_queue_heredoc));
 	if (heredoc == NULL)
 		return ;
-	heredoc->delimiter = ft_strdup(delimiter);
+	heredoc->delimiter = delimiter;
 	heredoc->content = heredoc_content;
 	ft_enqueue(heredoc_queue, heredoc);
 }

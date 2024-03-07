@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 13:44:11 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:29:28 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <dirent.h>
 # include <string.h>
 # include <errno.h>
-# include <termios.h>
 # include <curses.h>
 # include <readline/readline.h>
 # include <readline/history.h>

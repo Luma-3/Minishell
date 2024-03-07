@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 17:23:53 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:01:27 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 /////////////////////////
 
 int			verif_arg(const char *prompt);
+
+void		handle_heredoc(const char *prompt, t_ats *ats);
 
 /////////////////////////
 ////// POST PARSER //////

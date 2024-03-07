@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:00:24 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/06 13:15:31 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:54:34 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@
 int			test_exec_prog(char *tab);
 int			test_path_access(char *tab);
 
-char		*open_heredoc(const char *delimiter);
+void		create_enqueue_heredoc(t_queue *heredoc_queue, char *delimiter);
 
 #endif

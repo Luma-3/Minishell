@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/07 17:11:56 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/07 17:57:03 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,18 +78,19 @@ SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 SRC_PARSER_DIR			=	parser/
 
 SRC_PRE_PARSER_DIR		=	pre_parser/
-SRC_PRE_PARSER_LIST		=	verif_arg.c
+SRC_PRE_PARSER_LIST		=	verif_arg.c			\
+							open_heredoc.c
 SRC_PRE_PARSER			=	$(addprefix $(SRC_PRE_PARSER_DIR), $(SRC_PRE_PARSER_LIST))
 
 SRC_ATS_DIR				=	ats/
-SRC_ATS_LIST			=	ats.c			\
-							ats_copy_cmd.c	\
+SRC_ATS_LIST			=	ats.c				\
+							ats_copy_cmd.c		\
 							bin_tree.c
 SRC_ATS					=	$(addprefix $(SRC_ATS_DIR), $(SRC_ATS_LIST))
 
 SRC_POST_PARSER_DIR		=	post_parser/
-SRC_POST_PARSER_LIST	=	post_parser.c	\
-							alloc_tab.c		\
+SRC_POST_PARSER_LIST	=	post_parser.c		\
+							alloc_tab.c			\
 							count_utils.c
 SRC_POST_PARSER			=	$(addprefix $(SRC_POST_PARSER_DIR), $(SRC_POST_PARSER_LIST))
 

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 17:39:24 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:29:38 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,18 @@
 
 static void	init_ats(t_ats *ats, char *prompt)
 {
-	t_queue		*queue;
+	t_queue		*redir_queue;
+	t_queue		*heredoc_queue;
 	t_bin_tree	*root;
 
 	root = NULL;
-	queue = ft_init_queue();
+	redir_queue = ft_init_queue();
+	heredoc_queue = ft_init_queue();
 	ats->prompt = prompt;
-	ats->queue = queue;
+	ats->queue = redir_queue;
+	ats->queue_heredoc = heredoc_queue;
 	ats->root = root;
 }
-
 
 void	read_input(t_list **env)
 {
@@ -54,6 +56,7 @@ void	read_input(t_list **env)
 	{
 		display_message = handle_position(*env, display_message);
 		input = readline(display_message);
+		//tgoto(tgetstr("cm", NULL), 0, 0);
 		if (input != NULL && input[0] != '\0')
 		{
 			init_ats(&ats, input);
