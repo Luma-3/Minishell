@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_and.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:07:16 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/01 10:39:23 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/04 11:10:50 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,14 @@ int	handle_and(t_prompt *prompt, t_child *childs,
 		if (tab_cmd == NULL)
 			return (FAILURE);
 		if (is_builtins(tab_cmd[0]) == true)
-			return (exec_builtins(tab_cmd, prompt));
+		{
+			if (exec_builtins(tab_cmd, prompt) == FAILURE)
+				exit (EXIT_FAILURE);
+			exit (EXIT_SUCCESS);
+		}
 		if (exec_command(tab_cmd, prompt->env) == FAILURE)
 			exit (EXIT_FAILURE);
+		exit (EXIT_SUCCESS);
 	}
 	if (input_redir)
 		close_pipe(childs, index_child - 1);

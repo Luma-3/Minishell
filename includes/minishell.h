@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/06 11:16:05 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/07 11:21:50 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,17 @@ void		ft_create_history(t_list *env);
 //VERIF ARG
 int			verif_arg(char *prompt);
 
+//PRESENTATION_DISPLAY
+char		*ft_create_prompt(t_list *env);
+int			presentation_display(t_list **env);
+int			diff_position(char *display_message);
+char		*handle_position(t_list *env, char *display_message);
+
+
 //PRINT_ERROR
 void		print_error_message(void);
 void		print_error_arg(char token);
 void		print_error_display(void);
 
-
+void init_signal(void);
 #endif

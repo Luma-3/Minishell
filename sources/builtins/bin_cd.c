@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   bin_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:00:31 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/29 17:01:00 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/04 11:11:35 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_builtins.h"
 #include <env.h>
 
-int ms_cd(const char *prompt, char **args, t_list **envp)
+int	ms_cd(const char *prompt, char **args, t_list **envp)
 {
 	(void)prompt;
 	(void)envp;
@@ -33,5 +33,5 @@ int ms_cd(const char *prompt, char **args, t_list **envp)
 		ft_putendl_fd(args[1], STDERR_FILENO);
 		return (errno);
 	}
-	return (EXIT_SUCCESS);	
+	return (EXIT_SUCCESS);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   bin_echo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:10:35 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/01 17:01:29 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/04 11:08:33 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_builtins.h"
 
-static int is_token(const char *start_token)
+static int	is_token(const char *start_token)
 {
 	if (ft_strncmp(start_token, "||", 2) == 0)
 		return (true);
@@ -23,7 +23,7 @@ static int is_token(const char *start_token)
 	return (false);
 }
 
-static int skip_to_arg(const char *prompt, bool have_flag)
+static int	skip_to_arg(const char *prompt, bool have_flag)
 {
 	int	i;
 
@@ -64,7 +64,8 @@ static void	print_line(const char *str, t_list *envp)
 		}
 		if (str[i] == '\\' && is_between_quotes == false)
 			write(1, &str[++i], 1);
-		else if (is_printable_quote(&str[i], &is_between_quotes, &quote_type) == true)
+		else if (is_printable_quote(&str[i],
+				&is_between_quotes, &quote_type) == true)
 			write(1, &str[i], 1);
 	}
 }
@@ -73,7 +74,7 @@ int	ms_echo(const char *prompt, char **args, t_list **envp)
 {
 	bool	have_flag;
 	int		i;
-	
+
 	if (ft_strncmp(args[1], "-n", 2) == 0)
 	{
 		have_flag = true;

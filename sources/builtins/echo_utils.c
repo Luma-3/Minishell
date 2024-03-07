@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 12:55:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/29 14:27:28 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/04 11:10:01 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int handle_env(const char *start_spec, t_list *envp)
 	return (name_len + 1);
 }
 
-int is_printable_quote(const char *start_spec, bool *is_between_quotes, char *quote_type)
+int	is_printable_quote(const char *start_spec, bool *is_between_quotes, char *quote_type)
 {	
 	if (*start_spec == '\'' || *start_spec == '\"')
 	{

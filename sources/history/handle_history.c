@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_history.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:39:31 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/01 16:52:54 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/03 15:35:46 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	ft_create_history(t_list *env)
 			break ;
 		ft_trim_end(input);
 		add_history(input);
+		free(input);
 	}
 	close(fd);
+	free(temp);
 }

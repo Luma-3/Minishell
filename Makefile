@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/07 11:02:04 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/07 11:20:48 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,13 +103,15 @@ SRC_SIGNAL_DIR		=	signal/
 SRC_SIGNAL_LIST		=	signal.c
 SRC_SIGNAL			=	$(addprefix $(SRC_SIGNAL_DIR), $(SRC_SIGNAL_LIST))
 
-SRC_LIST			=	minishell.c			\
-						print_error_msg.c	\
-						test_access.c		\
-						$(SRC_BUILTINS)		\
-						$(SRC_PARSING)		\
-						$(SRC_ENV) 			\
-						$(SRC_EXEC)			\
+SRC_LIST			=	minishell.c				\
+						print_error_msg.c		\
+						test_access.c			\
+						presentation_display.c	\
+						presentation_position.c	\
+						$(SRC_BUILTINS)			\
+						$(SRC_PARSING)			\
+						$(SRC_ENV) 				\
+						$(SRC_EXEC)				\
 						$(SRC_HISTORY)		\
 						$(SRC_REDIR)		\
 						$(SRC_SIGNAL)		\
