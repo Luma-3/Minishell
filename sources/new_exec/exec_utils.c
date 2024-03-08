@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 00:43:26 by monsieurc         #+#    #+#             */
-/*   Updated: 2024/02/28 15:25:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:41:39 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,3 +43,4 @@ int	wait_child(t_child *child, int nb_child)
 	}
 	return (SUCCESS);
 }
+

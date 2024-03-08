@@ -6,13 +6,14 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 18:03:10 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:17:28 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include "minishell.h"
 
-static int	take_redir(const char *prompt, t_queue *queue, int *i_read)
+static int	take_redir(const char *prompt, t_ats *ats, int *i_read)
 {
 	t_queue_redir	*data;
 	int				i;
@@ -21,8 +22,8 @@ static int	take_redir(const char *prompt, t_queue *queue, int *i_read)
 	data = (t_queue_redir *)malloc(sizeof(t_queue_redir));
 	if (!data)
 		return (FAILURE);
-	ft_enqueue(queue, data);
 	data->type_redir = is_redir_type(prompt, *i_read);
+	ft_enqueue(ats->queue, data);
 	if (data->type_redir > 2)
 		*i_read += 2;
 	else
@@ -77,7 +78,7 @@ int	create_ats(t_ats *ats)
 	{
 		i_read = skip_quote_parenthesis(ats->prompt, i_read);
 		if (is_redir_type(ats->prompt, i_read) != 0)
-			nb_redir += take_redir(ats->prompt, ats->queue, &i_read);
+			nb_redir += take_redir(ats->prompt, ats, &i_read);
 		else if (is_solo == false && is_pipe(ats->prompt, i_read) == true)
 			i_read = copy_pipeline(ats, i_read, &i_copy, &nb_redir);
 		else if (is_token(ats->prompt[i_read]) == true)
@@ -87,7 +88,7 @@ int	create_ats(t_ats *ats)
 		if (nb_redir == -1 || i_read == -1)
 			return (FAILURE);
 	}
-	copy_cmd_token(ats, &nb_redir, i_read, &i_copy);
+	copy_last_cmd(ats, &nb_redir, i_read, &i_copy);
 	return (SUCCESS);
 }
 

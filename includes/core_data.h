@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/08 11:23:25 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/08 15:40:05 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_token
 	char	**argv;
 	bool	post_parser;
 	bool	is_subshell;
+	bool	last_cmd;
 }			t_token;
 
 typedef struct s_bin_tree
@@ -53,10 +54,12 @@ typedef struct s_bin_tree
 
 typedef struct s_ats
 {
-	char		*prompt;
 	t_bin_tree	*root;
-	t_queue		*queue;
+	t_list		*env;
 	t_queue		*queue_heredoc;
+	t_queue		*queue;
+	int			last_status;
+	char		*prompt;
 }				t_ats;
 
 // queue

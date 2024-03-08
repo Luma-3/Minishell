@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:11:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/29 15:35:07 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:15:31 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_builtin
 
 int is_builtins(const char *cmd);
 
-int exec_builtins(char **tab_cmd, t_prompt *prompt_struct);
+int	exec_builtins(const char **tab_cmd, t_list **env);
 
 // BUILTINS
 

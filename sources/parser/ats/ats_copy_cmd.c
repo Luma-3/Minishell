@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/08 11:30:04 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/08 15:43:41 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,6 @@ static char	*copy_whitout_parenthesis(const char *cmd, int size_cmd)
 	return (new_cmd);
 }
 
-bool	is_subshell(const char *cmd)
-{
-	int	i;
-
-	i = 0;
-	while (cmd[i])
-	{
-		if (cmd[i] == '(')
-			return (true);
-		else
-			i++;
-	}
-	return (false);
-}
-
 static t_token	*init_node(const char *cmd, int size_cmd, int nb_redir,
 							bool post_parser)
 {
@@ -61,7 +46,23 @@ static t_token	*init_node(const char *cmd, int size_cmd, int nb_redir,
 	token->nb_redir = nb_redir;
 	token->post_parser = post_parser;
 	token->argv = NULL;
+	token->last_cmd = false;
 	return (token);
+}
+
+int	copy_last_cmd(t_ats *ats, int *nb_redir, int i_read, int *i_copy)
+{
+	t_token		*data;
+
+	data = init_node(&(ats->prompt[*i_copy]), i_read - *i_copy,
+			*nb_redir, true);
+	data->last_cmd = true;
+	if (data != NULL)
+	{
+		insert_node(&(ats->root), data, compare_token);
+		*i_copy = i_read;
+	}
+	return (i_read);
 }
 
 int	copy_pipeline(t_ats *ats, int i_read, int *i_copy, int *nb_redir)

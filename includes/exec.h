@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:39:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/29 15:39:19 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/08 15:41:31 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 # define T_AND 3
 # define T_PIPE 4
 
+# define STOP -2
+# define CONTINUE -3
+
 int		detect_token(t_prompt *prompt);
 int		verif_token(char *prompt, char token);
 
@@ -39,9 +42,6 @@ int		verif_token(char *prompt, char token);
 int 	handle_pipe(t_prompt *prompt, t_child *childs, bool input_redir, int index_child);
 
 void	dup2_read_pipe(t_child *childs, int index_child);
-
-//HANDLE CMD
-int		handle_std(t_prompt *prompt, t_child *childs, bool input_redir, int index_child);
 
 //HANDLE AND
 int		skip_next_cmd(t_prompt *prompt);
@@ -57,15 +57,31 @@ int		handle_or(t_prompt *prompt, t_child *childs, bool input_redir, int index_ch
 /*--------------------------*/
 
 // int		launch_child(t_prompt *prompt);
-int			exec_command(char **tab_cmd, t_list **env);
 
-//PATH HANDLING
 
-char		*get_path(t_list *env, char *tab);
+
 
 void 		close_pipe(t_child *childs, int index_child);
 
 int			nb_array(char **tab);
 int			wait_child(t_child *child, int nb_child);
+
+
+
+//////////////////////////////////////////////////////////////////////////
+////////////////////WARNING: NEW EXEC. KEEP OUT ! ////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+int		handle_token(t_ats *ats, t_bin_tree *node, pid_t *pid);
+
+int		read_ats(t_ats *ats, t_bin_tree *root);
+
+pid_t	exec_std(t_ats *ats, const t_bin_tree *node, pid_t *pid);
+
+int		exec_command(char **tab_cmd, t_list **env);
+
+//PATH HANDLING
+
+char	*get_path(t_list *env, char *tab);
 
 #endif // EXEC_H

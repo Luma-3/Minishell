@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_std.c                                       :+:      :+:    :+:   */
+/*   is_type2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/26 17:37:01 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/08 12:03:03 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/03/08 14:00:57 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/03/08 14:01:13 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exec.h"
-#include "ms_builtins.h"
+#include "parser.h"
 
+bool	is_subshell(const char *cmd)
+{
+	int	i;
 
+	i = 0;
+	while (cmd[i])
+	{
+		if (cmd[i] == '(')
+			return (true);
+		else
+			i++;
+	}
+	return (false);
+}

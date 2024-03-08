@@ -6,11 +6,12 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/08 10:57:33 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:51:01 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "exec.h"
 #include "parser.h"
 
 // void	print_tree(WINDOW *win, t_bin_tree *root, int y, int x, int depth) {
@@ -30,7 +31,7 @@
 // 	}
 // }
 
-static void	init_ats(t_ats *ats, char *prompt)
+static void	init_ats(t_ats *ats, char *prompt, t_list *env)
 {
 	t_queue		*redir_queue;
 	t_queue		*heredoc_queue;
@@ -39,6 +40,7 @@ static void	init_ats(t_ats *ats, char *prompt)
 	root = NULL;
 	redir_queue = ft_init_queue();
 	heredoc_queue = ft_init_queue();
+	ats->env = env;
 	ats->prompt = prompt;
 	ats->queue = redir_queue;
 	ats->queue_heredoc = heredoc_queue;
@@ -58,7 +60,7 @@ void	read_input(t_list **env)
 		input = readline(display_message);
 		if (input != NULL && input[0] != '\0')
 		{
-			init_ats(&ats, input);
+			init_ats(&ats, input, *env);
 			ft_add_history(input, *env);
 			// if (ft_strncmp(input, "exit", ft_strlen(input)) == 0)
 			// {
@@ -88,7 +90,7 @@ void	read_input(t_list **env)
 			// endwin();
 			// refresh();
 			parse_ats(input, &ats, true);
-			// EXEC
+			read_ats(&ats, ats.root);
 			clear_tree(ats.root);
 			ft_clear_queue(ats.queue, free);
 		}

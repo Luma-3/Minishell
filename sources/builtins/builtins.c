@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:33:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/04 11:09:57 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:16:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	init_builtins(t_builtin *builtins)
 	builtins[6] = (t_builtin){"exit", ms_exit};
 }
 
-int	exec_builtins(char **tab_cmd, t_prompt *prompt_struct)
+int	exec_builtins(const char **tab_cmd, t_list **env)
 {
 	t_builtin	builtins[NB_BUILTINS];
 	int			i;

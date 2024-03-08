@@ -13,6 +13,11 @@
         "span": "c",
         "curses.h": "c",
         "convention.h": "c",
-        "*.tcc": "c"
+        "*.tcc": "c",
+        "ms_builtins.h": "c",
+        "stdio.h": "c",
+        "redirection.h": "c",
+        "core_data.h": "c",
+        "readline.h": "c"
     }
 }

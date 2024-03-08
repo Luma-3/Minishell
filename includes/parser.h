@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 18:01:27 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:53:29 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ char		**alloc_tab(char *prompt);
 
 int			post_parser(t_bin_tree	*root);
 
+// clean
+
+char		*clean_redir(char *word);
+
+char		*clean_quote(char *word);
+
 ///////////////////////////
 ////// ATOMIC PARSER //////
 ///////////////////////////
@@ -60,8 +66,6 @@ int			create_ats(t_ats *ats);
 int			parse_ats(char *prompt, t_ats *ats, bool check_arg);
 
 // bin_tree.c
-
-void		print_inorder(t_bin_tree *root);
 
 t_bin_tree	*create_node(t_token *data);
 
@@ -77,6 +81,8 @@ void		clear_tree(t_bin_tree *root);
 int			copy_pipeline(t_ats *ats, int i_read, int *i_copy, int *nb_redir);
 
 int			copy_cmd_token(t_ats *ats, int *nb_redir, int i_read, int *i_copy);
+
+int			copy_last_cmd(t_ats *ats, int *nb_redir, int i_read, int *i_copy);
 
 //////////////////////////
 ////// PARSER UTILS //////
@@ -103,5 +109,9 @@ int			is_token(char token);
 int			is_redir_type(const char *prompt, int index);
 
 int			is_quote_type(char c);
+
+//is_type2.c
+
+bool		is_subshell(const char *cmd);
 
 #endif // PARSER_H

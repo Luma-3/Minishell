@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/07 17:57:03 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/08 16:54:19 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,39 +40,49 @@ INCLUDE			=	$(addprefix -I, $(INCLUDE_LIST))
 
 SRC_DIR				=	sources/
 
-SRC_BUILTINS_DIR	=	builtins/
-SRC_BUILTINS_LIST	=	bin_cd.c		\
-						bin_echo.c		\
-						bin_env.c		\
-						bin_exit.c		\
-						bin_export.c	\
-						bin_pwd.c		\
-						bin_unset.c		\
-						builtins.c		\
-						echo_utils.c
-SRC_BUILTINS		=	$(addprefix $(SRC_BUILTINS_DIR), $(SRC_BUILTINS_LIST))
+# SRC_BUILTINS_DIR	=	builtins/
+# SRC_BUILTINS_LIST	=	bin_cd.c		\
+# 						bin_echo.c		\
+# 						bin_env.c		\
+# 						bin_exit.c		\
+# 						bin_export.c	\
+# 						bin_pwd.c		\
+# 						bin_unset.c		\
+# 						builtins.c		\
+# 						echo_utils.c
+# SRC_BUILTINS		=	$(addprefix $(SRC_BUILTINS_DIR), $(SRC_BUILTINS_LIST))
 
 SRC_ENV_DIR			=	env/
 SRC_ENV_LIST		=	transform_env.c		\
 						env_utils.c
 SRC_ENV				=	$(addprefix $(SRC_ENV_DIR), $(SRC_ENV_LIST))
 
-SRC_EXEC_DIR		=	exec/
 
-SRC_TOKEN_DIR		=	token/
-SRC_TOKEN_LIST		=	exec_token.c		\
-						handle_and.c		\
-						handle_or.c			\
-						handle_pipe.c		\
-						handle_std.c
-SRC_TOKEN			=	$(addprefix $(SRC_TOKEN_DIR), $(SRC_TOKEN_LIST))
+SRC_NEW_EXEC_DIR	=	new_exec/
+SRC_NEW_EXEC_LIST	=	exec_std.c			\
+						read_ats.c			\
+						exec_command.c		\
+						handle_token.c		\
+						get_path.c
+SRC_NEW_EXEC		=	$(addprefix $(SRC_NEW_EXEC_DIR), $(SRC_NEW_EXEC_LIST))
 
-SRC_EXEC_LIST		=	exec_command.c		\
-						exec_utils.c		\
-						exec.c				\
-						get_path.c			\
-						$(SRC_TOKEN)
-SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
+
+# SRC_EXEC_DIR		=	exec/
+
+# SRC_TOKEN_DIR		=	token/
+# SRC_TOKEN_LIST		=	exec_token.c		\
+# 						handle_and.c		\
+# 						handle_or.c			\
+# 						handle_pipe.c		\
+# 						handle_std.c
+# SRC_TOKEN			=	$(addprefix $(SRC_TOKEN_DIR), $(SRC_TOKEN_LIST))
+
+# SRC_EXEC_LIST		=	exec_command.c		\
+# 						exec_utils.c		\
+# 						exec.c				\
+# 						get_path.c			\
+# 						$(SRC_TOKEN)
+# SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 
 
 SRC_PARSER_DIR			=	parser/
@@ -91,10 +101,13 @@ SRC_ATS					=	$(addprefix $(SRC_ATS_DIR), $(SRC_ATS_LIST))
 SRC_POST_PARSER_DIR		=	post_parser/
 SRC_POST_PARSER_LIST	=	post_parser.c		\
 							alloc_tab.c			\
-							count_utils.c
+							count_utils.c		\
+							clean_redir.c		\
+							clean_quote.c
 SRC_POST_PARSER			=	$(addprefix $(SRC_POST_PARSER_DIR), $(SRC_POST_PARSER_LIST))
 
 SRC_PARSER_LIST			=	is_type.c			\
+							is_type2.c			\
 							place_cursor.c		\
 							$(SRC_ATS)			\
 							$(SRC_POST_PARSER)	\
@@ -107,7 +120,8 @@ SRC_HISTORY_LIST	=	handle_history.c
 SRC_HISTORY			=	$(addprefix $(SRC_HISTORY_DIR), $(SRC_HISTORY_LIST))
 
 SRC_REDIR_DIR		=	redirection/
-SRC_REDIR_LIST		=	heredoc.c
+SRC_REDIR_LIST		=	heredoc.c \
+						open_redir.c
 SRC_REDIR			=	$(addprefix $(SRC_REDIR_DIR), $(SRC_REDIR_LIST))
 
 				
@@ -123,7 +137,7 @@ SRC_LIST			=	minishell.c				\
 						$(SRC_BUILTINS)			\
 						$(SRC_PARSER)			\
 						$(SRC_ENV) 				\
-						$(SRC_EXEC)				\
+						$(SRC_NEW_EXEC)			\
 						$(SRC_HISTORY)		\
 						$(SRC_REDIR)		\
 						$(SRC_SIGNAL)
@@ -163,6 +177,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)$(SRC_ENV_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)$(SRC_TOKEN_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_NEW_EXEC_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(SRC_ATS_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(SRC_POST_PARSER_DIR)
