@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 18:29:38 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/08 10:57:33 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	read_input(t_list **env)
 	{
 		display_message = handle_position(*env, display_message);
 		input = readline(display_message);
-		//tgoto(tgetstr("cm", NULL), 0, 0);
 		if (input != NULL && input[0] != '\0')
 		{
 			init_ats(&ats, input);
@@ -89,6 +88,7 @@ void	read_input(t_list **env)
 			// endwin();
 			// refresh();
 			parse_ats(input, &ats, true);
+			// EXEC
 			clear_tree(ats.root);
 			ft_clear_queue(ats.queue, free);
 		}

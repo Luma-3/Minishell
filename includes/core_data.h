@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 17:26:08 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:23:25 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,11 @@ typedef struct s_prompt
 
 typedef struct s_token
 {
+	int		nb_redir;
 	char	*cmd;
 	char	**argv;
 	bool	post_parser;
-	int		nb_redir;
+	bool	is_subshell;
 }			t_token;
 
 typedef struct s_bin_tree
