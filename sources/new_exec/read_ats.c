@@ -6,26 +6,12 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/08 18:44:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/09 22:27:48 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "parser.h"
-
-static int	exec_subshell(t_ats *ats, t_bin_tree *node, pid_t *pid)
-{
-	*pid = fork();
-	if (*pid == -1)
-		return (FAILURE);
-	if (*pid == 0)
-	{
-		parse_ats(node->data->cmd, ats, false);
-		read_ats(ats, ats->root);
-		exit(SUCCESS);
-	}
-	return (SUCCESS);
-}
 
 static int	read_node(t_ats *ats, t_bin_tree *node, pid_t *pid)
 {

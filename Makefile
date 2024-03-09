@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/08 16:54:19 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/09 18:31:03 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRC_ENV				=	$(addprefix $(SRC_ENV_DIR), $(SRC_ENV_LIST))
 
 SRC_NEW_EXEC_DIR	=	new_exec/
 SRC_NEW_EXEC_LIST	=	exec_std.c			\
+						exec_subshell.c		\
 						read_ats.c			\
 						exec_command.c		\
 						handle_token.c		\
@@ -134,6 +135,7 @@ SRC_LIST			=	minishell.c				\
 						test_access.c			\
 						presentation_display.c	\
 						presentation_position.c	\
+						clear_ats.c				\
 						$(SRC_BUILTINS)			\
 						$(SRC_PARSER)			\
 						$(SRC_ENV) 				\

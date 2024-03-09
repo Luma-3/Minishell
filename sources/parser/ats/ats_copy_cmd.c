@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/08 15:43:41 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/09 22:27:23 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_token	*init_node(const char *cmd, int size_cmd, int nb_redir,
 	if (!token)
 		return (NULL);
 	token->is_subshell = false;
-	if (is_subshell(cmd) == true)
+	if (is_subshell(cmd, size_cmd) == true)
 		token->is_subshell = true;
 	token->cmd = copy_whitout_parenthesis(cmd, size_cmd);
 	token->nb_redir = nb_redir;

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/08 15:40:05 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/09 21:24:43 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 # include "libft.h"
 # include <stdbool.h>
+
+# define ATS_REDIR 0x01
+# define ATS_HEREDOC 0x02
+# define ATS_ENV 0x04
+# define ATS_PROMPT 0x08
+# define ATS_ROOT 0x10
 
 typedef struct s_child
 {
@@ -72,8 +78,9 @@ typedef struct s_queue_redir
 
 typedef struct s_queue_heredoc
 {
+	int		fd;
 	char	*delimiter;
-	char	*content;
+	char	*file_name;
 }			t_queue_heredoc;
 
 #endif

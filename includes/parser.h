@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/08 16:53:29 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/09 22:26:26 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,6 @@ int			is_quote_type(char c);
 
 //is_type2.c
 
-bool		is_subshell(const char *cmd);
+bool		is_subshell(const char *cmd, int size_cmd);
 
 #endif // PARSER_H

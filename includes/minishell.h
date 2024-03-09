@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 18:29:28 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/09 18:57:53 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@
 //int	g_sig_return;
 
 // DONE 
-
 int			launch_child(t_prompt *prompt);
 
 //HISTORY
@@ -50,11 +49,13 @@ int			presentation_display(t_list **env);
 int			diff_position(char *display_message);
 char		*handle_position(t_list *env, char *display_message);
 
-
 //PRINT_ERROR
 void		print_error_message(void);
 void		print_error_arg(char token);
 void		print_error_display(void);
 
-void init_signal(void);
+void		init_signal(void);
+
+void		clear_ats(t_ats *ats, int flag);
+
 #endif

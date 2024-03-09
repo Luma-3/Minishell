@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:39:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/08 15:41:31 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/09 19:32:40 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int		read_ats(t_ats *ats, t_bin_tree *root);
 pid_t	exec_std(t_ats *ats, const t_bin_tree *node, pid_t *pid);
 
 int		exec_command(char **tab_cmd, t_list **env);
+
+int		exec_subshell(t_ats *ats, t_bin_tree *node, pid_t *pid);
 
 //PATH HANDLING
 
