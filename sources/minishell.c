@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/19 19:02:43 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:45:36 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	read_input(t_list *env)
 			init_ats(&ats, input, env);
 			ft_add_history(input, env);
 			parse_ats(input, &ats, true);
-			//printf("node_count = %ld", count_nodes(ats.root, 0));
-			// read_ats(&ats, ats.root);
+			printf("node_count = %ld", count_nodes(ats.root, 0));
+			read_ats(&ats, ats.root);
 			clear_ats(&ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/19 19:41:39 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:53:40 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ t_token	*copy_token(t_ats *ats, const char *prompt, int size_copy)
 	int		nb_redir;
 	bool	is_subshell;
 
+	nb_redir = 0;
 	prompt_copy = take_redir(ats, prompt, size_copy, &nb_redir);
 	if (prompt_copy == NULL)
 		return (NULL);

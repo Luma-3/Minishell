@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/19 19:42:31 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:46:46 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static int	atomize_pipeline(t_ats *ats)
 	if (data == NULL)
 		return (FAILURE);
 	data->last_cmd = true;
+	data->post_parser = true;
 	return (insert_node(&(ats->root), data, compare_token), SUCCESS);
 }
 
@@ -71,6 +72,7 @@ static int	atomize_prompt(t_ats *ats)
 	if (data == NULL)
 		return (FAILURE);
 	data->last_cmd = true;
+	data->post_parser = true;
 	insert_node(&(ats->root), data, compare_token);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:10:20 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/19 19:41:03 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:53:07 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ char	*take_redir(t_ats *ats, const char *prompt, int size_prompt,
 	{
 		if (is_redir_type(prompt + i) > 0)
 		{
+			printf("REDIR FOUND\n");
 			i += add_queue(ats, prompt, is_redir_type(prompt + i), size_prompt);
 			nb_redir++;
 		}
