@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:52:59 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 11:55:10 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/19 19:19:41 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,29 @@ int	is_parenthesis(const char token)
 	return (false);
 }
 
-int	is_pipe(const char *prompt, int index)
+int	is_pipe(const char *prompt)
 {
-	if (prompt[index] == '|' && prompt[index + 1] != '|')
+	if (prompt[0] == '|' && prompt[1] != '|')
 	{
 		return (true);
 	}
 	return (false);
 }
 
-int	is_token(char token)
+int	is_operator(const char *token)
 {
-	if (token == '|' || token == '&')
+	if (*token == '|' && *(token + 1) == '|')
+	{
+		return (true);
+	}
+	else if (*token == '&' && *(token + 1) == '&')
 	{
 		return (true);
 	}
 	return (false);
 }
 
-int	is_quote_type(char c)
+int	is_quote(const char c)
 {
 	if (c == '\'' || c == '\"')
 	{
@@ -48,15 +52,15 @@ int	is_quote_type(char c)
 	return (false);
 }
 
-int	is_redir_type(const char *prompt, int index)
+int	is_redir_type(const char *prompt)
 {
-	if (prompt[index] == '<' && prompt[index + 1] != '<')
+	if (*prompt == '<' && *(prompt + 1) != '<')
 		return (REDIR_IN);
-	else if (prompt[index] == '>' && prompt[index + 1] != '>')
+	else if (*prompt == '>' && *(prompt + 1) != '>')
 		return (REDIR_OUT);
-	else if (prompt[index] == '>' && prompt[index + 1] == '>')
+	else if (*prompt == '>' && *(prompt + 1) == '>')
 		return (REDIR_OUT_APPEND);
-	else if (prompt[index] == '<' && prompt[index + 1] == '<')
+	else if (*prompt == '<' && *(prompt + 1) == '<')
 		return (REDIR_HEREDOC);
 	else
 		return (0);

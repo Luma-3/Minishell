@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:39:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/09 19:32:40 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:15:17 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,15 @@
 # define STOP -2
 # define CONTINUE -3
 
-int		detect_token(t_prompt *prompt);
 int		verif_token(char *prompt, char token);
 
 //HANDLE PIPE
-int 	handle_pipe(t_prompt *prompt, t_child *childs, bool input_redir, int index_child);
-
 void	dup2_read_pipe(t_child *childs, int index_child);
 
 //HANDLE AND
-int		skip_next_cmd(t_prompt *prompt);
-int		handle_and(t_prompt *prompt, t_child *childs, bool input_redir, int index_child);
 int		handle_parent_process(t_child *childs, int index_child);
 
 //HANDLE OR
-int		skip_next_choice(t_prompt *prompt);
-int		handle_or(t_prompt *prompt, t_child *childs, bool input_redir, int index_child);
 
 /*--------------------------*/
 /*        EXECUTION         */
@@ -58,15 +51,7 @@ int		handle_or(t_prompt *prompt, t_child *childs, bool input_redir, int index_ch
 
 // int		launch_child(t_prompt *prompt);
 
-
-
-
-void 		close_pipe(t_child *childs, int index_child);
-
-int			nb_array(char **tab);
-int			wait_child(t_child *child, int nb_child);
-
-
+void	close_pipe(t_child *childs, int index_child);
 
 //////////////////////////////////////////////////////////////////////////
 ////////////////////WARNING: NEW EXEC. KEEP OUT ! ////////////////////////

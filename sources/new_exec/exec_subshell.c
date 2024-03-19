@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:12:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/09 19:02:01 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:09:55 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	exec_subshell(t_ats *ats, t_bin_tree *node, pid_t *pid)
 		return (FAILURE);
 	if (*pid == 0)
 	{
+		//TODO : OPEN redir for subshell !
 		init_new_ats(ats, &new_ats, node);
 		parse_ats(new_ats.prompt, &new_ats, false);
 		read_ats(&new_ats, new_ats.root);

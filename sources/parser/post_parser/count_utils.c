@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:33:39 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 16:56:37 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/19 13:33:34 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	count_words_without_quote(const char *prompt, int i)
 {
 	while (prompt[i] && ft_iswhitespace(prompt[i]) == false)
 	{
-		if (is_quote_type(prompt[i]) == true)
+		if (is_quote(prompt[i]) == true)
 			break ;
 		else
 			i++;
@@ -36,7 +36,7 @@ int	count_words(const char *prompt)
 		i = ft_skip_whitespaces(prompt, i);
 		if (prompt[i] == '\0')
 			break ;
-		if (is_quote_type(prompt[i]) == true)
+		if (is_quote(prompt[i]) == true)
 			i = place_cursor_quote(prompt, i);
 		else
 			i = count_words_without_quote(prompt, i);
@@ -55,7 +55,7 @@ int	count_letters(const char *start_word)
 	{
 		if (ft_iswhitespace(start_word[i]) == true)
 			break ;
-		else if (is_quote_type(start_word[i]) == true)
+		else if (is_quote(start_word[i]) == true)
 			i = place_cursor_quote(start_word, i);
 		else
 			i++;

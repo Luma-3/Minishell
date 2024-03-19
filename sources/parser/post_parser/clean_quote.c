@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:39:12 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/08 16:54:38 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/19 13:33:34 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	copy_word_clean(const char *word, char *new_word)
 			quote_type = 0;
 			i++;
 		}
-		if (is_quote_type(word[i]) == false || quote_type != 0)
+		if (is_quote(word[i]) == false || quote_type != 0)
 			new_word[j++] = word[i++];
 	}
 }

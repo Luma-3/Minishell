@@ -6,12 +6,11 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:58:32 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/08 15:48:16 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/19 11:20:30 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-#include <stdio.h>
 
 int	handle_token(t_ats *ats, t_bin_tree *node, pid_t *pid)
 {

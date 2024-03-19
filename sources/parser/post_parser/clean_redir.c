@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:51:42 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/08 17:50:01 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:22:34 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	find_start_redir(const char *word)
 	start_i = 0;
 	while (word[start_i])
 	{
-		if (is_redir_type(word, start_i) > 0)
+		if (is_redir_type(word + start_i) > 0)
 			break ;
 		start_i++;
 	}
@@ -32,7 +32,7 @@ static int	calcul_size_redir(const char *start_redir)
 	int	i;
 
 	i = 0;
-	while (start_redir[i] && is_redir_type(start_redir, i) > 0)
+	while (start_redir[i] && is_redir_type(start_redir + i) > 0)
 		i++;
 	i = ft_skip_whitespaces(start_redir, i);
 	while (start_redir[i] && ft_iswhitespace(start_redir[i]) == false)

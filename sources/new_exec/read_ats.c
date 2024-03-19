@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/09 22:27:48 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:25:40 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	read_node(t_ats *ats, t_bin_tree *node, pid_t *pid)
 	{
 		exec_subshell(ats, node, pid);
 	}
-	else if (is_token(node->data->cmd[0]) == true)
+	else if (is_operator(node->data->cmd) == true)
 	{
 		return (handle_token(ats, node, pid));
 	}
@@ -37,7 +37,7 @@ int	read_ats(t_ats *ats, t_bin_tree *root)
 
 	code_status = CONTINUE;
 	if (root == NULL)
-		return (0);
+		return (SUCCESS);
 	read_ats(ats, root->left);
 	code_status = read_node(ats, root, &pid);
 	if (code_status == CONTINUE)

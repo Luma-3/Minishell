@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:19:12 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/07 15:38:36 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:25:00 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	verif_if_parenthesis_closed(const char *prompt)
 	parenthesis = 0;
 	while (prompt[i])
 	{
-		if (is_quote_type(prompt[i]) == true)
+		if (is_quote(prompt[i]) == true)
 			i = place_cursor_quote(prompt, i);
 		else if (prompt[i] == '(')
 			parenthesis++;
@@ -66,6 +66,8 @@ static int	verif_if_parenthesis_closed(const char *prompt)
 	return (SUCCESS);
 }
 
+//TODO REFACTO VERIF ARG
+
 static int	verif_token_separation(const char *prompt)
 {
 	int		i;
@@ -75,18 +77,18 @@ static int	verif_token_separation(const char *prompt)
 	i = 0;
 	while (prompt[i])
 	{
-		if (is_token(prompt[i]) == true)
+		if (is_operator(prompt + i) == true)
 		{
 			token = prompt[i];
-			if (is_token(prompt[i + 1]) == true && prompt[i] != prompt[i + 1])
+			if (is_operator(prompt + (i + 1)) == true && prompt[i] != prompt[i + 1])
 				return (print_error_arg(token), FAILURE);
-			else if (is_token(prompt[i + 1]) == true
+			else if (is_operator(prompt + (i + 1)) == true
 				&& prompt[i] == prompt[i + 1])
 				i += 2;
 			else if (prompt[i] == '|')
 				i++;
 			i = ft_skip_whitespaces(prompt, i);
-			if (is_token(prompt[i]) == true || prompt[i] == '\0')
+			if (is_operator(prompt + i) == true || prompt[i] == '\0')
 				return (print_error_arg(token), FAILURE);
 		}
 		i++;

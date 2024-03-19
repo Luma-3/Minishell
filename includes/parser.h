@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/09 22:26:26 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:18:25 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ char		*clean_quote(char *word);
 
 int			skip_quote_parenthesis(const char *prompt, int index);
 
-int			create_ats(t_ats *ats);
-
 int			parse_ats(char *prompt, t_ats *ats, bool check_arg);
 
 // bin_tree.c
@@ -76,13 +74,18 @@ int			compare_token(t_token *data1, t_token *data2);
 
 void		clear_tree(t_bin_tree *root);
 
+size_t		count_nodes(t_bin_tree *root, size_t count);
+
 // ats_copy_cmd.c
 
-int			copy_pipeline(t_ats *ats, int i_read, int *i_copy, int *nb_redir);
+int			copy_cmd_operator(t_ats *ats, int *i_copy, int *i_read);
 
-int			copy_cmd_token(t_ats *ats, int *nb_redir, int i_read, int *i_copy);
+t_token		*copy_token(t_ats *ats, const char *prompt, int size_copy);
 
-int			copy_last_cmd(t_ats *ats, int *nb_redir, int i_read, int *i_copy);
+// take_redir.c
+
+char		*take_redir(t_ats *ats, const char *prompt, int size_prompt,
+				int *nb_redir);
 
 //////////////////////////
 ////// PARSER UTILS //////
@@ -98,20 +101,24 @@ int			place_cursor_quote(const char *prompt, int i);
 
 int			place_cursor_after_token(const char *prompt, int i);
 
+int			skip_quote_parenthesis(const char *prompt, int index);
+
 // is_type.c
 
 int			is_parenthesis(const char token);
 
-int			is_pipe(const char *prompt, int index);
+int			is_pipe(const char *prompt);
 
-int			is_token(char token);
+int			is_operator(const char *token);
 
-int			is_redir_type(const char *prompt, int index);
+int			is_redir_type(const char *prompt);
 
-int			is_quote_type(char c);
+int			is_quote(const char c);
 
 //is_type2.c
 
 bool		is_subshell(const char *cmd, int size_cmd);
+
+bool		is_pipeline(const char *prompt);
 
 #endif // PARSER_H

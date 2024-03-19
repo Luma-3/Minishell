@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/09 21:24:43 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:22:56 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,6 @@ typedef struct s_child
 	int		status;
 	pid_t	pid;
 }			t_child;
-
-typedef struct s_prompt
-{
-	char	*prompt;
-	char	**tab;
-	t_list	**env;
-	bool	input_redir;
-	int		current_index;
-	int		pos_after_token;
-	int		nb_pipe;
-	int		nb_cmd;
-}			t_prompt;
 
 typedef struct s_token
 {

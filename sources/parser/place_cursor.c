@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:55:46 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 17:00:45 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:06:15 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,13 @@ int	place_cursor_after_token(const char *prompt, int i)
 	while (prompt[i] == c)
 		i++;
 	return (i);
+}
+
+int	skip_quote_parenthesis(const char *prompt, int index)
+{
+	if (is_quote(prompt[index]) == true)
+		index = place_cursor_quote(prompt, index);
+	if (prompt[index] == '(')
+		index = place_cursor_parenthesis(prompt, index);
+	return (index);
 }
