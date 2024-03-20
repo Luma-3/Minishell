@@ -6,14 +6,12 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:48:17 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/08 17:09:50 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:56:02 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "minishell.h"
-
-
 
 static char	**insert_data(char **tab, const char *prompt, int nb_words)
 {
@@ -22,7 +20,6 @@ static char	**insert_data(char **tab, const char *prompt, int nb_words)
 	int	index;
 
 	position = 0;
-	nb_letters = 0;
 	index = 0;
 	while (prompt[position] && index < nb_words)
 	{

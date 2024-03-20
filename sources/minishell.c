@@ -6,30 +6,13 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/19 19:45:36 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:04:00 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "exec.h"
 #include "parser.h"
-
-// void	print_tree(WINDOW *win, t_bin_tree *root, int y, int x, int depth) {
-// 	if (root == NULL) return;
-
-// 	// Affiche le nœud actuel
-// 	mvwprintw(win, y, x, "%s", root->data.token->cmd);
-
-// 	// Affiche les enfants (gauche et droit)
-// 	if (root->left != NULL) {
-// 		mvwaddch(win, y + 1, x - depth, '/');
-// 		print_tree(win, root->left, y + 2, x - depth - 1, depth / 2);
-// 	}
-// 	if (root->right != NULL) {
-// 		mvwaddch(win, y + 1, x + depth, '\\');
-// 		print_tree(win, root->right, y + 2, x + depth + 1, depth / 2);
-// 	}
-// }
 
 static void	init_ats(t_ats *ats, char *prompt, t_list *env)
 {
@@ -42,9 +25,10 @@ static void	init_ats(t_ats *ats, char *prompt, t_list *env)
 	heredoc_queue = ft_init_queue();
 	ats->env = env;
 	ats->prompt = prompt;
-	ats->queue = redir_queue;
+	ats->queue_redir = redir_queue;
 	ats->queue_heredoc = heredoc_queue;
 	ats->root = root;
+	ats->last_status = 1;
 }
 
 void	read_input(t_list *env)
@@ -58,12 +42,13 @@ void	read_input(t_list *env)
 	{
 		display_message = handle_position(env, display_message);
 		input = readline(display_message);
-		if (input != NULL && input[0] != '\0')
+		if (input == NULL)
+			break ;
+		if (input[0] != '\0')
 		{
 			init_ats(&ats, input, env);
 			ft_add_history(input, env);
 			parse_ats(input, &ats, true);
-			printf("node_count = %ld", count_nodes(ats.root, 0));
 			read_ats(&ats, ats.root);
 			clear_ats(&ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC);
 		}

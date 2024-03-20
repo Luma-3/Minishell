@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:19:12 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/19 18:25:00 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:56:25 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ static int	verif_token_separation(const char *prompt)
 	int		i;
 	char	token;
 
-	token = 0;
 	i = 0;
 	while (prompt[i])
 	{

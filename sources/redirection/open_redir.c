@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:26:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/09 23:01:41 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:09:32 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,16 @@ static int	open_redir_append(t_queue_redir *redir)
 static int	open_redir_heredoc(t_queue *queue_heredoc)
 {
 	t_queue_heredoc	*heredoc;
+	int				fd;
 
 	heredoc = (t_queue_heredoc *)ft_dequeue(queue_heredoc);
 	if (access(heredoc->file_name, F_OK | R_OK) == -1)
 		return (errno);
-	heredoc->fd = open(heredoc->file_name, O_RDONLY, 0644);
-	if (heredoc->fd == -1)
+	fd = open(heredoc->file_name, O_RDONLY, 0644);
+	if (fd == -1)
 		return (errno);
-	dup2(heredoc->fd, STDIN_FILENO);
-	close(heredoc->fd);
+	dup2(fd, STDIN_FILENO);
+	close(fd);
 	return (SUCCESS);
 }
 
@@ -78,7 +79,7 @@ int	open_redir(t_ats *ats, const t_bin_tree *node)
 	exit_code = SUCCESS;
 	while (node->data->nb_redir > 0 && exit_code == SUCCESS)
 	{
-		redir = (t_queue_redir *)ft_dequeue(ats->queue);
+		redir = (t_queue_redir *)ft_dequeue(ats->queue_redir);
 		if (redir->type_redir == REDIR_IN)
 			exit_code = open_redir_in(redir);
 		else if (redir->type_redir == REDIR_OUT)

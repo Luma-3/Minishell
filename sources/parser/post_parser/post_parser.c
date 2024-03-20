@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:46:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/09 18:01:46 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:58:14 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	post_parser(t_bin_tree	*root)
 		return (SUCCESS);
 	if (root->data->post_parser == true)
 	{
-		root->data->cmd = clean_redir(root->data->cmd);
 		root->data->argv = alloc_tab(root->data->cmd);
 		if (root->data->argv == NULL)
 			return (FAILURE);

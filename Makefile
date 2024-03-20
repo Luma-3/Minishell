@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/19 18:26:39 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/20 17:13:51 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,28 +63,8 @@ SRC_NEW_EXEC_LIST	=	exec_std.c			\
 						exec_subshell.c		\
 						read_ats.c			\
 						exec_command.c		\
-						handle_token.c		\
 						get_path.c
 SRC_NEW_EXEC		=	$(addprefix $(SRC_NEW_EXEC_DIR), $(SRC_NEW_EXEC_LIST))
-
-
-# SRC_EXEC_DIR		=	exec/
-
-# SRC_TOKEN_DIR		=	token/
-# SRC_TOKEN_LIST		=	exec_token.c		\
-# 						handle_and.c		\
-# 						handle_or.c			\
-# 						handle_pipe.c		\
-# 						handle_std.c
-# SRC_TOKEN			=	$(addprefix $(SRC_TOKEN_DIR), $(SRC_TOKEN_LIST))
-
-# SRC_EXEC_LIST		=	exec_command.c		\
-# 						exec_utils.c		\
-# 						exec.c				\
-# 						get_path.c			\
-# 						$(SRC_TOKEN)
-# SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
-
 
 SRC_PARSER_DIR			=	parser/
 
@@ -105,7 +85,6 @@ SRC_POST_PARSER_DIR		=	post_parser/
 SRC_POST_PARSER_LIST	=	post_parser.c		\
 							alloc_tab.c			\
 							count_utils.c		\
-							clean_redir.c		\
 							clean_quote.c
 SRC_POST_PARSER			=	$(addprefix $(SRC_POST_PARSER_DIR), $(SRC_POST_PARSER_LIST))
 

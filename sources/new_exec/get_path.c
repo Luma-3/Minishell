@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:47:27 by Monsieur_Ca       #+#    #+#             */
-/*   Updated: 2024/03/19 11:50:28 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:58:15 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ static char	*get_path_binary(char *tab)
 	char	*temp;
 
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
-		return (NULL);
-	temp = malloc(sizeof(char) * (ft_strlen(tab)));
-	if (temp == NULL)
 		return (NULL);
 	path_prog = ft_strdup(cwd);
 	temp = ft_strtrim(tab, ".");

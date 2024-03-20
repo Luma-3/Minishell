@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/19 16:22:56 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:57:04 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,14 @@ typedef struct s_child
 
 typedef struct s_token
 {
-	int		nb_redir;
-	char	*cmd;
-	char	**argv;
-	bool	post_parser;
-	bool	is_subshell;
-	bool	last_cmd;
+	int				nb_redir;
+	int				exit_code;
+	pid_t			pid;
+	char			*cmd;
+	char			**argv;
+	bool			post_parser;
+	bool			is_subshell;
+	bool			require_wait;
 }			t_token;
 
 typedef struct s_bin_tree
@@ -51,7 +53,8 @@ typedef struct s_ats
 	t_bin_tree	*root;
 	t_list		*env;
 	t_queue		*queue_heredoc;
-	t_queue		*queue;
+	t_queue		*queue_redir;
+	t_queue		*queue_pipe;
 	int			last_status;
 	char		*prompt;
 }				t_ats;
@@ -66,9 +69,14 @@ typedef struct s_queue_redir
 
 typedef struct s_queue_heredoc
 {
-	int		fd;
 	char	*delimiter;
 	char	*file_name;
 }			t_queue_heredoc;
+
+typedef struct s_queue_pipe
+{
+	int		pipe_fd[2];
+	int		index;
+}			t_queue_pipe;
 
 #endif

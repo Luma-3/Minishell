@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:39:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/19 18:15:17 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:43:24 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,15 @@ void	close_pipe(t_child *childs, int index_child);
 ////////////////////WARNING: NEW EXEC. KEEP OUT ! ////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
-int		handle_token(t_ats *ats, t_bin_tree *node, pid_t *pid);
+int		handle_token(t_ats *ats, t_bin_tree *node);
 
 int		read_ats(t_ats *ats, t_bin_tree *root);
 
-pid_t	exec_std(t_ats *ats, const t_bin_tree *node, pid_t *pid);
+pid_t	exec_std(t_ats *ats, const t_bin_tree *node);
 
 int		exec_command(char **tab_cmd, t_list **env);
 
-int		exec_subshell(t_ats *ats, t_bin_tree *node, pid_t *pid);
+int		exec_subshell(t_ats *ats, t_bin_tree *node);
 
 //PATH HANDLING
 

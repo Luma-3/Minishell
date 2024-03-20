@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/19 18:18:25 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:58:26 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ char		**alloc_tab(char *prompt);
 int			post_parser(t_bin_tree	*root);
 
 // clean
-
-char		*clean_redir(char *word);
 
 char		*clean_quote(char *word);
 

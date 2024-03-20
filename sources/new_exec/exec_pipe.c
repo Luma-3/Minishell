@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:16:20 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/19 13:29:40 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:34:30 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,20 @@
 #include "ms_builtins.h"
 #include <stdio.h>
 
-pid_t	exec_pipe()
-{}
-
-int	read_pipeline(t_ats *ats, t_bin_tree *root)
-{
-	int	count_pipe;
-
-	read_inorder(ats, root, true);
-	count_pipe = count_nodes(root, 0);
-	
-	
-}
-
-int read_inorder(t_ats *ats, t_bin_tree *root, bool is_redir)
+int	open_all_redir(t_ats *ats, t_bin_tree *root)
 {
 	if (!root)
 		return (SUCCESS);
-	read_inorder(ats, root->left, is_redir);
-	if (is_redir == true)
-	{
-		if (is_operator(root) == false)
-			open_redir(ats, root);
-	}
-	else
-		//exec
-	read_inorder
+	open_all_redir(ats, root->left);
+	return (open_redir(ats, root));
+}
+
+int	open_pipe(t_ats *ats, t_bin_tree *root)
+{
+	int	*pipe_fd[2];
+
+	pipe_fd = malloc(sizeof(int *) * count_nodes(root));
+	if (!pipe_fd)
+		return (FAILURE);
 	
 }

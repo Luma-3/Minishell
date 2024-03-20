@@ -6,13 +6,14 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:12:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/19 11:09:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:04:00 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "parser.h"
 #include "minishell.h"
+#include "redirection.h"
 
 static void	init_new_ats(t_ats *ats, t_ats *new_ats, t_bin_tree *node)
 {
@@ -21,21 +22,24 @@ static void	init_new_ats(t_ats *ats, t_ats *new_ats, t_bin_tree *node)
 	new_ats->env = ats->env;
 	new_ats->queue_heredoc = ats->queue_heredoc;
 	new_ats->last_status = 0;
-	new_ats->queue = ft_init_queue();
+	new_ats->queue_redir = ft_init_queue();
 	new_ats->root = NULL;
 }
 
-int	exec_subshell(t_ats *ats, t_bin_tree *node, pid_t *pid)
+int	exec_subshell(t_ats *ats, t_bin_tree *node)
 {
 	t_ats	new_ats;
 	int		status;
+	pid_t	pid;
 
-	*pid = fork();
-	if (*pid == -1)
+	pid = fork();
+	if (pid == -1)
 		return (FAILURE);
-	if (*pid == 0)
+	node->data->pid = pid;
+	if (pid == 0)
 	{
 		//TODO : OPEN redir for subshell !
+		open_redir(ats, node);
 		init_new_ats(ats, &new_ats, node);
 		parse_ats(new_ats.prompt, &new_ats, false);
 		read_ats(&new_ats, new_ats.root);

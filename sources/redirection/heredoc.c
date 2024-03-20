@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:04:47 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/09 23:19:58 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:09:05 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,11 @@ static int	open_heredoc(const char *delimiter, int fd)
 	return (free(heredoc_display), SUCCESS);
 }
 
-int	create_enqueue_heredoc(t_queue *heredoc_queue, char *delimiter)
+static int	create_enqueue_heredoc(t_queue *heredoc_queue, char *delimiter)
 {
 	t_queue_heredoc	*heredoc;
 	char			*heredoc_name;
+	int				fd;
 
 	heredoc = (t_queue_heredoc *)malloc(sizeof(t_queue_heredoc));
 	heredoc_name = ft_strjoin(".heredoc_", delimiter);
@@ -70,8 +71,8 @@ int	create_enqueue_heredoc(t_queue *heredoc_queue, char *delimiter)
 	}
 	heredoc->file_name = heredoc_name;
 	heredoc->delimiter = delimiter;
-	heredoc->fd = open(heredoc->file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (heredoc->fd == -1)
+	fd = open(heredoc->file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (fd == -1)
 	{
 		free(heredoc->file_name);
 		free(heredoc);
@@ -79,5 +80,31 @@ int	create_enqueue_heredoc(t_queue *heredoc_queue, char *delimiter)
 		return (errno);
 	}
 	ft_enqueue(heredoc_queue, heredoc);
-	return (open_heredoc(delimiter, heredoc->fd));
+	return (open_heredoc(delimiter, fd));
+}
+
+void	handle_heredoc(const char *prompt, t_ats *ats)
+{
+	int		i;
+	int		j;
+	char	*delimiteur;
+
+	i = 0;
+	j = 0;
+	delimiteur = NULL;
+	while (prompt[i])
+	{
+		if (is_quote(prompt[i]) == true)
+			i = place_cursor_quote(prompt, i);
+		if (is_redir_type(prompt + i) == REDIR_HEREDOC)
+		{
+			i += 2;
+			i = ft_skip_whitespaces(prompt, i);
+			while (prompt[i + j] && ft_iswhitespace(prompt[i + j]) == false)
+				j++;
+			delimiteur = ft_strndup(prompt + i, j);
+			create_enqueue_heredoc(ats->queue_heredoc, delimiteur);
+		}
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/19 11:22:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:09:55 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 #include "ms_builtins.h"
 #include "redirection.h"
 
-pid_t	exec_std(t_ats *ats, const t_bin_tree *node, pid_t *pid)
+pid_t	exec_std(t_ats *ats, const t_bin_tree *node)
 {
-	*pid = fork();
-	if (*pid < 0)
+	pid_t		pid;
+
+	pid = fork();
+	if (pid < 0)
 		return (FAILURE);
-	else if (*pid == 0)
+	node->data->pid = pid;
+	if (pid == 0)
 	{
 		// if (is_builtins(node->data->argv[0]) == true)
 		// {
@@ -30,7 +33,10 @@ pid_t	exec_std(t_ats *ats, const t_bin_tree *node, pid_t *pid)
 		if (open_redir(ats, node) != SUCCESS)
 			exit(errno);
 		if (exec_command(node->data->argv, &(ats->env)) == FAILURE)
-			return (FAILURE);
+		{
+			printf("EXEC COMMAND FAILURE\n");
+			exit (FAILURE);
+		}
 	}
 	return (SUCCESS);
 }

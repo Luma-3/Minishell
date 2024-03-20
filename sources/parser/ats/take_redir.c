@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:10:20 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/19 19:53:07 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:04:00 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static size_t	len_without_redir(const char *prompt)
 				i++;
 		}
 		len++;
-		i++;
+		if (prompt[i] != '\0')
+			i++;
 	}
 	return (len);
 }
@@ -44,11 +45,12 @@ static int	add_queue(t_ats *ats, const char *prompt, int redir_type,
 	int				j;
 
 	i = 0;
+	j = 0;
 	data = (t_queue_redir *)malloc(sizeof(t_queue_redir));
 	if (!data)
 		return (FAILURE);
 	data->type_redir = redir_type;
-	ft_enqueue(ats->queue, data);
+	ft_enqueue(ats->queue_redir, data);
 	if (data->type_redir > 2)
 		i += 2;
 	else
@@ -68,24 +70,33 @@ char	*take_redir(t_ats *ats, const char *prompt, int size_prompt,
 	int		i;
 	int		j;
 	char	*new_prompt;
+	char	quote;
+	int		parenthesis;
 
+	parenthesis = 0;
 	new_prompt = ft_calloc(len_without_redir(prompt) + 1, sizeof(char));
 	if (!new_prompt)
 		return (NULL);
 	i = 0;
 	j = 0;
+	quote = '\0';
 	while (prompt[i] && i < size_prompt)
 	{
-		if (is_redir_type(prompt + i) > 0)
+		if (is_quote(prompt[i]) == true && quote == '\0')
+			quote = prompt[i];
+		else if (is_quote(prompt[i]) == true && quote == prompt[i])
+			quote = '\0';
+		else if (prompt[i] == '(')
+			parenthesis++;
+		else if (prompt[i] == ')')
+			parenthesis--;
+		if (is_redir_type(prompt + i) > 0 && quote == '\0' && parenthesis == 0)
 		{
-			printf("REDIR FOUND\n");
-			i += add_queue(ats, prompt, is_redir_type(prompt + i), size_prompt);
-			nb_redir++;
+			i += add_queue(ats, prompt + i, is_redir_type(prompt + i), size_prompt);
+			*nb_redir += 1;
 		}
 		else
-		{
 			new_prompt[j++] = prompt[i++];
-		}
 	}
 	return (new_prompt);
 }

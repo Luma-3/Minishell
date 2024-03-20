@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/19 19:53:40 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:22:40 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,13 @@
 static char	*copy_whitout_parenthesis(char *cmd)
 {
 	char	*tmp;
-	int		i;
 
 	if (cmd == NULL)
 		return (NULL);
-	i = ft_skip_whitespaces(cmd, 0);
-	if (cmd[i] != '(')
-		return (cmd);
 	tmp = ft_strtrim(cmd, " \t\n\v\f\r");
 	free(cmd);
+	if (*tmp != '(')
+		return (tmp);
 	cmd = ft_strndup(tmp + 1, ft_strlen(tmp) - 2);
 	free(tmp);
 	return (cmd);
@@ -45,7 +43,9 @@ static t_token	*init_node(const char *cmd, int size_cmd)
 		token->post_parser = true;
 	token->cmd = copy_whitout_parenthesis((char *)cmd);
 	token->argv = NULL;
-	token->last_cmd = false;
+	token->require_wait = true;
+	token->exit_code = 0;
+	token->pid = -1;
 	return (token);
 }
 
@@ -65,6 +65,10 @@ int	copy_cmd_operator(t_ats *ats, int *i_copy, int *i_read)
 		return (FAILURE);
 	data->post_parser = false;
 	insert_node(&(ats->root), data, compare_token);
+	if (*(data->cmd) == '&')
+		data->exit_code = EXIT_SUCCESS;
+	else
+		data->exit_code = EXIT_FAILURE;
 	*i_copy = *i_read;
 	return (SUCCESS);
 }

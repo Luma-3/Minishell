@@ -6,48 +6,57 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/19 19:55:50 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:37:41 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "parser.h"
 
-static int	read_node(t_ats *ats, t_bin_tree *node, pid_t *pid)
+static int	read_node(t_ats *ats, t_bin_tree *node, t_bin_tree *preview_node)
 {
-	if (node->data->is_subshell == true)
+	if (is_operator(node->data->cmd) == true)
 	{
-		exec_subshell(ats, node, pid);
+		node->data->exit_code = preview_node->data->exit_code;
+		return (SUCCESS);
 	}
-	else if (is_operator(node->data->cmd) == true)
+	else if (node->data->is_subshell == true)
 	{
-		printf("OP\n");
-		return (handle_token(ats, node, pid));
+		exec_subshell(ats, node);
 	}
 	else
 	{
-		printf("exec_std\n");
-		return (exec_std(ats, node, pid));
+		exec_std(ats, node);
+	}
+	if (node->data->pid >= 0 && node->data->require_wait == true)
+	{
+		if (waitpid(node->data->pid, &node->data->exit_code, 0) == FAILURE)
+			return (errno);
+		ats->last_status = node->data->exit_code;
 	}
 	return (SUCCESS);
 }
 
 int	read_ats(t_ats *ats, t_bin_tree *root)
 {
-	static int	pid;
-	int			code_status;
+	int	error_return;
 
-	code_status = CONTINUE;
 	if (root == NULL)
 		return (SUCCESS);
+	
 	read_ats(ats, root->left);
-	code_status = read_node(ats, root, &pid);
-	printf("cmd : %s\n", root->data->cmd);
-	if (code_status == CONTINUE)
-		read_ats(ats, root->right);
-	if (root->data->last_cmd == true)
+	error_return = read_node(ats, root, root->left);
+	if (is_operator(root->data->cmd) == true)
 	{
-		handle_token(ats, root, &pid);
-	}
-	return (SUCCESS);
+		if (root->data->cmd[0] == '&' && root->data->exit_code != EXIT_SUCCESS)
+			return (SUCCESS);
+		else if (root->data->cmd[0] == '|'
+			&& root->data->exit_code == EXIT_SUCCESS)
+			return (SUCCESS);
+		else
+			read_ats(ats, root->right);
+	}	
+	if (is_operator(root->data->cmd) == true)
+		error_return = read_node(ats, root, root->right);
+	return (error_return);
 }
