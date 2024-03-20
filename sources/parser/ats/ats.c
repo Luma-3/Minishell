@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ats.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/19 19:46:46 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:14:11 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,7 @@ static int	atomize_prompt(t_ats *ats)
 	i_copy = 0;
 	i_read = 0;
 	if (is_pipeline(ats->prompt) == true)
-	{
-		printf ("PIPELINE FOUND\n");
 		return (atomize_pipeline(ats));
-	}
 	while (ats->prompt[i_read])
 	{
 		i_read = skip_quote_parenthesis(ats->prompt, i_read);
@@ -66,7 +63,10 @@ static int	atomize_prompt(t_ats *ats)
 				return (FAILURE);
 		}
 		else
-			i_read++;
+		{
+			if (ats->prompt[i_read] != '\0')
+				i_read++;
+		}
 	}
 	data = copy_token(ats, ats->prompt + i_copy, i_read - i_copy);
 	if (data == NULL)

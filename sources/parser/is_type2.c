@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_type2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:00:57 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/19 19:08:12 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:14:52 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ bool	is_pipeline(const char *prompt)
 		if (is_operator(prompt + i) == true)
 			return (false);
 		i = skip_quote_parenthesis(prompt, i);
+		if (prompt[i] == '\0')
+			break ;
 		i++;
 	}
 	if (have_pipe > 0)

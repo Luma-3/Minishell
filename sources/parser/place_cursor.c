@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   place_cursor.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:55:46 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/19 18:06:15 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:25:26 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ int	place_cursor_parenthesis(const char *prompt, int index)
 	index++;
 	while (prompt[index] && parenthesis != 0)
 	{
-		if (prompt[index++] == '(')
+		if (prompt[index] == '(')
 		{
+			index++;
 			parenthesis++;
 		}
-		else if (prompt[index++] == ')')
+		else if (prompt[index] == ')')
 		{
+			index++;
 			parenthesis--;
 		}
 		else
