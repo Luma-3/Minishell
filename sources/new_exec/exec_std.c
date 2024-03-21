@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_std.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/20 16:09:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/21 09:20:51 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ pid_t	exec_std(t_ats *ats, const t_bin_tree *node)
 		// }
 		if (open_redir(ats, node) != SUCCESS)
 			exit(errno);
+		// if (open_pipe(ats, node) != SUCCESS)
+		// 	exit(errno);
 		if (exec_command(node->data->argv, &(ats->env)) == FAILURE)
 		{
 			printf("EXEC COMMAND FAILURE\n");

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
+#    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/20 17:13:51 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/21 08:46:41 by antgabri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,8 +69,7 @@ SRC_NEW_EXEC		=	$(addprefix $(SRC_NEW_EXEC_DIR), $(SRC_NEW_EXEC_LIST))
 SRC_PARSER_DIR			=	parser/
 
 SRC_PRE_PARSER_DIR		=	pre_parser/
-SRC_PRE_PARSER_LIST		=	verif_arg.c			\
-							open_heredoc.c
+SRC_PRE_PARSER_LIST		=	verif_arg.c			
 SRC_PRE_PARSER			=	$(addprefix $(SRC_PRE_PARSER_DIR), $(SRC_PRE_PARSER_LIST))
 
 SRC_ATS_DIR				=	ats/

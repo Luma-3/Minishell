@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/20 11:58:26 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/21 09:03:15 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ char		*clean_quote(char *word);
 ///////////////////////////
 
 int			skip_quote_parenthesis(const char *prompt, int index);
+
+void		init_ats(t_ats *ats, char *prompt, t_list *env);
 
 int			parse_ats(char *prompt, t_ats *ats, bool check_arg);
 

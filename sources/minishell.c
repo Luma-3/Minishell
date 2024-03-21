@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/20 17:04:00 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/21 09:02:43 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "exec.h"
 #include "parser.h"
 
-static void	init_ats(t_ats *ats, char *prompt, t_list *env)
+void	init_ats(t_ats *ats, char *prompt, t_list *env)
 {
 	t_queue		*redir_queue;
 	t_queue		*heredoc_queue;
@@ -38,6 +38,7 @@ void	read_input(t_list *env)
 	char		*display_message;
 
 	display_message = NULL;
+	presentation_display(&ats, &env);
 	while (true)
 	{
 		display_message = handle_position(env, display_message);
@@ -66,7 +67,6 @@ int	main(int ac, char **av, char **envp)
 		return (EXIT_FAILURE);
 	env = copy_env(envp);
 	ft_create_history(env);
-	//presentation_display(&env);
 	read_input(env);
 	return (EXIT_SUCCESS);
 }

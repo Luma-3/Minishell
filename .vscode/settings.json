@@ -18,6 +18,7 @@
         "stdio.h": "c",
         "redirection.h": "c",
         "core_data.h": "c",
-        "readline.h": "c"
+        "readline.h": "c",
+        "cerrno": "c"
     }
 }

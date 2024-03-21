@@ -3,30 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   ats.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/20 18:09:11 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/21 09:20:34 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "minishell.h"
 
+static int	copy_insert_node(t_ats *ats, int i_copy, int i_read)
+{
+	t_token	*data;
+
+	data = copy_token(ats, ats->prompt + i_copy, i_read - i_copy);
+	if (data == NULL)
+		return (FAILURE);
+	data->post_parser = true;
+	insert_node(&(ats->root), data, compare_token);
+	return (SUCCESS);
+}
+
 static int	add_queue_pipe(t_queue *queue, int nb_pipe)
 {
 	t_queue_pipe	*data;
 
 	data = malloc(sizeof(t_queue_pipe));
-	if (pipe == NULL)
-		return ;
+	if (data == NULL)
+		return (FAILURE);
 	data->index = nb_pipe;
 	if (pipe(data->pipe_fd) == FAILURE)
 	{
 		free(data);
 		return (FAILURE);
 	}
-	ft_enqueue(&queue, data);
+	ft_enqueue(queue, data);
 	return (SUCCESS);
 }
 
@@ -61,6 +73,7 @@ static int	atomize_pipeline(t_ats *ats)
 	if (data == NULL)
 		return (FAILURE);
 	data->post_parser = true;
+	data->require_wait = true;
 	return (insert_node(&(ats->root), data, compare_token), SUCCESS);
 }
 
@@ -68,7 +81,6 @@ static int	atomize_prompt(t_ats *ats)
 {
 	int		i_copy;
 	int		i_read;
-	t_token	*data;
 
 	i_copy = 0;
 	i_read = 0;
@@ -88,23 +100,17 @@ static int	atomize_prompt(t_ats *ats)
 				i_read++;
 		}
 	}
-	data = copy_token(ats, ats->prompt + i_copy, i_read - i_copy);
-	if (data == NULL)
-		return (FAILURE);
-	data->post_parser = true;
-	insert_node(&(ats->root), data, compare_token);
-	return (SUCCESS);
+	return (copy_insert_node(ats, i_copy, i_read));
 }
 
 int	parse_ats(char *prompt, t_ats *ats, bool check_arg)
 {
-	(void)check_arg;
-	// if (check_arg == true)
-	// {
-	// 	if (verif_arg(prompt) == FAILURE)
-	// 		return (FAILURE);
-	// 	handle_heredoc(prompt, ats);
-	// }
+	if (check_arg == true)
+	{
+		if (verif_arg(prompt) == FAILURE)
+			return (FAILURE);
+		handle_heredoc(prompt, ats);
+	}
 	if (atomize_prompt(ats) == FAILURE)
 		return (free(prompt), FAILURE);
 	if (post_parser(ats->root) == FAILURE)

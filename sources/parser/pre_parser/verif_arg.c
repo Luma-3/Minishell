@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:19:12 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/20 16:56:25 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/21 09:30:04 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 static void	print_error_arg(char token)
 {
-	printf("parse error near '%c'\n", token); // TODO STDERR
+	ft_putstr_fd("parse error near '", STDERR_FILENO);
+	ft_putchar_fd(token, STDERR_FILENO);
+	ft_putstr_fd("'\n", STDERR_FILENO);
 }
 
 static int	verif_if_quote_closed(const char *prompt)
@@ -66,28 +68,25 @@ static int	verif_if_parenthesis_closed(const char *prompt)
 	return (SUCCESS);
 }
 
-//TODO REFACTO VERIF ARG
-
 static int	verif_token_separation(const char *prompt)
 {
 	int		i;
+	int		tmp;
 	char	token;
 
 	i = 0;
 	while (prompt[i])
 	{
-		if (is_operator(prompt + i) == true)
+		if (is_operator(prompt + i) == true || is_pipe(prompt + i) == true)
 		{
 			token = prompt[i];
-			if (is_operator(prompt + (i + 1)) == true && prompt[i] != prompt[i + 1])
+			tmp = i;
+			i = place_cursor_after_token(prompt, i);
+			if (i - tmp > 2)
 				return (print_error_arg(token), FAILURE);
-			else if (is_operator(prompt + (i + 1)) == true
-				&& prompt[i] == prompt[i + 1])
-				i += 2;
-			else if (prompt[i] == '|')
-				i++;
 			i = ft_skip_whitespaces(prompt, i);
-			if (is_operator(prompt + i) == true || prompt[i] == '\0')
+			if (is_operator(prompt + i) == true
+				|| is_pipe(prompt + i) == true || prompt[i] == '\0')
 				return (print_error_arg(token), FAILURE);
 		}
 		i++;

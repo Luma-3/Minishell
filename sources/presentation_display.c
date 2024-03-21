@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   presentation_display.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/07 13:31:09 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/21 09:09:38 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "color.h"
+#include "parser.h"
+#include "exec.h"
 
 int	diff_position(char *display_message)
 {
@@ -53,12 +55,11 @@ static char	*ft_get_hostname(t_list *env)
 	return (tmp2);
 }
 
-static char	*ft_get_cwd(t_list *env)
+static char	*ft_get_cwd(void)
 {
 	char	*tmp;
 	char	*tmp2;
 
-	(void)env;
 	tmp = malloc(sizeof(char) * 100);
 	if (tmp == NULL)
 		return (NULL);
@@ -79,20 +80,21 @@ char	*ft_create_prompt(t_list *env)
 	char	*display_prompt;
 
 	display_hostname = ft_get_hostname(env);
-	display_path = ft_get_cwd(env);
+	display_path = ft_get_cwd();
 	display_prompt = ft_strjoin(display_hostname, display_path);
 	free(display_hostname);
 	free(display_path);
 	return (display_prompt);
 }
 
-// int	presentation_display(t_list **env)
-// {
-// 	t_prompt	command;
+int	presentation_display(t_ats *ats, t_list **env)
+{
+	char	*command;
 
-// 	//parser_init(&command,
-// 	//	"toilet -tf future --gay -F border Welcome in MINISHELL", env);
-// 	launch_child(&command);
-// 	ft_rm_split(command.tab);
-// 	return (SUCCESS);
-// }
+	command = ft_strdup("toilet -tf future --gay -F border Welcome in MINISHELL");
+	init_ats(ats, command, *env);
+	parse_ats(command, ats, false);
+	read_ats(ats, ats->root);
+	clear_ats(ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC);
+	return (SUCCESS);
+}
