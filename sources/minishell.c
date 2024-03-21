@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 09:02:43 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:42:00 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,14 @@
 
 void	init_ats(t_ats *ats, char *prompt, t_list *env)
 {
-	t_queue		*redir_queue;
-	t_queue		*heredoc_queue;
 	t_bin_tree	*root;
 
 	root = NULL;
-	redir_queue = ft_init_queue();
-	heredoc_queue = ft_init_queue();
 	ats->env = env;
 	ats->prompt = prompt;
-	ats->queue_redir = redir_queue;
-	ats->queue_heredoc = heredoc_queue;
+	ats->queue_redir = ft_init_queue();
+	ats->queue_heredoc = ft_init_queue();
+	ats->queue_pipe = ft_init_queue();
 	ats->root = root;
 	ats->last_status = 1;
 }
@@ -62,7 +59,7 @@ int	main(int ac, char **av, char **envp)
 
 	(void)av;
 	printf("\033]0;MINISHELL\007");
-	//init_signal();
+	init_signal();
 	if (ac != 1)
 		return (EXIT_FAILURE);
 	env = copy_env(envp);

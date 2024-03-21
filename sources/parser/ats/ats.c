@@ -3,27 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ats.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 09:20:34 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:42:42 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "minishell.h"
-
-static int	copy_insert_node(t_ats *ats, int i_copy, int i_read)
-{
-	t_token	*data;
-
-	data = copy_token(ats, ats->prompt + i_copy, i_read - i_copy);
-	if (data == NULL)
-		return (FAILURE);
-	data->post_parser = true;
-	insert_node(&(ats->root), data, compare_token);
-	return (SUCCESS);
-}
 
 static int	add_queue_pipe(t_queue *queue, int nb_pipe)
 {
@@ -42,6 +30,20 @@ static int	add_queue_pipe(t_queue *queue, int nb_pipe)
 	return (SUCCESS);
 }
 
+static int	copy_cmd_pipe(t_ats *ats, int i_copy, int i_read, int *nb_pipe)
+{
+	t_token	*data;
+
+	data = copy_insert_node(ats, i_copy, i_read);
+	if (data == NULL)
+		return (FAILURE);
+	data->require_wait = false;
+	data->index = *nb_pipe;
+	add_queue_pipe(ats->queue_pipe, *nb_pipe);
+	(*nb_pipe)++;
+	return (SUCCESS);
+}
+
 static int	atomize_pipeline(t_ats *ats)
 {
 	int				i_read;
@@ -57,24 +59,18 @@ static int	atomize_pipeline(t_ats *ats)
 		i_read = skip_quote_parenthesis(ats->prompt, i_read);
 		if (is_pipe(ats->prompt + i_read) == true)
 		{
-			data = copy_token(ats, ats->prompt + i_copy, i_read - i_copy);
-			if (data == NULL)
+			if (copy_cmd_pipe(ats, i_copy, i_read, &nb_pipe) == FAILURE)
 				return (FAILURE);
-			data->post_parser = true;
-			data->require_wait = false;
-			add_queue_pipe(ats->queue_pipe, nb_pipe++);
-			insert_node(&(ats->root), data, compare_token);
 			i_copy = ++i_read;
 		}
 		else
 			i_read++;
 	}
-	data = copy_token(ats, ats->prompt + i_copy, i_read - i_copy);
+	data = copy_insert_node(ats, i_copy, i_read);
 	if (data == NULL)
 		return (FAILURE);
-	data->post_parser = true;
-	data->require_wait = true;
-	return (insert_node(&(ats->root), data, compare_token), SUCCESS);
+	data->index = nb_pipe;
+	return (SUCCESS);
 }
 
 static int	atomize_prompt(t_ats *ats)
@@ -100,7 +96,9 @@ static int	atomize_prompt(t_ats *ats)
 				i_read++;
 		}
 	}
-	return (copy_insert_node(ats, i_copy, i_read));
+	if (copy_insert_node(ats, i_copy, i_read) == NULL)
+		return (FAILURE);
+	return (SUCCESS);
 }
 
 int	parse_ats(char *prompt, t_ats *ats, bool check_arg)

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/20 17:22:40 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/21 10:45:55 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,36 @@ static char	*copy_whitout_parenthesis(char *cmd)
 
 static t_token	*init_node(const char *cmd, int size_cmd)
 {
-	t_token	*token;
+	t_token	*data;
 
-	token = (t_token *)malloc(sizeof(t_token));
-	if (!token)
+	data = (t_token *)malloc(sizeof(t_token));
+	if (!data)
 		return (NULL);
-	token->is_subshell = false;
-	token->post_parser = false;
+	data->is_subshell = false;
+	data->post_parser = false;
 	if (is_subshell(cmd, size_cmd) == true)
-		token->is_subshell = true;
+		data->is_subshell = true;
 	else if (is_operator(cmd) == false)
-		token->post_parser = true;
-	token->cmd = copy_whitout_parenthesis((char *)cmd);
-	token->argv = NULL;
-	token->require_wait = true;
-	token->exit_code = 0;
-	token->pid = -1;
-	return (token);
+		data->post_parser = true;
+	data->cmd = copy_whitout_parenthesis((char *)cmd);
+	data->argv = NULL;
+	data->require_wait = true;
+	data->post_parser = true;
+	data->exit_code = 0;
+	data->pid = -1;
+	data->index = -1;
+	return (data);
+}
+
+t_token	*copy_insert_node(t_ats *ats, int i_copy, int i_read)
+{
+	t_token	*data;
+
+	data = copy_token(ats, ats->prompt + i_copy, i_read - i_copy);
+	if (data == NULL)
+		return (NULL);
+	insert_node(&(ats->root), data, compare_token);
+	return (data);
 }
 
 int	copy_cmd_operator(t_ats *ats, int *i_copy, int *i_read)
@@ -56,7 +69,6 @@ int	copy_cmd_operator(t_ats *ats, int *i_copy, int *i_read)
 	data = copy_token(ats, ats->prompt + *i_copy, *i_read - *i_copy);
 	if (data == NULL)
 		return (FAILURE);
-	data->post_parser = true;
 	insert_node(&(ats->root), data, compare_token);
 	*i_copy = *i_read;
 	*i_read += 2;

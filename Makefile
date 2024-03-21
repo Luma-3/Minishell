@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
+#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/21 08:46:41 by antgabri         ###   ########.fr        #
+#    Updated: 2024/03/21 11:23:50 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,8 @@ SRC_NEW_EXEC_LIST	=	exec_std.c			\
 						exec_subshell.c		\
 						read_ats.c			\
 						exec_command.c		\
-						get_path.c
+						get_path.c			\
+						exec_pipe.c			
 SRC_NEW_EXEC		=	$(addprefix $(SRC_NEW_EXEC_DIR), $(SRC_NEW_EXEC_LIST))
 
 SRC_PARSER_DIR			=	parser/

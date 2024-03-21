@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 09:03:15 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:21:15 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ size_t		count_nodes(t_bin_tree *root, size_t count);
 int			copy_cmd_operator(t_ats *ats, int *i_copy, int *i_read);
 
 t_token		*copy_token(t_ats *ats, const char *prompt, int size_copy);
+
+t_token		*copy_insert_node(t_ats *ats, int i_copy, int i_read);
 
 // take_redir.c
 

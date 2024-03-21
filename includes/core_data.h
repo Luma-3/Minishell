@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/20 17:57:04 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/21 10:35:42 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_child
 
 typedef struct s_token
 {
+	int				index;
 	int				nb_redir;
 	int				exit_code;
 	pid_t			pid;

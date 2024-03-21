@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   presentation_display.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/21 09:09:38 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/21 10:08:55 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	presentation_display(t_ats *ats, t_list **env)
 {
 	char	*command;
 
-	command = ft_strdup("toilet -tf future --gay -F border Welcome in MINISHELL");
+	command = ft_strdup("toilet -tf future --gay -F border Welcome in KIKISHELL");
 	init_ats(ats, command, *env);
 	parse_ats(command, ats, false);
 	read_ats(ats, ats->root);

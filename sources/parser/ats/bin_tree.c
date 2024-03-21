@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:10:14 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/07 17:16:24 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:39:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ static int	find_weight(const char *data)
 		return (WEIGHT_OR);
 	else if (ft_strncmp(data, "&&", 3) == 0)
 		return (WEIGHT_AND);
-	else if (ft_strncmp(data, "|", 2) == 0)
-		return (WEIGHT_PIPE);
 	return (WEIGHT_CMD);
 }
 

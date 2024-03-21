@@ -6,12 +6,13 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/20 17:37:41 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:42:16 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "parser.h"
+#include "minishell.h"
 
 static int	read_node(t_ats *ats, t_bin_tree *node, t_bin_tree *preview_node)
 {
@@ -31,8 +32,8 @@ static int	read_node(t_ats *ats, t_bin_tree *node, t_bin_tree *preview_node)
 	if (node->data->pid >= 0 && node->data->require_wait == true)
 	{
 		if (waitpid(node->data->pid, &node->data->exit_code, 0) == FAILURE)
-			return (errno);
-		ats->last_status = node->data->exit_code;
+			return (FAILURE);
+		ats->last_status = wexit_status(node->data->exit_code);
 	}
 	return (SUCCESS);
 }
@@ -43,7 +44,6 @@ int	read_ats(t_ats *ats, t_bin_tree *root)
 
 	if (root == NULL)
 		return (SUCCESS);
-	
 	read_ats(ats, root->left);
 	error_return = read_node(ats, root, root->left);
 	if (is_operator(root->data->cmd) == true)
