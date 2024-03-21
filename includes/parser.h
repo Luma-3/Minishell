@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 11:21:15 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:20:21 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@
 # include "libft.h"
 
 # define WEIGHT_CMD 1
-# define WEIGHT_PIPE 2
-# define WEIGHT_AND 3
-# define WEIGHT_OR 3
+# define WEIGHT_AND 2
+# define WEIGHT_OR 2
 
 # define REDIR_IN 1
 # define REDIR_OUT 2
@@ -33,7 +32,17 @@
 ////// PRE PARSER //////
 /////////////////////////
 
-int			verif_arg(const char *prompt);
+int			verif_prompt(const char *prompt);
+
+int			verif_if_quote_closed(const char *prompt);
+
+int			verif_if_parenthesis_closed(const char *prompt);
+
+int			verif_before_operator(const char *prompt, char *token);
+
+int			verif_token_separation(const char *prompt);
+
+int			verif_before_operator(const char *prompt, char *token);
 
 void		handle_heredoc(const char *prompt, t_ats *ats);
 
@@ -72,7 +81,7 @@ void		insert_node(t_bin_tree **root, t_token *data,
 
 int			compare_token(t_token *data1, t_token *data2);
 
-void		clear_tree(t_bin_tree *root);
+void		clear_tree(t_bin_tree *root, void (*free_data)(void *));
 
 size_t		count_nodes(t_bin_tree *root, size_t count);
 

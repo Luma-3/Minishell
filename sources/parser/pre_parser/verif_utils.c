@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   verif_arg.c                                        :+:      :+:    :+:   */
+/*   verif_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:19:12 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/21 09:30:04 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/21 21:42:26 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-#include <stdio.h>
 
 static void	print_error_arg(char token)
 {
@@ -20,7 +19,7 @@ static void	print_error_arg(char token)
 	ft_putstr_fd("'\n", STDERR_FILENO);
 }
 
-static int	verif_if_quote_closed(const char *prompt)
+int	verif_if_quote_closed(const char *prompt)
 {
 	int		i;
 	bool	quote;
@@ -31,8 +30,7 @@ static int	verif_if_quote_closed(const char *prompt)
 	quote = false;
 	while (prompt[i])
 	{
-		if ((prompt[i] == '\"' && quote == false)
-			|| (prompt[i] == '\'' && quote == false))
+		if (is_quote(prompt[i]) == true && quote == false)
 		{
 			quote_type = prompt[i];
 			quote = true;
@@ -46,7 +44,7 @@ static int	verif_if_quote_closed(const char *prompt)
 	return (SUCCESS);
 }
 
-static int	verif_if_parenthesis_closed(const char *prompt)
+int	verif_if_parenthesis_closed(const char *prompt)
 {
 	int	i;
 	int	parenthesis;
@@ -68,19 +66,21 @@ static int	verif_if_parenthesis_closed(const char *prompt)
 	return (SUCCESS);
 }
 
-static int	verif_token_separation(const char *prompt)
+int	verif_token_separation(const char *prompt)
 {
 	int		i;
 	int		tmp;
 	char	token;
 
 	i = 0;
+	if (verif_before_operator(prompt, &token) == FAILURE)
+		return (print_error_arg(token), FAILURE);
 	while (prompt[i])
 	{
 		if (is_operator(prompt + i) == true || is_pipe(prompt + i) == true)
 		{
-			token = prompt[i];
 			tmp = i;
+			token = prompt[i];
 			i = place_cursor_after_token(prompt, i);
 			if (i - tmp > 2)
 				return (print_error_arg(token), FAILURE);
@@ -94,14 +94,27 @@ static int	verif_token_separation(const char *prompt)
 	return (SUCCESS);
 }
 
-int	verif_arg(const char *prompt)
+int	verif_before_operator(const char *prompt, char *token)
 {
-	if (verif_if_quote_closed(prompt) == FAILURE)
-		return (FAILURE);
-	else if (verif_if_parenthesis_closed(prompt) == FAILURE)
-		return (FAILURE);
-	else if (verif_token_separation(prompt) == FAILURE)
-		return (FAILURE);
-	else
-		return (SUCCESS);
+	int		i;
+	int		nb_space;
+
+	i = 0;
+	nb_space = 0;
+	while (prompt[i])
+	{
+		if (ft_iswhitespace(prompt[i]) == true)
+			nb_space++;
+		if (is_operator(prompt + i) == true || is_pipe(prompt + i) == true)
+		{
+			if ((nb_space == i && i - 1 != 0) || i - 1 == -1)
+			{
+				*token = prompt[i];
+				return (FAILURE);
+			}
+			break ;
+		}
+		i++;
+	}
+	return (SUCCESS);
 }

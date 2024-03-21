@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/21 10:08:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:14:31 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,6 @@ int	presentation_display(t_ats *ats, t_list **env)
 	init_ats(ats, command, *env);
 	parse_ats(command, ats, false);
 	read_ats(ats, ats->root);
-	clear_ats(ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC);
+	clear_ats(ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC | ATS_PIPE);
 	return (SUCCESS);
 }

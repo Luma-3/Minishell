@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 15:42:00 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:22:33 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,12 @@ void	read_input(t_list *env)
 			ft_add_history(input, env);
 			parse_ats(input, &ats, true);
 			read_ats(&ats, ats.root);
-			clear_ats(&ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC);
+			clear_ats(&ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC | ATS_PIPE);
 		}
 	}
+	free(display_message);
+	clear_ats(&ats, ATS_ENV | ATS_HEREDOC | ATS_PIPE | ATS_PROMPT
+		| ATS_REDIR | ATS_ROOT);
 }
 
 int	main(int ac, char **av, char **envp)

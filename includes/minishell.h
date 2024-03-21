@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 15:26:34 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/21 22:20:02 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@
 
 # define ERROR_FORMAT "Minishell error"
 //int	g_sig_return;
-
 
 //HISTORY
 void		ft_add_history(char *input, t_list *env);

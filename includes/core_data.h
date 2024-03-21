@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 10:35:42 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:05:54 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define ATS_ENV 0x04
 # define ATS_PROMPT 0x08
 # define ATS_ROOT 0x10
+# define ATS_PIPE 0x20
 
 typedef struct s_child
 {

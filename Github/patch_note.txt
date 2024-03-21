@@ -1,0 +1,8 @@
+% Fix Issue
+	[1] - Relink Makefile 
+	[2] - no error if nothing before operator
+	
+% Valgrind Issue
+	[1] - Fix Leak on presentation_display (pipe queue)
+	[2] - Fix invalide free[] on clear_ats
+	[3] - Fix Leak of bin_tree node (dont correctly free)

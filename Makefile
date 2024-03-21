@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/21 11:23:50 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/21 22:57:50 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,8 @@ SRC_NEW_EXEC		=	$(addprefix $(SRC_NEW_EXEC_DIR), $(SRC_NEW_EXEC_LIST))
 SRC_PARSER_DIR			=	parser/
 
 SRC_PRE_PARSER_DIR		=	pre_parser/
-SRC_PRE_PARSER_LIST		=	verif_arg.c			
+SRC_PRE_PARSER_LIST		=	verif_prompt.c		\
+							verif_utils.c
 SRC_PRE_PARSER			=	$(addprefix $(SRC_PRE_PARSER_DIR), $(SRC_PRE_PARSER_LIST))
 
 SRC_ATS_DIR				=	ats/
@@ -116,7 +117,7 @@ SRC_LIST			=	minishell.c				\
 						test_access.c			\
 						presentation_display.c	\
 						presentation_position.c	\
-						clear_ats.c				\
+						free/clear_ats.c				\
 						$(SRC_BUILTINS)			\
 						$(SRC_PARSER)			\
 						$(SRC_ENV) 				\
@@ -168,11 +169,13 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)$(SRC_HISTORY_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_REDIR_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_SIGNAL_DIR)
+	@mkdir -p $(OBJ_DIR)free/
+	
 
 $(LIBFT):
 	@make -sC $(LIBFT_DIR)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(OBJ_DIR)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	@echo "$(COLOR_BLUE)Compile $<$(COLOR_RESET)"
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 

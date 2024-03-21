@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:10:14 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 11:39:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:17:26 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ void	insert_node(t_bin_tree **root, t_token *data,
 	}
 }
 
-void	clear_tree(t_bin_tree *root)
+void	clear_tree(t_bin_tree *root, void (*free_data)(void *))
 {
 	if (!root)
 		return ;
-	clear_tree(root->left);
-	clear_tree(root->right);
-	free(root->data);
+	clear_tree(root->left, free_data);
+	clear_tree(root->right, free_data);
+	free_data(root->data);
 	free(root);
 }
