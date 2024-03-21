@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 15:42:00 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/21 20:40:35 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ void	init_ats(t_ats *ats, char *prompt, t_list *env)
 
 void	read_input(t_list *env)
 {
-	char		*input;
-	t_ats		ats;
+	char			*input;
+	t_ats			ats;
 	char		*display_message;
 
 	display_message = NULL;
 	presentation_display(&ats, &env);
 	while (true)
 	{
-		display_message = handle_position(env, display_message);
+		display_message = handle_position(env,display_message);
 		input = readline(display_message);
 		if (input == NULL)
 			break ;
