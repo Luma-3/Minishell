@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
+#    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/22 13:39:55 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/22 16:35:28 by antgabri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,13 @@ SRC_DIR				=	sources/
 # 						builtins.c		\
 # 						echo_utils.c
 # SRC_BUILTINS		=	$(addprefix $(SRC_BUILTINS_DIR), $(SRC_BUILTINS_LIST))
+
+SRC_DISPLAY_DIR		=	display/
+SRC_DISPLAY_LIST	=	presentation_display.c		\
+						presentation_position.c		\
+						display_utils.c
+SRC_DISPLAY			=	$(addprefix $(SRC_DISPLAY_DIR), $(SRC_DISPLAY_LIST))
+
 
 SRC_ENV_DIR			=	env/
 SRC_ENV_LIST		=	transform_env.c		\
@@ -119,10 +126,9 @@ SRC_SIGNAL			=	$(addprefix $(SRC_SIGNAL_DIR), $(SRC_SIGNAL_LIST))
 
 SRC_LIST			=	minishell.c				\
 						print_error_msg.c		\
-						presentation_display.c	\
-						presentation_position.c	\
 						$(SRC_BUILTINS)			\
 						$(SRC_ERROR)			\
+						$(SRC_DISPLAY)			\
 						$(SRC_PARSER)			\
 						$(SRC_ENV) 				\
 						$(SRC_EXEC)			\
@@ -162,6 +168,7 @@ all: $(LIBFT) $(NAME)
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_BUILTINS_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_DISPLAY_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_ENV_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)

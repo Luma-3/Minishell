@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 15:31:45 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:36:32 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,20 @@ void	read_input(t_list *env)
 	presentation_display(&ats, &env);
 	while (true)
 	{
-		display_message = handle_position(env, display_message);
-		input = readline(display_message);
+		display_message = handle_position(env, display_message, ats.last_status);
+		ft_putstr_fd(display_message, 1);
+		ft_putchar_fd('\n', 1);
+		input = readline("\033[1;32m┗━━━▶\033[0m ");
 		if (input == NULL)
 			break ;
 		if (input[0] != '\0')
 		{
+			ft_putchar_fd('\n', 1);
 			init_ats(&ats, input, env);
 			ft_add_history(input, env);
 			parse_ats(input, &ats, true);
 			read_ats(&ats, ats.root);
+			ft_putchar_fd('\n', 1);
 			clear_ats(&ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC | ATS_PIPE);
 		}
 	}
@@ -72,4 +76,3 @@ int	main(int ac, char **av, char **envp)
 	read_input(env);
 	return (EXIT_SUCCESS);
 }
-	//FORK DES LE DEBUT POUR LE SIGNAL
