@@ -6,7 +6,7 @@
 /*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:39:34 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/22 14:45:00 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:48:47 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*get_home_path(t_list *env, char *old_path)
 	if (new_path == NULL)
 		return (old_path);
 	free(home);
-	ft_strlcpy(new_path, old_path + i, len + 1);
+	ft_strlcpy(new_path, old_path + i, len);
 	home = ft_strjoin(" ~", new_path);
 	free(new_path);
 	return (home);
@@ -54,7 +54,7 @@ char	*ft_get_cwd(t_list *env)
 	size_cwd = ft_strlen(tmp);
 	while (len >= 0 && tmp[len] != '/')
 		len--;
-	tmp2 = ft_strndup(tmp, size_cwd - (size_cwd - len));
+	tmp2 = ft_strndup(tmp, size_cwd - (size_cwd - len - 1));
 	free(tmp);
 	tmp = get_home_path(env, tmp2);
 	free(tmp2);
@@ -68,17 +68,15 @@ char	*ft_get_chdir(void)
 	int		len;
 	int		size_cwd;
 
-	tmp = malloc(sizeof(char) * 100);
-	if (tmp == NULL)
-		return (ft_strdup(" > "));
-	tmp = getcwd(tmp, 100);
+	tmp = NULL;
+	tmp = getcwd(tmp, 0);
 	if (tmp == NULL)
 		return (free(tmp), ft_strdup(" > "));
 	len = ft_strlen(tmp);
 	size_cwd = ft_strlen(tmp);
 	while (len >= 0 && tmp[len - 1] != '/')
 		len--;
-	tmp2 = ft_strndup(tmp + len, size_cwd);
+	tmp2 = ft_strndup(tmp + len, size_cwd - len);
 	free(tmp);
 	return (tmp2);
 }

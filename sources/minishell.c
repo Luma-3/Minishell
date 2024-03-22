@@ -6,7 +6,7 @@
 /*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 14:52:03 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:58:04 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	read_input(t_list *env)
 	while (true)
 	{
 		display_message = handle_position(env, display_message, ats.last_status);
-		clear_ats(&ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC);
 		ft_putstr_fd(display_message, 1);
 		ft_putchar_fd('\n', 1);
 		input = readline("\033[1;32m┗━━━▶\033[0m ");
@@ -52,7 +51,8 @@ void	read_input(t_list *env)
 			ft_add_history(input, env);
 			parse_ats(input, &ats, true);
 			read_ats(&ats, ats.root);
-			(ft_putchar_fd('\n', 1), free(display_message));
+			ft_putchar_fd('\n', 1);
+			clear_ats(&ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC);
 		}
 	}
 }

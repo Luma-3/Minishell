@@ -6,7 +6,7 @@
 /*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/22 15:05:50 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:58:50 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,17 @@ int	diff_position(char *display_message)
 {
 	char	**old_position;
 	char	*new_position;
+	int		index;
 
-	old_position = ft_split(display_message, '@');
+	index = 0;
+	old_position = ft_split(display_message, ' ');
 	if (old_position == NULL)
-		return (ft_rm_split(old_position), false);
-	new_position = malloc(sizeof(char) * 100);
-	if (new_position == NULL)
-		return (ft_rm_split(old_position), false);
-	getcwd(new_position, 100);
-	if (ft_strncmp(old_position[1], new_position,
-			ft_strlen(old_position[1])) != 0)
+		return (true);
+	while (old_position[index])
+		index++;
+	new_position = ft_get_chdir();
+	if (ft_strncmp(old_position[index - 1], new_position,
+			ft_strlen(old_position[index - 1])) != 0)
 	{
 		ft_rm_split(old_position);
 		return (free(new_position), true);
@@ -35,21 +36,27 @@ int	diff_position(char *display_message)
 	return (false);
 }
 
-static char	*assemble(char **display, int nb_display)
+static char	*assemble(char **display)
 {
 	char	*display_final;
-	char	*tmp;
 	int		i;
+	int		len;
 
 	i = 0;
+	len = 0;
 	display_final = ft_strdup("");
-	while (i < nb_display)
+	while (display[i] != NULL)
 	{
-		tmp = ft_strjoin(display_final, display[i]);
-		free(display_final);
-		display_final = ft_strdup(tmp);
-		free(tmp);
+		len += ft_strlen(display[i]);
 		i++;
+	}
+	display_final = ft_calloc(sizeof(char), len + 1);
+	if (display_final == NULL)
+		return (NULL);
+	i = 0;
+	while (display[i] != NULL)
+	{
+		ft_strlcat(display_final, display[i++], len + 1);
 	}
 	free(display[4]);
 	free(display[9]);
@@ -82,7 +89,7 @@ char	*ft_create_prompt(t_list *env, int last_status)
 	display[17] = display_error(last_status);
 	display[18] = RESET;
 	display[19] = NULL;
-	return (assemble(display, 19));
+	return (assemble(display));
 }
 
 int	presentation_display(t_ats *ats, t_list **env)
@@ -93,5 +100,6 @@ int	presentation_display(t_ats *ats, t_list **env)
 	init_ats(ats, command, *env);
 	parse_ats(command, ats, false);
 	read_ats(ats, ats->root);
+	clear_ats(ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC);
 	return (SUCCESS);
 }
