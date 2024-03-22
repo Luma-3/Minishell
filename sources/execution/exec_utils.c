@@ -1,33 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_command.c                                     :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 12:06:49 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/20 16:09:48 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/02/22 00:43:26 by monsieurc         #+#    #+#             */
+/*   Updated: 2024/03/22 11:48:24 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	exec_command(char **tab_cmd, t_list **env)
+int	nb_array(char **tab)
 {
-	char	*path_command;
-	char	**env_tab;
+	int	i;
+	int	count;
 
-	path_command = get_path(*env, tab_cmd[0]);
-	if (path_command == NULL)
+	count = 0;
+	i = 0;
+	while (tab[i])
 	{
-		return (free(tab_cmd), FAILURE);
+		if (tab[i] != NULL && ft_strchr(tab[i], '|') != 0)
+			count++;
+		i++;
 	}
-	env_tab = env_to_tab(*env);
-	if (execve(path_command, tab_cmd, env_tab) == -1)
+	return (i + count);
+}
+
+int	wait_child(t_child *child, int nb_child)
+{
+	int	i;
+
+	i = 0;
+	while (i < nb_child)
 	{
-		ft_rm_split(env_tab);
-		return (free(path_command), ft_rm_split(tab_cmd), FAILURE);
-		 // TODO : check free
+		while (child[i].status == -2)
+			i++;
+		if (waitpid(child[i].pid, NULL, 0) == -1)
+			return (FAILURE);
+		i++;
 	}
 	return (SUCCESS);
 }
+

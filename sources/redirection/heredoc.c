@@ -6,11 +6,12 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:04:47 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 13:32:09 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:16:39 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirection.h"
+#include <readline/readline.h>
 #include "parser.h"
 
 static void	heredoc_error(const char *delimiter)

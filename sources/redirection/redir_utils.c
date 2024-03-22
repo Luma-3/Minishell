@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convention.h                                       :+:      :+:    :+:   */
+/*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 16:56:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/28 14:53:16 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/03/22 10:16:35 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/03/22 10:17:37 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONVENTION_H
-# define CONVENTION_H
+#include "redirection.h"
 
-# define FAILURE -1
-# define SUCCESS 0
-
-# define READ 0
-# define WRITE 1
-
-#endif	// CONVENTION_H
+int	open_all_redir(t_queue *redir, t_queue *heredoc, t_bin_tree *root)
+{
+	if (!root)
+		return (SUCCESS);
+	open_all_redir(redir, heredoc, root->left);
+	return (open_redir(redir, heredoc, root));
+}

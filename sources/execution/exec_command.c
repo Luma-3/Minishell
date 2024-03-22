@@ -1,46 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_utils.c                                       :+:      :+:    :+:   */
+/*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 00:43:26 by monsieurc         #+#    #+#             */
-/*   Updated: 2024/03/08 12:41:39 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/02/23 12:06:49 by antgabri          #+#    #+#             */
+/*   Updated: 2024/03/22 14:29:18 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-int	nb_array(char **tab)
+int	exec_command(char **tab_cmd, t_list **env, t_error *errors)
 {
-	int	i;
-	int	count;
+	char	*path_command;
+	char	**env_tab;
 
-	count = 0;
-	i = 0;
-	while (tab[i])
+	path_command = get_path(*env, tab_cmd[0]);
+	if (path_command == NULL)
 	{
-		if (tab[i] != NULL && ft_strchr(tab[i], '|') != 0)
-			count++;
-		i++;
+		ft_perror(errors, tab_cmd[0]);
+		return (FAILURE);
 	}
-	return (i + count);
-}
-
-int	wait_child(t_child *child, int nb_child)
-{
-	int	i;
-
-	i = 0;
-	while (i < nb_child)
+	env_tab = env_to_tab(*env);
+	if (execve(path_command, tab_cmd, env_tab) == -1)
 	{
-		while (child[i].status == -2)
-			i++;
-		if (waitpid(child[i].pid, NULL, 0) == -1)
-			return (FAILURE);
-		i++;
+		free(path_command);
+		ft_rm_split(env_tab);
+		perror("execve");
+		return (FAILURE);
 	}
 	return (SUCCESS);
 }
-

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 23:05:54 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:27:35 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,36 @@
 # define CORE_DATA_H
 
 # include "libft.h"
+
+# include <errno.h>
+# include <sys/wait.h>
 # include <stdbool.h>
 
-# define ATS_REDIR 0x01
-# define ATS_HEREDOC 0x02
-# define ATS_ENV 0x04
-# define ATS_PROMPT 0x08
-# define ATS_ROOT 0x10
-# define ATS_PIPE 0x20
+# define ATS_REDIR		0x01
+# define ATS_HEREDOC	0x02
+# define ATS_ENV		0x04
+# define ATS_PROMPT		0x08
+# define ATS_ROOT		0x10
+# define ATS_PIPE		0x20
+# define ATS_ALL		0x3F
 
-typedef struct s_child
+# define FAILURE -1
+# define SUCCESS 0
+
+# define READ 0
+# define WRITE 1
+
+// ERRORS
+
+# define __NB_ERRORS_ 1
+
+typedef struct s_error
 {
-	int		pipe_fd[2];
-	int		status;
-	pid_t	pid;
-}			t_child;
+	int		code;
+	char	*msg;
+}			t_error;
+
+// END ERRORS
 
 typedef struct s_token
 {
@@ -59,6 +74,7 @@ typedef struct s_ats
 	t_queue		*queue_pipe;
 	int			last_status;
 	char		*prompt;
+	t_error		errors[__NB_ERRORS_];
 }				t_ats;
 
 // queue

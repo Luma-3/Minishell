@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/21 23:14:31 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:26:52 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "color.h"
 #include "parser.h"
 #include "exec.h"
+
 
 int	diff_position(char *display_message)
 {

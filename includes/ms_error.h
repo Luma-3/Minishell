@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_access.c                                      :+:      :+:    :+:   */
+/*   ms_error.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 19:06:08 by anthony           #+#    #+#             */
-/*   Updated: 2024/02/28 15:01:04 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/03/22 10:52:44 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/03/22 14:59:32 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "redirection.h"
+#ifndef MS_ERROR_H
+# define MS_ERROR_H
 
-int	test_path_access(char *tab)
-{
-	if (access(tab, F_OK) == 0)
-		return (SUCCESS);
-	return (FAILURE);
-}
+# include "libft.h"
+# include "core_data.h"
 
-int	test_exec_prog(char *tab)
-{
-	if (access(tab, X_OK) == 0)
-		return (SUCCESS);
-	return (FAILURE);
-}
+# include <string.h>
+
+# define ENOCNF 137
+
+# define EMSG_ENOCNF "Command not found"
+
+void	__init_error__(t_error *errors);
+
+void	ft_perror(t_error *errors, char *str);
+
+char	*ft_strerror(t_error *errors, int code);
+
+// CLEARTOOL
+
+void	clear_ats(t_ats *ats, int flag);
+
+#endif

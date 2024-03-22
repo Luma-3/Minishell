@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 22:20:02 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:27:20 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,14 @@
 # include <sys/stat.h>
 # include <dirent.h>
 # include <string.h>
-# include <errno.h>
 # include <curses.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 // TODO: remove unecessary includes
 
-# include "convention.h"
 # include "libft.h"
 # include "core_data.h"
+# include "ms_error.h"
 
 # include "env.h"
 
@@ -52,8 +51,6 @@ void		print_error_arg(char token);
 void		print_error_display(void);
 
 void		init_signal(void);
-
-void		clear_ats(t_ats *ats, int flag);
 
 int			wexit_status(int status);
 

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 21:40:21 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/22 09:07:38 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,8 @@ int	parse_ats(char *prompt, t_ats *ats, bool check_arg)
 		return (free(prompt), FAILURE);
 	if (post_parser(ats->root) == FAILURE)
 	{
-		clear_tree(ats->root);
-		ft_clear_queue(ats->queue_redir, free);
-		return (free(prompt), FAILURE);
+		clear_ats(ats, ATS_ROOT | ATS_PROMPT | ATS_REDIR | ATS_PIPE | ATS_HEREDOC);
+		return (FAILURE);
 	}
 	return (SUCCESS); // TODO : Free function to add !!!!!!!!!!!!!!!!!!!!!!!!!!
 }

@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_pipe.c                                        :+:      :+:    :+:   */
+/*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:16:20 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 14:49:22 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:32:43 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-#include "parser.h"
 #include "redirection.h"
-#include "ms_builtins.h"
-#include <stdio.h>
+#include "parser.h"
 
 static int	dup_in(t_queue_pipe *data)
 {
@@ -40,7 +38,6 @@ static int	dup_out(t_queue_pipe *data)
 	return (SUCCESS);
 }
 
-
 int	dup_pipe(t_ats *ats, int index)
 {
 	t_queue_pipe	*data;
@@ -59,4 +56,34 @@ int	dup_pipe(t_ats *ats, int index)
 			return (FAILURE);
 	}
 	return (SUCCESS);
+}
+
+int	close_pipe(t_ats *ats)
+{
+	t_queue_pipe	*data;
+
+	data = ft_dequeue(ats->queue_pipe);
+	if (data == NULL)
+		return (FAILURE);
+	if (close(data->pipe_fd[READ]) == FAILURE)
+		return (FAILURE);
+	if (close(data->pipe_fd[WRITE]) == FAILURE)
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+int	handle_pipeline(t_ats *ats, const t_bin_tree *node)
+{
+	t_queue		*tmp_redir;
+	t_queue		*tmp_heredoc;
+
+	if (node->data->index != 0)
+	{
+		return (SUCCESS);
+	}
+	tmp_redir = ft_dup_queue(ats->queue_redir);
+	tmp_heredoc = ft_dup_queue(ats->queue_heredoc);
+	if (!tmp_redir || !tmp_heredoc)
+		return (FAILURE);
+	return (open_all_redir(tmp_redir, tmp_heredoc, ats->root));
 }

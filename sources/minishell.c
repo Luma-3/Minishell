@@ -6,13 +6,14 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 23:22:33 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:31:45 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "exec.h"
 #include "parser.h"
+#include "ms_error.h"
 
 void	init_ats(t_ats *ats, char *prompt, t_list *env)
 {
@@ -35,6 +36,7 @@ void	read_input(t_list *env)
 	char		*display_message;
 
 	display_message = NULL;
+	__init_error__(ats.errors);
 	presentation_display(&ats, &env);
 	while (true)
 	{
@@ -61,7 +63,7 @@ int	main(int ac, char **av, char **envp)
 	t_list	*env;
 
 	(void)av;
-	printf("\033]0;MINISHELL\007");
+	printf("\033]0;KikiShell\007");
 	init_signal();
 	if (ac != 1)
 		return (EXIT_FAILURE);

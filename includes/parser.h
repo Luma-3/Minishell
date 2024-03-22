@@ -6,18 +6,18 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 23:20:21 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:27:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include <stdbool.h>
-
-# include "convention.h"
-# include "core_data.h"
 # include "libft.h"
+# include "core_data.h"
+# include "ms_error.h"
+
+# include <stdbool.h>
 
 # define WEIGHT_CMD 1
 # define WEIGHT_AND 2

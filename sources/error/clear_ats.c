@@ -6,12 +6,13 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:52:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 23:20:34 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:28:04 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "error.h"
+#include "core_data.h"
 #include "parser.h"
-#include "minishell.h"
 
 static void	clear_heredoc_queue(void *content)
 {

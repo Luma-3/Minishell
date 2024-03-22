@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:27:06 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/12 13:28:29 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/22 09:01:14 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,11 @@
 
 # define BOLD "\033[1m"
 # define UNDERLINE "\033[4m"
+
+# define BG_BLACK "\033[40m"
+# define BG_RED "\033[41m"
+# define BG_GREEN "\033[42m"
+# define BG_YELLOW "\033[43m"
+# define BG_BLUE "\033[44m"
 
 #endif

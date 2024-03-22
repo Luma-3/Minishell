@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/21 22:57:50 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/22 13:39:55 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,15 +57,19 @@ SRC_ENV_LIST		=	transform_env.c		\
 						env_utils.c
 SRC_ENV				=	$(addprefix $(SRC_ENV_DIR), $(SRC_ENV_LIST))
 
+SRC_ERROR_DIR		=	error/
+SRC_ERROR_LIST		=	error.c			\
+						clear_ats.c
+SRC_ERROR			=	$(addprefix $(SRC_ERROR_DIR), $(SRC_ERROR_LIST))
 
-SRC_NEW_EXEC_DIR	=	new_exec/
-SRC_NEW_EXEC_LIST	=	exec_std.c			\
-						exec_subshell.c		\
-						read_ats.c			\
-						exec_command.c		\
-						get_path.c			\
-						exec_pipe.c			
-SRC_NEW_EXEC		=	$(addprefix $(SRC_NEW_EXEC_DIR), $(SRC_NEW_EXEC_LIST))
+SRC_EXEC_DIR	=	execution/
+SRC_EXEC_LIST	=	exec_std.c			\
+					exec_subshell.c		\
+					read_ats.c			\
+					exec_command.c		\
+					get_path.c			\
+					pipe_utils.c
+SRC_EXEC		=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 
 SRC_PARSER_DIR			=	parser/
 
@@ -103,8 +107,9 @@ SRC_HISTORY_LIST	=	handle_history.c
 SRC_HISTORY			=	$(addprefix $(SRC_HISTORY_DIR), $(SRC_HISTORY_LIST))
 
 SRC_REDIR_DIR		=	redirection/
-SRC_REDIR_LIST		=	heredoc.c \
-						open_redir.c
+SRC_REDIR_LIST		=	heredoc.c 		\
+						open_redir.c	\
+						redir_utils.c
 SRC_REDIR			=	$(addprefix $(SRC_REDIR_DIR), $(SRC_REDIR_LIST))
 
 				
@@ -114,14 +119,13 @@ SRC_SIGNAL			=	$(addprefix $(SRC_SIGNAL_DIR), $(SRC_SIGNAL_LIST))
 
 SRC_LIST			=	minishell.c				\
 						print_error_msg.c		\
-						test_access.c			\
 						presentation_display.c	\
 						presentation_position.c	\
-						free/clear_ats.c				\
 						$(SRC_BUILTINS)			\
+						$(SRC_ERROR)			\
 						$(SRC_PARSER)			\
 						$(SRC_ENV) 				\
-						$(SRC_NEW_EXEC)			\
+						$(SRC_EXEC)			\
 						$(SRC_HISTORY)		\
 						$(SRC_REDIR)		\
 						$(SRC_SIGNAL)
@@ -160,8 +164,6 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)$(SRC_BUILTINS_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_ENV_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)$(SRC_TOKEN_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_NEW_EXEC_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(SRC_ATS_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(SRC_POST_PARSER_DIR)
@@ -169,7 +171,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)$(SRC_HISTORY_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_REDIR_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_SIGNAL_DIR)
-	@mkdir -p $(OBJ_DIR)free/
+	@mkdir -p $(OBJ_DIR)$(SRC_ERROR_DIR)
 	
 
 $(LIBFT):
