@@ -6,7 +6,7 @@
 /*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/22 15:58:50 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/22 18:08:55 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static char	*assemble(char **display)
 
 	i = 0;
 	len = 0;
-	display_final = ft_strdup("");
 	while (display[i] != NULL)
 	{
 		len += ft_strlen(display[i]);
@@ -69,7 +68,7 @@ char	*ft_create_prompt(t_list *env, int last_status)
 {
 	char	*display[20];
 
-	display[0] = "\033[1;32m┏━\033[0m";
+	display[0] = "\033[1;32m┏\033[0m";
 	display[1] = BG_BLACK_INV;
 	display[2] = BOLD_GREEN;
 	display[3] = " ";

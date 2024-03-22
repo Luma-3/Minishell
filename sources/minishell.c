@@ -6,7 +6,7 @@
 /*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 16:36:32 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/22 18:14:29 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,25 @@ void	init_ats(t_ats *ats, char *prompt, t_list *env)
 
 void	read_input(t_list *env)
 {
-	char		*input;
 	t_ats		ats;
-	char		*display_message;
+	char		*prompt;
+	char		*tmp_prompt;
+	char		*input;
 
-	display_message = NULL;
+
+	prompt = NULL;
 	__init_error__(ats.errors);
 	presentation_display(&ats, &env);
 	while (true)
 	{
-		display_message = handle_position(env, display_message, ats.last_status);
-		ft_putstr_fd(display_message, 1);
-		ft_putchar_fd('\n', 1);
-		input = readline("\033[1;32m┗━━━▶\033[0m ");
+		tmp_prompt = handle_position(env, prompt, ats.last_status);
+		if (tmp_prompt != NULL)
+		{
+			free(prompt);
+			prompt = tmp_prompt;
+		}	
+		ft_putendl_fd(prompt, 1);
+		input = readline("\001\033[1;32m┗━━▶\002\033[0m ");
 		if (input == NULL)
 			break ;
 		if (input[0] != '\0')
@@ -56,8 +62,9 @@ void	read_input(t_list *env)
 			ft_putchar_fd('\n', 1);
 			clear_ats(&ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC | ATS_PIPE);
 		}
+		rl_on_new_line();
 	}
-	free(display_message);
+	free(prompt);
 	clear_ats(&ats, ATS_ENV | ATS_HEREDOC | ATS_PIPE | ATS_PROMPT
 		| ATS_REDIR | ATS_ROOT);
 }
