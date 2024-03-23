@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 15:42:16 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/23 23:28:20 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	read_ats(t_ats *ats, t_bin_tree *root)
 			return (SUCCESS);
 		else
 			read_ats(ats, root->right);
-	}	
+	}
 	if (is_operator(root->data->cmd) == true)
 		error_return = read_node(ats, root, root->right);
 	return (error_return);

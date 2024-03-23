@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/23 17:28:56 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/23 23:29:01 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,30 +45,29 @@ void	process_input(t_ats *ats, t_list *env, char *input)
 void	read_input(t_list *env, t_error *errors)
 {
 	t_ats		ats;
-	//char		*prompt;
-	//char		*tmp_prompt;
+	char		*prompt;
+	char		*tmp_prompt;
 	char		*input;
 
-	//prompt = NULL;
+	prompt = NULL;
 	ats.errors = errors;
-	//presentation_display(&ats, &env);
+	presentation_display(&ats, &env);
 	while (true)
 	{
-		
-		// tmp_prompt = handle_position(env, prompt, ats.last_status);
-		// if (tmp_prompt != NULL)
-		// {
-		// 	free(prompt);
-		// 	prompt = tmp_prompt;
-		// }
-		// ft_putendl_fd(prompt, 1);
+		tmp_prompt = handle_position(env, prompt, ats.last_status);
+		if (tmp_prompt != NULL)
+		{
+			free(prompt);
+			prompt = tmp_prompt;
+		}
+		ft_putendl_fd(prompt, 1);
 		input = readline("\001\033[1;32m┗━━▶\002\033[0m ");
 		if (input == NULL)
 			break ;
 		if (input[0] != '\0')
 			process_input(&ats, env, input);
 	}
-	//free(prompt);
+	free(prompt);
 	clear_ats(&ats, ATS_ENV);
 }
 

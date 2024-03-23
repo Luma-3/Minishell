@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/23 22:23:52 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/23 23:26:33 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,5 @@ int	parse_ats(char *prompt, t_ats *ats, bool check_arg)
 		perror("post_parser");
 		return (FAILURE);
 	}
-	return (SUCCESS); // TODO : Free function to add !!!!!!!!!!!!!!!!!!!!!!!!!!
+	return (SUCCESS);
 }
