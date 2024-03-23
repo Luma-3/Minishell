@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:04:47 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 13:16:39 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/23 22:25:27 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	create_enqueue_heredoc(t_queue *heredoc_queue, char *delimiter)
 	if (heredoc_name == NULL || heredoc == NULL)
 	{
 		errno = ENOMEM;
-		return (free(heredoc), errno);
+		return (free(heredoc), FAILURE);
 	}
 	heredoc->file_name = heredoc_name;
 	heredoc->delimiter = delimiter;
@@ -80,6 +80,8 @@ static int	create_enqueue_heredoc(t_queue *heredoc_queue, char *delimiter)
 		perror("minishell: heredoc");
 		return (errno);
 	}
+	if (heredoc_queue == NULL)
+		return (close(fd), FAILURE);
 	ft_enqueue(heredoc_queue, heredoc);
 	return (open_heredoc(delimiter, fd));
 }

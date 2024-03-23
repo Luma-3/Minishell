@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 10:45:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/23 19:00:24 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ static char	*copy_whitout_parenthesis(char *cmd)
 {
 	char	*tmp;
 
-	if (cmd == NULL)
-		return (NULL);
 	tmp = ft_strtrim(cmd, " \t\n\v\f\r");
+	if (tmp == NULL)
+		return (NULL);
 	free(cmd);
 	if (*tmp != '(')
 		return (tmp);
 	cmd = ft_strndup(tmp + 1, ft_strlen(tmp) - 2);
+	if (cmd == NULL)
+		return (NULL);
 	free(tmp);
 	return (cmd);
 }
@@ -42,6 +44,8 @@ static t_token	*init_node(const char *cmd, int size_cmd)
 	else if (is_operator(cmd) == false)
 		data->post_parser = true;
 	data->cmd = copy_whitout_parenthesis((char *)cmd);
+	if (data->cmd == NULL)
+		return (free(data), NULL);
 	data->argv = NULL;
 	data->require_wait = true;
 	data->post_parser = true;
@@ -58,7 +62,8 @@ t_token	*copy_insert_node(t_ats *ats, int i_copy, int i_read)
 	data = copy_token(ats, ats->prompt + i_copy, i_read - i_copy);
 	if (data == NULL)
 		return (NULL);
-	insert_node(&(ats->root), data, compare_token);
+	if (insert_node(&(ats->root), data, compare_token) == FAILURE)
+		return (free(data), NULL);
 	return (data);
 }
 
@@ -69,14 +74,16 @@ int	copy_cmd_operator(t_ats *ats, int *i_copy, int *i_read)
 	data = copy_token(ats, ats->prompt + *i_copy, *i_read - *i_copy);
 	if (data == NULL)
 		return (FAILURE);
-	insert_node(&(ats->root), data, compare_token);
+	if (insert_node(&(ats->root), data, compare_token) == FAILURE)
+		return (free(data), FAILURE);
 	*i_copy = *i_read;
 	*i_read += 2;
 	data = copy_token(ats, ats->prompt + *i_copy, *i_read - *i_copy);
 	if (data == NULL)
 		return (FAILURE);
 	data->post_parser = false;
-	insert_node(&(ats->root), data, compare_token);
+	if (insert_node(&(ats->root), data, compare_token) == FAILURE)
+		return (free(data), FAILURE);
 	if (*(data->cmd) == '&')
 		data->exit_code = EXIT_SUCCESS;
 	else

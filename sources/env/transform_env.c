@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:52:52 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/02/16 17:59:50 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/23 17:02:14 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,21 @@
 t_list	*copy_env(char **envp)
 {
 	int		i;
+	char	*tmp;
 	t_list	*head_env_list;
 
 	i = -1;
 	head_env_list = NULL;
 	while (envp[++i])
 	{
-		ft_lstadd_back(&head_env_list, ft_lstnew(ft_strdup(envp[i])));
+		tmp = ft_strdup(envp[i]);
+		if (!tmp)
+		{
+			errno = ENOMEM;
+			ft_lstclear(&head_env_list, free);
+			return (NULL);
+		}
+		ft_lstadd_back(&head_env_list, ft_lstnew(tmp));
 	}
 	return (head_env_list);
 }

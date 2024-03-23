@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:48:17 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/20 16:56:02 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/23 12:46:38 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ static char	**insert_data(char **tab, const char *prompt, int nb_words)
 		if (nb_letters != 0)
 		{
 			tab[index] = ft_strndup(&prompt[position], nb_letters);
+			if (tab[index] == NULL)
+				return (ft_rm_split(tab), NULL);
 			tab[index] = clean_quote(tab[index]);
+			if (tab[index] == NULL)
+				return (ft_rm_split(tab), NULL);
 			position += nb_letters;
 			index++;
 		}

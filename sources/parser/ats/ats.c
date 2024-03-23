@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 09:07:38 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/23 22:23:52 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	copy_cmd_pipe(t_ats *ats, int i_copy, int i_read, int *nb_pipe)
 	t_token	*data;
 
 	data = copy_insert_node(ats, i_copy, i_read);
-	if (data == NULL)
+	if (data == NULL || ats->queue_pipe == NULL)
 		return (FAILURE);
 	data->require_wait = false;
 	data->index = *nb_pipe;
@@ -110,10 +110,13 @@ int	parse_ats(char *prompt, t_ats *ats, bool check_arg)
 		handle_heredoc(prompt, ats);
 	}
 	if (atomize_prompt(ats) == FAILURE)
-		return (free(prompt), FAILURE);
+	{
+		perror("atomize_prompt");
+		return (FAILURE);
+	}
 	if (post_parser(ats->root) == FAILURE)
 	{
-		clear_ats(ats, ATS_ROOT | ATS_PROMPT | ATS_REDIR | ATS_PIPE | ATS_HEREDOC);
+		perror("post_parser");
 		return (FAILURE);
 	}
 	return (SUCCESS); // TODO : Free function to add !!!!!!!!!!!!!!!!!!!!!!!!!!

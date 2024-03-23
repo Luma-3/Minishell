@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 16:34:03 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/23 13:54:31 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 //int	g_sig_return;
 
 //HISTORY
-void		ft_add_history(char *input, t_list *env);
-void		ft_create_history(t_list *env);
+int			ft_add_history(char *input, t_list *env);
+int			ft_create_history(t_list *env);
 
 //PRESENTATION_DISPLAY
 char		*ft_create_prompt(t_list *env, int last_status);

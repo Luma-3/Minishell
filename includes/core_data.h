@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 15:27:35 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/23 13:54:05 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@
 # define WRITE 1
 
 // ERRORS
-
-# define __NB_ERRORS_ 1
 
 typedef struct s_error
 {
@@ -74,7 +72,7 @@ typedef struct s_ats
 	t_queue		*queue_pipe;
 	int			last_status;
 	char		*prompt;
-	t_error		errors[__NB_ERRORS_];
+	t_error		*errors;
 }				t_ats;
 
 // queue

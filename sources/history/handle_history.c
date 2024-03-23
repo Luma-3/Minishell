@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:39:31 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/07 12:28:20 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:25:12 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	ft_trim_end(char *str)
 	str[i] = '\0';
 }
 
-void	ft_add_history(char *input, t_list *env)
+int	ft_add_history(char *input, t_list *env)
 {
 	int		fd;
 	char	*home;
@@ -32,22 +32,23 @@ void	ft_add_history(char *input, t_list *env)
 	temp = NULL;
 	home = ms_getenv(env, "HOME");
 	if (home == NULL)
-		return ;
+		return (FAILURE);
 	temp = ft_strjoin(home, "/.ms_history");
 	free(home);
 	if (temp == NULL)
-		return ;
+		return (FAILURE);
 	fd = open(temp, O_CREAT | O_APPEND | O_RDWR);
 	if (fd == -1)
-		return ;
+		return (FAILURE);
 	ft_putstr_fd(input, fd);
 	write(fd, "\n", 1);
 	add_history(input);
 	close(fd);
 	free(temp);
+	return (SUCCESS);
 }
 
-void	ft_create_history(t_list *env)
+int	ft_create_history(t_list *env)
 {
 	int		fd;
 	char	*home;
@@ -56,14 +57,14 @@ void	ft_create_history(t_list *env)
 
 	home = ms_getenv(env, "HOME");
 	if (home == NULL)
-		return ;
+		return (errno = ENVHOM, FAILURE);
 	temp = ft_strjoin(home, "/.ms_history");
 	free(home);
 	if (temp == NULL)
-		return ;
+		return (errno = ENOMEM, FAILURE);
 	fd = open(temp, O_CREAT | O_RDWR, 0644);
 	if (fd == -1)
-		return ;
+		return (errno = EBADFD, FAILURE);
 	while (1)
 	{
 		input = get_next_line(fd);
@@ -75,4 +76,5 @@ void	ft_create_history(t_list *env)
 	}
 	close(fd);
 	free(temp);
+	return (SUCCESS);
 }

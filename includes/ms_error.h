@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:52:44 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 14:59:32 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/23 16:55:11 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,26 @@
 # include "core_data.h"
 
 # include <string.h>
+# include <errno.h>
+# include <stdio.h>
+
+# define __NB_ERRORS_ 2
 
 # define ENOCNF 137
+# define ENVHOM 138
+# define ENOENV 139
 
 # define EMSG_ENOCNF "Command not found"
+# define EMSG_ENVHOM "HOME not set"
+# define EMSG_ENOENV "Environment not set"
 
 void	__init_error__(t_error *errors);
 
 void	ft_perror(t_error *errors, char *str);
 
 char	*ft_strerror(t_error *errors, int code);
+
+void	perror_switch(t_error *errors, char *str);
 
 // CLEARTOOL
 

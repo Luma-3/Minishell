@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:39:53 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 15:34:51 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:17:17 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 static void	_init_msg_error_(char **msg_error)
 {
 	msg_error[0] = EMSG_ENOCNF;
+	msg_error[1] = EMSG_ENVHOM;
 }
 
 static void	_init_struct(t_error *errors, char **msg_error)
@@ -30,6 +31,7 @@ static void	_init_struct(t_error *errors, char **msg_error)
 		errors[i].code = code;
 		errors[i].msg = msg_error[i];
 		i++;
+		code++;
 	}
 }
 
@@ -53,7 +55,7 @@ char	*ft_strerror(t_error *errors, int code)
 	int		i;
 
 	i = 0;
-	while (errors[i].code != code)
+	while (errors[i].code != code && i <= 255)
 		i++;
 	return (errors[i].msg);
 }

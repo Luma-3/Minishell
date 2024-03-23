@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:09:50 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/09 19:30:39 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/23 16:52:09 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ char	*ms_getenv(t_list *env, const char *name)
 	int		name_len;
 
 	format_name = ft_strjoin(name, "=");
-	name_len = ft_strlen(format_name);
 	if (!format_name)
 		return (NULL);
+	name_len = ft_strlen(format_name);
 	while (env)
 	{
 		if (ft_strncmp(env->content, format_name, name_len) == 0)

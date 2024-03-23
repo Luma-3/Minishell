@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:52:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 15:28:04 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/23 17:40:24 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ static void	free_data_tree(void *content)
 	t_token	*data;
 
 	data = (t_token *)content;
-	ft_rm_split(data->argv);
-	free(data->cmd);
+	if (data->cmd != NULL)
+		free(data->cmd);
+	if (data->argv != NULL)
+		ft_rm_split(data->argv);
 	free(data);
 }
 

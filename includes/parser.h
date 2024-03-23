@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 15:27:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/23 18:24:34 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int			parse_ats(char *prompt, t_ats *ats, bool check_arg);
 
 t_bin_tree	*create_node(t_token *data);
 
-void		insert_node(t_bin_tree **root, t_token *data,
+int			insert_node(t_bin_tree **root, t_token *data,
 				int (*cmp)(t_token *, t_token *));
 
 int			compare_token(t_token *data1, t_token *data2);
