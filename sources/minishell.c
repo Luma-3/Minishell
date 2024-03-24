@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/23 23:29:01 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/24 12:40:30 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "exec.h"
 #include "parser.h"
 #include "ms_error.h"
+
+volatile int	g_sigreciever = 0;
 
 void	init_ats(t_ats *ats, char *prompt, t_list *env)
 {
@@ -54,6 +56,7 @@ void	read_input(t_list *env, t_error *errors)
 	presentation_display(&ats, &env);
 	while (true)
 	{
+		g_sigreciever = 0;
 		tmp_prompt = handle_position(env, prompt, ats.last_status);
 		if (tmp_prompt != NULL)
 		{

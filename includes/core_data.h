@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/23 13:54:05 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/24 12:40:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 
 # define READ 0
 # define WRITE 1
+
+# define SIGINT 2
 
 // ERRORS
 
