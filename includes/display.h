@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:41:17 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/24 17:37:04 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/24 17:43:10 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ char	*assemble(char **display);
 
 char	*ft_get_chdir(void);
 
-void	goodbye_display(t_list *env);
+void	goodbye_display(t_ats *ats, t_list *env);
 
 #endif

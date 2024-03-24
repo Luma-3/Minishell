@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/24 17:37:17 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/24 17:52:01 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,20 @@ void	presentation_display(t_ats *ats, t_list *env)
 	return ;
 }
 
-void	goodbye_display(t_list *env)
+void	goodbye_display(t_ats *ats, t_list *env)
 {
 	char *command;
-	t_ats ats;
 
-	command = ft_strdup("See you soon !!!");
-	init_ats(&ats, command, env);
-	parse_ats(command, &ats, false);
-	read_ats(&ats, ats.root);
+	clear_ats(ats, ATS_HEREDOC | ATS_PIPE | ATS_PROMPT
+		| ATS_REDIR | ATS_ROOT);
+	command = ft_strdup("toilet -tf future --gay -F border\
+			See you soon in KIKISHELL");
+	init_ats(ats, command, env);
+	parse_ats(command, ats, false);
+	read_ats(ats, ats->root);
 	ft_putchar_fd('\n', 1);
+	clear_ats(ats, ATS_ENV | ATS_HEREDOC | ATS_PIPE | ATS_PROMPT
+		| ATS_REDIR | ATS_ROOT);
 	return ;
 }
 
@@ -77,6 +81,5 @@ char	*display_prompt(t_ats *ats, t_list *env, char *display_message)
 			return (ft_strdup("I Lost my prompt 😢\n"));
 	}
 	ft_putendl_fd(display_message, 1);
-	// clear_ats(ats, ATS_PROMPT | ATS_REDIR | ATS_ROOT | ATS_PIPE | ATS_HEREDOC);
 	return (display_message);
 }

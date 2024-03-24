@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/24 17:40:27 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/24 17:54:03 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	init_ats(t_ats *ats, char *prompt, t_list *env)
 
 static void	exec_process(t_ats *ats, t_list *env, char *input )
 {
+	clear_ats(ats, ATS_HEREDOC | ATS_PIPE | ATS_PROMPT
+		| ATS_REDIR | ATS_ROOT);
 	ft_putchar_fd('\n', 1);
 	init_ats(ats, input, env);
 	parse_ats(input, ats, true);
@@ -56,13 +58,13 @@ void	read_input(t_list *env)
 		if (input == NULL)
 		{
 			free(input);
-			goodbye_display(env);
+			free(prompt);
+			goodbye_display(&ats, env);
 			break ;
 		}
 		exec_process(&ats, env, input);
 	}
-	clear_ats(&ats, ATS_ENV | ATS_HEREDOC | ATS_PIPE | ATS_PROMPT
-		| ATS_REDIR | ATS_ROOT);
+	return ;
 }
 
 int	main(int ac, char **av, char **envp)
@@ -75,10 +77,7 @@ int	main(int ac, char **av, char **envp)
 	init_signal();
 	env = copy_env(envp);
 	if (ac != 1)
-	{
-		print_error_why(&ats, env);
-		return (EXIT_FAILURE);
-	}
+		return (print_error_why(&ats, env), EXIT_FAILURE);
 	ft_create_history(env);
 	read_input(env);
 	return (EXIT_SUCCESS);
