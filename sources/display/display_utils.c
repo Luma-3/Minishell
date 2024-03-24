@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:39:34 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/23 01:52:58 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/24 17:10:18 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ char	*ft_get_chdir(void)
 	len = ft_strlen(absolute_path);
 	while (len >= 0 && absolute_path[len - 1] != '/')
 		len--;
-	working_directory = ft_strndup(absolute_path + len, ft_strlen(absolute_path) - len);
+	working_directory = ft_strndup(absolute_path + len,
+			ft_strlen(absolute_path) - len);
 	free(absolute_path);
 	return (working_directory);
 }

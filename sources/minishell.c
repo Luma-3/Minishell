@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/23 02:20:08 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/24 17:40:27 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ void	read_input(t_list *env)
 	(__init_error__(ats.errors), presentation_display(&ats, env));
 	while (true)
 	{
-		prompt = display_prompt(env, prompt, ats.last_status);
+		prompt = display_prompt(&ats, env, prompt);
 		input = readline("\001\033[1;32m┗━━▶\002\033[0m ");
 		if (input == NULL)
 		{
-			(free(prompt), free(input));
-			goodbye_display(&ats, env);
+			free(input);
+			goodbye_display(env);
 			break ;
 		}
 		exec_process(&ats, env, input);
