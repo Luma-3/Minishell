@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/25 11:54:34 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/25 12:19:51 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	presentation_display(t_ats *ats, t_list *env)
 	if (command == NULL)
 	{
 		errno = ENOMEM;
-		ft_perror(ats->errors, "KikiShell");
+		perror_switch(ats->errors, "KikiShell");
 		return ;
 	}
 	init_ats(ats, command, env);
@@ -43,7 +43,7 @@ void	goodbye_display(t_ats *ats, t_list *env)
 	if (command == NULL)
 	{
 		errno = ENOMEM;
-		ft_perror(ats->errors, "KikiShell");
+		perror_switch(ats->errors, "KikiShell");
 		return ;
 	}
 	clear_ats(ats, ATS_HEREDOC | ATS_PIPE | ATS_PROMPT

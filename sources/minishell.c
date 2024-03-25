@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 11:47:09 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/25 12:43:50 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,6 @@ int	main(int ac, char **av, char **envp)
 	env = copy_env(envp);
 	if (ac != 1)
 		return (print_error_why(env), EXIT_FAILURE);
-	if (env == NULL)
-	{
-		perror_switch(errors, "KikiShell");
-		return (EXIT_FAILURE);
-	}
 	if (ft_create_history(env) == FAILURE)
 	{
 		perror_switch(errors, "KikiShell");

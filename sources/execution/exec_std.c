@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 14:37:39 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 12:58:14 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,22 @@
 
 int	clean_parent(t_ats *ats, const t_bin_tree *node)
 {
-	t_queue_redir *free_queue;
+	t_queue_redir	*free_data_redir;
+	t_queue_heredoc	*free_data_heredoc;
 
 	while (node->data->nb_redir > 0)
 	{
-		free_queue = (t_queue_redir *)ft_dequeue(ats->queue_redir);
+		free_data_redir = (t_queue_redir *)ft_dequeue(ats->queue_redir);
 		node->data->nb_redir--;
-		if (free_queue->type_redir == REDIR_HEREDOC)
-			ft_dequeue(ats->queue_heredoc);
+		if (free_data_redir->type_redir == REDIR_HEREDOC)
+		{
+			free_data_heredoc = ft_dequeue(ats->queue_heredoc);
+			free(free_data_heredoc->file_name);
+			free(free_data_heredoc->delimiter);
+			free(free_data_heredoc);
+		}
+		free(free_data_redir->file_name);
+		free(free_data_redir);
 	}
 	if (node->data->index - 1 >= 0)
 		return (close_pipe(ats));

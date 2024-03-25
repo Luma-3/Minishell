@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:16:20 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 13:32:43 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 12:40:55 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,16 @@ int	close_pipe(t_ats *ats)
 	if (data == NULL)
 		return (FAILURE);
 	if (close(data->pipe_fd[READ]) == FAILURE)
+	{
+		free(data);
 		return (FAILURE);
+	}
 	if (close(data->pipe_fd[WRITE]) == FAILURE)
+	{
+		free(data);
 		return (FAILURE);
+	}
+	free(data);
 	return (SUCCESS);
 }
 

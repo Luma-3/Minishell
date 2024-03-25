@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/24 12:51:49 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:13:54 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int	read_ats(t_ats *ats, t_bin_tree *root)
 		return (FAILURE);
 	error_return = read_node(ats, root, root->left);
 	if (is_operator(root->data->cmd) == true && error_return != FAILURE)
-		return (FAILURE);
 	{
 		if (root->data->cmd[0] == '&' && root->data->exit_code != EXIT_SUCCESS)
 			return (SUCCESS);
