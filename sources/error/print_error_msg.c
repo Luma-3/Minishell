@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:20:43 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/25 11:11:26 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:27:54 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	wexit_status(int status)
 
 void	print_error_why(t_list *env)
 {
-	t_ats	ats;
+	t_maindata	ats;
 	char	*command;
 
 	command = ft_strdup("toilet -tf future --gay -F border WHY ?????");

@@ -6,13 +6,13 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/25 12:19:51 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:27:54 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
 
-void	presentation_display(t_ats *ats, t_list *env)
+void	presentation_display(t_maindata *ats, t_list *env)
 {
 	char	*command;
 
@@ -24,17 +24,10 @@ void	presentation_display(t_ats *ats, t_list *env)
 		perror_switch(ats->errors, "KikiShell");
 		return ;
 	}
-	init_ats(ats, command, env);
-	if (parse_ats(command, ats, true) == FAILURE)
-	{
-		clear_ats(ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC
-			| ATS_PIPE);
-		return ;
-	}
-	(read_ats(ats, ats->root), ft_putchar_fd('\n', 1));
+	exec_process(ats, env, command);
 }
 
-void	goodbye_display(t_ats *ats, t_list *env)
+void	goodbye_display(t_maindata *ats, t_list *env)
 {
 	char	*command;
 
@@ -46,20 +39,7 @@ void	goodbye_display(t_ats *ats, t_list *env)
 		perror_switch(ats->errors, "KikiShell");
 		return ;
 	}
-	clear_ats(ats, ATS_HEREDOC | ATS_PIPE | ATS_PROMPT
-		| ATS_REDIR | ATS_ROOT);
-	init_ats(ats, command, env);
-	if (parse_ats(command, ats, true) == FAILURE)
-	{
-		clear_ats(ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC
-			| ATS_PIPE);
-		return ;
-	}
-	read_ats(ats, ats->root);
-	ft_putchar_fd('\n', 1);
-	clear_ats(ats, ATS_ENV | ATS_HEREDOC | ATS_PIPE | ATS_PROMPT
-		| ATS_REDIR | ATS_ROOT);
-	return ;
+	exec_process(ats, env, command);
 }
 
 void	ft_create_prompt(t_list *env, int last_status)
@@ -79,9 +59,9 @@ void	ft_create_prompt(t_list *env, int last_status)
 	display[10] = ft_get_chdir();
 	display[11] = " ";
 	if (last_status == 0)
-		display[12] =" ☀️ ";
+		display[12] = " ☀️ ";
 	else
-		display[12] =" 🌙 ";
+		display[12] = " 🌙 ";
 	display[13] = RESET;
 	display[14] = '\0';
 	assemble(display);

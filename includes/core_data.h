@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/24 12:40:19 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:28:27 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,16 @@ typedef struct s_token
 	bool			require_wait;
 }			t_token;
 
-typedef struct s_bin_tree
-{
-	t_token				*data;
-	struct s_bin_tree	*left;
-	struct s_bin_tree	*right;
-}						t_bin_tree;
-
 typedef struct s_ats
 {
-	t_bin_tree	*root;
+	t_token			*data;
+	struct s_ats	*left;
+	struct s_ats	*right;
+}						t_ats;
+
+typedef struct s_maindata
+{
+	t_ats		*root;
 	t_list		*env;
 	t_queue		*queue_heredoc;
 	t_queue		*queue_redir;
@@ -75,7 +75,7 @@ typedef struct s_ats
 	int			last_status;
 	char		*prompt;
 	t_error		*errors;
-}				t_ats;
+}				t_maindata;
 
 // queue
 

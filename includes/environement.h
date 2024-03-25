@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   environement.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:01:25 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 15:27:27 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:51:34 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_H
-# define ENV_H
+#ifndef ENVIRONEMENT_H
+# define ENVIRONEMENT_H
 
 # include "libft.h"
 # include "core_data.h"
@@ -24,7 +24,7 @@
  * 
  * @return The copy of the envp into a t_list.
 */
-t_list	*copy_env(char **envp);
+t_list	*env_to_lst(char **envp);
 
 /**
  * @brief Transform the env list into a char **.
@@ -57,7 +57,6 @@ char	*ms_getenv(t_list *env, const char *name);
 */
 int		ms_setenv(t_list **env, const char *name, const char *value);
 
-
 /**
  * @brief Unset the env value from the env list.
  * 
@@ -66,6 +65,6 @@ int		ms_setenv(t_list **env, const char *name, const char *value);
  * 
  * @return SUCCESS if the variable has been unset, FAILURE otherwise.
 */
-int	ms_unsetenv(t_list **env, const char *name);
+int		ms_unsetenv(t_list **env, const char *name);
 
 #endif

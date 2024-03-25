@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:52:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 11:00:16 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:27:54 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	free_data_tree(void *content)
 	free(data);
 }
 
-void	clear_ats(t_ats *ats, int flag)
+void	clear_ats(t_maindata *ats, int flag)
 {
 	if (flag & ATS_ROOT && ats->root != NULL)
 	{

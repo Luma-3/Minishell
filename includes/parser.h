@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/23 18:24:34 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:52:57 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int			verif_token_separation(const char *prompt);
 
 int			verif_before_operator(const char *prompt, char *token);
 
-void		handle_heredoc(const char *prompt, t_ats *ats);
+void		handle_heredoc(const char *prompt, t_maindata *ats);
 
 /////////////////////////
 ////// POST PARSER //////
@@ -56,7 +56,7 @@ int			count_letters(const char *start_word);
 
 char		**alloc_tab(char *prompt);
 
-int			post_parser(t_bin_tree	*root);
+int			post_parser(t_ats	*root);
 
 // clean
 
@@ -68,34 +68,34 @@ char		*clean_quote(char *word);
 
 int			skip_quote_parenthesis(const char *prompt, int index);
 
-void		init_ats(t_ats *ats, char *prompt, t_list *env);
+int			init_ats(t_maindata *ats, char *prompt, t_list *env);
 
-int			parse_ats(char *prompt, t_ats *ats, bool check_arg);
+int			parse_ats(char *prompt, t_maindata *ats, bool check_arg);
 
 // bin_tree.c
 
-t_bin_tree	*create_node(t_token *data);
+t_ats		*create_node(t_token *data);
 
-int			insert_node(t_bin_tree **root, t_token *data,
+int			insert_node(t_ats **root, t_token *data,
 				int (*cmp)(t_token *, t_token *));
 
 int			compare_token(t_token *data1, t_token *data2);
 
-void		clear_tree(t_bin_tree *root, void (*free_data)(void *));
+void		clear_tree(t_ats *root, void (*free_data)(void *));
 
-size_t		count_nodes(t_bin_tree *root, size_t count);
+size_t		count_nodes(t_ats *root, size_t count);
 
 // ats_copy_cmd.c
 
-int			copy_cmd_operator(t_ats *ats, int *i_copy, int *i_read);
+int			copy_cmd_operator(t_maindata *ats, int *i_copy, int *i_read);
 
-t_token		*copy_token(t_ats *ats, const char *prompt, int size_copy);
+t_token		*copy_token(t_maindata *ats, const char *prompt, int size_copy);
 
-t_token		*copy_insert_node(t_ats *ats, int i_copy, int i_read);
+t_token		*copy_insert_node(t_maindata *ats, int i_copy, int i_read);
 
 // take_redir.c
 
-char		*take_redir(t_ats *ats, const char *prompt, int size_prompt,
+char		*take_redir(t_maindata *ats, const char *prompt, int size_prompt,
 				int *nb_redir);
 
 //////////////////////////

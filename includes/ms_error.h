@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:52:44 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 12:13:56 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:27:54 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ void	print_error_why(t_list *env);
 
 // CLEARTOOL
 
-void	clear_ats(t_ats *ats, int flag);
+void	clear_ats(t_maindata *ats, int flag);
 
 #endif

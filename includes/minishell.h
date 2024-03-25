@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 11:08:31 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:52:49 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # include "core_data.h"
 # include "ms_error.h"
 
-# include "env.h"
+# include "environement.h"
 
 # define ERROR_FORMAT "Minishell error"
 //int	g_sig_return;
@@ -47,5 +47,6 @@ void		print_error_display(void);
 void		init_signal(void);
 
 int			wexit_status(int status);
+void		exec_process(t_maindata *ats, t_list *env, char *input);
 
 #endif

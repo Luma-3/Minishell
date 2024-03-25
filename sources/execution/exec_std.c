@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 12:58:14 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:28:13 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "redirection.h"
 #include "parser.h"
 
-int	clean_parent(t_ats *ats, const t_bin_tree *node)
+int	clean_parent(t_maindata *ats, const t_ats *node)
 {
 	t_queue_redir	*free_data_redir;
 	t_queue_heredoc	*free_data_heredoc;
@@ -39,7 +39,7 @@ int	clean_parent(t_ats *ats, const t_bin_tree *node)
 	return (SUCCESS);
 }
 
-pid_t	exec_std(t_ats *ats, const t_bin_tree *node)
+pid_t	exec_std(t_maindata *ats, const t_ats *node)
 {
 	pid_t			pid;
 

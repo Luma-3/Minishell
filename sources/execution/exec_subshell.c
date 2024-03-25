@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:12:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 12:23:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:28:14 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "minishell.h"
 #include "redirection.h"
 
-static void	init_new_ats(t_ats *ats, t_ats *new_ats, t_bin_tree *node)
+static void	init_new_ats(t_maindata *ats, t_maindata *new_ats, t_ats *node)
 {
 	new_ats->prompt = ft_strdup(node->data->cmd);
 	clear_ats(ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_PIPE);
@@ -27,9 +27,9 @@ static void	init_new_ats(t_ats *ats, t_ats *new_ats, t_bin_tree *node)
 	new_ats->root = NULL;
 }
 
-int	exec_subshell(t_ats *ats, t_bin_tree *node)
+int	exec_subshell(t_maindata *ats, t_ats *node)
 {
-	t_ats			new_ats;
+	t_maindata			new_ats;
 	pid_t			pid;
 	int				status;
 

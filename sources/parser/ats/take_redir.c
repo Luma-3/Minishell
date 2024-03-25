@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:10:20 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/23 22:22:58 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:27:54 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static size_t	len_without_redir(const char *prompt)
 	return (len);
 }
 
-static int	add_queue(t_ats *ats, const char *prompt, int redir_type,
+static int	add_queue(t_maindata *ats, const char *prompt, int redir_type,
 							int size_prompt)
 {
 	t_queue_redir	*data;
@@ -64,7 +64,7 @@ static int	add_queue(t_ats *ats, const char *prompt, int redir_type,
 	return (i + j);
 }
 
-char	*take_redir(t_ats *ats, const char *prompt, int size_prompt,
+char	*take_redir(t_maindata *ats, const char *prompt, int size_prompt,
 					int *nb_redir)
 {
 	int		i;

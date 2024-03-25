@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:26:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 14:50:07 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:28:13 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	open_redir_heredoc(t_queue *queue_heredoc)
 	return (SUCCESS);
 }
 
-int	open_redir(t_queue *redir, t_queue *heredoc, const t_bin_tree *root)
+int	open_redir(t_queue *redir, t_queue *heredoc, const t_ats *root)
 {
 	t_queue_redir	*node;
 	int				exit_code;

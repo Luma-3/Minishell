@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:16:20 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 12:40:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:28:13 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	dup_out(t_queue_pipe *data)
 	return (SUCCESS);
 }
 
-int	dup_pipe(t_ats *ats, int index)
+int	dup_pipe(t_maindata *ats, int index)
 {
 	t_queue_pipe	*data;
 
@@ -58,7 +58,7 @@ int	dup_pipe(t_ats *ats, int index)
 	return (SUCCESS);
 }
 
-int	close_pipe(t_ats *ats)
+int	close_pipe(t_maindata *ats)
 {
 	t_queue_pipe	*data;
 
@@ -79,7 +79,7 @@ int	close_pipe(t_ats *ats)
 	return (SUCCESS);
 }
 
-int	handle_pipeline(t_ats *ats, const t_bin_tree *node)
+int	handle_pipeline(t_maindata *ats, const t_ats *node)
 {
 	t_queue		*tmp_redir;
 	t_queue		*tmp_heredoc;

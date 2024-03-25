@@ -6,13 +6,13 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:46:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/23 23:26:23 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:28:13 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int	post_parser(t_bin_tree	*root)
+int	post_parser(t_ats	*root)
 {
 	if (root == NULL)
 		return (SUCCESS);

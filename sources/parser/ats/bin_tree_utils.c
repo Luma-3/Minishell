@@ -6,13 +6,13 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:39:06 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/19 16:28:47 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 20:28:13 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-size_t	count_nodes(t_bin_tree *root, size_t count)
+size_t	count_nodes(t_ats *root, size_t count)
 {
 	if (!root)
 		return (count);
