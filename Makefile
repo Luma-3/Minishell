@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/23 13:57:04 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/25 11:07:17 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,8 +53,7 @@ SRC_DIR				=	sources/
 # SRC_BUILTINS		=	$(addprefix $(SRC_BUILTINS_DIR), $(SRC_BUILTINS_LIST))
 
 SRC_DISPLAY_DIR		=	display/
-SRC_DISPLAY_LIST	=	presentation_display.c		\
-						presentation_position.c		\
+SRC_DISPLAY_LIST	=	display.c			\
 						display_utils.c
 SRC_DISPLAY			=	$(addprefix $(SRC_DISPLAY_DIR), $(SRC_DISPLAY_LIST))
 
@@ -67,7 +66,8 @@ SRC_ENV				=	$(addprefix $(SRC_ENV_DIR), $(SRC_ENV_LIST))
 SRC_ERROR_DIR		=	error/
 SRC_ERROR_LIST		=	error.c			\
 						clear_ats.c		\
-						error_utils.c
+						error_utils.c		\
+						print_error_msg.c
 SRC_ERROR			=	$(addprefix $(SRC_ERROR_DIR), $(SRC_ERROR_LIST))
 
 SRC_EXEC_DIR	=	execution/
@@ -126,7 +126,6 @@ SRC_SIGNAL_LIST		=	signal.c
 SRC_SIGNAL			=	$(addprefix $(SRC_SIGNAL_DIR), $(SRC_SIGNAL_LIST))
 
 SRC_LIST			=	minishell.c				\
-						print_error_msg.c		\
 						$(SRC_BUILTINS)			\
 						$(SRC_ERROR)			\
 						$(SRC_DISPLAY)			\

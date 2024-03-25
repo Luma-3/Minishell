@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/24 12:40:30 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 11:06:34 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "exec.h"
 #include "parser.h"
 #include "ms_error.h"
+#include "display.h"
 
 volatile int	g_sigreciever = 0;
 
@@ -31,15 +32,17 @@ void	init_ats(t_ats *ats, char *prompt, t_list *env)
 	ats->last_status = 1;
 }
 
-void	process_input(t_ats *ats, t_list *env, char *input)
+static void	exec_process(t_ats *ats, t_list *env, char *input )
 {
+	clear_ats(ats, ATS_HEREDOC | ATS_PIPE | ATS_PROMPT
+		| ATS_REDIR | ATS_ROOT);
 	ft_putchar_fd('\n', 1);
 	init_ats(ats, input, env);
-	ft_add_history(input, env);
 	if (parse_ats(input, ats, true) == FAILURE)
 		clear_ats(ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC
 			| ATS_PIPE);
 	read_ats(ats, ats->root);
+	ft_add_history(input, env);
 	ft_putchar_fd('\n', 1);
 	clear_ats(ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC | ATS_PIPE);
 }
@@ -48,7 +51,6 @@ void	read_input(t_list *env, t_error *errors)
 {
 	t_ats		ats;
 	char		*prompt;
-	char		*tmp_prompt;
 	char		*input;
 
 	prompt = NULL;
@@ -57,21 +59,19 @@ void	read_input(t_list *env, t_error *errors)
 	while (true)
 	{
 		g_sigreciever = 0;
-		tmp_prompt = handle_position(env, prompt, ats.last_status);
-		if (tmp_prompt != NULL)
-		{
-			free(prompt);
-			prompt = tmp_prompt;
-		}
-		ft_putendl_fd(prompt, 1);
+		prompt = ft_create_prompt(env, ats.last_status);
 		input = readline("\001\033[1;32m┗━━▶\002\033[0m ");
 		if (input == NULL)
+		{
+			(free(input), free(prompt));
+			goodbye_display(&ats, env);
 			break ;
-		if (input[0] != '\0')
-			process_input(&ats, env, input);
+		}
+		exec_process(&ats, env, input);
 	}
 	free(prompt);
-	clear_ats(&ats, ATS_ENV);
+	clear_ats(&ats, ATS_ENV | ATS_HEREDOC | ATS_PIPE | ATS_PROMPT
+		| ATS_REDIR | ATS_ROOT);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -83,9 +83,9 @@ int	main(int ac, char **av, char **envp)
 	__init_error__(errors);
 	printf("\033]0;KikiShell\007");
 	init_signal();
-	if (ac != 1)
-		return (EXIT_FAILURE);
 	env = copy_env(envp);
+	if (ac != 1)
+		return (print_error_why(&ats, env), EXIT_FAILURE);
 	if (env == NULL)
 	{
 		perror_switch(errors, "KikiShell");

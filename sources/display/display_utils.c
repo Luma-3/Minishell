@@ -3,91 +3,76 @@
 /*                                                        :::      ::::::::   */
 /*   display_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:39:34 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/22 15:48:47 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/25 10:25:20 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
 
-char	*get_home_path(t_list *env, char *old_path)
+char	*path_to_tilde(t_list *env)
 {
-	char	*home;
-	char	*new_path;
+	char	*path_home;
+	char	*path_absolute;
 	int		i;
-	int		len;
 
 	i = 0;
-	home = ms_getenv(env, "HOME");
-	if (home == NULL)
-		return (old_path);
-	while (old_path[i] == home[i]
-		&& old_path[i] != '\0' && home[i] != '\0')
+	path_absolute = NULL;
+	path_home = ms_getenv(env, "HOME");
+	if (path_home == NULL)
+		return (ft_strdup(" ~ "));
+	path_absolute = getcwd(path_absolute, 0);
+	if (path_absolute == NULL)
+		return (ft_strdup(" ~ "));
+	while (path_home[i] == path_absolute[i]
+		&& path_home[i] && path_absolute[i])
 		i++;
-	len = ft_strlen(old_path) - i;
-	new_path = malloc(sizeof(char) * len);
-	if (new_path == NULL)
-		return (old_path);
-	free(home);
-	ft_strlcpy(new_path, old_path + i, len);
-	home = ft_strjoin(" ~", new_path);
-	free(new_path);
-	return (home);
-}
-
-char	*ft_get_cwd(t_list *env)
-{
-	char	*tmp;
-	char	*tmp2;
-	int		len;
-	int		size_cwd;
-
-	tmp = malloc(sizeof(char) * 100);
-	if (tmp == NULL)
-		return (ft_strdup(" > "));
-	tmp = getcwd(tmp, 100);
-	if (tmp == NULL)
-		return (free(tmp), ft_strdup(" > "));
-	len = ft_strlen(tmp);
-	size_cwd = ft_strlen(tmp);
-	while (len >= 0 && tmp[len] != '/')
-		len--;
-	tmp2 = ft_strndup(tmp, size_cwd - (size_cwd - len - 1));
-	free(tmp);
-	tmp = get_home_path(env, tmp2);
-	free(tmp2);
-	return (tmp);
+	free(path_home);
+	path_home = ft_strjoin(" ~ ", path_absolute + i);
+	free(path_absolute);
+	return (path_home);
 }
 
 char	*ft_get_chdir(void)
 {
-	char	*tmp;
-	char	*tmp2;
+	char	*absolute_path;
+	char	*working_directory;
 	int		len;
-	int		size_cwd;
 
-	tmp = NULL;
-	tmp = getcwd(tmp, 0);
-	if (tmp == NULL)
-		return (free(tmp), ft_strdup(" > "));
-	len = ft_strlen(tmp);
-	size_cwd = ft_strlen(tmp);
-	while (len >= 0 && tmp[len - 1] != '/')
+	absolute_path = NULL;
+	absolute_path = getcwd(absolute_path, 0);
+	if (absolute_path == NULL)
+		return (NULL);
+	len = ft_strlen(absolute_path);
+	while (len >= 0 && absolute_path[len - 1] != '/')
 		len--;
-	tmp2 = ft_strndup(tmp + len, size_cwd - len);
-	free(tmp);
-	return (tmp2);
+	working_directory = ft_strndup(absolute_path + len,
+			ft_strlen(absolute_path) - len);
+	free(absolute_path);
+	return (working_directory);
 }
 
-char	*display_error(int last_status)
+char	*assemble(char **display)
 {
-	char	*display_error;
+	char	*display_final;
+	int		i;
+	int		len;
 
-	if (last_status == 0)
-		display_error = ft_strdup(" ☀️  ");
-	else
-		display_error = ft_strdup(" 🌙 ");
-	return (display_error);
+	i = 0;
+	len = 0;
+	while (display[i] != NULL)
+		len += ft_strlen(display[i++]);
+	display_final = ft_calloc(sizeof(char), len + 1);
+	if (display_final == NULL)
+		return (NULL);
+	i = 0;
+	while (display[i] != NULL)
+		ft_strlcat(display_final, display[i++], len + 1);
+	free(display[2]);
+	free(display[6]);
+	free(display[10]);
+	ft_putendl_fd(display_final, 1);
+	return (display_final);
 }
