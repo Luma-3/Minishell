@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/23 18:24:34 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 16:30:22 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int			skip_quote_parenthesis(const char *prompt, int index);
 void		init_ats(t_ats *ats, char *prompt, t_list *env);
 
 int			parse_ats(char *prompt, t_ats *ats, bool check_arg);
+
+char		*handle_env_prompt(t_ats *ats, char *prompt);
 
 // bin_tree.c
 

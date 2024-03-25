@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
+#    By: anthony <anthony@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/25 11:07:17 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/25 16:31:20 by anthony          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,7 +91,8 @@ SRC_ATS_LIST			=	ats.c				\
 							ats_copy_cmd.c		\
 							bin_tree.c			\
 							bin_tree_utils.c 	\
-							take_redir.c		
+							take_redir.c		\
+							take_env.c
 SRC_ATS					=	$(addprefix $(SRC_ATS_DIR), $(SRC_ATS_LIST))
 
 SRC_POST_PARSER_DIR		=	post_parser/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ats_copy_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/23 19:00:24 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 19:35:39 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,15 @@ t_token	*copy_token(t_ats *ats, const char *prompt, int size_copy)
 	bool	is_subshell;
 
 	nb_redir = 0;
+	printf("prompt: %s\n", prompt);
 	prompt_copy = take_redir(ats, prompt, size_copy, &nb_redir);
 	if (prompt_copy == NULL)
 		return (NULL);
 	is_subshell = is_pipeline(prompt_copy);
-	token = init_node(prompt_copy, size_copy);
+	printf("prompt_copy avant: %s\n", prompt_copy);
+	prompt_copy = handle_env_prompt(ats, prompt_copy);
+	printf("prompt_copy: %s\n", prompt_copy);
+	token = init_node(prompt_copy, size_copy);//TODO handle NULL
 	if (token == NULL)
 		return (NULL);
 	if (token->is_subshell == false)

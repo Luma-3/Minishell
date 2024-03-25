@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_error_msg.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:20:43 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/25 11:11:26 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 12:11:12 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,19 @@ void	print_error_why(t_list *env)
 	char	*command;
 
 	command = ft_strdup("toilet -tf future --gay -F border WHY ?????");
+	if (command == NULL)
+	{
+		errno = ENOMEM;
+		ft_perror(ats.errors, "KikiShell");
+		return ;
+	}
 	init_ats(&ats, command, env);
-	parse_ats(command, &ats, false);
+	if (parse_ats(command, &ats, true) == FAILURE)
+	{
+		clear_ats(&ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC
+			| ATS_PIPE);
+		return ;
+	}
 	read_ats(&ats, ats.root);
 	ft_putstr_fd("Why do you want to put arguments with KikiShell ?\n", 1);
 	ft_putstr_fd("FLY, YOU FOOLS !!!\n", 1);

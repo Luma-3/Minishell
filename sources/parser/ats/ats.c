@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 11:45:12 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/25 16:25:44 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ int	parse_ats(char *prompt, t_ats *ats, bool check_arg)
 			return (FAILURE);
 		handle_heredoc(prompt, ats);
 	}
-	//TODO VARIABLE ENV
 	if (atomize_prompt(ats) == FAILURE)
 	{
 		perror("atomize_prompt");

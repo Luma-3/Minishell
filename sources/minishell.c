@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 11:47:09 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/25 17:15:33 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	init_ats(t_ats *ats, char *prompt, t_list *env)
 
 static void	exec_process(t_ats *ats, t_list *env, char *input )
 {
-	clear_ats(ats, ATS_HEREDOC | ATS_PIPE | ATS_PROMPT
-		| ATS_REDIR | ATS_ROOT);
+	clear_ats(ats, ATS_HEREDOC | ATS_PIPE
+		| ATS_PROMPT | ATS_REDIR | ATS_ROOT);
 	ft_putchar_fd('\n', 1);
 	init_ats(ats, input, env);
 	if (parse_ats(input, ats, true) == FAILURE)
@@ -47,7 +47,7 @@ static void	exec_process(t_ats *ats, t_list *env, char *input )
 	read_ats(ats, ats->root);
 	ft_add_history(input, env);
 	ft_putchar_fd('\n', 1);
-	clear_ats(ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC | ATS_PIPE);
+	clear_ats(ats, ATS_REDIR | ATS_ROOT | ATS_HEREDOC | ATS_PIPE);
 }
 
 void	read_input(t_list *env, t_error *errors)
