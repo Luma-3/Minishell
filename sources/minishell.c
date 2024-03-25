@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 11:14:12 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/25 11:47:09 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ static void	exec_process(t_ats *ats, t_list *env, char *input )
 	ft_putchar_fd('\n', 1);
 	init_ats(ats, input, env);
 	if (parse_ats(input, ats, true) == FAILURE)
+	{
 		clear_ats(ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC
 			| ATS_PIPE);
+		return ;
+	}
 	read_ats(ats, ats->root);
 	ft_add_history(input, env);
 	ft_putchar_fd('\n', 1);
@@ -50,20 +53,18 @@ static void	exec_process(t_ats *ats, t_list *env, char *input )
 void	read_input(t_list *env, t_error *errors)
 {
 	t_ats		ats;
-	char		*prompt;
 	char		*input;
 
-	prompt = NULL;
 	ats.errors = errors;
 	presentation_display(&ats, env);
 	while (true)
 	{
 		g_sigreciever = 0;
-		prompt = ft_create_prompt(env, ats.last_status);
+		ft_create_prompt(env, ats.last_status);
 		input = readline("\001\033[1;32m┗━━▶\002\033[0m ");
 		if (input == NULL)
 		{
-			(free(input), free(prompt));
+			free(input);
 			goodbye_display(&ats, env);
 			break ;
 		}

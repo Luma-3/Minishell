@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:39:34 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/25 10:25:20 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/25 11:53:33 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,12 @@ char	*ft_get_chdir(void)
 		len--;
 	working_directory = ft_strndup(absolute_path + len,
 			ft_strlen(absolute_path) - len);
+	//TODO : check if working_directory is NULL
 	free(absolute_path);
 	return (working_directory);
 }
 
-char	*assemble(char **display)
+void	assemble(char **display)
 {
 	char	*display_final;
 	int		i;
@@ -66,7 +67,7 @@ char	*assemble(char **display)
 		len += ft_strlen(display[i++]);
 	display_final = ft_calloc(sizeof(char), len + 1);
 	if (display_final == NULL)
-		return (NULL);
+		return ;
 	i = 0;
 	while (display[i] != NULL)
 		ft_strlcat(display_final, display[i++], len + 1);
@@ -74,5 +75,6 @@ char	*assemble(char **display)
 	free(display[6]);
 	free(display[10]);
 	ft_putendl_fd(display_final, 1);
-	return (display_final);
+	free (display_final);
+	return ;
 }

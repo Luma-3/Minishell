@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/25 10:27:41 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/25 11:54:34 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,19 @@ void	presentation_display(t_ats *ats, t_list *env)
 
 	command = ft_strdup("toilet -tf future --gay -F border\
 			Welcome in KIKISHELL");
-	(init_ats(ats, command, env), parse_ats(command, ats, false));
+	if (command == NULL)
+	{
+		errno = ENOMEM;
+		ft_perror(ats->errors, "KikiShell");
+		return ;
+	}
+	init_ats(ats, command, env);
+	if (parse_ats(command, ats, true) == FAILURE)
+	{
+		clear_ats(ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC
+			| ATS_PIPE);
+		return ;
+	}
 	(read_ats(ats, ats->root), ft_putchar_fd('\n', 1));
 }
 
@@ -28,15 +40,29 @@ void	goodbye_display(t_ats *ats, t_list *env)
 
 	command = ft_strdup("toilet -tf future --gay -F border\
 			See you soon in KIKISHELL");
+	if (command == NULL)
+	{
+		errno = ENOMEM;
+		ft_perror(ats->errors, "KikiShell");
+		return ;
+	}
 	clear_ats(ats, ATS_HEREDOC | ATS_PIPE | ATS_PROMPT
 		| ATS_REDIR | ATS_ROOT);
-	(init_ats(ats, command, env), parse_ats(command, ats, false));
-	(read_ats(ats, ats->root), ft_putchar_fd('\n', 1));
+	init_ats(ats, command, env);
+	if (parse_ats(command, ats, true) == FAILURE)
+	{
+		clear_ats(ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC
+			| ATS_PIPE);
+		return ;
+	}
+	read_ats(ats, ats->root);
+	ft_putchar_fd('\n', 1);
 	clear_ats(ats, ATS_ENV | ATS_HEREDOC | ATS_PIPE | ATS_PROMPT
 		| ATS_REDIR | ATS_ROOT);
 	return ;
 }
-char	*ft_create_prompt(t_list *env, int last_status)
+
+void	ft_create_prompt(t_list *env, int last_status)
 {
 	char	*display[20];
 
@@ -58,5 +84,6 @@ char	*ft_create_prompt(t_list *env, int last_status)
 		display[12] =" 🌙 ";
 	display[13] = RESET;
 	display[14] = '\0';
-	return (assemble(display));
+	assemble(display);
+	return ;
 }
