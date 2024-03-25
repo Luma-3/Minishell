@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/24 17:54:03 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/25 10:28:36 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "parser.h"
 #include "ms_error.h"
 #include "display.h"
+#include "sys/time.h"
 
 void	init_ats(t_ats *ats, char *prompt, t_list *env)
 {
@@ -53,12 +54,11 @@ void	read_input(t_list *env)
 	(__init_error__(ats.errors), presentation_display(&ats, env));
 	while (true)
 	{
-		prompt = display_prompt(&ats, env, prompt);
+		prompt = ft_create_prompt(env, ats.last_status);
 		input = readline("\001\033[1;32m┗━━▶\002\033[0m ");
 		if (input == NULL)
 		{
-			free(input);
-			free(prompt);
+			(free(input), free(prompt));
 			goodbye_display(&ats, env);
 			break ;
 		}
