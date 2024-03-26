@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_error_msg.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:20:43 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/25 12:11:12 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/26 13:13:20 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,24 @@ void	print_error_message(void)
 	perror(ERROR_FORMAT);
 }
 
+void	print_error_arg(char token)
+{
+	ft_putstr_fd("parse error near '", STDERR_FILENO);
+	ft_putchar_fd(token, STDERR_FILENO);
+	ft_putstr_fd("'\n", STDERR_FILENO);
+}
+
+void	print_error_arg_msg(void)
+{
+	ft_putstr_fd("kikishell: syntax error near", STDERR_FILENO);
+	ft_putstr_fd("unexpected token `", STDERR_FILENO);
+}
+
 void	print_error_display(void)
 {
 	printf("minishell: toilet command not found\n");
 	printf("You can install it with 'sudo apt install toilet'\n");
 	printf("Restart minishell and now you have a beautiful display\n");
-}
-
-int	wexit_status(int status)
-{
-	return (((status) & 0xff00) >> 8);
 }
 
 void	print_error_why(t_list *env)

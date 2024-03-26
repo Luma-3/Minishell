@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_error.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:52:44 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 11:11:59 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:11:36 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,19 @@ char	*ft_strerror(t_error *errors, int code);
 
 void	perror_switch(t_error *errors, char *str);
 
+//PRINT ERROR
+
 void	print_error_why(t_list *env);
 
+void	print_error_arg_msg(void);
+
+void	print_error_arg(char token);
+
+void	print_error_message(void);
+
+void	print_error_display(void);
 
 // CLEARTOOL
-
 void	clear_ats(t_ats *ats, int flag);
 
 #endif

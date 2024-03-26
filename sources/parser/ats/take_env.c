@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   take_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:51:57 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/25 19:34:20 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/26 11:29:22 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static char	*get_env_name(char *prompt, int index)
 	env_name = NULL;
 	i = index;
 	while (ft_iswhitespace(prompt[i]) == false && prompt[i] != '\0'
-		&& prompt[i] != '$')
+		&& prompt[i] != '$' && is_parenthesis(prompt[i]) == false
+		&& is_quote(prompt[i]) == false)
 		i++;
 	if (i == index)
 		return (NULL);
@@ -40,16 +41,13 @@ static char	*copy_env_in_prompt(char *prompt, char *new_prompt,
 	i = 0;
 	j = 0;
 	while (prompt[i] && i < index)
-	{
 		new_prompt[j++] = prompt[i++];
-	}
 	i = 0;
 	while (value_env[i])
-	{
 		new_prompt[j++] = value_env[i++];
-	}
 	return (new_prompt);
 }
+
 static char	*env_to_str(char *prompt, char *value_env, int index)
 {
 	char	*new_prompt;
@@ -60,7 +58,8 @@ static char	*env_to_str(char *prompt, char *value_env, int index)
 		index++;
 	i = index + 1;
 	while (ft_iswhitespace(prompt[i]) == false && prompt[i] != '\0'
-		&& prompt[i] != '$')
+		&& prompt[i] != '$' && is_parenthesis(prompt[i]) == false
+		&& is_quote(prompt[i]) == false)
 		i++;
 	prompt_tmp = calloc(sizeof(char), ft_strlen(prompt) - (i - index)
 			+ ft_strlen(value_env) + 1);
@@ -70,7 +69,34 @@ static char	*env_to_str(char *prompt, char *value_env, int index)
 	new_prompt = ft_strjoin(prompt_tmp, prompt + i);
 	free(prompt_tmp);
 	free(prompt);
-	printf("new_prompt: %s\n", new_prompt);
+	return (new_prompt);
+}
+
+static char	*delete_env_in_prompt(char *prompt, int index)
+{
+	char	*new_prompt;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	new_prompt = calloc(sizeof(char), ft_strlen(prompt) + 1);
+	if (new_prompt == NULL)
+		return (NULL);
+	while (prompt[i] && i < index)
+	{
+		new_prompt[j++] = prompt[i++];
+	}
+	i++;
+	while (ft_iswhitespace(prompt[i]) == false && prompt[i] != '\0'
+		&& prompt[i] != '$' && is_parenthesis(prompt[i]) == false
+		&& is_quote(prompt[i]) == false)
+		i++;
+	while (prompt[i])
+	{
+		new_prompt[j++] = prompt[i++];
+	}
+	free(prompt);
 	return (new_prompt);
 }
 
@@ -91,13 +117,14 @@ char	*handle_env_prompt(t_ats *ats, char *prompt)
 			{
 				value_env = ms_getenv(ats->env, name_env);
 				if (value_env == NULL)
-					return (free(name_env), prompt);
+					return (free(name_env), delete_env_in_prompt(prompt, i));
 				prompt = env_to_str(prompt, value_env, i);
 				(free(name_env), free(value_env));
 			}
+			else
+				prompt = delete_env_in_prompt(prompt, i);
 		}
 		i++;
 	}
-	ats->prompt = ft_strdup(prompt);
 	return (prompt);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 17:15:33 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/26 13:31:13 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	init_ats(t_ats *ats, char *prompt, t_list *env)
 
 static void	exec_process(t_ats *ats, t_list *env, char *input )
 {
-	clear_ats(ats, ATS_HEREDOC | ATS_PIPE
-		| ATS_PROMPT | ATS_REDIR | ATS_ROOT);
+	// clear_ats(ats, ATS_HEREDOC | ATS_PIPE
+	// 	| ATS_PROMPT | ATS_REDIR | ATS_ROOT);
 	ft_putchar_fd('\n', 1);
 	init_ats(ats, input, env);
 	if (parse_ats(input, ats, true) == FAILURE)
@@ -80,7 +80,7 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	__init_error__(errors);
 	printf("\033]0;KikiShell\007");
-	init_signal();
+	// init_signal();
 	env = copy_env(envp);
 	if (ac != 1)
 		return (print_error_why(env), EXIT_FAILURE);

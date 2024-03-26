@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/25 17:16:40 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/26 13:30:24 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	goodbye_display(t_ats *ats, t_list *env)
 		perror_switch(ats->errors, "KikiShell");
 		return ;
 	}
-	clear_ats(ats, ATS_HEREDOC | ATS_PIPE | ATS_PROMPT
-		| ATS_REDIR | ATS_ROOT);
+	// clear_ats(ats, ATS_HEREDOC | ATS_PIPE | ATS_PROMPT
+	// 	| ATS_REDIR | ATS_ROOT);
 	init_ats(ats, command, env);
 	if (parse_ats(command, ats, true) == FAILURE)
 	{
@@ -61,7 +61,7 @@ void	goodbye_display(t_ats *ats, t_list *env)
 	ft_putchar_fd('\n', 1);
 	clear_ats(ats, ATS_ENV | ATS_HEREDOC | ATS_PIPE | ATS_PROMPT
 		| ATS_REDIR | ATS_ROOT);
-	free(command);
+	// free(command);
 	return ;
 }
 
@@ -90,3 +90,4 @@ void	ft_create_prompt(t_list *env, int last_status)
 	assemble(display);
 	return ;
 }
+//😃🦆

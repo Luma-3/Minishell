@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 16:30:22 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/26 13:16:47 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int			verif_prompt(const char *prompt);
 int			verif_if_quote_closed(const char *prompt);
 
 int			verif_if_parenthesis_closed(const char *prompt);
+
+int			verif_arg_parenthesis(const char *prompt);
 
 int			verif_before_operator(const char *prompt, char *token);
 

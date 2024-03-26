@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anthony <anthony@student.42.fr>            +#+  +:+       +#+         #
+#    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/25 16:31:20 by anthony          ###   ########.fr        #
+#    Updated: 2024/03/26 12:49:48 by antgabri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,8 @@ SRC_PARSER_DIR			=	parser/
 
 SRC_PRE_PARSER_DIR		=	pre_parser/
 SRC_PRE_PARSER_LIST		=	verif_prompt.c		\
-							verif_utils.c
+							verif_utils.c		\
+							verif_utils2.c		
 SRC_PRE_PARSER			=	$(addprefix $(SRC_PRE_PARSER_DIR), $(SRC_PRE_PARSER_LIST))
 
 SRC_ATS_DIR				=	ats/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 11:08:31 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:16:39 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,7 @@
 int			ft_add_history(char *input, t_list *env);
 int			ft_create_history(t_list *env);
 
-//PRINT_ERROR
-void		print_error_message(void);
-void		print_error_arg(char token);
-void		print_error_display(void);
-
+//SIGNAL
 void		init_signal(void);
-
-int			wexit_status(int status);
 
 #endif
