@@ -6,28 +6,13 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:47:27 by Monsieur_Ca       #+#    #+#             */
-/*   Updated: 2024/03/26 13:31:09 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 18:45:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "redirection.h"
 #include "ms_error.h"
-
-static char	*get_path_binary(char *tab)
-{
-	char	*cwd;
-	char	*path_prog;
-	char	*temp;
-
-	cwd = NULL;
-	if (getcwd(cwd, 0) == NULL)
-		return (NULL);
-	temp = ft_strtrim(tab, ".");
-	path_prog = ft_strjoin(cwd, temp);
-	free(temp);
-	return (path_prog);
-}
 
 static char	*create_path(char *path, char *arg)
 {
@@ -65,26 +50,44 @@ static char	*get_path_command(char *tab, t_list *env)
 	return (ft_rm_split(path_command), NULL);
 }
 
+static int	is_path(char *tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		if (tab[i] == '/')
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
+static char	*path_to_relative(char *tab)
+{
+	char	*temp;
+
+	temp = ft_strjoin("./", tab);
+	if (temp == NULL)
+		return (NULL);
+	if (access(temp, X_OK) == SUCCESS)
+		return (temp);
+	return (NULL);
+}
+
 char	*get_path(t_list *env, char *tab)
 {
 	char	*path;
-	char	**temp;
 
-	temp = NULL;
-	if (tab[0] == '\\')
-	{
-		temp = ft_split(tab, ' ');
-		if (temp != NULL && access(temp[0], F_OK) == SUCCESS)
-			return (temp[0]);
-	}
-	else if (tab[0] == '.')
-	{
-		path = get_path_binary(tab);
-		if (path != NULL && access(temp[0], X_OK) == SUCCESS)
-			return (path);
-	}
+	if (tab[0] == '/' || ft_strncmp(tab, "./", 2) == 0)
+		return (tab);
 	else
 	{
+		if (is_path(tab) == true)
+		{
+			return (path_to_relative(tab));
+		}
 		path = get_path_command(tab, env);
 		if (path != NULL && access(path, X_OK | F_OK) == SUCCESS)
 			return (path);

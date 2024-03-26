@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 14:58:02 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 18:01:17 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,9 @@ void		init_signal(void);
 
 void		exec_process(t_maindata *ats, t_list *env, char *input);
 
-int			init_shell(t_maindata *core_data, t_error *errors, t_list *env,
-				char **envp);
+int			init_shell(t_maindata *core_data, t_error *errors, char **envp);
 
-int			safe_mode(t_maindata *core_data);
+int			init_safe_mode(t_maindata *core_data);
 
 //HISTORY
 

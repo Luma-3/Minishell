@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:39:34 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/26 14:59:16 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 18:28:42 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,27 @@ char	*path_to_tilde(t_list *env)
 {
 	char	*path_home;
 	char	*path_absolute;
-	char	*path_tmp;
 	int		i;
 
 	i = 0;
-	path_tmp = ft_strdup(" ~ ");
-	if (path_tmp == NULL)
-		return (NULL);
-	path_absolute = NULL;
+	path_absolute = getcwd(NULL, 0);
+	if (path_absolute == NULL)
+		return (ft_strdup("I am lost"));
 	path_home = ms_getenv(env, "HOME");
 	if (path_home == NULL)
-		return (path_tmp);
-	path_absolute = getcwd(path_absolute, 0);
-	if (path_absolute == NULL)
-		return (free(path_home), path_tmp);
+		return (path_absolute);
 	while (path_home[i] == path_absolute[i]
 		&& path_home[i] && path_absolute[i])
 		i++;
 	free(path_home);
 	path_home = ft_strjoin(" ~ ", path_absolute + i);
 	if (path_home == NULL)
-		return (free(path_home), free(path_absolute), path_tmp);
-	(free(path_absolute), free(path_tmp));
+		return (path_absolute);
+	free(path_absolute);
 	return (path_home);
 }
 
-char	*ft_get_chdir(void)
+char	*get_current_dir(void)
 {
 	char	*absolute_path;
 	char	*working_directory;
@@ -66,7 +61,7 @@ char	*ft_get_chdir(void)
 	return (working_directory);
 }
 
-char *assemble(char **display)
+char	*assemble(char **display)
 {
 	char	*display_final;
 	int		i;

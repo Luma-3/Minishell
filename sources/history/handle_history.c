@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:39:31 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/26 14:26:35 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 18:31:13 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	open_history(const char *name, const char *uname)
 	path_atom[4] = NULL;
 	path = assemble(path_atom);
 	fd = open(path, O_CREAT | O_RDWR, 0644);
-	printf("path = %s | fd = %d\n", path, fd);
 	free(path);
 	if (fd == -1)
 		return (errno = EBADFD, FAILURE);

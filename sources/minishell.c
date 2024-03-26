@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 15:12:07 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 18:43:11 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,14 @@ void	read_input(t_maindata *core_data)
 {
 	char		*input;
 
-	presentation_display(core_data, core_data->env);
 	while (true)
 	{
 		g_sigreciever = 0;
-		ft_create_prompt(core_data->env, core_data->last_status);
-		input = readline("\001\033[1;32m┗━━▶\002\033[0m ");
+		input = shell_prompt(core_data);
 		if (input == NULL)
 		{
 			free(input);
-			goodbye_display(core_data, core_data->env);
+			display_msg(core_data, core_data->env, BYE_MSG);
 			break ;
 		}
 		ft_add_history(input, core_data->history_fd);
@@ -80,15 +78,13 @@ void	read_input(t_maindata *core_data)
 
 int	main(int ac, char **av, char **envp)
 {
-	t_list		*env;
 	t_maindata	core_data;
 	t_error		errors[__NB_ERRORS_];
 
 	(void)av;
 	if (ac != 1)
 		print_error_why();
-	env = NULL;
-	if (init_shell(&core_data, errors, env, envp) == FAILURE)
+	if (init_shell(&core_data, errors, envp) == FAILURE)
 		return (EXIT_FAILURE);
 	read_input(&core_data);
 	return (EXIT_SUCCESS);

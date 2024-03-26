@@ -6,29 +6,30 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 20:45:55 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 14:52:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 18:37:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environement.h"
 #include <fcntl.h>
 
-static int	take_path(char *path)
+static char	*take_path(void)
 {
 	int		fd;
 	char	*line;
+	char	*path;
 
 	fd = open("/etc/environment", O_RDONLY);
 	if (fd == -1)
-		return (perror("Safe Mode"), FAILURE);
+		return (perror("Safe Mode"), NULL);
 	line = get_next_line(fd);
 	close(fd);
 	if (line == NULL)
-		return (errno = ENOMEM, FAILURE);
+		return (errno = ENOMEM, NULL);
 	path = ft_strndup(line + 6, ft_strlen(line) - 8);
 	if (path == NULL)
-		return (errno = ENOMEM, FAILURE);
-	return (SUCCESS);
+		return (errno = ENOMEM, NULL);
+	return (path);
 }
 
 static int	safe_env(t_list *env)
@@ -48,16 +49,17 @@ static int	safe_env(t_list *env)
 	return (SUCCESS);
 }
 
-int	safe_mode(t_maindata *core_data)
+int	init_safe_mode(t_maindata *core_data)
 {
-	if (take_path(core_data->path) == FAILURE)
+	core_data->path = take_path();
+	if (core_data->path == NULL)
 	{
 		perror_switch(core_data->errors, "Safe Mode");
 		return (FAILURE);
 	}
 	if (safe_env(core_data->env) == FAILURE)
 	{
-		perror_switch(core_data->errors, "Safe Mode2");
+		perror_switch(core_data->errors, "Safe Mode");
 		return (FAILURE);
 	}
 	return (SUCCESS);

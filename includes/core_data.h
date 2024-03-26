@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 15:10:43 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:43:39 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,23 @@
 # define CORE_REDIR		0x01
 # define CORE_HEREDOC	0x02
 # define CORE_ENV		0x04
-# define CORE_PROMPT		0x08
+# define CORE_PROMPT	0x08
 # define CORE_ROOT		0x10
 # define CORE_PIPE		0x20
 # define CORE_UNAME		0x40
 # define CORE_ALL		0x7F
 
 # define FAILURE -1
-# define SUCCESS 0
+# define SUCCESS	0
 
 # define READ 0
 # define WRITE 1
 
 # define SIGINT 2
+
+# define HELLO_MSG 	"toilet -tf future --gay -F border Welcome in KIKISHELL"
+# define BYE_MSG 	"toilet -tf future --gay -F border See you soon !!!"
+# define SAFE_MSG 	"toilet -tf future --gay -F border Welcome in SAFEKIKI"
 
 // ERRORS
 
