@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   take_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:51:57 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/26 11:29:22 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:22:48 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static char	*delete_env_in_prompt(char *prompt, int index)
 	return (new_prompt);
 }
 
-char	*handle_env_prompt(t_ats *ats, char *prompt)
+char	*handle_env_prompt(t_maindata *core_data, char *prompt)
 {
 	int		i;
 	char	*name_env;
@@ -115,7 +115,7 @@ char	*handle_env_prompt(t_ats *ats, char *prompt)
 			name_env = get_env_name(prompt, i + 1);
 			if (name_env != NULL)
 			{
-				value_env = ms_getenv(ats->env, name_env);
+				value_env = ms_getenv(core_data->env, name_env);
 				if (value_env == NULL)
 					return (free(name_env), delete_env_in_prompt(prompt, i));
 				prompt = env_to_str(prompt, value_env, i);

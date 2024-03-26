@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:52:44 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 14:57:23 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:16:14 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,13 @@ char	*ft_strerror(t_error *errors, int code);
 
 void	perror_switch(t_error *errors, char *str);
 
-void	print_error_why(t_list *env);
+void	print_error_why(void);
 
 void	print_error_arg_msg(void);
 
 void	print_error_arg(char token);
 
 void	print_error_message(void);
-
-void	print_error_display(void);
-void	print_error_message(void);
-void	print_error_arg(char token);
-void	print_error_display(void);
 
 // CLEARTOOL
 

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 15:01:37 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:24:32 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,34 +55,34 @@ static t_token	*init_node(const char *cmd, int size_cmd)
 	return (data);
 }
 
-t_token	*copy_insert_node(t_ats *ats, int i_copy, int i_read)
+t_token	*copy_insert_node(t_maindata *core_data, int i_copy, int i_read)
 {
 	t_token	*data;
 
-	data = copy_token(ats, ats->prompt + i_copy, i_read - i_copy);
+	data = copy_token(core_data, core_data->prompt + i_copy, i_read - i_copy);
 	if (data == NULL)
 		return (NULL);
-	if (insert_node(&(ats->root), data, compare_token) == FAILURE)
+	if (insert_node(&(core_data->root), data, compare_token) == FAILURE)
 		return (free(data), NULL);
 	return (data);
 }
 
-int	copy_cmd_operator(t_ats *ats, int *i_copy, int *i_read)
+int	copy_cmd_operator(t_maindata *core, int *i_copy, int *i_read)
 {
 	t_token	*data;
 
-	data = copy_token(ats, ats->prompt + *i_copy, *i_read - *i_copy);
+	data = copy_token(core, core->prompt + *i_copy, *i_read - *i_copy);
 	if (data == NULL)
 		return (FAILURE);
-	if (insert_node(&(ats->root), data, compare_token) == FAILURE)
+	if (insert_node(&(core->root), data, compare_token) == FAILURE)
 		return (free(data), FAILURE);
 	*i_copy = *i_read;
 	*i_read += 2;
-	data = copy_token(ats, ats->prompt + *i_copy, *i_read - *i_copy);
+	data = copy_token(core, core->prompt + *i_copy, *i_read - *i_copy);
 	if (data == NULL)
 		return (FAILURE);
 	data->post_parser = false;
-	if (insert_node(&(ats->root), data, compare_token) == FAILURE)
+	if (insert_node(&(core->root), data, compare_token) == FAILURE)
 		return (free(data), FAILURE);
 	if (*(data->cmd) == '&')
 		data->exit_code = EXIT_SUCCESS;
@@ -92,7 +92,7 @@ int	copy_cmd_operator(t_ats *ats, int *i_copy, int *i_read)
 	return (SUCCESS);
 }
 
-t_token	*copy_token(t_ats *ats, const char *prompt, int size_copy)
+t_token	*copy_token(t_maindata *core_data, const char *prompt, int size_copy)
 {
 	t_token	*token;
 	char	*prompt_copy;
@@ -100,10 +100,11 @@ t_token	*copy_token(t_ats *ats, const char *prompt, int size_copy)
 	bool	is_subshell;
 
 	nb_redir = 0;
-	prompt_copy = take_redir(ats, prompt, size_copy, &nb_redir);
+	prompt_copy = take_redir(core_data, prompt, size_copy, &nb_redir);
 	if (prompt_copy == NULL)
 		return (NULL);
 	is_subshell = is_pipeline(prompt_copy);
+	prompt_copy = handle_env_prompt(core_data, prompt_copy);
 	token = init_node(prompt_copy, size_copy);
 	if (token == NULL)
 		return (NULL);

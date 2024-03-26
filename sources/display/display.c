@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/26 14:59:01 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:53:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,8 @@ void	ft_create_prompt(t_list *env, int last_status)
 	display[10] = ft_get_chdir();
 	display[11] = " ";
 	if (last_status == 0)
-		display[12] = " ☀️ ";
-		display[12] = " ☀️ ";
+		display[12] = " ☀️  ";
 	else
-		display[12] = " 🌙 ";
 		display[12] = " 🌙 ";
 	display[13] = RESET;
 	display[14] = '\0';

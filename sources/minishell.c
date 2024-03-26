@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 14:54:59 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:12:07 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,42 +18,42 @@
 
 volatile int	g_sigreciever = 0;
 
-int	init_ats(t_maindata *ats, char *prompt, t_list *env)
+int	init_core_data(t_maindata *core_data, char *prompt, t_list *env)
 {
 	t_ats	*root;
 
 	root = NULL;
-	ats->env = env;
-	ats->prompt = prompt;
-	ats->queue_redir = ft_init_queue();
-	ats->queue_heredoc = ft_init_queue();
-	ats->queue_pipe = ft_init_queue();
-	if (ats->queue_redir == NULL || ats->queue_heredoc == NULL
-		|| ats->queue_pipe == NULL)
+	core_data->env = env;
+	core_data->prompt = prompt;
+	core_data->queue_redir = ft_init_queue();
+	core_data->queue_heredoc = ft_init_queue();
+	core_data->queue_pipe = ft_init_queue();
+	if (core_data->queue_redir == NULL || core_data->queue_heredoc == NULL
+		|| core_data->queue_pipe == NULL)
 	{
 		errno = ENOMEM;
-		perror_switch(ats->errors, "KikiShell");
+		perror_switch(core_data->errors, "KikiShell");
 		return (FAILURE);
 	}
-	ats->root = root;
-	ats->last_status = 1;
+	core_data->root = root;
+	core_data->last_status = 1;
 	return (SUCCESS);
 }
 
-void	exec_process(t_maindata *ats, t_list *env, char *input)
+void	exec_process(t_maindata *core_data, t_list *env, char *input)
 {
 	ft_putchar_fd('\n', 1);
-	if (init_ats(ats, input, env) == FAILURE)
+	if (init_core_data(core_data, input, env) == FAILURE)
 		return ;
-	if (parse_ats(input, ats, true) == FAILURE)
+	if (parse_ats(input, core_data, true) == FAILURE)
 	{
-		clear_ats(ats, CORE_REDIR | CORE_ROOT | CORE_PROMPT | CORE_HEREDOC
+		clear_ats(core_data, CORE_REDIR | CORE_ROOT | CORE_PROMPT | CORE_HEREDOC
 			| CORE_PIPE);
 		return ;
 	}
-	read_ats(ats, ats->root);
+	read_ats(core_data, core_data->root);
 	ft_putchar_fd('\n', 1);
-	clear_ats(ats, CORE_REDIR | CORE_ROOT | CORE_PROMPT | CORE_HEREDOC | CORE_PIPE);
+	clear_ats(core_data, CORE_REDIR | CORE_ROOT | CORE_PROMPT | CORE_HEREDOC | CORE_PIPE);
 }
 
 void	read_input(t_maindata *core_data)

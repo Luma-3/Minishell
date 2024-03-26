@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 15:01:24 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:07:15 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	add_queue_pipe(t_queue *queue, int nb_pipe)
 	return (SUCCESS);
 }
 
-static int	copy_cmd_pipe(t_ats *ats, int i_copy, int i_read, int *nb_pipe)
+static int	copy_cmd_pipe(t_maindata *ats, int i_copy, int i_read, int *nb_pipe)
 {
 	t_token	*data;
 
@@ -44,7 +44,7 @@ static int	copy_cmd_pipe(t_ats *ats, int i_copy, int i_read, int *nb_pipe)
 	return (SUCCESS);
 }
 
-static int	atomize_pipeline(t_ats *ats)
+static int	atomize_pipeline(t_maindata *ats)
 {
 	int				i_read;
 	int				i_copy;
@@ -73,7 +73,7 @@ static int	atomize_pipeline(t_ats *ats)
 	return (SUCCESS);
 }
 
-static int	atomize_prompt(t_ats *ats)
+static int	atomize_prompt(t_maindata *ats)
 {
 	int		i_copy;
 	int		i_read;
@@ -101,21 +101,21 @@ static int	atomize_prompt(t_ats *ats)
 	return (SUCCESS);
 }
 
-int	parse_ats(char *prompt, t_ats *ats, bool check_arg)
+int	parse_ats(char *prompt, t_maindata *core_data, bool check_arg)
 {
 	if (check_arg == true)
 	{
 		if (verif_prompt(prompt) == FAILURE)
 			return (FAILURE);
-		handle_heredoc(prompt, ats);
+		handle_heredoc(prompt, core_data);
 	}
 	//TODO VARIABLE ENV
-	if (atomize_prompt(ats) == FAILURE)
+	if (atomize_prompt(core_data) == FAILURE)
 	{
 		perror("atomize_prompt");
 		return (FAILURE);
 	}
-	if (post_parser(ats->root) == FAILURE)
+	if (post_parser(core_data->root) == FAILURE)
 	{
 		perror("post_parser");
 		return (FAILURE);

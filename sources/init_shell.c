@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:49:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 14:28:59 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:49:51 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ int	init_shell(t_maindata *core_data, t_error *errors, t_list *env, char **envp)
 	if (core_data->uname == NULL)
 		return (perror_switch(errors, "KikiShell1"), FAILURE);
 	printf("ccuname = %s\n", core_data->uname);
-	core_data->history_fd = open_history(".kikishell_history",
+	core_data->history_fd = open_history(".kiki_history",
 			core_data->uname);
+	get_history(core_data->history_fd);
 	if (core_data->history_fd == FAILURE)
 		return (perror_switch(errors, "KikiShell2"), FAILURE);
 	env = env_to_lst(envp);

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:39:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 20:52:34 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:15:25 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,23 @@
 
 // PIPE
 
-int		dup_pipe(t_maindata *ats, int index);
+int		dup_pipe(t_maindata *core_data, int index);
 
-int		close_pipe(t_maindata *ats);
+int		close_pipe(t_maindata *core_data);
 
-int		handle_pipeline(t_maindata *ats, const t_ats *node);
+int		handle_pipeline(t_maindata *core_data, const t_ats *node);
 
 // EXEC
 
-int		read_ats(t_maindata *ats, t_ats *root);
+int		read_ats(t_maindata *core_data, t_ats *root);
 
-pid_t	exec_std(t_maindata *ats, const t_ats *node);
+pid_t	exec_std(t_maindata *core_data, const t_ats *node);
 
 int		exec_command(char **tab_cmd, t_list **env, t_error *errors);
 
-int		exec_subshell(t_maindata *ats, t_ats *node);
+int		exec_subshell(t_maindata *core_data, t_ats *node);
 
-int		clean_parent(t_maindata *ats, const t_ats *node);
+int		clean_parent(t_maindata *core_data, const t_ats *node);
 
 //PATH HANDLING
 

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 14:42:19 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:19:04 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 #include "redirection.h"
 #include "parser.h"
 
-int	clean_parent(t_maindata *ats, const t_ats *node)
+int	clean_parent(t_maindata *core_data, const t_ats *node)
 {
 	t_queue_redir	*free_data_redir;
 	t_queue_heredoc	*free_data_heredoc;
 
 	while (node->data->nb_redir > 0)
 	{
-		free_data_redir = (t_queue_redir *)ft_dequeue(ats->queue_redir);
+		free_data_redir = (t_queue_redir *)ft_dequeue(core_data->queue_redir);
 		node->data->nb_redir--;
 		if (free_data_redir->type_redir == REDIR_HEREDOC)
 		{
-			free_data_heredoc = ft_dequeue(ats->queue_heredoc);
+			free_data_heredoc = ft_dequeue(core_data->queue_heredoc);
 			free(free_data_heredoc->file_name);
 			free(free_data_heredoc->delimiter);
 			free(free_data_heredoc);
@@ -35,11 +35,11 @@ int	clean_parent(t_maindata *ats, const t_ats *node)
 		free(free_data_redir);
 	}
 	if (node->data->index - 1 >= 0)
-		return (close_pipe(ats));
+		return (close_pipe(core_data));
 	return (SUCCESS);
 }
 
-pid_t	exec_std(t_maindata *ats, const t_ats *node)
+pid_t	exec_std(t_maindata *core_data, const t_ats *node)
 {
 	pid_t			pid;
 
@@ -50,17 +50,17 @@ pid_t	exec_std(t_maindata *ats, const t_ats *node)
 	if (pid == 0)
 	{
 		// TODO : handle builtins
-		if (handle_pipeline(ats, node) == FAILURE)
+		if (handle_pipeline(core_data, node) == FAILURE)
 			exit(FAILURE);
-		if (open_redir(ats->queue_redir, ats->queue_heredoc, node) != SUCCESS)
+		if (open_redir(core_data->queue_redir, core_data->queue_heredoc, node) != SUCCESS)
 			exit(FAILURE);
 		if (node->data->index != -1)
-			dup_pipe(ats, node->data->index);
-		if (exec_command(node->data->argv, &(ats->env), ats->errors) == FAILURE)
+			dup_pipe(core_data, node->data->index);
+		if (exec_command(node->data->argv, &(core_data->env), core_data->errors) == FAILURE)
 		{
-			clear_ats(ats, CORE_ALL);
+			clear_ats(core_data, CORE_ALL);
 			exit (FAILURE);
 		}
 	}
-	return (clean_parent(ats, node));
+	return (clean_parent(core_data, node));
 }

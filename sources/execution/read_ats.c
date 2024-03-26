@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 15:00:30 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:13:30 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 extern volatile int	g_sigreciever;
 
-static int	wait_process(t_maindata *ats, t_ats *node)
+static int	wait_process(t_maindata *core_data, t_ats *node)
 {
 	int	ret;
 
@@ -27,21 +27,21 @@ static int	wait_process(t_maindata *ats, t_ats *node)
 			return (FAILURE);
 		if (ret == node->data->pid)
 		{
-			ats->last_status = WEXITSTATUS(node->data->exit_code);
+			core_data->last_status = WEXITSTATUS(node->data->exit_code);
 			return (SUCCESS);
 		}
 		if (g_sigreciever == SIGINT)
 		{
 			kill(node->data->pid, SIGINT);
 			waitpid(node->data->pid, &node->data->exit_code, 0);
-			ats->last_status = WEXITSTATUS(node->data->exit_code);
+			core_data->last_status = WEXITSTATUS(node->data->exit_code);
 			g_sigreciever = 0;
 			return (FAILURE);
 		}
 	}
 }
 
-static int	read_node(t_maindata *ats, t_ats *node, t_ats *preview_node)
+static int	read_node(t_maindata *core_data, t_ats *node, t_ats *preview_node)
 {
 	if (is_operator(node->data->cmd) == true)
 	{
@@ -50,30 +50,30 @@ static int	read_node(t_maindata *ats, t_ats *node, t_ats *preview_node)
 	}
 	else if (node->data->is_subshell == true)
 	{
-		exec_subshell(ats, node);
+		exec_subshell(core_data, node);
 	}
 	else
 	{
-		exec_std(ats, node);
+		exec_std(core_data, node);
 	}
 	if (node->data->pid >= 0 && node->data->require_wait == true)
 	{
-		if (wait_process(ats, node) == FAILURE)
+		if (wait_process(core_data, node) == FAILURE)
 			return (FAILURE);
 	}
 	return (SUCCESS);
 }
 
-int	read_ats(t_maindata *ats, t_ats *root)
+int	read_ats(t_maindata *core_data, t_ats *root)
 {
 	int	error_return;
 
 	if (root == NULL)
 		return (SUCCESS);
-	error_return = read_ats(ats, root->left);
+	error_return = read_ats(core_data, root->left);
 	if (error_return == FAILURE)
 		return (FAILURE);
-	error_return = read_node(ats, root, root->left);
+	error_return = read_node(core_data, root, root->left);
 	if (is_operator(root->data->cmd) == true && error_return != FAILURE)
 	{
 		if (root->data->cmd[0] == '&' && root->data->exit_code != EXIT_SUCCESS)
@@ -82,9 +82,9 @@ int	read_ats(t_maindata *ats, t_ats *root)
 			&& root->data->exit_code == EXIT_SUCCESS)
 			return (SUCCESS);
 		else
-			error_return = read_ats(ats, root->right);
+			error_return = read_ats(core_data, root->right);
 	}
 	if (is_operator(root->data->cmd) == true && error_return != FAILURE)
-		error_return = read_node(ats, root, root->right);
+		error_return = read_node(core_data, root, root->right);
 	return (error_return);
 }

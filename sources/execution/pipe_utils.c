@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:16:20 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 20:28:13 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:21:53 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,19 @@ static int	dup_out(t_queue_pipe *data)
 	return (SUCCESS);
 }
 
-int	dup_pipe(t_maindata *ats, int index)
+int	dup_pipe(t_maindata *core_data, int index)
 {
 	t_queue_pipe	*data;
 
 	data = NULL;
 	if (index - 1 >= 0)
 	{
-		data = ft_dequeue(ats->queue_pipe);
+		data = ft_dequeue(core_data->queue_pipe);
 		if (dup_in(data) == FAILURE)
 			return (FAILURE);
 	}
-	data = ft_peek(ats->queue_pipe);
-	if (index != (int)count_nodes(ats->root, 0) - 1)
+	data = ft_peek(core_data->queue_pipe);
+	if (index != (int)count_nodes(core_data->root, 0) - 1)
 	{
 		if (dup_out(data) == FAILURE)
 			return (FAILURE);
@@ -58,11 +58,11 @@ int	dup_pipe(t_maindata *ats, int index)
 	return (SUCCESS);
 }
 
-int	close_pipe(t_maindata *ats)
+int	close_pipe(t_maindata *core_data)
 {
 	t_queue_pipe	*data;
 
-	data = ft_dequeue(ats->queue_pipe);
+	data = ft_dequeue(core_data->queue_pipe);
 	if (data == NULL)
 		return (FAILURE);
 	if (close(data->pipe_fd[READ]) == FAILURE)
@@ -79,7 +79,7 @@ int	close_pipe(t_maindata *ats)
 	return (SUCCESS);
 }
 
-int	handle_pipeline(t_maindata *ats, const t_ats *node)
+int	handle_pipeline(t_maindata *core_data, const t_ats *node)
 {
 	t_queue		*tmp_redir;
 	t_queue		*tmp_heredoc;
@@ -88,9 +88,9 @@ int	handle_pipeline(t_maindata *ats, const t_ats *node)
 	{
 		return (SUCCESS);
 	}
-	tmp_redir = ft_dup_queue(ats->queue_redir);
-	tmp_heredoc = ft_dup_queue(ats->queue_heredoc);
+	tmp_redir = ft_dup_queue(core_data->queue_redir);
+	tmp_heredoc = ft_dup_queue(core_data->queue_heredoc);
 	if (!tmp_redir || !tmp_heredoc)
 		return (FAILURE);
-	return (open_all_redir(tmp_redir, tmp_heredoc, ats->root));
+	return (open_all_redir(tmp_redir, tmp_heredoc, core_data->root));
 }
