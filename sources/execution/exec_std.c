@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 20:28:13 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:42:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ pid_t	exec_std(t_maindata *ats, const t_ats *node)
 			dup_pipe(ats, node->data->index);
 		if (exec_command(node->data->argv, &(ats->env), ats->errors) == FAILURE)
 		{
-			clear_ats(ats, ATS_ALL);
+			clear_ats(ats, CORE_ALL);
 			exit (FAILURE);
 		}
 	}

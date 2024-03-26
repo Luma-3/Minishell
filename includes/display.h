@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:41:17 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/25 20:53:04 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:25:26 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_create_prompt(t_list *env, int last_status);
 
 char	*path_to_tilde(t_list *env);
 
-void	assemble(char **display);
+char	*assemble(char **display);
 
 char	*ft_get_chdir(void);
 

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:47:27 by Monsieur_Ca       #+#    #+#             */
-/*   Updated: 2024/03/22 15:23:54 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:31:09 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ static char	*get_path_binary(char *tab)
 	cwd = NULL;
 	if (getcwd(cwd, 0) == NULL)
 		return (NULL);
-	path_prog = ft_strdup(cwd);
-	free(cwd);
 	temp = ft_strtrim(tab, ".");
-	path_prog = ft_strjoin(path_prog, temp);
+	path_prog = ft_strjoin(cwd, temp);
 	free(temp);
 	return (path_prog);
 }
@@ -72,7 +70,6 @@ char	*get_path(t_list *env, char *tab)
 	char	*path;
 	char	**temp;
 
-	path = NULL;
 	temp = NULL;
 	if (tab[0] == '\\')
 	{

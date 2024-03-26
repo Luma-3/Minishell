@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 21:01:35 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:42:08 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,64 +47,49 @@ void	exec_process(t_maindata *ats, t_list *env, char *input)
 		return ;
 	if (parse_ats(input, ats, true) == FAILURE)
 	{
-		clear_ats(ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC
-			| ATS_PIPE);
+		clear_ats(ats, CORE_REDIR | CORE_ROOT | CORE_PROMPT | CORE_HEREDOC
+			| CORE_PIPE);
 		return ;
 	}
 	read_ats(ats, ats->root);
 	ft_putchar_fd('\n', 1);
-	clear_ats(ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_HEREDOC | ATS_PIPE);
+	clear_ats(ats, CORE_REDIR | CORE_ROOT | CORE_PROMPT | CORE_HEREDOC | CORE_PIPE);
 }
 
-void	read_input(t_list *env, t_error *errors)
+void	read_input(t_maindata *core_data)
 {
-	t_maindata	ats;
 	char		*input;
 
-	ats.errors = errors;
-	presentation_display(&ats, env);
+	presentation_display(core_data, core_data->env);
 	while (true)
 	{
 		g_sigreciever = 0;
-		ft_create_prompt(env, ats.last_status);
+		ft_create_prompt(core_data->env, core_data->last_status);
 		input = readline("\001\033[1;32m┗━━▶\002\033[0m ");
 		if (input == NULL)
 		{
 			free(input);
-			goodbye_display(&ats, env);
+			goodbye_display(core_data, core_data->env);
 			break ;
 		}
-		ft_add_history(input, env);
-		exec_process(&ats, env, input);
+		ft_add_history(input, core_data->history_fd);
+		exec_process(core_data, core_data->env, input);
 	}
-	ft_lstclear(&env, free);
+	ft_lstclear(&(core_data->env), free);
 }
 
-int	init_shell(char **envp, int ac)
+int	main(int ac, char **av, char **envp)
 {
 	t_list		*env;
 	t_maindata	core_data;
 	t_error		errors[__NB_ERRORS_];
 
-	printf("\033]0;KikiShell\007");
-	__init_error__(errors);
-	init_signal();
-	ft_bzero(&core_data, sizeof(t_maindata));
-	env = env_to_lst(envp);
-	if (ac != 1)
-		return (print_error_why(env), EXIT_FAILURE); // TODO : check safe mode (anthony)
-	if (ft_create_history(env) == FAILURE)
-	{
-		perror_switch(errors, "KikiShell");
-		return (EXIT_FAILURE);
-	}
-}
-
-int	main(int ac, char **av, char **envp)
-{
 	(void)av;
-
-	init_shell();
-	read_input(env, errors);
+	if (ac != 1)
+		print_error_why();
+	env = NULL;
+	if (init_shell(&core_data, errors, env, envp) == FAILURE)
+		return (EXIT_FAILURE);
+	read_input(&core_data);
 	return (EXIT_SUCCESS);
 }

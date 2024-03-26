@@ -6,11 +6,11 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:09:50 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 20:06:20 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:52:14 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "environement.h"
 
 char	*ms_getenv(t_list *env, const char *name)
 {
@@ -55,10 +55,10 @@ int	ms_setenv(t_list **env, const char *name, const char *value)
 	}
 	new_var = ft_lstnew(ft_strjoin(format_name, value));
 	if (!new_var)
-		return (FAILURE);
+		return (errno = ENOMEM, FAILURE);
 	ft_lstadd_front(env, new_var);
 	free(format_name);
-	return (FAILURE);
+	return (SUCCESS);
 }
 
 int	ms_unsetenv(t_list **env, const char *name)

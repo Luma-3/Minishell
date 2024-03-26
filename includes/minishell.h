@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 20:52:49 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:36:03 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,24 @@
 # include "environement.h"
 
 # define ERROR_FORMAT "Minishell error"
-//int	g_sig_return;
-
-//HISTORY
-int			ft_add_history(char *input, t_list *env);
-int			ft_create_history(t_list *env);
 
 //PRINT_ERROR
-void		print_error_message(void);
-void		print_error_arg(char token);
-void		print_error_display(void);
 
 void		init_signal(void);
 
-int			wexit_status(int status);
 void		exec_process(t_maindata *ats, t_list *env, char *input);
+
+int			init_shell(t_maindata *core_data, t_error *errors, t_list *env,
+				char **envp);
+
+int			safe_mode(t_maindata *core_data);
+
+//HISTORY
+
+int			get_history(int fd);
+
+int			open_history(const char *name, const char *uname);
+
+int			ft_add_history(char *input, int fd);
 
 #endif

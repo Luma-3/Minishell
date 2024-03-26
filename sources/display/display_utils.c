@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:39:34 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/25 11:53:33 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/26 14:24:15 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*ft_get_chdir(void)
 	return (working_directory);
 }
 
-void	assemble(char **display)
+char *assemble(char **display)
 {
 	char	*display_final;
 	int		i;
@@ -67,14 +67,9 @@ void	assemble(char **display)
 		len += ft_strlen(display[i++]);
 	display_final = ft_calloc(sizeof(char), len + 1);
 	if (display_final == NULL)
-		return ;
+		return (NULL);
 	i = 0;
 	while (display[i] != NULL)
 		ft_strlcat(display_final, display[i++], len + 1);
-	free(display[2]);
-	free(display[6]);
-	free(display[10]);
-	ft_putendl_fd(display_final, 1);
-	free (display_final);
-	return ;
+	return (display_final);
 }

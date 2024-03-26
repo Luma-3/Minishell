@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:52:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 20:27:54 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:43:36 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,34 +57,39 @@ static void	free_data_tree(void *content)
 
 void	clear_ats(t_maindata *ats, int flag)
 {
-	if (flag & ATS_ROOT && ats->root != NULL)
+	if (flag & CORE_ROOT && ats->root != NULL)
 	{
 		clear_tree(ats->root, &free_data_tree);
 		ats->root = NULL;
 	}
-	if (flag & ATS_PROMPT && ats->prompt != NULL)
+	if (flag & CORE_PROMPT && ats->prompt != NULL)
 	{
 		free(ats->prompt);
 		ats->prompt = NULL;
 	}
-	if (flag & ATS_REDIR && ats->queue_redir != NULL)
+	if (flag & CORE_REDIR && ats->queue_redir != NULL)
 	{
 		ft_clear_queue(ats->queue_redir, &clear_redir_queue);
 		ats->queue_redir = NULL;
 	}
-	if (flag & ATS_HEREDOC && ats->queue_heredoc != NULL)
+	if (flag & CORE_HEREDOC && ats->queue_heredoc != NULL)
 	{
 		ft_clear_queue(ats->queue_heredoc, &clear_heredoc_queue);
 		ats->queue_heredoc = NULL;
 	}
-	if (flag & ATS_PIPE && ats->queue_pipe != NULL)
+	if (flag & CORE_PIPE && ats->queue_pipe != NULL)
 	{
 		ft_clear_queue(ats->queue_pipe, &clear_pipe_queue);
 		ats->queue_pipe = NULL;
 	}
-	if (flag & ATS_ENV && ats->env != NULL)
+	if (flag & CORE_ENV && ats->env != NULL)
 	{
 		ft_lstclear(&(ats->env), &free);
 		ats->env = NULL;
+	}
+	if (flag & CORE_UNAME && ats->uname != NULL)
+	{
+		free(ats->uname);
+		ats->uname = NULL;
 	}
 }

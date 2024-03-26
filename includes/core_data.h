@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 20:28:27 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:42:25 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@
 # include <sys/wait.h>
 # include <stdbool.h>
 
-# define ATS_REDIR		0x01
-# define ATS_HEREDOC	0x02
-# define ATS_ENV		0x04
-# define ATS_PROMPT		0x08
-# define ATS_ROOT		0x10
-# define ATS_PIPE		0x20
-# define ATS_ALL		0x3F
+# define CORE_REDIR		0x01
+# define CORE_HEREDOC	0x02
+# define CORE_ENV		0x04
+# define CORE_PROMPT		0x08
+# define CORE_ROOT		0x10
+# define CORE_PIPE		0x20
+# define CORE_UNAME		0x40
+# define CORE_ALL		0x7F
 
 # define FAILURE -1
 # define SUCCESS 0
@@ -75,6 +76,9 @@ typedef struct s_maindata
 	int			last_status;
 	char		*prompt;
 	t_error		*errors;
+	char		*path;
+	char		*uname;
+	int			history_fd;
 }				t_maindata;
 
 // queue

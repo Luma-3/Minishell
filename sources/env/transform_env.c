@@ -6,11 +6,11 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:52:52 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 20:50:27 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:30:18 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "environement.h"
 
 static void	free_tab(char **tab, int index)
 {

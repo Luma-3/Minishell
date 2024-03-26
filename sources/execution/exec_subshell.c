@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:12:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 20:28:14 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:42:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 static void	init_new_ats(t_maindata *ats, t_maindata *new_ats, t_ats *node)
 {
 	new_ats->prompt = ft_strdup(node->data->cmd);
-	clear_ats(ats, ATS_REDIR | ATS_ROOT | ATS_PROMPT | ATS_PIPE);
+	clear_ats(ats, CORE_REDIR | CORE_ROOT | CORE_PROMPT | CORE_PIPE);
 	new_ats->env = ats->env;
 	new_ats->queue_heredoc = ats->queue_heredoc;
 	new_ats->last_status = 0;
@@ -45,7 +45,7 @@ int	exec_subshell(t_maindata *ats, t_ats *node)
 		parse_ats(new_ats.prompt, &new_ats, false);
 		read_ats(&new_ats, new_ats.root);
 		status = new_ats.last_status;
-		clear_ats(&new_ats, ATS_ALL);
+		clear_ats(&new_ats, CORE_ALL);
 		exit(status);
 	}
 	return (clean_parent(ats, node));

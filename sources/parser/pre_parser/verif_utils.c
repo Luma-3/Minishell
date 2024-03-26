@@ -6,13 +6,13 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:19:12 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/21 21:42:26 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:29:58 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static void	print_error_arg(char token)
+void	print_error_arg(char token)
 {
 	ft_putstr_fd("parse error near '", STDERR_FILENO);
 	ft_putchar_fd(token, STDERR_FILENO);

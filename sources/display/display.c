@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/25 20:27:54 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:25:09 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ void	ft_create_prompt(t_list *env, int last_status)
 		display[12] = " 🌙 ";
 	display[13] = RESET;
 	display[14] = '\0';
-	assemble(display);
+	ft_putendl_fd(assemble(display), 1);
+	free(display[2]);
+	free(display[6]);
+	free(display[10]);
 	return ;
 }
