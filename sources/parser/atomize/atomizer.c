@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ats.c                                              :+:      :+:    :+:   */
+/*   atomizer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 20:27:54 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:01:24 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	add_queue_pipe(t_queue *queue, int nb_pipe)
 	return (SUCCESS);
 }
 
-static int	copy_cmd_pipe(t_maindata *ats, int i_copy, int i_read, int *nb_pipe)
+static int	copy_cmd_pipe(t_ats *ats, int i_copy, int i_read, int *nb_pipe)
 {
 	t_token	*data;
 
@@ -44,7 +44,7 @@ static int	copy_cmd_pipe(t_maindata *ats, int i_copy, int i_read, int *nb_pipe)
 	return (SUCCESS);
 }
 
-static int	atomize_pipeline(t_maindata *ats)
+static int	atomize_pipeline(t_ats *ats)
 {
 	int				i_read;
 	int				i_copy;
@@ -73,7 +73,7 @@ static int	atomize_pipeline(t_maindata *ats)
 	return (SUCCESS);
 }
 
-static int	atomize_prompt(t_maindata *ats)
+static int	atomize_prompt(t_ats *ats)
 {
 	int		i_copy;
 	int		i_read;
@@ -101,7 +101,7 @@ static int	atomize_prompt(t_maindata *ats)
 	return (SUCCESS);
 }
 
-int	parse_ats(char *prompt, t_maindata *ats, bool check_arg)
+int	parse_ats(char *prompt, t_ats *ats, bool check_arg)
 {
 	if (check_arg == true)
 	{

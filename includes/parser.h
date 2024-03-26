@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 20:52:57 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:56:03 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int			verif_prompt(const char *prompt);
 int			verif_if_quote_closed(const char *prompt);
 
 int			verif_if_parenthesis_closed(const char *prompt);
+
+int			verif_arg_parenthesis(const char *prompt);
 
 int			verif_before_operator(const char *prompt, char *token);
 
@@ -70,7 +72,9 @@ int			skip_quote_parenthesis(const char *prompt, int index);
 
 int			init_ats(t_maindata *ats, char *prompt, t_list *env);
 
-int			parse_ats(char *prompt, t_maindata *ats, bool check_arg);
+int			parse_ats(char *prompt, t_ats *ats, bool check_arg);
+
+char		*handle_env_prompt(t_ats *ats, char *prompt);
 
 // bin_tree.c
 

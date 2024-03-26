@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 13:36:03 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:58:02 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@
 
 # define ERROR_FORMAT "Minishell error"
 
-//PRINT_ERROR
-
+//SIGNAL
 void		init_signal(void);
 
 void		exec_process(t_maindata *ats, t_list *env, char *input);

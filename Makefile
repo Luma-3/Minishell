@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/26 13:32:45 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/26 14:55:20 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,8 @@ SRC_PARSER_DIR			=	parser/
 
 SRC_PRE_PARSER_DIR		=	pre_parser/
 SRC_PRE_PARSER_LIST		=	verif_prompt.c		\
-							verif_utils.c
+							verif_utils.c		\
+							verif_utils2.c		
 SRC_PRE_PARSER			=	$(addprefix $(SRC_PRE_PARSER_DIR), $(SRC_PRE_PARSER_LIST))
 
 SRC_ATS_DIR				=	atomize/
@@ -91,7 +92,8 @@ SRC_ATS_LIST			=	atomizer.c			\
 							atomizer_copy.c		\
 							bin_tree.c			\
 							bin_tree_utils.c 	\
-							take_redir.c		
+							take_redir.c		\
+							take_env.c
 SRC_ATS					=	$(addprefix $(SRC_ATS_DIR), $(SRC_ATS_LIST))
 
 SRC_POST_PARSER_DIR		=	post_parser/

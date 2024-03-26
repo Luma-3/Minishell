@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 20:43:42 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/21 22:19:04 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 13:14:46 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 int	verif_prompt(const char *prompt)
 {
-	if (verif_if_quote_closed(prompt) == FAILURE)
+	if (verif_arg_parenthesis(prompt) == FAILURE)
+		return (FAILURE);
+	else if (verif_if_quote_closed(prompt) == FAILURE)
 		return (FAILURE);
 	else if (verif_if_parenthesis_closed(prompt) == FAILURE)
 		return (FAILURE);

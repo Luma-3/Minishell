@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ats_copy_cmd.c                                     :+:      :+:    :+:   */
+/*   atomizer_copy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 20:27:54 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 15:01:37 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static t_token	*init_node(const char *cmd, int size_cmd)
 	return (data);
 }
 
-t_token	*copy_insert_node(t_maindata *ats, int i_copy, int i_read)
+t_token	*copy_insert_node(t_ats *ats, int i_copy, int i_read)
 {
 	t_token	*data;
 
@@ -67,7 +67,7 @@ t_token	*copy_insert_node(t_maindata *ats, int i_copy, int i_read)
 	return (data);
 }
 
-int	copy_cmd_operator(t_maindata *ats, int *i_copy, int *i_read)
+int	copy_cmd_operator(t_ats *ats, int *i_copy, int *i_read)
 {
 	t_token	*data;
 
@@ -92,7 +92,7 @@ int	copy_cmd_operator(t_maindata *ats, int *i_copy, int *i_read)
 	return (SUCCESS);
 }
 
-t_token	*copy_token(t_maindata *ats, const char *prompt, int size_copy)
+t_token	*copy_token(t_ats *ats, const char *prompt, int size_copy)
 {
 	t_token	*token;
 	char	*prompt_copy;

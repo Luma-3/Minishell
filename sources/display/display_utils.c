@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:39:34 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/26 14:24:15 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 14:59:16 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,28 @@ char	*path_to_tilde(t_list *env)
 {
 	char	*path_home;
 	char	*path_absolute;
+	char	*path_tmp;
 	int		i;
 
 	i = 0;
+	path_tmp = ft_strdup(" ~ ");
+	if (path_tmp == NULL)
+		return (NULL);
 	path_absolute = NULL;
 	path_home = ms_getenv(env, "HOME");
 	if (path_home == NULL)
-		return (ft_strdup(" ~ "));
+		return (path_tmp);
 	path_absolute = getcwd(path_absolute, 0);
 	if (path_absolute == NULL)
-		return (ft_strdup(" ~ "));
+		return (free(path_home), path_tmp);
 	while (path_home[i] == path_absolute[i]
 		&& path_home[i] && path_absolute[i])
 		i++;
 	free(path_home);
 	path_home = ft_strjoin(" ~ ", path_absolute + i);
-	free(path_absolute);
+	if (path_home == NULL)
+		return (free(path_home), free(path_absolute), path_tmp);
+	(free(path_absolute), free(path_tmp));
 	return (path_home);
 }
 
@@ -50,7 +56,12 @@ char	*ft_get_chdir(void)
 		len--;
 	working_directory = ft_strndup(absolute_path + len,
 			ft_strlen(absolute_path) - len);
-	//TODO : check if working_directory is NULL
+	if (working_directory == NULL)
+	{
+		errno = ENOMEM;
+		free(absolute_path);
+		return (NULL);
+	}
 	free(absolute_path);
 	return (working_directory);
 }
