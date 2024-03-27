@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   atomizer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 15:07:15 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 22:32:57 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ int	parse_ats(char *prompt, t_maindata *core_data, bool check_arg)
 			return (FAILURE);
 		handle_heredoc(prompt, core_data);
 	}
-	//TODO VARIABLE ENV
 	if (atomize_prompt(core_data) == FAILURE)
 	{
 		perror("atomize_prompt");

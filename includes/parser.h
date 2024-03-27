@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 15:11:49 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 14:06:55 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ int			verif_token_separation(const char *prompt);
 int			verif_before_operator(const char *prompt, char *token);
 
 void		handle_heredoc(const char *prompt, t_maindata *ats);
+
+char		*handle_wildcard(t_maindata *core_data, char *prompt);
+
 
 /////////////////////////
 ////// POST PARSER //////
@@ -102,6 +105,21 @@ t_token		*copy_insert_node(t_maindata *ats, int i_copy, int i_read);
 char		*take_redir(t_maindata *ats, const char *prompt, int size_prompt,
 				int *nb_redir);
 
+//WILDCARD
+
+char		*copy_data_env(t_maindata *core_data, char *prompt,
+				char *wild_data, int index);
+
+char		*copy_data_tilde(t_maindata *core_data, char *prompt,
+				char *wild_data, int index);
+
+char		*get_wildcard(char *prompt, int index);
+
+char		*put_wildcard(char *prompt, char *data_wildcard,
+				char token, int index);
+
+
+
 //////////////////////////
 ////// PARSER UTILS //////
 //////////////////////////
@@ -115,6 +133,8 @@ int			place_cursor_quote(const char *prompt, int i);
 int			place_cursor_quote(const char *prompt, int i);
 
 int			place_cursor_after_token(const char *prompt, int i);
+
+int			place_cursor_before_prefix(const char *prompt, int index);
 
 int			skip_quote_parenthesis(const char *prompt, int index);
 
@@ -130,6 +150,7 @@ int			is_redir_type(const char *prompt);
 
 int			is_quote(const char c);
 
+char		is_tilde_to_replace(char *prompt, int i);
 //is_type2.c
 
 bool		is_subshell(const char *cmd, int size_cmd);
