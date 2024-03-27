@@ -6,7 +6,7 @@
 #    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/27 14:16:06 by antgabri         ###   ########.fr        #
+#    Updated: 2024/03/27 14:24:29 by antgabri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -120,20 +120,20 @@ SRC_EXEC		=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 SRC_PARSER_DIR		=	parser/
 
 PRE_PARSER_DIR		=	pre_parser/
-PRE_PARSER_LIST		=	verif_prompt.c			\
-							verif_utils.c		\
-							verif_utils2.c		
+PRE_PARSER_LIST		=	verif_prompt.c		\
+						verif_utils.c		\
+						verif_utils2.c		
 PRE_PARSER			=	$(addprefix $(PRE_PARSER_DIR), $(PRE_PARSER_LIST))
 
 ATS_DIR				=	atomize/
 ATS_LIST			=	atomizer.c				\
-							atomizer_copy.c		\
-							bin_tree.c			\
-							bin_tree_utils.c 	\
-							take_redir.c		\
-							wildcard.c			\
-							wildcard_utils.c
-SRC_ATS					=	$(addprefix $(SRC_ATS_DIR), $(SRC_ATS_LIST))
+						atomizer_copy.c		\
+						bin_tree.c			\
+						bin_tree_utils.c 	\
+						take_redir.c		\
+						wildcard.c			\
+						wildcard_utils.c
+ATS					=	$(addprefix $(ATS_DIR), $(ATS_LIST))
 
 POST_PARSER_DIR		=	post_parser/
 POST_PARSER_LIST	=	post_parser.c			\
@@ -199,9 +199,9 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)$(SRC_BUILTINS_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(SRC_ATS_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(SRC_POST_PARSER_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(SRC_PRE_PARSER_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(ATS_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(POST_PARSER_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(PRE_PARSER_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_HISTORY_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_REDIR_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_SIGNAL_DIR)

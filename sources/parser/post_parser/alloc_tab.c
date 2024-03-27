@@ -3,53 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_tab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:48:17 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/23 12:46:38 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:27:33 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "minishell.h"
 
-static char	**insert_data(char **tab, const char *prompt, int nb_words)
+static t_list	*split_arg(const char *prompt)
 {
-	int	nb_letters;
-	int	position;
-	int	index;
+	t_list	*args_lst;
+	int		len;
+	int		i;
 
-	position = 0;
-	index = 0;
-	while (prompt[position] && index < nb_words)
+	i = 0;
+	args_lst = NULL;
+	while (prompt[i])
 	{
-		position = ft_skip_whitespaces(prompt, position);
-		nb_letters = count_letters(&prompt[position]);
-		if (nb_letters != 0)
+		i = ft_skip_whitespaces(prompt, i);
+		len = count_letters(&prompt[i]);
+		if (len != 0)
 		{
-			tab[index] = ft_strndup(&prompt[position], nb_letters);
-			if (tab[index] == NULL)
-				return (ft_rm_split(tab), NULL);
-			tab[index] = clean_quote(tab[index]);
-			if (tab[index] == NULL)
-				return (ft_rm_split(tab), NULL);
-			position += nb_letters;
-			index++;
+			ft_lstadd_back(&args_lst,
+				ft_lstnew(ft_strndup(&prompt[i], len)));
+			i += len;
 		}
 	}
-	return (tab);
+	return (args_lst);
 }
 
 char	**alloc_tab(char *prompt)
 {
 	char	**tab;
 	int		nb_words;
+	t_list	*args_lst;
 
-	tab = NULL;
-	nb_words = count_words(prompt);
-	tab = (char **)ft_calloc(nb_words + 1, sizeof(char *));
-	if (tab == NULL)
+	args_lst = split_arg(prompt);
+	if (args_lst == NULL)
 		return (NULL);
-	tab[nb_words] = NULL;
-	return (insert_data(tab, prompt, nb_words));
+	
+	return (tab);
 }
+
+
+			// tab[index] = clean_quote(tab[index]);
+			// if (tab[index] == NULL)
+			// 	return (ft_rm_split(tab), NULL);

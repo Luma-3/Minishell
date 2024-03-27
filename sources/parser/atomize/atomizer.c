@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   atomizer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 22:32:57 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/27 14:59:06 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	parse_ats(char *prompt, t_maindata *core_data, bool check_arg)
 		perror("atomize_prompt");
 		return (FAILURE);
 	}
-	if (post_parser(core_data->root) == FAILURE)
+	if (post_parser(core_data, core_data->root) == FAILURE)
 	{
 		perror("post_parser");
 		return (FAILURE);

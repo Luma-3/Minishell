@@ -6,7 +6,7 @@
 /*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 14:06:55 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/27 15:11:50 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			verif_before_operator(const char *prompt, char *token);
 
 void		handle_heredoc(const char *prompt, t_maindata *ats);
 
-char		*handle_wildcard(t_maindata *core_data, char *prompt);
+char		*handle_wildcard(t_maindata *core_data, char **argv);
 
 
 /////////////////////////
@@ -61,7 +61,7 @@ int			count_letters(const char *start_word);
 
 char		**alloc_tab(char *prompt);
 
-int			post_parser(t_ats	*root);
+int			post_parser(t_maindata *core_data, t_ats *root);
 
 // clean
 

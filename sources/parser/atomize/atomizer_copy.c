@@ -6,7 +6,7 @@
 /*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 13:46:55 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/27 15:12:21 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ t_token	*copy_token(t_maindata *core_data, const char *prompt, int size_copy)
 	if (prompt_copy == NULL)
 		return (NULL);
 	is_subshell = is_pipeline(prompt_copy);
-	prompt_copy = handle_wildcard(core_data, prompt_copy);
 	token = init_node(prompt_copy, size_copy);
 	if (token == NULL)
 		return (NULL);
