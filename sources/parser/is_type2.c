@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:00:57 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 15:52:04 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/26 23:46:33 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,15 @@ bool	is_pipeline(const char *prompt)
 		i++;
 	}
 	if (have_pipe > 0)
+		return (true);
+	return (false);
+}
+
+char	is_tilde_to_replace(char *prompt, int i)
+{
+	if (ft_iswhitespace(prompt[i + 1]) == false
+		&& prompt[i + 1] != '~' && is_parenthesis(prompt[i + 1]) == false
+		&& is_quote(prompt[i + 1]) == false)
 		return (true);
 	return (false);
 }

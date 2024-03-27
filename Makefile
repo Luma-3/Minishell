@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
+#    By: anthony <anthony@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/26 14:55:20 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/26 23:43:37 by anthony          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,8 @@ SRC_ATS_LIST			=	atomizer.c			\
 							bin_tree.c			\
 							bin_tree_utils.c 	\
 							take_redir.c		\
-							take_env.c
+							wildcard.c			\
+							wildcard_utils.c
 SRC_ATS					=	$(addprefix $(SRC_ATS_DIR), $(SRC_ATS_LIST))
 
 SRC_POST_PARSER_DIR		=	post_parser/
@@ -177,6 +178,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(SRC_ATS_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(SRC_ATS_DIR)$(SRC_WILDCARD_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(SRC_POST_PARSER_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(SRC_PRE_PARSER_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_HISTORY_DIR)

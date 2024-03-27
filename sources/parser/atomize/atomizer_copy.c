@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   atomizer_copy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 15:24:32 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/26 23:34:13 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ t_token	*copy_token(t_maindata *core_data, const char *prompt, int size_copy)
 	if (prompt_copy == NULL)
 		return (NULL);
 	is_subshell = is_pipeline(prompt_copy);
-	prompt_copy = handle_env_prompt(core_data, prompt_copy);
+	prompt_copy = handle_wildcard(core_data, prompt_copy);
 	token = init_node(prompt_copy, size_copy);
 	if (token == NULL)
 		return (NULL);

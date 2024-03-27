@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   take_env.c                                         :+:      :+:    :+:   */
+/*   wildcard_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:51:57 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/26 15:22:48 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 00:43:05 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
 
-static char	*get_env_name(char *prompt, int index)
+char	*get_wildcard(char *prompt, int index)
 {
 	char	*env_name;
 	int		i;
@@ -32,8 +32,8 @@ static char	*get_env_name(char *prompt, int index)
 	return (env_name);
 }
 
-static char	*copy_env_in_prompt(char *prompt, char *new_prompt,
-	char *value_env, int index)
+char	*copy_wildcard(char *prompt, char *new_prompt,
+	char	*data_wildcard, int index)
 {
 	int	i;
 	int	j;
@@ -43,36 +43,36 @@ static char	*copy_env_in_prompt(char *prompt, char *new_prompt,
 	while (prompt[i] && i < index)
 		new_prompt[j++] = prompt[i++];
 	i = 0;
-	while (value_env[i])
-		new_prompt[j++] = value_env[i++];
+	while (data_wildcard[i])
+		new_prompt[j++] = data_wildcard[i++];
 	return (new_prompt);
 }
 
-static char	*env_to_str(char *prompt, char *value_env, int index)
+char	*put_wildcard(char *prompt, char *data_wildcard, char token, int index)
 {
 	char	*new_prompt;
 	char	*prompt_tmp;
 	int		i;
 
-	while (prompt[index] != '\0' && prompt[index] != '$')
+	while (prompt[index] != '\0' && prompt[index] != token)
 		index++;
 	i = index + 1;
 	while (ft_iswhitespace(prompt[i]) == false && prompt[i] != '\0'
-		&& prompt[i] != '$' && is_parenthesis(prompt[i]) == false
+		&& prompt[i] != token && is_parenthesis(prompt[i]) == false
 		&& is_quote(prompt[i]) == false)
 		i++;
 	prompt_tmp = calloc(sizeof(char), ft_strlen(prompt) - (i - index)
-			+ ft_strlen(value_env) + 1);
+			+ ft_strlen(data_wildcard) + 1);
 	if (prompt_tmp == NULL)
 		return (NULL);
-	prompt_tmp = copy_env_in_prompt(prompt, prompt_tmp, value_env, index);
+	prompt_tmp = copy_wildcard(prompt, prompt_tmp, data_wildcard, index);
 	new_prompt = ft_strjoin(prompt_tmp, prompt + i);
 	free(prompt_tmp);
 	free(prompt);
 	return (new_prompt);
 }
 
-static char	*delete_env_in_prompt(char *prompt, int index)
+static char	*delete_wildcard(char *prompt, char token, int index)
 {
 	char	*new_prompt;
 	int		i;
@@ -89,7 +89,7 @@ static char	*delete_env_in_prompt(char *prompt, int index)
 	}
 	i++;
 	while (ft_iswhitespace(prompt[i]) == false && prompt[i] != '\0'
-		&& prompt[i] != '$' && is_parenthesis(prompt[i]) == false
+		&& prompt[i] != token && is_parenthesis(prompt[i]) == false
 		&& is_quote(prompt[i]) == false)
 		i++;
 	while (prompt[i])
@@ -100,31 +100,24 @@ static char	*delete_env_in_prompt(char *prompt, int index)
 	return (new_prompt);
 }
 
-char	*handle_env_prompt(t_maindata *core_data, char *prompt)
+char	*copy_data_wildcard(t_maindata *core_data,
+	char *wild_data, char token, int index)
 {
-	int		i;
-	char	*name_env;
-	char	*value_env;
+	char	*new_prompt;
+	char	*to_replace;
 
-	i = 0;
-	name_env = NULL;
-	while (prompt[i])
+	new_prompt = ft_strdup(core_data->prompt);
+	if (new_prompt == NULL)
+		return (NULL);
+	if (wild_data != NULL)
 	{
-		if (prompt[i] == '$')
-		{
-			name_env = get_env_name(prompt, i + 1);
-			if (name_env != NULL)
-			{
-				value_env = ms_getenv(core_data->env, name_env);
-				if (value_env == NULL)
-					return (free(name_env), delete_env_in_prompt(prompt, i));
-				prompt = env_to_str(prompt, value_env, i);
-				(free(name_env), free(value_env));
-			}
-			else
-				prompt = delete_env_in_prompt(prompt, i);
-		}
-		i++;
+		to_replace = ms_getenv(core_data->env, wild_data);
+		if (to_replace == NULL)
+			return (free(wild_data), delete_wildcard(new_prompt, token, index));
+		new_prompt = put_wildcard(new_prompt, to_replace, token, index);
+		(free(wild_data), free(to_replace));
+		return (new_prompt);
 	}
-	return (prompt);
+	else
+		return (delete_wildcard(new_prompt, token, index));
 }
