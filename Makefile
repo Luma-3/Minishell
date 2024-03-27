@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
+#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/27 14:24:29 by antgabri         ###   ########.fr        #
+#    Updated: 2024/03/27 18:12:52 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -126,20 +126,20 @@ PRE_PARSER_LIST		=	verif_prompt.c		\
 PRE_PARSER			=	$(addprefix $(PRE_PARSER_DIR), $(PRE_PARSER_LIST))
 
 ATS_DIR				=	atomize/
-ATS_LIST			=	atomizer.c				\
+ATS_LIST			=	atomizer.c			\
 						atomizer_copy.c		\
 						bin_tree.c			\
 						bin_tree_utils.c 	\
-						take_redir.c		\
-						wildcard.c			\
-						wildcard_utils.c
+						take_redir.c
 ATS					=	$(addprefix $(ATS_DIR), $(ATS_LIST))
 
 POST_PARSER_DIR		=	post_parser/
-POST_PARSER_LIST	=	post_parser.c			\
-							alloc_tab.c			\
-							count_utils.c		\
-							clean_quote.c
+POST_PARSER_LIST	=	post_parser.c		\
+						alloc_tab.c			\
+						count_utils.c		\
+						clean_quote.c		\
+						wildcard.c			\
+						wildcard_utils.c
 POST_PARSER			=	$(addprefix $(POST_PARSER_DIR), $(POST_PARSER_LIST))
 
 SRC_PARSER_LIST			=	is_type.c			\

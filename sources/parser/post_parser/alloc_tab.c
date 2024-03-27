@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_tab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:48:17 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/27 16:27:33 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/27 18:24:26 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,16 @@ static t_list	*split_arg(const char *prompt)
 	return (args_lst);
 }
 
-char	**alloc_tab(char *prompt)
+char	**alloc_tab(t_maindata *core_data, char *prompt)
 {
 	char	**tab;
-	int		nb_words;
 	t_list	*args_lst;
 
+	tab = NULL;
 	args_lst = split_arg(prompt);
 	if (args_lst == NULL)
 		return (NULL);
-	
+	handle_wildcard(core_data, args_lst);
 	return (tab);
 }
 

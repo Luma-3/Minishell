@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   old_wildcard.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 23:33:10 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/27 16:35:04 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:41:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,21 +136,4 @@
 // 	return (prompt);
 // }
 
-int	handle_wildcard(t_maindata *core_data, char **argv)
-{
-	int	i;
-	int	j;
 
-	j = 0;
-	i = 0;
-	while (argv[i])
-	{
-		if (ft_strchr(argv[i], '~'))
-			handle_tilde();
-		if (ft_strchr ($))
-			handle_dollar();
-		if (ft_strchr(argv[i], '*'))
-			hanlde_all
-	}
-	return (SUCCESS);
-}

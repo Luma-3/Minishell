@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 14:21:31 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/27 17:19:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,20 @@ int	init_core_data(t_maindata *core_data, char *prompt, t_list *env)
 	core_data->root = root;
 	core_data->last_status = 1;
 	return (SUCCESS);
+}
+
+char	*get_home(const char *uname)
+{
+	char *home;
+	
+	home = ft_strjoin("/home/", uname);
+	if (home == NULL)
+	{
+		errno = ENOMEM;
+		perror("KikiShell");
+		return (NULL);
+	}
+	return (home);
 }
 
 void	exec_process(t_maindata *core_data, t_list *env, char *input)

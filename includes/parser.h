@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 15:11:50 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/27 18:46:51 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			verif_before_operator(const char *prompt, char *token);
 
 void		handle_heredoc(const char *prompt, t_maindata *ats);
 
-char		*handle_wildcard(t_maindata *core_data, char **argv);
+int			handle_wildcard(t_maindata *core_data, t_list const *args);
 
 
 /////////////////////////
@@ -59,7 +59,7 @@ int			count_words(const char *prompt);
 
 int			count_letters(const char *start_word);
 
-char		**alloc_tab(char *prompt);
+char		**alloc_tab(t_maindata *core_data, char *prompt);
 
 int			post_parser(t_maindata *core_data, t_ats *root);
 
@@ -76,8 +76,6 @@ int			skip_quote_parenthesis(const char *prompt, int index);
 int			init_core_data(t_maindata *ats, char *prompt, t_list *env);
 
 int			parse_ats(char *prompt, t_maindata *core_data, bool check_arg);
-
-char		*handle_env_prompt(t_maindata *ats, char *prompt);
 
 // bin_tree.c
 
@@ -104,21 +102,6 @@ t_token		*copy_insert_node(t_maindata *ats, int i_copy, int i_read);
 
 char		*take_redir(t_maindata *ats, const char *prompt, int size_prompt,
 				int *nb_redir);
-
-//WILDCARD
-
-char		*copy_data_env(t_maindata *core_data, char *prompt,
-				char *wild_data, int index);
-
-char		*copy_data_tilde(t_maindata *core_data, char *prompt,
-				char *wild_data, int index);
-
-char		*get_wildcard(char *prompt, int index);
-
-char		*put_wildcard(char *prompt, char *data_wildcard,
-				char token, int index);
-
-
 
 //////////////////////////
 ////// PARSER UTILS //////
@@ -150,11 +133,15 @@ int			is_redir_type(const char *prompt);
 
 int			is_quote(const char c);
 
-char		is_tilde_to_replace(char *prompt, int i);
 //is_type2.c
 
 bool		is_subshell(const char *cmd, int size_cmd);
 
 bool		is_pipeline(const char *prompt);
+
+// TODODODODODOD
+
+bool		check_tilde(const char *arg, const int prev_i,
+				const int next_i);
 
 #endif // PARSER_H
