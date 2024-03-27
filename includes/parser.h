@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 01:11:20 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/27 14:06:55 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,16 @@ char		*take_redir(t_maindata *ats, const char *prompt, int size_prompt,
 
 //WILDCARD
 
-char	*copy_data_wildcard(t_maindata *core_data,
-				char *wild_data, char token, int index);
+char		*copy_data_env(t_maindata *core_data, char *prompt,
+				char *wild_data, int index);
 
-char	*get_wildcard(char *prompt, int index);
+char		*copy_data_tilde(t_maindata *core_data, char *prompt,
+				char *wild_data, int index);
 
-char	*put_wildcard(char *prompt, char *data_wildcard, char token, int index);
+char		*get_wildcard(char *prompt, int index);
+
+char		*put_wildcard(char *prompt, char *data_wildcard,
+				char token, int index);
 
 
 
@@ -129,6 +133,8 @@ int			place_cursor_quote(const char *prompt, int i);
 int			place_cursor_quote(const char *prompt, int i);
 
 int			place_cursor_after_token(const char *prompt, int i);
+
+int			place_cursor_before_prefix(const char *prompt, int index);
 
 int			skip_quote_parenthesis(const char *prompt, int index);
 

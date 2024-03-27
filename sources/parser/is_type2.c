@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_type2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:00:57 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 23:46:33 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/27 10:52:18 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,10 @@ bool	is_pipeline(const char *prompt)
 
 char	is_tilde_to_replace(char *prompt, int i)
 {
-	if (ft_iswhitespace(prompt[i + 1]) == false
-		&& prompt[i + 1] != '~' && is_parenthesis(prompt[i + 1]) == false
-		&& is_quote(prompt[i + 1]) == false)
+	if ((ft_iswhitespace(prompt[i + 1]) == true
+			&& prompt[i + 1] != '~' && is_parenthesis(prompt[i + 1]) == false
+			&& is_quote(prompt[i + 1]) == false)
+		|| (prompt[i + 1] == '\0' && ft_iswhitespace(prompt[i - 1]) == true))
 		return (true);
 	return (false);
 }

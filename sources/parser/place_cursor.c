@@ -6,7 +6,7 @@
 /*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:55:46 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/20 11:25:26 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/27 11:19:01 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,13 @@ int	skip_quote_parenthesis(const char *prompt, int index)
 		index = place_cursor_quote(prompt, index);
 	if (prompt[index] == '(')
 		index = place_cursor_parenthesis(prompt, index);
+	return (index);
+}
+
+int	place_cursor_before_prefix(const char *prompt, int index)
+{
+	while (ft_iswhitespace(prompt[index]) == false
+		&& index >= 0 && prompt[index] != '/')
+		index--;
 	return (index);
 }

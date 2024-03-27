@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:49:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 22:19:50 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/27 10:42:09 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,32 @@
 #include <utmp.h>
 #include <fcntl.h>
 
-// static char	*take_u_name(void)
-// {
-// 	int			fd;
-// 	struct utmp	user;
-// 	char		*uname;
+static char	*take_u_name(void)
+{
+	int			fd;
+	struct utmp	user;
+	char		*uname;
 
-// 	fd = open("/run/utmp", O_RDONLY);
-// 	if (fd == -1)
-// 		return (perror("Safe Mode"), NULL);
-// 	while (read(fd, &user, sizeof(struct utmp)) > 0)
-// 	{
-// 		if (user.ut_type == USER_PROCESS)
-// 		{
-// 			uname = ft_strdup(user.ut_name);
-// 			if (uname == NULL)
-// 			{
-// 				close(fd);
-// 				errno = ENOMEM;
-// 				return (perror("Safe Mode"), NULL);
-// 			}
-// 			return (uname);
-// 		}
-// 	}
-// 	close(fd);
-// 	return (NULL);
-// }
+	fd = open("/run/utmp", O_RDONLY);
+	if (fd == -1)
+		return (perror("Safe Mode"), NULL);
+	while (read(fd, &user, sizeof(struct utmp)) > 0)
+	{
+		if (user.ut_type == USER_PROCESS)
+		{
+			uname = ft_strdup(user.ut_name);
+			if (uname == NULL)
+			{
+				close(fd);
+				errno = ENOMEM;
+				return (perror("Safe Mode"), NULL);
+			}
+			return (uname);
+		}
+	}
+	close(fd);
+	return (NULL);
+}
 
 int	init_shell(t_maindata *core_data, t_error *errors, t_list *env, char **envp)
 {
@@ -48,7 +48,7 @@ int	init_shell(t_maindata *core_data, t_error *errors, t_list *env, char **envp)
 	init_signal();
 	ft_bzero(core_data, sizeof(t_maindata));
 	core_data->errors = errors;
-	core_data->uname = ft_strdup("anthony");
+	core_data->uname = take_u_name();
 	if (core_data->uname == NULL)
 		return (perror_switch(errors, "KikiShell1"), FAILURE);
 	core_data->history_fd = open_history(".kiki_history",

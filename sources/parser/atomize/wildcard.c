@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 23:33:10 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/27 01:34:06 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/27 14:13:06 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,97 +14,127 @@
 #include "parser.h"
 #include <dirent.h>
 
-static char	*get_path_prefix(char *prompt, int index)
-{
-	int	i;
+// static char	*get_prefix(char *prompt, int index)
+// {
+// 	int	i;
 
-	i = index;
-	while (ft_iswhitespace(prompt[index]) == false
-		&& index >= 0 && prompt[index] != '/')
-		index--;
-	return (ft_strndup(prompt + index, i - index));
-}
+// 	i = index;
+// 	while (index >= 0 && ft_iswhitespace(prompt[index - 1]) == false
+// 		&& prompt[index - 1] != '/')
+// 		index--;
+// 	if (index == i)
+// 		return (NULL);
+// 	return (ft_strndup(prompt + index, i - index));
+// }
 
-static char	*get_path_wildcard(char *prompt, int index)
-{
-	char	*path;
-	int		i;
+// static char	*get_suffix(char *prompt, int index)
+// {
+// 	int	i;
 
-	i = index;
-	while (ft_iswhitespace(prompt[i]) == false && i >= 0)
-		i--;
-	path = ft_strndup(prompt - index, index - i + 1);
-	if (path == NULL)
-		return (NULL);
-	return (path);
-}
+// 	i = index;
+// 	while (prompt[i + 1] != '\0' && ft_iswhitespace(prompt[i + 1]) == false
+// 		&& prompt[i + 1] != '/')
+// 		i++;
+// 	if (i == index)
+// 		return (NULL);
+// 	return (ft_strndup(prompt + index + 1, i - index));
+// }
 
-static  char	*get_current_file(char *prompt, int index)
-{
-	DIR		*dir;
-	char	*path;
-	char	*current_file;
+// static char	*get_path_wildcard(char *prompt, int index)
+// {
+// 	char	*path;
+// 	int		i;
 
-	path = getcwd(NULL, 0);
-	if (path == NULL)
-		return (NULL);
-	dir = opendir(path);
-	if (dir == NULL)
-		return (NULL);
-	while (readdir(dir)->d_name != NULL)
-	{
-		current_file = readdir(dir)->d_name;
-		if (current_file[0] == '.')
-			continue ;
-		prompt = put_wildcard(prompt, current_file, ' ', index);
-		index += ft_strlen(current_file);
-		printf("PROMPT = %s\n", prompt);
-	}
-	return (path);
-}
+// 	i = index;
+// 	while (ft_iswhitespace(prompt[i]) == false && i >= 0)
+// 		i--;
+// 	path = ft_strndup(prompt + (i + 1), index - i);
+// 	return (path);
+// }
 
-static char	*copy_all_files(char *prompt, int index)
-{
-	// DIR				*dir;
-	// struct dirent	*entry;
-	char			*prefix;
-	// char			*suffix;
-	char			*path;
-	int				i;
+// static bool	find_match_file(char *entry, char *prefix, char *suffix)
+// {
+// 	int	len_entry;
+// 	int	len_prefix;
+// 	int	len_suffix;
 
-	prefix = NULL;
-	i = index;
-	// dir = NULL;
-	printf("index = %d\n", index);
-	prefix = get_path_prefix(prompt, index);
-	if (prompt[i - 1] == '/')
-	{
-		printf("GO TO GET PATH WILDCARD\n");
-		path = get_path_wildcard(prompt, index);
-	}
-	else if (prompt[i - 1] == ' ')
-	{
-		printf("GO TO GET CURRENT FILE\n");
-		path = get_current_file(prompt, index);
-	}
+// 	len_entry = 0;
+// 	len_prefix = 0;
+// 	len_suffix = 0;
+// 	if (prefix == NULL && suffix == NULL)
+// 		return (false);
+// 	if (suffix != NULL)
+// 		len_suffix = ft_strlen(suffix);
+// 	if (prefix != NULL)
+// 		len_prefix = ft_strlen(prefix);
+// 	if (entry != NULL)
+// 		len_entry = ft_strlen(entry);
+// 	if (prefix != NULL && ft_strncmp(entry, prefix, len_prefix) == 0)
+// 		return (true);
+// 	while (suffix != NULL && entry[len_entry - 1] == suffix[len_suffix - 1])
+// 	{
+// 		len_entry--;
+// 		len_suffix--;
+// 		if (len_suffix == 0)
+// 			return (true);
+// 	}
+// 	return (false);
+// }
 
-	(void)path;
-	(void)prefix;
-	// dir = opendir(path);
-	// if (path == NULL)
-	// {
-	// 	errno = 0;
-	// 	return (prompt);
-	// }
-	// // suffix = get_suffix(core_data, prompt, index);
-	// while (entry != NULL)
-	// {
-	// 	entry = readdir(dir);
-	// 	if (ft_strncmp(entry->d_name, prefix, ft_strlen(prefix)) == 0) //TODO RVERSE STRNCMP
-	// 		prompt = copy_data_wildcard(core_data, ft_strdup(entry->d_name), ' ', index);
-	// }
-	return (prompt);
-}
+// static char	*copy_all_files(char *prompt, int index)
+// {
+// 	DIR				*dir;
+// 	struct dirent	*entry;
+// 	char			*prefix;
+// 	char			*suffix;
+// 	char			*path;
+// 	int				i;
+
+// 	prefix = NULL;
+// 	i = index;
+// 	prefix = get_prefix(prompt, index);
+// 	index = place_cursor_before_prefix(prompt, index);
+// 	printf("index = %d\n", index);
+// 	if (prompt[index] == '/')
+// 	{
+// 		path = get_path_wildcard(prompt, index);
+// 	}
+// 	else
+// 	{
+// 		path = getcwd(NULL, 0);
+// 	}
+// 	suffix = get_suffix(prompt, i);
+// 	dir = opendir(path);
+// 	if (path == NULL)
+// 	{
+// 		errno = 0;
+// 		return (prompt);
+// 	}
+// 	while ((entry = readdir(dir)) != NULL)
+// 	{
+// 		while (find_match_file(entry->d_name, prefix, suffix) == false)
+// 			continue ;
+// 		if (entry != NULL)
+// 		{
+// 			printf("FOUND OCCURENCE\n");
+// 			prompt = put_wildcard(prompt, entry->d_name, '*', index);
+// 			index += ft_strlen(entry->d_name) + 1;
+// 			prompt = put_wildcard(prompt, " ", ' ', index);
+// 			index++;
+// 		}
+// 	}
+// 	printf("COPY ALL FILES\n");
+// 	while ((entry = readdir(dir)) != NULL)
+// 	{
+// 		if (entry->d_name[0] == '.')
+// 			continue ;
+// 		prompt = put_wildcard(prompt, entry->d_name, ' ', index);
+// 		index += ft_strlen(entry->d_name);
+// 		prompt = put_wildcard(prompt, " ", ' ', index);
+// 		index++;
+// 	}
+// 	return (prompt);
+// }
 
 char	*handle_wildcard(t_maindata *core_data, char *prompt)
 {
@@ -113,13 +143,14 @@ char	*handle_wildcard(t_maindata *core_data, char *prompt)
 	i = 0;
 	while (prompt[i])
 	{
+		if (prompt[i] == '$' && prompt[i + 1] == '?')
+			prompt = put_wildcard(prompt,
+					ft_itoa(core_data->last_status), '$', i);
 		if (prompt[i] == '$' && prompt[i + 1] != '\0')
-			prompt = copy_data_wildcard(core_data,
-					get_wildcard(prompt, i + 1), '$', i);
+			prompt = copy_data_env(core_data, prompt,
+					get_wildcard(prompt, i + 1), i);
 		else if (prompt[i] == '~' && is_tilde_to_replace(prompt, i) == true)
-			prompt = copy_data_wildcard(core_data, ft_strdup("HOME"), '~', i);
-		else if (prompt[i] == '*')
-			prompt = copy_all_files(prompt, i);
+			prompt = copy_data_tilde(core_data, prompt, ft_strdup("HOME"), i);
 		i++;
 	}
 	return (prompt);
