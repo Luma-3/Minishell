@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 15:19:04 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:53:08 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,27 @@ int	clean_parent(t_maindata *core_data, const t_ats *node)
 	return (SUCCESS);
 }
 
+void	pre_process_exec(t_maindata *core_data, const t_ats *node)
+{
+	if (handle_pipeline(core_data, node) == FAILURE)
+	{
+		clear_ats(core_data, CORE_ALL);
+		exit(FAILURE);
+	}
+	if (open_redir(core_data->queue_redir, core_data->queue_heredoc,
+			node) != SUCCESS)
+	{
+		clear_ats(core_data, CORE_ALL);
+		exit(FAILURE);
+	}
+	if (node->data->index != -1)
+		dup_pipe(core_data, node->data->index);
+}
+
 pid_t	exec_std(t_maindata *core_data, const t_ats *node)
 {
-	pid_t			pid;
+	pid_t	pid;
+	char	*path;
 
 	pid = fork();
 	if (pid < 0)
@@ -50,17 +68,14 @@ pid_t	exec_std(t_maindata *core_data, const t_ats *node)
 	if (pid == 0)
 	{
 		// TODO : handle builtins
-		if (handle_pipeline(core_data, node) == FAILURE)
-			exit(FAILURE);
-		if (open_redir(core_data->queue_redir, core_data->queue_heredoc, node) != SUCCESS)
-			exit(FAILURE);
-		if (node->data->index != -1)
-			dup_pipe(core_data, node->data->index);
-		if (exec_command(node->data->argv, &(core_data->env), core_data->errors) == FAILURE)
-		{
-			clear_ats(core_data, CORE_ALL);
-			exit (FAILURE);
-		}
+		pre_process_exec(core_data, node);
+		path = ms_getenv(core_data->env, "PATH");
+		if (path == NULL)
+			path = ft_strdup(core_data->path);
+		exec_command(node->data->argv, &(core_data->env),
+			core_data->errors, path);
+		clear_ats(core_data, CORE_ALL);
+		exit (errno);
 	}
 	return (clean_parent(core_data, node));
 }

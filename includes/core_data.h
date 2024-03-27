@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 17:43:39 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:39:53 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@
 # define CORE_ROOT		0x10
 # define CORE_PIPE		0x20
 # define CORE_UNAME		0x40
-# define CORE_ALL		0x7F
+# define CORE_PATH		0x80
+# define CORE_ALL		0xFF
 
 # define FAILURE -1
-# define SUCCESS	0
+# define SUCCESS	0 
 
 # define READ 0
 # define WRITE 1
@@ -39,6 +40,9 @@
 # define HELLO_MSG 	"toilet -tf future --gay -F border Welcome in KIKISHELL"
 # define BYE_MSG 	"toilet -tf future --gay -F border See you soon !!!"
 # define SAFE_MSG 	"toilet -tf future --gay -F border Welcome in SAFEKIKI"
+
+# define PROMPT_SHELL	"\001\033[1;32m┗━━▶\002\033[0m "
+# define PROMPT_SAFE	"> "
 
 // ERRORS
 

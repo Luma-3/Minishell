@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:52:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 14:43:36 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:38:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,10 @@ void	clear_ats(t_maindata *ats, int flag)
 	{
 		free(ats->uname);
 		ats->uname = NULL;
+	}
+	if (flag & CORE_PATH && ats->path != NULL)
+	{
+		free(ats->path);
+		ats->path = NULL;
 	}
 }

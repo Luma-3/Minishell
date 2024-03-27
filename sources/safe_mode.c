@@ -6,12 +6,25 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 20:45:55 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 18:37:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:59:30 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environement.h"
 #include <fcntl.h>
+
+static void	close_gnl(int fd)
+{
+	char	*line;
+
+	while (true)
+	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
+		free(line);
+	}
+}
 
 static char	*take_path(void)
 {
@@ -23,10 +36,12 @@ static char	*take_path(void)
 	if (fd == -1)
 		return (perror("Safe Mode"), NULL);
 	line = get_next_line(fd);
+	close_gnl(fd);
 	close(fd);
 	if (line == NULL)
 		return (errno = ENOMEM, NULL);
 	path = ft_strndup(line + 6, ft_strlen(line) - 8);
+	free(line);
 	if (path == NULL)
 		return (errno = ENOMEM, NULL);
 	return (path);
@@ -44,8 +59,9 @@ static int	safe_env(t_list *env)
 		printf("PWD\n");
 		return (free(cwd), FAILURE);
 	}
+	free(cwd);
 	if (ms_setenv(&env, "_", "]") == FAILURE)
-		return (free(cwd), FAILURE);
+		return (FAILURE);
 	return (SUCCESS);
 }
 

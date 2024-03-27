@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:47:27 by Monsieur_Ca       #+#    #+#             */
-/*   Updated: 2024/03/26 18:45:19 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:52:55 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,16 @@ static char	*create_path(char *path, char *arg)
 	return (temp1);
 }
 
-static char	*get_path_command(char *tab, t_list *env)
+static char	*get_path_command(char *path, char *tab)
 {
 	char	**path_command;
 	char	*temp1;
 	int		i;
 
 	i = 0;
-	temp1 = ms_getenv(env, "PATH");
-	path_command = ft_split(temp1, ':');
+	path_command = ft_split(path, ':');
 	if (path_command == NULL)
 		return (NULL);
-	free(temp1);
 	while (path_command[i])
 	{
 		temp1 = create_path(path_command[i], tab);
@@ -76,9 +74,9 @@ static char	*path_to_relative(char *tab)
 	return (NULL);
 }
 
-char	*get_path(t_list *env, char *tab)
+char	*get_path(char *path, char *tab)
 {
-	char	*path;
+	char	*cmd_path;
 
 	if (tab[0] == '/' || ft_strncmp(tab, "./", 2) == 0)
 		return (tab);
@@ -88,9 +86,10 @@ char	*get_path(t_list *env, char *tab)
 		{
 			return (path_to_relative(tab));
 		}
-		path = get_path_command(tab, env);
-		if (path != NULL && access(path, X_OK | F_OK) == SUCCESS)
-			return (path);
+		cmd_path = get_path_command(path, tab);
+		free(path);
+		if (cmd_path != NULL && access(cmd_path, X_OK | F_OK) == SUCCESS)
+			return (cmd_path);
 	}
 	errno = ENOCNF;
 	return (NULL);

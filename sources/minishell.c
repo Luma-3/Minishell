@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 18:43:11 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:54:05 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	read_input(t_maindata *core_data)
 		ft_add_history(input, core_data->history_fd);
 		exec_process(core_data, core_data->env, input);
 	}
-	ft_lstclear(&(core_data->env), free);
+	clear_ats(core_data, CORE_UNAME | CORE_ENV | CORE_PATH);
 }
 
 int	main(int ac, char **av, char **envp)

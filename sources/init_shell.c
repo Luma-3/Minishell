@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:49:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 18:31:21 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:41:25 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,20 @@ static char	*take_u_name(void)
 	return (NULL);
 }
 
+bool	has_path(t_list *env)
+{
+	char	*path;
+
+	path = ms_getenv(env, "PATH");
+	if (path == NULL)
+	{
+		free(path);
+		return (false);
+	}
+	free(path);
+	return (true);
+}
+
 static int	launch_shell(t_maindata *core_data, char **envp)
 {
 	t_list	*env;
@@ -52,8 +66,9 @@ static int	launch_shell(t_maindata *core_data, char **envp)
 	if (core_data->history_fd == FAILURE)
 		return (perror_switch(core_data->errors, "KikiShell"), FAILURE);
 	env = env_to_lst(envp);
-	if (!env)
+	if (!env || has_path(env) == false)
 	{
+		core_data->env = env;
 		if (init_safe_mode(core_data) == FAILURE)
 			return (FAILURE);
 		display_msg(core_data, core_data->env, SAFE_MSG);
