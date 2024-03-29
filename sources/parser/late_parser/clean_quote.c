@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:39:12 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/29 16:57:39 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/29 19:08:37 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,5 @@ char	*clean_quote(char *word)
 	if (new_word == NULL)
 		return (NULL);
 	copy_word_clean(word, new_word);
-	free(word);
 	return (new_word);
 }
