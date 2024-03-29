@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/28 13:00:42 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/29 17:01:36 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,11 @@ int	clean_parent(t_maindata *core_data, const t_ats *node)
 	return (SUCCESS);
 }
 
-void	pre_process_exec(t_maindata *core_data, t_ats *node)
+char	**pre_process_exec(t_maindata *core_data, t_ats *node)
 {
-	late_parser(core_data, node);
+	char	**args;
+
+	args = late_parser(core_data, node);
 	if (handle_pipeline(core_data, node) == FAILURE)
 	{
 		clear_ats(core_data, CORE_ALL);
@@ -55,12 +57,14 @@ void	pre_process_exec(t_maindata *core_data, t_ats *node)
 	}
 	if (node->data->index != -1)
 		dup_pipe(core_data, node->data->index);
+	return (args);
 }
 
 pid_t	exec_std(t_maindata *core_data, const t_ats *node)
 {
 	pid_t	pid;
 	char	*path;
+	char	**args;
 
 	pid = fork();
 	if (pid < 0)
@@ -69,11 +73,11 @@ pid_t	exec_std(t_maindata *core_data, const t_ats *node)
 	if (pid == 0)
 	{
 		// TODO : handle builtins
-		pre_process_exec(core_data, (t_ats *)node);
+		args = pre_process_exec(core_data, (t_ats *)node);
 		path = ms_getenv(core_data->env, "PATH");
 		if (path == NULL)
 			path = ft_strdup(core_data->path);
-		exec_command(node->data->argv, &(core_data->env),
+		exec_command(args, &(core_data->env),
 			core_data->errors, path);
 		clear_ats(core_data, CORE_ALL);
 		exit (errno);

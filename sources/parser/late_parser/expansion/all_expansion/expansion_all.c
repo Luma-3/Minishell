@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 14:08:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/29 16:08:13 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/29 18:59:12 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,12 @@ static int	find_all_files(t_dstack *stack, t_match_file match_file, int i)
 	char			*new;
 	char			*old_data;
 	
+	old_data = NULL;
 	dir = opendir(match_file.path);
 	if (dir == NULL)
+	{
 		return (FAILURE);
+	}
 	old_data = (char *)d_pop_stk(stack);
 	token = get_token(match_file.prefix, match_file.suffix);
 	if (token == NULL)
@@ -53,7 +56,7 @@ static int	find_all_files(t_dstack *stack, t_match_file match_file, int i)
 	{
 		entry = readdir(dir);
 		if (entry == NULL)
-			break ;
+			return (SUCCESS);
 		if (find_match_file(entry->d_name, match_file.prefix, match_file.suffix) == true)
 		{
 			new = ft_insert_str(old_data, entry->d_name, token, i);
@@ -83,7 +86,7 @@ static void	call_recursion(t_match_file match_file, t_dstack *stack, t_list **li
 	}
 }
 
-static void	rec_all(t_dstack *stack, t_list **list)
+void	rec_all(t_dstack *stack, t_list **list)
 {
 	t_match_file	match_file;
 	char			*data;
@@ -101,7 +104,7 @@ static void	rec_all(t_dstack *stack, t_list **list)
 			match_file.suffix = get_suffix(data, i);
 			break ;
 		}
-		if (data[i] == '\0')
+		if (data[i] != '\0')
 			i++;
 	}
 	call_recursion(match_file, stack, list, i);

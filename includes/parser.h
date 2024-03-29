@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/29 16:09:52 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:50:58 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ int			verif_before_operator(const char *prompt, char *token);
 
 void		handle_heredoc(const char *prompt, t_maindata *ats);
 
-int			expansion_cmd(t_maindata *core_data, t_list const *args);
-
 /////////////////////////
 ////// POST PARSER //////
 /////////////////////////
@@ -66,7 +64,7 @@ int			count_words(const char *prompt);
 
 int			count_letters(const char *start_word);
 
-char		**alloc_tab(t_maindata *core_data, char *prompt);
+char		**list_to_tab(t_list **lst);
 
 char		**late_parser(t_maindata *core_data, t_ats *node);
 // clean
@@ -152,7 +150,7 @@ bool		is_valid_char_name_env(const char c);
 //////////////////////////
 // TODO Trie par fichier
 
-int			expansion_cmd(t_maindata *core_data, t_list const *args);
+int			expansion_cmd(t_maindata *core_data, t_list **args);
 
 char		*copy_data_env(t_maindata *core_data, char *arg, int index);
 
@@ -171,5 +169,10 @@ char		*get_suffix(char *prompt, int index);
 char		*get_prefix(char *prompt, int index);
 
 char		*get_path_wildcard(char *arg, int index);
+
+bool		find_match_file(char *entry, char *prefix, char *suffix);
+
+void		rec_all(t_dstack *stack, t_list **list);
+
 
 #endif // PARSER_H

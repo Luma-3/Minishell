@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_quote.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:39:12 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/20 11:18:26 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:57:39 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*clean_quote(char *word)
 
 	nb_quote = count_quote(word);
 	if (nb_quote == 0)
-		return (word);
+		return (ft_strdup(word));
 	new_word = (char *)ft_calloc(ft_strlen(word) - nb_quote + 1, sizeof(char));
 	if (new_word == NULL)
 		return (NULL);
