@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/28 12:57:05 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:09:52 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "core_data.h"
 # include "ms_error.h"
+# include "stackft.h"
 
 # include <stdbool.h>
 
@@ -27,6 +28,13 @@
 # define REDIR_OUT 2
 # define REDIR_OUT_APPEND 3
 # define REDIR_HEREDOC 4
+
+typedef struct s_match_file
+{
+	char		*prefix;
+	char		*suffix;
+	char		*path;
+}				t_match_file;
 
 /////////////////////////
 ////// PRE PARSER //////
@@ -60,7 +68,7 @@ int			count_letters(const char *start_word);
 
 char		**alloc_tab(t_maindata *core_data, char *prompt);
 
-char	**late_parser(t_maindata *core_data, t_ats *node);
+char		**late_parser(t_maindata *core_data, t_ats *node);
 // clean
 
 char		*clean_quote(char *word);
@@ -68,8 +76,6 @@ char		*clean_quote(char *word);
 ///////////////////////////
 ////// ATOMIC PARSER //////
 ///////////////////////////
-
-int			skip_quote_parenthesis(const char *prompt, int index);
 
 int			init_core_data(t_maindata *ats, char *prompt, t_list *env);
 
@@ -154,5 +160,16 @@ char		*copy_data_tilde(const char *uname, char *arg, int index);
 
 bool		check_tilde(const char *arg, const int prev_i,
 				const int next_i);
+
+t_list		*get_all_file(char *arg);
+
+//all_utils.c
+char		*get_token(char *prefix, char *suffix);
+
+char		*get_suffix(char *prompt, int index);
+
+char		*get_prefix(char *prompt, int index);
+
+char		*get_path_wildcard(char *arg, int index);
 
 #endif // PARSER_H

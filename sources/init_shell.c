@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:49:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 14:17:37 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/29 13:19:30 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	init_shell(t_maindata *core_data, t_error *errors, char **envp)
 	ft_bzero(core_data, sizeof(t_maindata));
 	__init_error__(errors);
 	core_data->errors = errors;
-	init_signal();
+	//init_signal();
 	core_data->uname = take_u_name();
 	if (core_data->uname == NULL)
 		return (perror_switch(errors, "KikiShell"), FAILURE);

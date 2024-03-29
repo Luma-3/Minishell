@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:35:19 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/28 16:19:02 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/29 16:02:52 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,24 @@ static char *handle_env(t_maindata *core_data, const char *arg)
 	return (new_arg);
 }
 
-static char	*handle_all(t_maindata *core_data, const char *arg)
+static t_list	*handle_all(const char *arg)
 {
-	char	*new_arg;
+	t_list	*match_files;
 	int		i;
 
 	i = 0;
-	new_arg = (char *)arg;
-	while (new_arg[i])
+	match_files = NULL;
+	while (arg[i])
 	{
-		i = skip_quote_parenthesis(new_arg, i);
-		if (new_arg[i] == '*')
+		i = skip_quote_parenthesis(arg, i);
+		if (arg[i] == '*')
 		{
-			new_arg = find_data_all(core_data, new_arg, i);
+			match_files = get_all_file((char *)arg);
+			break ;
 		}
 		i++;
 	}
-	return (NULL);
+	return (match_files);
 }
 
 int	expansion_cmd(t_maindata *core_data, t_list const *args)
@@ -83,12 +84,8 @@ int	expansion_cmd(t_maindata *core_data, t_list const *args)
 		}
 		else if (ft_strchr((const char *)indexer->content, '*') != NULL)
 		{
-			indexer->content = (void *)handle_all(core_data, indexer->content);
+			indexer->content = (void *)handle_all(indexer->content);
 		}
-		// if (ft_strchr ($))
-		// 	handle_dollar();
-		// if (ft_strchr(argv[i], '*'))
-		// 	hanlde_all
 		indexer = indexer->next;
 	}
 	return (SUCCESS);
