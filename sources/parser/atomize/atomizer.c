@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   atomizer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 14:59:06 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/28 09:27:55 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	atomize_pipeline(t_maindata *ats)
 	return (SUCCESS);
 }
 
-static int	atomize_prompt(t_maindata *ats)
+int	atomize_prompt(t_maindata *ats)
 {
 	int		i_copy;
 	int		i_read;
@@ -98,26 +98,5 @@ static int	atomize_prompt(t_maindata *ats)
 	}
 	if (copy_insert_node(ats, i_copy, i_read) == NULL)
 		return (FAILURE);
-	return (SUCCESS);
-}
-
-int	parse_ats(char *prompt, t_maindata *core_data, bool check_arg)
-{
-	if (check_arg == true)
-	{
-		if (verif_prompt(prompt) == FAILURE)
-			return (FAILURE);
-		handle_heredoc(prompt, core_data);
-	}
-	if (atomize_prompt(core_data) == FAILURE)
-	{
-		perror("atomize_prompt");
-		return (FAILURE);
-	}
-	if (post_parser(core_data, core_data->root) == FAILURE)
-	{
-		perror("post_parser");
-		return (FAILURE);
-	}
 	return (SUCCESS);
 }

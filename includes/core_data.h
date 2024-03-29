@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 12:39:53 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/28 15:55:55 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,12 @@ typedef struct s_token
 	bool			is_subshell;
 	bool			require_wait;
 }			t_token;
+
+typedef struct s_tree_asterisk
+{
+	char		*data;
+	t_queue		*branch;
+}			t_tree_asterisk;
 
 typedef struct s_ats
 {

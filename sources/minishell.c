@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 17:19:19 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/28 09:23:26 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	init_core_data(t_maindata *core_data, char *prompt, t_list *env)
 
 char	*get_home(const char *uname)
 {
-	char *home;
-	
+	char	*home;
+
 	home = ft_strjoin("/home/", uname);
 	if (home == NULL)
 	{
@@ -59,7 +59,7 @@ void	exec_process(t_maindata *core_data, t_list *env, char *input)
 	ft_putchar_fd('\n', 1);
 	if (init_core_data(core_data, input, env) == FAILURE)
 		return ;
-	if (parse_ats(input, core_data, true) == FAILURE)
+	if (parse_prompt(input, core_data, true) == FAILURE)
 	{
 		clear_ats(core_data, CORE_REDIR | CORE_ROOT | CORE_PROMPT | CORE_HEREDOC
 			| CORE_PIPE);
@@ -67,7 +67,8 @@ void	exec_process(t_maindata *core_data, t_list *env, char *input)
 	}
 	read_ats(core_data, core_data->root);
 	ft_putchar_fd('\n', 1);
-	clear_ats(core_data, CORE_REDIR | CORE_ROOT | CORE_PROMPT | CORE_HEREDOC | CORE_PIPE);
+	clear_ats(core_data, CORE_REDIR | CORE_ROOT | CORE_PROMPT
+		| CORE_HEREDOC | CORE_PIPE);
 }
 
 void	read_input(t_maindata *core_data)

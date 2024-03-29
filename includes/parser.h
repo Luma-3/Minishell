@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 18:46:51 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/28 12:57:05 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ int			verif_before_operator(const char *prompt, char *token);
 
 void		handle_heredoc(const char *prompt, t_maindata *ats);
 
-int			handle_wildcard(t_maindata *core_data, t_list const *args);
-
+int			expansion_cmd(t_maindata *core_data, t_list const *args);
 
 /////////////////////////
 ////// POST PARSER //////
@@ -61,8 +60,7 @@ int			count_letters(const char *start_word);
 
 char		**alloc_tab(t_maindata *core_data, char *prompt);
 
-int			post_parser(t_maindata *core_data, t_ats *root);
-
+char	**late_parser(t_maindata *core_data, t_ats *node);
 // clean
 
 char		*clean_quote(char *word);
@@ -75,7 +73,9 @@ int			skip_quote_parenthesis(const char *prompt, int index);
 
 int			init_core_data(t_maindata *ats, char *prompt, t_list *env);
 
-int			parse_ats(char *prompt, t_maindata *core_data, bool check_arg);
+int			parse_prompt(char *prompt, t_maindata *core_data, bool check_arg);
+
+int			atomize_prompt(t_maindata *ats);
 
 // bin_tree.c
 
@@ -139,7 +139,18 @@ bool		is_subshell(const char *cmd, int size_cmd);
 
 bool		is_pipeline(const char *prompt);
 
-// TODODODODODOD
+bool		is_valid_char_name_env(const char c);
+
+//////////////////////////
+/////// EXPANSION  ///////
+//////////////////////////
+// TODO Trie par fichier
+
+int			expansion_cmd(t_maindata *core_data, t_list const *args);
+
+char		*copy_data_env(t_maindata *core_data, char *arg, int index);
+
+char		*copy_data_tilde(const char *uname, char *arg, int index);
 
 bool		check_tilde(const char *arg, const int prev_i,
 				const int next_i);

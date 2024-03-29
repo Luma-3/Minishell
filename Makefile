@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/27 18:12:52 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/28 12:51:00 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -120,29 +120,36 @@ SRC_EXEC		=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 SRC_PARSER_DIR		=	parser/
 
 PRE_PARSER_DIR		=	pre_parser/
-PRE_PARSER_LIST		=	verif_prompt.c		\
-						verif_utils.c		\
+PRE_PARSER_LIST		=	verif_prompt.c			\
+						verif_utils.c			\
 						verif_utils2.c		
 PRE_PARSER			=	$(addprefix $(PRE_PARSER_DIR), $(PRE_PARSER_LIST))
 
 ATS_DIR				=	atomize/
-ATS_LIST			=	atomizer.c			\
-						atomizer_copy.c		\
-						bin_tree.c			\
-						bin_tree_utils.c 	\
+ATS_LIST			=	atomizer.c				\
+						atomizer_copy.c			\
+						bin_tree.c				\
+						bin_tree_utils.c 		\
 						take_redir.c
 ATS					=	$(addprefix $(ATS_DIR), $(ATS_LIST))
 
-POST_PARSER_DIR		=	post_parser/
-POST_PARSER_LIST	=	post_parser.c		\
-						alloc_tab.c			\
-						count_utils.c		\
-						clean_quote.c		\
-						wildcard.c			\
-						wildcard_utils.c
+POST_PARSER_DIR		=	late_parser/
+
+EXPAND_DIR			=	expansion/
+EXPAND_LIST			=	expansion.c 			\
+						expansion_env.c			\
+						expansion_tilde.c		
+EXPAND				=	$(addprefix $(EXPAND_DIR), $(EXPAND_LIST))
+
+POST_PARSER_LIST	=	late_parser.c			\
+						alloc_tab.c				\
+						count_utils.c			\
+						clean_quote.c			\
+						$(EXPAND)
 POST_PARSER			=	$(addprefix $(POST_PARSER_DIR), $(POST_PARSER_LIST))
 
-SRC_PARSER_LIST			=	is_type.c			\
+SRC_PARSER_LIST			=	parser.c			\
+							is_type.c			\
 							is_type2.c			\
 							place_cursor.c		\
 							$(ATS)				\
@@ -150,12 +157,12 @@ SRC_PARSER_LIST			=	is_type.c			\
 							$(PRE_PARSER)
 SRC_PARSER				=	$(addprefix $(SRC_PARSER_DIR), $(SRC_PARSER_LIST))
 
-SRC_LIST			=	minishell.c				\
-						safe_mode.c				\
-						init_shell.c			\
-						$(COMPONENTS)			\
-						$(SRC_BUILTINS)			\
-						$(SRC_PARSER)			\
+SRC_LIST			=	minishell.c			\
+						safe_mode.c			\
+						init_shell.c		\
+						$(COMPONENTS)		\
+						$(SRC_BUILTINS)		\
+						$(SRC_PARSER)		\
 						$(SRC_EXEC)
 SRC					=	$(addprefix $(SRC_DIR), $(SRC_LIST))
 
@@ -201,6 +208,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(ATS_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(POST_PARSER_DIR)
+	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(POST_PARSER_DIR)$(EXPAND_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(PRE_PARSER_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_HISTORY_DIR)
 	@mkdir -p $(OBJ_DIR)$(SRC_REDIR_DIR)

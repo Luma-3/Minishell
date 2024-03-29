@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:12:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 15:22:08 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/28 09:23:10 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	exec_subshell(t_maindata *core_data, t_ats *node)
 	{
 		open_redir(core_data->queue_redir, core_data->queue_heredoc, node);
 		init_new_ats(core_data, &new_ats, node);
-		parse_ats(new_ats.prompt, &new_ats, false);
+		parse_prompt(new_ats.prompt, &new_ats, false);
 		read_ats(&new_ats, new_ats.root);
 		status = new_ats.last_status;
 		clear_ats(&new_ats, CORE_ALL);

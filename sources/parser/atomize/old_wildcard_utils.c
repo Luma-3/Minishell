@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 14:51:57 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/27 17:52:08 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/28 09:35:12 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@
 // 		return (NULL);
 // 	return (env_name);
 // }
-
-
-
 
 
 // static char	*delete_wildcard(char *prompt, char token, int index)

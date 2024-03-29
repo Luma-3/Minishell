@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alloc_tab.c                                        :+:      :+:    :+:   */
+/*   late_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 10:48:17 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/27 18:24:26 by jbrousse         ###   ########.fr       */
+/*   Created: 2024/03/07 12:46:36 by jbrousse          #+#    #+#             */
+/*   Updated: 2024/03/28 12:58:58 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-#include "minishell.h"
 
 static t_list	*split_arg(const char *prompt)
 {
@@ -35,20 +34,16 @@ static t_list	*split_arg(const char *prompt)
 	return (args_lst);
 }
 
-char	**alloc_tab(t_maindata *core_data, char *prompt)
+char	**late_parser(t_maindata *core_data, t_ats *node)
 {
-	char	**tab;
-	t_list	*args_lst;
+	t_list	*lst_args;
+	char 	**tab_args;
 
-	tab = NULL;
-	args_lst = split_arg(prompt);
-	if (args_lst == NULL)
+	(void)core_data;
+	tab_args = NULL;
+	lst_args = split_arg(node->data->cmd);
+	if (lst_args == NULL)
 		return (NULL);
-	handle_wildcard(core_data, args_lst);
-	return (tab);
+	expansion_cmd(core_data, lst_args);
+	return (tab_args);
 }
-
-
-			// tab[index] = clean_quote(tab[index]);
-			// if (tab[index] == NULL)
-			// 	return (ft_rm_split(tab), NULL);

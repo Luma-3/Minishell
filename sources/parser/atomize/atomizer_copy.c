@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   atomizer_copy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 15:12:21 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/28 09:24:16 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-#include "minishell.h"
+// #include "minishell.h"
 
 static char	*copy_whitout_parenthesis(char *cmd)
 {
