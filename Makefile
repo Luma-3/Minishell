@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/28 12:51:00 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/03/29 11:31:22 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,16 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g3
 
 ################
-##   LIBFT	  ##
+##   LIBS	  ##
 ################
 
 LIBFT = $(LIBFT_DIR)libft.a
-LIBFT_DIR = libft/
+LIBFT_DIR = libs/libft/
 LIBFT_INC = $(LIBFT_DIR)includes/
+
+STACKFT = $(STACKFT_DIR)stackft.a
+STACKFT_DIR = libs/stackft/
+STACKFT_INC = $(STACKFT_DIR)includes/
 
 #################
 ##   INCLUDE   ##
@@ -31,7 +35,8 @@ LIBFT_INC = $(LIBFT_DIR)includes/
 
 INCLUDE_LIST	=	./includes/				\
 					./includes/components/	\
-					./$(LIBFT_INC)
+					./$(LIBFT_INC) 			\
+					./$(STACKFT_INC)
 INCLUDE			=	$(addprefix -I, $(INCLUDE_LIST))
 
 
@@ -192,7 +197,7 @@ COLOR_BLUE		=	\033[34m
 
 
 
-all: $(LIBFT) $(NAME)
+all: $(LIBFT) $(STACKFT) $(NAME)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
@@ -219,27 +224,32 @@ $(OBJ_DIR):
 $(LIBFT):
 	@make -sC $(LIBFT_DIR)
 
+$(STACKFT):
+	@make -sC $(STACKFT_DIR)
+
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	@echo "$(COLOR_BLUE)Compile $<$(COLOR_RESET)"
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(NAME): $(OBJ_LIST)
 	@echo "$(COLOR_BLUE)Compile $(NAME)$(COLOR_RESET)"
-	@$(CC) $(CFLAGS) $(OBJ_LIST) $(LIBFT) -o $(NAME) -lreadline -lcurses
+	@$(CC) $(CFLAGS) $(OBJ_LIST) $(LIBFT) $(STACKFT) -o $(NAME) -lreadline -lcurses
 
 clean:
 	@echo "$(COLOR_RED)Delete objects$(COLOR_RESET)"
 	@rm -rf $(OBJ_DIR) $(NORM_LOG)
 	@make clean -sC $(LIBFT_DIR) 
+	@make clean -sC $(STACKFT_DIR)
 
 fclean: clean
 	@echo "$(COLOR_RED)Delete $(NAME)$(COLOR_RESET)"
 	@rm -f $(NAME)
-	@make fclean -sC $(LIBFT_DIR)
+	@make fclean -sC $(LIBFT_DIR) 
+	@make fclean -sC $(STACKFT_DIR)
 
 norme:
 	@echo "$(COLOR_BLUE)Norminette...$(COLOR_RESET)"
-	@norminette $(SRC) $(INCLUDES) $(LIBFT_DIR) > $(NORM_LOG) ; \
+	@norminette $(SRC) $(INCLUDES) $(LIBFT_DIR) $(STACKFT_DIR) > $(NORM_LOG) ; \
 	if grep -q "Error" $(NORM_LOG); then \
 		echo "$(COLOR_RED)Norme : KO!$(COLOR_RESET)"; \
 	else \
