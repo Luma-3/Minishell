@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expansion_all.c                                    :+:      :+:    :+:   */
+/*   all_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 14:08:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 14:47:13 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/30 17:17:09 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,28 +112,6 @@ void	rec_all(t_dstack *stack, t_list **list)
 			i++;
 	}
 	call_recursion(match_file, stack, list, i);
-}
-
-static void	*ft_lstdetach(t_list **lst, t_list *current_index)
-{
-	t_list	*prev;
-	t_list	*next;
-
-	prev = *lst;
-	next = current_index->next;
-	if (prev == current_index)
-	{
-		*lst = next;
-	}
-	else
-	{
-		while (prev->next != current_index)
-		{
-			prev = prev->next;
-		}
-		prev->next = next;
-	}
-	return (current_index);
 }
 
 t_list	*get_all_file(t_list **head, t_list *arg)
