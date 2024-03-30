@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:43:18 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/26 13:16:28 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/03/30 17:20:35 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,15 @@ static int	verif_token_before(const char *prompt, int i)
 	{
 		if (ft_iswhitespace(prompt[i]) == true)
 			i--;
-		if (is_operator(prompt + i) == true
+		if (is_operator(prompt + i - 1) == true
 			|| is_quote(prompt[i]) == true
 			|| prompt[i] == '\0')
 			return (SUCCESS);
 		else
+		{
+			printf("ERROR: %c\n", prompt[i]);
 			return (FAILURE);
+		}
 	}
 	return (SUCCESS);
 }

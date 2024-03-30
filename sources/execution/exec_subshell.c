@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:12:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 17:01:10 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/30 18:06:52 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int	exec_subshell(t_maindata *core_data, t_ats *node)
 		clear_ats(&new_ats, CORE_ALL);
 		exit(status);
 	}
+	close(core_data->history_fd);
 	return (clean_parent(core_data, node));
 }

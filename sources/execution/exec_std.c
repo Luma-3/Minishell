@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 16:59:34 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/30 18:11:38 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	clean_parent(t_maindata *core_data, const t_ats *node)
 		free(free_data_redir->file_name);
 		free(free_data_redir);
 	}
-	close(core_data->history_fd);
 	if (node->data->index - 1 >= 0)
 		return (close_pipe(core_data));
 	return (SUCCESS);
@@ -77,6 +76,7 @@ pid_t	exec_std(t_maindata *core_data, const t_ats *node)
 		path = ms_getenv(core_data->env, "PATH");
 		if (path == NULL)
 			path = ft_strdup(core_data->path);
+		close(core_data->history_fd);
 		exec_command(args, &(core_data->env),
 			core_data->errors, path);
 		clear_ats(core_data, CORE_ALL);
