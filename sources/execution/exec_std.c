@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_std.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/29 17:01:36 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/30 15:14:02 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ char	**pre_process_exec(t_maindata *core_data, t_ats *node)
 		clear_ats(core_data, CORE_ALL);
 		exit(FAILURE);
 	}
+	
 	if (open_redir(core_data->queue_redir, core_data->queue_heredoc,
 			node) != SUCCESS)
 	{

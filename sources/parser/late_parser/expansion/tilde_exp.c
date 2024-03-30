@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expansion_tilde.c                                  :+:      :+:    :+:   */
+/*   tilde_exp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 17:10:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/28 12:57:40 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/30 15:21:22 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	check_tilde(const char *arg, const int prev_i, const int next_i)
 char	*copy_data_tilde(const char *uname, char *arg, int index)
 {
 	char	*home;
-	char 	*new_arg;
+	char	*new_arg;
 
 	home = get_home(uname);
 	if (home == NULL)

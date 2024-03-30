@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:49:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 09:56:13 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/30 12:11:50 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*take_u_name(void)
 
 	fd = open("/run/utmp", O_RDONLY);
 	if (fd == -1)
-		return (perror("Safe Mode"), NULL);
+		return (ft_strdup("anthony"));//DELETE OR REPLACE
 	while (read(fd, &user, sizeof(struct utmp)) > 0)
 	{
 		if (user.ut_type == USER_PROCESS)

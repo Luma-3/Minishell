@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core_data.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/28 15:55:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/30 14:59:08 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ typedef struct s_token
 	int				exit_code;
 	pid_t			pid;
 	char			*cmd;
-	char			**argv;
-	bool			post_parser;
 	bool			is_subshell;
 	bool			require_wait;
 }			t_token;

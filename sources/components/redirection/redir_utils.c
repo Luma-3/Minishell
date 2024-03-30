@@ -3,19 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:16:35 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 15:20:24 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/30 15:33:04 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirection.h"
 
-int	open_all_redir(t_queue *redir, t_queue *heredoc, t_ats *root)
+int	open_redir_out(t_queue_redir *redir)
 {
-	if (!root)
-		return (SUCCESS);
-	open_all_redir(redir, heredoc, root->left);
-	return (open_redir(redir, heredoc, root));
+	int	fd;
+
+	fd = open(redir->file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd == -1)
+	{
+		return (FAILURE);
+	}
+	if (access(redir->file_name, F_OK | W_OK) != 0)
+	{
+		return (FAILURE);
+	}
+	dup2(fd, STDOUT_FILENO);
+	close(fd);
+	return (SUCCESS);
 }
+
+int	open_redir_in(t_queue_redir *redir)
+{
+	int	fd;
+
+	if (access(redir->file_name, F_OK | R_OK) != 0)
+	{
+		return (FAILURE);
+	}
+	fd = open(redir->file_name, O_RDONLY, 0644);
+	if (fd == -1)
+	{
+		return (FAILURE);
+	}
+	dup2(fd, STDIN_FILENO);
+	close(fd);
+	return (SUCCESS);
+}
+
+int	open_redir_append(t_queue_redir *redir)
+{
+	int	fd;
+
+	fd = open(redir->file_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	if (fd == -1)
+		return (FAILURE);
+	if (access(redir->file_name, F_OK | W_OK) != 0)
+		return (FAILURE);
+	dup2(fd, STDOUT_FILENO);
+	close(fd);
+	return (SUCCESS);
+}
+
+int	open_redir_heredoc(t_queue *queue_heredoc)
+{
+	t_queue_heredoc	*heredoc;
+	int				fd;
+
+	heredoc = (t_queue_heredoc *)ft_dequeue(queue_heredoc);
+	if (access(heredoc->file_name, F_OK | R_OK) != 0)
+		return (FAILURE);
+	fd = open(heredoc->file_name, O_RDONLY, 0644);
+	if (fd == -1)
+		return (FAILURE);
+	dup2(fd, STDIN_FILENO);
+	close(fd);
+	return (SUCCESS);
+}
+
+

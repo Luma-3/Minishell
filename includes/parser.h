@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/29 16:50:58 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/30 14:14:44 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ char		*copy_data_tilde(const char *uname, char *arg, int index);
 bool		check_tilde(const char *arg, const int prev_i,
 				const int next_i);
 
-t_list		*get_all_file(char *arg);
+t_list		*get_all_file(t_list **head, t_list *arg);
 
 //all_utils.c
 char		*get_token(char *prefix, char *suffix);
