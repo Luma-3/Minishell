@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:49:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/29 13:19:30 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/30 09:56:13 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static int	launch_shell(t_maindata *core_data, char **envp)
 }
 
 int	init_shell(t_maindata *core_data, t_error *errors, char **envp)
-{	
+{
 	ft_bzero(core_data, sizeof(t_maindata));
 	__init_error__(errors);
 	core_data->errors = errors;
