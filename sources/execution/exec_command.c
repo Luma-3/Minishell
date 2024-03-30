@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:06:49 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/27 12:49:58 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/30 16:46:12 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	exec_command(char **tab_cmd, t_list **env, t_error *errors, char *path)
 	if (path_command == NULL)
 	{
 		ft_perror(errors, tab_cmd[0]);
+		ft_rm_split(tab_cmd);
 		return (FAILURE);
 	}
 	env_tab = env_to_tab(*env);

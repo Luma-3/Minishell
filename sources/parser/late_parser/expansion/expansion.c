@@ -6,14 +6,14 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:35:19 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 15:11:21 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/30 16:11:53 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "minishell.h"
 
-static char	*handle_tilde(const char *arg, const char *uname)
+char	*handle_tilde(const char *arg, const char *uname)
 {
 	int		i;
 	char	*new_arg;
@@ -22,16 +22,18 @@ static char	*handle_tilde(const char *arg, const char *uname)
 	new_arg = (char *)arg;
 	while (new_arg[i])
 	{
+		i = skip_quote_parenthesis(new_arg, i);
 		if (new_arg[i] == '~' && check_tilde(new_arg, i - 1, i + 1) == true)
 		{
 			new_arg = copy_data_tilde(uname, new_arg, i);
 		}
-		i++;
+		if (new_arg[i] != '\0')
+			i++;
 	}
 	return (new_arg);
 }
 
-static char	*handle_env(t_maindata *core_data, const char *arg)
+char	*handle_env(t_maindata *core_data, const char *arg)
 {
 	int		i;
 	char	*new_arg;

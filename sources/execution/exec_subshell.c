@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_subshell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:12:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/28 09:23:10 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/30 17:01:10 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ static void	init_new_ats(t_maindata *core_data, t_maindata *new_core,
 	new_core->env = core_data->env;
 	new_core->queue_heredoc = core_data->queue_heredoc;
 	new_core->last_status = 0;
+	new_core->uname = core_data->uname;
+	new_core->path = core_data->path;
+	new_core->history_fd = core_data->history_fd;
+	new_core->errors = core_data->errors;
 	new_core->queue_redir = ft_init_queue();
 	new_core->queue_pipe = ft_init_queue();
 	new_core->root = NULL;
@@ -41,7 +45,7 @@ int	exec_subshell(t_maindata *core_data, t_ats *node)
 	node->data->pid = pid;
 	if (pid == 0)
 	{
-		open_redir(core_data->queue_redir, core_data->queue_heredoc, node);
+		open_redir(core_data, node);
 		init_new_ats(core_data, &new_ats, node);
 		parse_prompt(new_ats.prompt, &new_ats, false);
 		read_ats(&new_ats, new_ats.root);

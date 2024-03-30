@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_builtins.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:11:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/22 15:27:16 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/30 16:07:28 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	exec_builtins(const char **tab_cmd, t_list **env);
 // BUILTINS
 
 int	ms_echo(const char *prompt, char **args, t_list **envp);
-int	handle_env(const char *start_spec, t_list *envp);
+// int	handle_env(const char *start_spec, t_list *envp);
 int	is_printable_quote(const char *start_spec, bool *is_between_quotes, char *quote_type);
 
 int	ms_pwd(const char *prompt, char **args, t_list **envp);

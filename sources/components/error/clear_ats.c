@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear_ats.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:52:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 12:38:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/30 16:23:04 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ static void	free_data_tree(void *content)
 	data = (t_token *)content;
 	if (data->cmd != NULL)
 		free(data->cmd);
-	if (data->argv != NULL)
-		ft_rm_split(data->argv);
 	free(data);
 }
 

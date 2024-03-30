@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:16:35 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 15:33:04 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/30 15:34:04 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,3 @@ int	open_redir_heredoc(t_queue *queue_heredoc)
 	close(fd);
 	return (SUCCESS);
 }
-
-

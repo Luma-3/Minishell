@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expansion_env.c                                    :+:      :+:    :+:   */
+/*   env_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 11:48:27 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/28 13:13:29 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/30 16:21:45 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,9 @@ char *copy_data_env(t_maindata *core_data, char *arg, int index)
 	}
 	while (arg[i] != '\0' && is_valid_char_name_env(arg[i]) == true && arg[i] != '$')
 		i++;
-	printf("i: %d\n", i);
 	token = ft_substr(arg, index, i - index);
 	if (token == NULL)
 		return (arg);
-	printf("token: %s\n", token);
 	env_value = ms_getenv(core_data->env, token + 1);
 	new_arg = ft_insert_str(arg, env_value, token, index);
 	if (new_arg == arg)

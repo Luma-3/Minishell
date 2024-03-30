@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 11:16:20 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 15:24:46 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/30 16:08:14 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,5 @@ int	handle_pipeline(t_maindata *core_data, const t_ats *node)
 	tmp_heredoc = ft_dup_queue(core_data->queue_heredoc);
 	if (!tmp_redir || !tmp_heredoc)
 		return (FAILURE);
-	return (open_redirs_pipe(tmp_redir, tmp_heredoc, core_data->root));
+	return (open_redirs_pipe(core_data, core_data->root));
 }

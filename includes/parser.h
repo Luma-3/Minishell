@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 14:14:44 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/30 16:05:28 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,10 @@ char		*get_path_wildcard(char *arg, int index);
 bool		find_match_file(char *entry, char *prefix, char *suffix);
 
 void		rec_all(t_dstack *stack, t_list **list);
+
+char		*handle_tilde(const char *arg, const char *uname);
+
+char		*handle_env(t_maindata *core_data, const char *arg);
 
 
 #endif // PARSER_H

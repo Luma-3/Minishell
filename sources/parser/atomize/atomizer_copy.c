@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   atomizer_copy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/28 09:24:16 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/30 16:24:00 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,12 @@ static t_token	*init_node(const char *cmd, int size_cmd)
 	if (!data)
 		return (NULL);
 	data->is_subshell = false;
-	data->post_parser = false;
 	if (is_subshell(cmd, size_cmd) == true)
 		data->is_subshell = true;
-	else if (is_operator(cmd) == false)
-		data->post_parser = true;
 	data->cmd = copy_whitout_parenthesis((char *)cmd);
 	if (data->cmd == NULL)
 		return (free(data), NULL);
-	data->argv = NULL;
 	data->require_wait = true;
-	data->post_parser = true;
 	data->exit_code = 0;
 	data->pid = -1;
 	data->index = -1;
@@ -81,7 +76,6 @@ int	copy_cmd_operator(t_maindata *core, int *i_copy, int *i_read)
 	data = copy_token(core, core->prompt + *i_copy, *i_read - *i_copy);
 	if (data == NULL)
 		return (FAILURE);
-	data->post_parser = false;
 	if (insert_node(&(core->root), data, compare_token) == FAILURE)
 		return (free(data), FAILURE);
 	if (*(data->cmd) == '&')

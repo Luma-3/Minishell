@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 15:14:02 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/30 16:59:34 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	clean_parent(t_maindata *core_data, const t_ats *node)
 		free(free_data_redir->file_name);
 		free(free_data_redir);
 	}
+	close(core_data->history_fd);
 	if (node->data->index - 1 >= 0)
 		return (close_pipe(core_data));
 	return (SUCCESS);
@@ -49,9 +50,7 @@ char	**pre_process_exec(t_maindata *core_data, t_ats *node)
 		clear_ats(core_data, CORE_ALL);
 		exit(FAILURE);
 	}
-	
-	if (open_redir(core_data->queue_redir, core_data->queue_heredoc,
-			node) != SUCCESS)
+	if (open_redir(core_data, node) != SUCCESS)
 	{
 		clear_ats(core_data, CORE_ALL);
 		exit(FAILURE);
