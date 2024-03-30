@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:40:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/29 18:37:44 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/03/30 19:06:26 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*get_suffix(char *arg, int index)
 	i = index + 1;
 	while (arg[i] != '\0' && arg[i] != '/' && arg[i] != '*')
 		i++;
-	if (i == index + 1)
+	if (i == index + 1 && arg[i] == '*')
 		return (NULL);
 	suffix = ft_strndup(arg + index + 1, i - index);
 	if (suffix == NULL)
