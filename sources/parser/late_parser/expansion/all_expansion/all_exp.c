@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 14:08:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 19:46:05 by anthony          ###   ########.fr       */
+/*   Updated: 2024/03/31 20:32:20 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,23 @@ static void	pop_stack_to_list(t_dstack *stack, t_list **list)
 	}
 }
 
-static int	find_all_files(t_dstack *stack, t_match_file match_file, int i)
+static int	find_all_files(t_dstack *stack, t_match_file match_file, t_list **lst, int i)
 {
 	DIR				*dir;
 	struct dirent	*entry;
 	struct stat		stat_file;
 	char			*token;
-	char			*new;
 	char			*old_data;
 	char			tmp[257];
 	char			*suffix;
+	char 			*path;
+	bool			have_file;
 
 	old_data = NULL;
 	dir = opendir(match_file.path);
 	if (dir == NULL)
 		return (FAILURE);
 	old_data = (char *)d_pop_stk(stack);
-	printf ("old_data = %s\n", old_data);
 	if (ft_strchr(match_file.suffix, '/') != 0)
 		suffix = ft_strtrim(match_file.suffix, "/");
 	else
@@ -60,25 +60,30 @@ static int	find_all_files(t_dstack *stack, t_match_file match_file, int i)
 	token = get_token(match_file.prefix, suffix);
 	if (token == NULL)
 		return (FAILURE);
-	printf("token = %s\n", token);
+	have_file = false;
 	while (true)
 	{
 		entry = readdir(dir);
 		if (entry == NULL)
-			return (SUCCESS);
-		stat(entry->d_name, &stat_file);
+			break ;
+		path = ft_strjoin(match_file.path, entry->d_name);
+		stat(path, &stat_file);
 		ft_strlcpy(tmp, entry->d_name, 256);
-		if (S_ISDIR(stat_file.st_mode) == true)
+		if (S_ISDIR(stat_file.st_mode))
 		{
 			ft_strlcat(tmp, "/", 257);
 		}
-		printf("tmp = %s\n", tmp);
 		if (find_match_file(tmp, match_file.prefix,
 				match_file.suffix) == true)
 		{
-			new = ft_insert_str(old_data, entry->d_name, token, i);
-			d_push_stk(stack, new);
+			have_file = true;
+			d_push_stk(stack, ft_insert_str(old_data, entry->d_name, token, i));
 		}
+	}
+	if (have_file == false)
+	{
+		ft_lstadd_front(lst, ft_lstnew(old_data));
+		return (FAILURE);
 	}
 	return (SUCCESS);
 }
@@ -93,7 +98,7 @@ static void	call_recursion(t_match_file match_file, t_dstack *stack,
 	{
 		len = ft_strlen(match_file.prefix);
 	}
-	if (find_all_files(stack, match_file, i - len) == FAILURE)
+	if (find_all_files(stack, match_file, list, i - len) == FAILURE)
 	{
 		d_drop_stk(stack, free);
 	}
@@ -119,16 +124,12 @@ void	rec_all(t_dstack *stack, t_list **list)
 		{
 			match_file.suffix = get_suffix(data, i);
 			match_file.path = get_path_wildcard(data, i);
-			if (ft_strchr(match_file.suffix, '/') != 0)
-				//TODO
 			if (access(match_file.path, F_OK) == FAILURE)
 			{
-				printf("No such file or directory: %s\n", match_file.path);
 				ft_lstadd_front(list, ft_lstnew(d_pop_stk(stack)));
 				return ;
 			}
 			match_file.prefix = get_prefix(data, i);
-			printf("suffix = %s\n", match_file.suffix);
 			break ;
 		}
 		if (data[i] != '\0')
