@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/02 17:00:45 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/04/02 19:37:48 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -194,9 +194,32 @@ OBJ_LIST	=	$(addprefix $(OBJ_DIR), $(SRC_LIST:.c=.o))
 #################
 
 COLOR_RESET		=	\033[0m
-COLOR_GREEN		=	\033[32m
-COLOR_RED		=	\033[31m
-COLOR_BLUE		=	\033[34m
+COLOR_GREEN		=	\033[38;5;76m
+COLOR_RED		=	\033[38;5;160m
+COLOR_BLUE		=	\033[38;5;45m
+COLOR_ORANGE	=	\033[38;5;220m
+BOLD			=	\033[1m
+UNDERLINE		=	\033[4m
+
+################
+##	PROGRESS  ##
+################
+
+TOTAL_SRCS		=	$(words $(SRC))
+COMPILED_SRCS	:=	0
+
+define print_progress
+	@printf "\033[2K"
+	@printf "$(COLOR_BLUE)Compiling: [$(COLOR_GREEN)"
+	@for i in $(shell seq 1 25); do \
+		if [ $$i -le $$(($(1)*25/$(2))) ]; then \
+			printf "#"; \
+		else \
+			printf "."; \
+		fi; \
+	done
+	@printf "$(COLOR_BLUE)] $(BOLD)$(1)/$(2) $(COLOR_GREEN)$(3)$(COLOR_RESET)\r"
+endef
 
 #################
 ##    RULES    ##
@@ -236,21 +259,23 @@ $(STACKFT):
 	@make -sC $(STACKFT_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
-	@echo "$(COLOR_BLUE)Compile $<$(COLOR_RESET)"
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
+	@$(eval COMPILED_SRCS=$(shell expr $(COMPILED_SRCS) + 1))
+	@$(call print_progress,$(COMPILED_SRCS),$(TOTAL_SRCS), $<)
+
 $(NAME): $(OBJ_LIST)
-	@echo "$(COLOR_BLUE)Compile $(NAME)$(COLOR_RESET)"
+	@echo "\033[2K$(COLOR_ORANGE)$(BOLD)Compilation complete ! $(COLOR_BLUE)Minishell is Ready !$(COLOR_RESET)"
 	@$(CC) $(CFLAGS) $(OBJ_LIST) $(LIBFT) $(STACKFT) -o $(NAME) -lreadline -lcurses
 
 clean:
-	@echo "$(COLOR_RED)Delete objects$(COLOR_RESET)"
+	@echo "$(COLOR_RED)$(BOLD)Delete $(NAME) objects$(COLOR_RESET)"
 	@rm -rf $(OBJ_DIR) $(NORM_LOG)
 	@make clean -sC $(LIBFT_DIR) 
 	@make clean -sC $(STACKFT_DIR)
 
 fclean: clean
-	@echo "$(COLOR_RED)Delete $(NAME)$(COLOR_RESET)"
+	@echo "$(COLOR_RED)$(BOLD)Delete Minishell$(COLOR_RESET)"
 	@rm -f $(NAME)
 	@make fclean -sC $(LIBFT_DIR) 
 	@make fclean -sC $(STACKFT_DIR)
