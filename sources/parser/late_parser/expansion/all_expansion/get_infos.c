@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   all_utils.c                                        :+:      :+:    :+:   */
+/*   get_info.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:40:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 19:06:26 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/03 00:20:08 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*get_path_wildcard(char *arg, int index)
 {
 	char	*path;
 	int		i;
-	int 	len;
+	int		len;
 
 	path = NULL;
 
@@ -75,37 +75,6 @@ char	*get_suffix(char *arg, int index)
 	if (suffix == NULL)
 		return (NULL);
 	return (suffix);
-}
-
-bool	find_match_file(char *entry, char *prefix, char *suffix)
-{
-	int	len_entry;
-	int	len_prefix;
-	int	len_suffix;
-
-	len_prefix = 0;
-	len_suffix = 0;
-	len_entry = 0;
-
-	if (suffix != NULL)
-		len_suffix = ft_strlen(suffix);
-	if (prefix != NULL)
-		len_prefix = ft_strlen(prefix);
-	if (entry != NULL)
-		len_entry = ft_strlen(entry);
-	if (len_prefix == 0 && len_suffix == 0)
-	{
-		if (entry[0] != '.')
-			return true;
-		return false;
-	}
-	if (len_prefix == 0 && entry[0] == '.') 
-		return false;
-	if (ft_strncmp(entry, prefix, len_prefix) == 0 && ft_strncmp(entry + len_entry - len_suffix, suffix, len_suffix) == 0)
-	{
-		return true;
-	}
-	return (false);
 }
 
 char	*get_token(char *prefix, char *suffix)

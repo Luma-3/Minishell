@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
+#    By: anthony <anthony@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/02 19:37:48 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/04/03 00:57:07 by anthony          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -142,13 +142,15 @@ POST_PARSER_DIR		=	late_parser/
 
 ALL_EXPAND_DIR		=	all_expansion/
 ALL_EXPAND_LIST		= 	all_exp.c			\
-						all_utils.c
+						get_infos.c			\
+						find_files.c		\
+						lst_utils.c			
 ALL_EXPAND			=	$(addprefix $(ALL_EXPAND_DIR), $(ALL_EXPAND_LIST))
 
 EXPAND_DIR			=	expansion/
 EXPAND_LIST			=	expansion.c 			\
 						env_exp.c				\
-						tilde_exp.c			\
+						tilde_exp.c				\
 						$(ALL_EXPAND)
 EXPAND				=	$(addprefix $(EXPAND_DIR), $(EXPAND_LIST))
 
