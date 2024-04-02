@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:10:35 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 13:23:02 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:28:36 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static void	print_arg(char **arg)
 	while (arg[i])
 	{
 		ft_putstr_fd(arg[i], 1);
+		if (arg[i + 1])
+			write(1, " ", 1);
 		i++;
 	}
 }

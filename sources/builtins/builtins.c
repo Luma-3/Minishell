@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:33:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 13:28:50 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/02 17:05:53 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	init_builtins(t_builtin *builtins)
 	builtins[6] = (t_builtin){"exit", ms_exit};
 }
 
-int	exec_builtins(const char **tab_cmd, t_list **env, t_error *errors)
+int	exec_builtin(const char **tab_cmd, t_list **env, t_error *errors)
 {
 	t_builtin	builtins[NB_BUILTINS];
 	int			i;
@@ -46,7 +46,7 @@ int	exec_builtins(const char **tab_cmd, t_list **env, t_error *errors)
 	return (EXIT_FAILURE);
 }
 
-int	is_builtins(const char *cmd)
+int	is_builtin(const char *cmd)
 {
 	t_builtin	builtins[NB_BUILTINS];
 	int			i;
@@ -55,8 +55,10 @@ int	is_builtins(const char *cmd)
 	init_builtins(builtins);
 	while (i < NB_BUILTINS)
 	{
-		if (ft_strncmp(builtins[i].name, cmd, ft_strlen(cmd)) == 0)
+		if (ft_strncmp(builtins[i].name, cmd, ft_strlen(builtins[i].name)) == 0)
+		{
 			return (true);
+		}
 		i++;
 	}
 	return (false);

@@ -6,36 +6,12 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:10:20 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 20:27:54 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/02 17:44:20 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "minishell.h"
-
-static size_t	len_without_redir(const char *prompt)
-{
-	size_t	i;
-	size_t	len;
-
-	i = 0;
-	len = 0;
-	while (prompt[i])
-	{
-		if (is_redir_type(prompt + i) != 0)
-		{
-			i += 2 - (is_redir_type(prompt + i) < 2);
-			while (prompt[i] && ft_iswhitespace(prompt[i]) == true)
-				i++;
-			while (prompt[i] && ft_iswhitespace(prompt[i]) == false)
-				i++;
-		}
-		len++;
-		if (prompt[i] != '\0')
-			i++;
-	}
-	return (len);
-}
 
 static int	add_queue(t_maindata *ats, const char *prompt, int redir_type,
 							int size_prompt)
@@ -74,7 +50,7 @@ char	*take_redir(t_maindata *ats, const char *prompt, int size_prompt,
 	int		parenthesis;
 
 	parenthesis = 0;
-	new_prompt = ft_calloc(len_without_redir(prompt) + 1, sizeof(char));
+	new_prompt = ft_calloc(ft_strlen(prompt) + 1, sizeof(char));
 	if (!new_prompt)
 		return (NULL);
 	i = 0;
@@ -95,7 +71,7 @@ char	*take_redir(t_maindata *ats, const char *prompt, int size_prompt,
 			i += add_queue(ats, prompt + i, is_redir_type(prompt + i), size_prompt);
 			*nb_redir += 1;
 		}
-		else
+		else if (i < size_prompt && prompt[i] != '\0')
 			new_prompt[j++] = prompt[i++];
 	}
 	return (new_prompt);

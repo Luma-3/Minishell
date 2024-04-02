@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 14:08:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/01 17:18:40 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/02 18:00:13 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ static int	find_all_files(t_dstack *stack, t_match_file *match_file, t_list **ls
 		entry = readdir(dir);
 		if (entry == NULL)
 			break ;
-		path = ft_strjoin(match_file->path, entry->d_name);
+		path = ft_strjoin(match_file->path, "/");
+		path = ft_strjoin(path, entry->d_name);
 		stat(path, &stat_file);
 		ft_strlcpy(tmp, entry->d_name, 256);
 		if (S_ISDIR(stat_file.st_mode))

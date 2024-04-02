@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:16:35 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 15:34:04 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/02 17:11:41 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ int	open_redir_out(t_queue_redir *redir)
 {
 	int	fd;
 
-	fd = open(redir->file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd == -1)
+	if (access(redir->file_name, F_OK | W_OK) != 0)
 	{
 		return (FAILURE);
 	}
-	if (access(redir->file_name, F_OK | W_OK) != 0)
+	fd = open(redir->file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd == -1)
 	{
 		return (FAILURE);
 	}
@@ -52,10 +52,10 @@ int	open_redir_append(t_queue_redir *redir)
 {
 	int	fd;
 
+	if (access(redir->file_name, F_OK | W_OK) != 0)
+		return (FAILURE);
 	fd = open(redir->file_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
-		return (FAILURE);
-	if (access(redir->file_name, F_OK | W_OK) != 0)
 		return (FAILURE);
 	dup2(fd, STDOUT_FILENO);
 	close(fd);

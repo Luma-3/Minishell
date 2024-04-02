@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:26:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 16:15:49 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/02 17:22:58 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,12 @@ int	open_redir(t_maindata *core_data, const t_ats *node)
 			return (FAILURE);
 		}
 		expand_redir(core_data, node_redir);
-		exit_code = open_redir_type(node_redir, core_data->queue_heredoc);
+		if (open_redir_type(node_redir, core_data->queue_heredoc) == FAILURE)
+		{
+			perror_switch(core_data->errors, node_redir->file_name);
+			exit_code = FAILURE;
+		}
+		//TODO FREE
 		index--;
 	}
 	return (exit_code);

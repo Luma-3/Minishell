@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 15:13:30 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/02 16:48:47 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static int	wait_process(t_maindata *core_data, t_ats *node)
 			return (FAILURE);
 		}
 	}
+	return (SUCCESS);
 }
 
 static int	read_node(t_maindata *core_data, t_ats *node, t_ats *preview_node)
@@ -58,33 +59,35 @@ static int	read_node(t_maindata *core_data, t_ats *node, t_ats *preview_node)
 	}
 	if (node->data->pid >= 0 && node->data->require_wait == true)
 	{
-		if (wait_process(core_data, node) == FAILURE)
-			return (FAILURE);
+		return (wait_process(core_data, node));
 	}
 	return (SUCCESS);
 }
 
 int	read_ats(t_maindata *core_data, t_ats *root)
 {
-	int	error_return;
-
 	if (root == NULL)
 		return (SUCCESS);
-	error_return = read_ats(core_data, root->left);
-	if (error_return == FAILURE)
+	if (read_ats(core_data, root->left) == FAILURE)
 		return (FAILURE);
-	error_return = read_node(core_data, root, root->left);
-	if (is_operator(root->data->cmd) == true && error_return != FAILURE)
+	if (read_node(core_data, root, root->left) == FAILURE)
+		return (FAILURE);
+	if (is_operator(root->data->cmd) == true)
 	{
-		if (root->data->cmd[0] == '&' && root->data->exit_code != EXIT_SUCCESS)
+		if (root->data->cmd[0] == '&' && root->data->exit_code != SUCCESS)
 			return (SUCCESS);
-		else if (root->data->cmd[0] == '|'
-			&& root->data->exit_code == EXIT_SUCCESS)
+		else if (root->data->cmd[0] == '|' && root->data->exit_code == SUCCESS)
 			return (SUCCESS);
 		else
-			error_return = read_ats(core_data, root->right);
+		{
+			if (read_ats(core_data, root->right) == FAILURE)
+				return (FAILURE);
+		}
 	}
-	if (is_operator(root->data->cmd) == true && error_return != FAILURE)
-		error_return = read_node(core_data, root, root->right);
-	return (error_return);
+	if (is_operator(root->data->cmd) == true)
+	{
+		if (read_node(core_data, root, root->right) == FAILURE)
+			return (FAILURE);
+	}
+	return (SUCCESS);
 }

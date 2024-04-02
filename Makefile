@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
+#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/02 13:34:25 by antgabri         ###   ########.fr        #
+#    Updated: 2024/04/02 17:00:45 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,7 +113,8 @@ SRC_BUILTINS		=	$(addprefix $(SRC_BUILTINS_DIR), $(SRC_BUILTINS_LIST))
 
 
 SRC_EXEC_DIR		=	execution/
-SRC_EXEC_LIST		=	exec_std.c			\
+SRC_EXEC_LIST		=	exec_builtins.c		\
+						exec_std.c			\
 						exec_subshell.c		\
 						read_ats.c			\
 						exec_command.c		\

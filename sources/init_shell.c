@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:49:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 11:25:37 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/02 17:26:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*get_uname(void)
 				close(fd);
 				return (errno = ENOMEM, NULL);
 			}
+			close(fd);
 			return (uname);
 		}
 	}

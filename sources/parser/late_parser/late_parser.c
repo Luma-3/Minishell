@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:46:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/29 17:00:14 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/02 16:03:26 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static t_list	*split_arg(const char *prompt)
 char	**late_parser(t_maindata *core_data, t_ats *node)
 {
 	t_list	*lst_args;
-	char 	**tab_args;
+	char	**tab_args;
 
 	tab_args = NULL;
 	lst_args = split_arg(node->data->cmd);

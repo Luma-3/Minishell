@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:11:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 13:28:10 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/02 16:02:35 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ typedef struct s_builtin
 	int			(*func)(char **args, t_list **envp, t_error *errors);
 }	t_builtin;
 
-int	is_builtins(const char *cmd);
+int	is_builtin(const char *cmd);
 
-int	exec_builtins(const char **tab_cmd, t_list **env, t_error *errors);
+int	exec_builtin(const char **tab_cmd, t_list **env, t_error *errors);
 
 // BUILTINS
 

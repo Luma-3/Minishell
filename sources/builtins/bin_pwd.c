@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:04:59 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 13:26:53 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:13:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ int	ms_pwd(char **args, t_list **envp, t_error *errors)
 	}
 	ft_putendl_fd(cwd, STDOUT_FILENO);
 	free(cwd);
-	exit (EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
