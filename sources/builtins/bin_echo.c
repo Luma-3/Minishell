@@ -3,85 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   bin_echo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:10:35 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/04 11:08:33 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/04/02 13:23:02 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_builtins.h"
 
-static int	is_token(const char *start_token)
-{
-	if (ft_strncmp(start_token, "||", 2) == 0)
-		return (true);
-	if (ft_strncmp(start_token, "&&", 2) == 0)
-		return (true);
-	if (ft_strncmp(start_token, "|", 1) == 0)
-		return (true);
-	return (false);
-}
-
-static int	skip_to_arg(const char *prompt, bool have_flag)
+static int	have_flag(char **arg)
 {
 	int	i;
+	int	j;
 
-	i = 0;
-	while (prompt[i])
+	i = 1;
+	while (arg[i])
 	{
-		if (have_flag == true && ft_strncmp(&prompt[i], "-n", 2) == 0)
+		if (arg[i][0] != '-')
+			break ;
+		j = 1;
+		while (arg[i][j] == '\0')
 		{
-			i += 2;
-			return (ft_skip_whitespaces(prompt, i));
-		}
-		else if (have_flag == false && ft_strncmp(&prompt[i], "echo", 4) == 0)
-		{
-			i += 4;
-			return (ft_skip_whitespaces(prompt, i));
+			if (arg[i][j] != 'n')
+				return (i);
+			j++;
 		}
 		i++;
 	}
 	return (i);
 }
 
-static void	print_line(const char *str, t_list *envp)
+static void	print_arg(char **arg)
 {
-	int		i;
-	bool	is_between_quotes;
-	char	quote_type;
+	int	i;
 
-	i = -1;
-	is_between_quotes = false;
-	while (str[i])
+	i = 0;
+	while (arg[i])
 	{
+		ft_putstr_fd(arg[i], 1);
 		i++;
-		if (is_token(&str[i]) == true && is_between_quotes == false)
-			return ;
-		if (str[i] == '$' && is_between_quotes == false)
-		{
-			i += handle_env(&str[i + 1], envp);
-		}
-		if (str[i] == '\\' && is_between_quotes == false)
-			write(1, &str[++i], 1);
-		else if (is_printable_quote(&str[i],
-				&is_between_quotes, &quote_type) == true)
-			write(1, &str[i], 1);
 	}
 }
 
-int	ms_echo(const char *prompt, char **args, t_list **envp)
+int	ms_echo(char **args, t_list **envp, t_error *errors)
 {
-	bool	have_flag;
-	int		i;
+	int	end_flag;
 
-	if (ft_strncmp(args[1], "-n", 2) == 0)
-	{
-		have_flag = true;
-	}
-	i = skip_to_arg(prompt, have_flag);
-	print_line(&prompt[i], *envp);
-	if (have_flag == false)
+	(void)envp;
+	(void)errors;
+	end_flag = have_flag(args);
+	print_arg(args + end_flag);
+	if (end_flag > 0)
 		write(1, "\n", 1);
 	return (EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 16:05:28 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/02 13:05:09 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ bool		is_subshell(const char *cmd, int size_cmd);
 
 bool		is_pipeline(const char *prompt);
 
-bool		is_valid_char_name_env(const char c);
+bool		valid_env_char(const char c);
 
 //////////////////////////
 /////// EXPANSION  ///////

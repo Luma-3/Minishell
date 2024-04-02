@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/27 17:20:18 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/02 11:18:05 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <fcntl.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <dirent.h>
@@ -52,5 +51,7 @@ int			open_history(const char *name, const char *uname);
 int			ft_add_history(char *input, int fd);
 
 char		*get_home(const char *uname);
+
+char		*get_uname(void);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_builtins.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:11:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 16:07:28 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/02 13:28:10 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,27 @@
 typedef struct s_builtin
 {
 	const char	*name;
-	int			(*func)(const char *prompt, char **args, t_list **envp);
+	int			(*func)(char **args, t_list **envp, t_error *errors);
 }	t_builtin;
 
 int	is_builtins(const char *cmd);
 
-int	exec_builtins(const char **tab_cmd, t_list **env);
+int	exec_builtins(const char **tab_cmd, t_list **env, t_error *errors);
 
 // BUILTINS
 
-int	ms_echo(const char *prompt, char **args, t_list **envp);
-// int	handle_env(const char *start_spec, t_list *envp);
-int	is_printable_quote(const char *start_spec, bool *is_between_quotes, char *quote_type);
+int	ms_echo(char **args, t_list **envp, t_error *errors);
 
-int	ms_pwd(const char *prompt, char **args, t_list **envp);
+int	ms_pwd(char **args, t_list **envp, t_error *errors);
 
-int	ms_cd(const char *prompt, char **args, t_list **envp);
+int	ms_cd(char **args, t_list **envp, t_error *errors);
 
-int	ms_unset(const char *prompt, char **args, t_list **envp);
+int	ms_unset(char **args, t_list **envp, t_error *errors);
 
-int	ms_env(const char *prompt, char **args, t_list **envp);
+int	ms_env(char **args, t_list **envp, t_error *errors);
 
-int	ms_export(const char *prompt, char **args, t_list **envp);
+int	ms_export(char **args, t_list **envp, t_error *errors);
 
-int	ms_exit(const char *prompt, char **args, t_list **envp);
+int	ms_exit(char **args, t_list **envp, t_error *errors);
 
 #endif

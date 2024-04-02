@@ -3,23 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   bin_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:16:34 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/04 11:08:52 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/04/02 13:25:30 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_builtins.h"
-#include "env.h"
+#include "environement.h"
+#include "parser.h"
 
-int	ms_export(const char *prompt, char **args, t_list **envp)
+static bool	is_valid_name(char *name)
+{
+	while (name)
+	{
+		if (valid_env_char(*name) == false)
+			return (false);
+		name++;
+	}
+	return (true);
+}
+
+int	ms_export(char **args, t_list **envp, t_error *errors)
 {
 	int		i;
 	int		j;
 	char	*name;
 
-	(void)prompt;
 	i = 1;
 	while (args[i])
 	{
@@ -27,6 +38,15 @@ int	ms_export(const char *prompt, char **args, t_list **envp)
 		while (args[i][j] && args[i][j] != '=')
 			j++;
 		name = ft_substr(args[i], 0, j);
+		if (name == NULL)
+			return (ENOMEM);
+		if (is_valid_name(name) == false)
+		{
+			errno = EINVID;
+			ft_putstr_fd("export: ", STDERR_FILENO);
+			perror_switch(errors, name);
+			return (free(name), errno);
+		}
 		ms_setenv(envp, name, &args[i][j + 1]);
 		i++;
 	}

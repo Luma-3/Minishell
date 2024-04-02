@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:52:44 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 15:16:14 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/02 13:12:26 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,19 @@
 # include <errno.h>
 # include <stdio.h>
 
-# define __NB_ERRORS_ 2
+# define __NB_ERRORS_ 4
 
 # define ENOCNF 137
 # define ENVHOM 138
 # define ENOENV 139
+# define ENOUSR 140
+# define EINVID 141
 
 # define EMSG_ENOCNF "Command not found"
 # define EMSG_ENVHOM "HOME not set"
 # define EMSG_ENOENV "Environment not set"
+# define EMSG_ENOUSR "User not found"
+# define EMSG_EINVID "not a valid identifier"
 
 void	__init_error__(t_error *errors);
 

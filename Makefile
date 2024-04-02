@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anthony <anthony@student.42.fr>            +#+  +:+       +#+         #
+#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/30 16:25:38 by anthony          ###   ########.fr        #
+#    Updated: 2024/04/02 13:18:05 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,28 +99,27 @@ COMPONENTS			=	$(addprefix $(COMPONENTS_DIR), $(COMPONENTS_LIST))
 ##----------------------------------------------------------------------------------##
 
 
-# SRC_BUILTINS_DIR	=	builtins/
-# SRC_BUILTINS_LIST	=	bin_cd.c		\
-# 						bin_echo.c		\
-# 						bin_env.c		\
-# 						bin_exit.c		\
-# 						bin_export.c	\
-# 						bin_pwd.c		\
-# 						bin_unset.c		\
-# 						builtins.c		\
-# 						echo_utils.c
-# SRC_BUILTINS		=	$(addprefix $(SRC_BUILTINS_DIR), $(SRC_BUILTINS_LIST))
+SRC_BUILTINS_DIR	=	builtins/
+SRC_BUILTINS_LIST	=	bin_cd.c		\
+						bin_echo.c		\
+						bin_env.c		\
+						bin_exit.c		\
+						bin_export.c	\
+						bin_pwd.c		\
+						bin_unset.c		\
+						builtins.c
+SRC_BUILTINS		=	$(addprefix $(SRC_BUILTINS_DIR), $(SRC_BUILTINS_LIST))
 
 
 
-SRC_EXEC_DIR	=	execution/
-SRC_EXEC_LIST	=	exec_std.c			\
-					exec_subshell.c		\
-					read_ats.c			\
-					exec_command.c		\
-					get_path.c			\
-					pipe_utils.c
-SRC_EXEC		=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
+SRC_EXEC_DIR		=	execution/
+SRC_EXEC_LIST		=	exec_std.c			\
+						exec_subshell.c		\
+						read_ats.c			\
+						exec_command.c		\
+						get_path.c			\
+						pipe_utils.c
+SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 
 SRC_PARSER_DIR		=	parser/
 
@@ -159,14 +158,14 @@ POST_PARSER_LIST	=	late_parser.c			\
 						$(EXPAND)
 POST_PARSER			=	$(addprefix $(POST_PARSER_DIR), $(POST_PARSER_LIST))
 
-SRC_PARSER_LIST			=	parser.c			\
-							is_type.c			\
-							is_type2.c			\
-							place_cursor.c		\
-							$(ATS)				\
-							$(POST_PARSER)		\
-							$(PRE_PARSER)
-SRC_PARSER				=	$(addprefix $(SRC_PARSER_DIR), $(SRC_PARSER_LIST))
+SRC_PARSER_LIST		=	parser.c			\
+						is_type.c			\
+						is_type2.c			\
+						place_cursor.c		\
+						$(ATS)				\
+						$(POST_PARSER)		\
+						$(PRE_PARSER)
+SRC_PARSER			=	$(addprefix $(SRC_PARSER_DIR), $(SRC_PARSER_LIST))
 
 SRC_LIST			=	minishell.c			\
 						safe_mode.c			\

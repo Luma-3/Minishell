@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:49:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 18:17:25 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/02 11:25:37 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <fcntl.h>
 #include "display.h"
 
-static char	*take_u_name(void)
+char	*get_uname(void)
 {
 	int			fd;
 	struct utmp	user;
@@ -23,7 +23,10 @@ static char	*take_u_name(void)
 
 	fd = open("/run/utmp", O_RDONLY);
 	if (fd == -1)
+	{
+		errno = ENOENT;
 		return (ft_strdup("anthony"));
+	}
 	while (read(fd, &user, sizeof(struct utmp)) > 0)
 	{
 		if (user.ut_type == USER_PROCESS)
@@ -32,14 +35,13 @@ static char	*take_u_name(void)
 			if (uname == NULL)
 			{
 				close(fd);
-				errno = ENOMEM;
-				return (perror("Safe Mode"), NULL);
+				return (errno = ENOMEM, NULL);
 			}
 			return (uname);
 		}
 	}
 	close(fd);
-	return (NULL);
+	return (errno = ENOENT, NULL);
 }
 
 bool	has_path(t_list *env)
@@ -85,7 +87,7 @@ int	init_shell(t_maindata *core_data, t_error *errors, char **envp)
 	__init_error__(errors);
 	core_data->errors = errors;
 	//init_signal();
-	core_data->uname = take_u_name();
+	core_data->uname = get_uname();
 	if (core_data->uname == NULL)
 		return (perror_switch(errors, "KikiShell"), FAILURE);
 	core_data->history_fd = open_history(".kiki_history",

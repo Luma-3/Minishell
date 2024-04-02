@@ -6,12 +6,13 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:39:31 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/26 18:31:13 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:23:36 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "display.h"
+#include "fcntl.h"
 
 static void	ft_trim_end(char *str)
 {

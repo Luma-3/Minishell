@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:33:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/08 12:16:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/02 13:28:50 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	init_builtins(t_builtin *builtins)
 	builtins[6] = (t_builtin){"exit", ms_exit};
 }
 
-int	exec_builtins(const char **tab_cmd, t_list **env)
+int	exec_builtins(const char **tab_cmd, t_list **env, t_error *errors)
 {
 	t_builtin	builtins[NB_BUILTINS];
 	int			i;
@@ -36,14 +36,13 @@ int	exec_builtins(const char **tab_cmd, t_list **env)
 		if (ft_strncmp(builtins[i].name, tab_cmd[0],
 				ft_strlen(tab_cmd[0])) == 0)
 		{
-			builtins[i].func(prompt_struct->prompt,
-				tab_cmd, prompt_struct->env);
-			ft_rm_split(tab_cmd);
+			builtins[i].func((char **)tab_cmd, env, errors);
+			ft_rm_split((char **)tab_cmd);
 			return (EXIT_SUCCESS);
 		}
 		i++;
 	}
-	ft_rm_split(tab_cmd);
+	ft_rm_split((char **)tab_cmd);
 	return (EXIT_FAILURE);
 }
 
@@ -62,4 +61,3 @@ int	is_builtins(const char *cmd)
 	}
 	return (false);
 }
-

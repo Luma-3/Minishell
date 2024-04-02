@@ -3,32 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   env_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 11:48:27 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 16:21:45 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/02 13:05:13 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "minishell.h"
 
-char *copy_data_env(t_maindata *core_data, char *arg, int index)
+char	*copy_data_env(t_maindata *core_data, char *arg, int index)
 {
 	char	*new_arg;
 	char	*token;
 	char	*env_value;
-	int	i;
+	int		i;
 
 	i = index + 1;
 	if (arg[i] == '?')
 	{
 		new_arg = ft_insert_str(arg,
-			ft_itoa(core_data->last_status), "$?", index);
+				ft_itoa(core_data->last_status), "$?", index);
 		free(arg);
 		return (new_arg);
 	}
-	while (arg[i] != '\0' && is_valid_char_name_env(arg[i]) == true && arg[i] != '$')
+	while (arg[i] != '\0' && valid_env_char(arg[i]) == true && arg[i] != '$')
 		i++;
 	token = ft_substr(arg, index, i - index);
 	if (token == NULL)
@@ -39,5 +39,5 @@ char *copy_data_env(t_maindata *core_data, char *arg, int index)
 		return (free(token), new_arg);
 	free(arg);
 	free(token);
-	return (new_arg); 
+	return (new_arg);
 }

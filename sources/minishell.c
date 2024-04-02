@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 18:07:04 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/02 11:37:38 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,7 @@ char	*get_home(const char *uname)
 	home = ft_strjoin("/home/", uname);
 	if (home == NULL)
 	{
-		errno = ENOMEM;
-		perror("KikiShell");
-		return (NULL);
+		return (errno = ENOMEM, NULL);
 	}
 	return (home);
 }

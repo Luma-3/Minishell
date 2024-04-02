@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:00:57 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/28 12:04:38 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/02 13:05:26 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ bool	is_pipeline(const char *prompt)
 	return (false);
 }
 
-bool	is_valid_char_name_env(const char c)
+bool	valid_env_char(const char c)
 {
 	if (ft_isalnum(c) == true || c == '_')
 		return (true);
