@@ -53,4 +53,5 @@ dkms.conf
 minishell
 norme_log
 .heredoc_*
+test.c
 
