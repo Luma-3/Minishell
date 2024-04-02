@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:35:19 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 16:11:53 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/02 12:51:01 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,33 @@ char	*handle_tilde(const char *arg, const char *uname)
 char	*handle_env(t_maindata *core_data, const char *arg)
 {
 	int		i;
+	char	quote;
 	char	*new_arg;
 
 	i = 0;
+	quote = '\0';
 	new_arg = (char *)arg;
 	while (new_arg[i])
 	{
+		if (new_arg[i] == '\"' && quote == '\0')
+		{
+			quote = '\"';
+			i++;
+		}
+		if (new_arg[i] == '\"' && quote != '\0')
+		{
+			quote = '\0';
+			i++;
+		}
+		if (new_arg[i] == '\'' && quote == '\0')
+			i = skip_quote_parenthesis(new_arg, i);
 		if (new_arg[i] == '$' && (ft_iswhitespace(new_arg[i + 1]) == false
 				|| new_arg[i + 1] != '\0'))
 		{
 			new_arg = copy_data_env(core_data, new_arg, i);
 		}
-		i++;
+		if (new_arg[i] != '\0')
+			i++;
 	}
 	return (new_arg);
 }
@@ -69,7 +84,8 @@ static t_list	*handle_all(t_list **lst, t_list *current_index)
 			match_files = get_all_file(lst, current_index);
 			break ;
 		}
-		i++;
+		if (arg[i] != '\0')
+			i++;
 	}
 	return (match_files);
 }

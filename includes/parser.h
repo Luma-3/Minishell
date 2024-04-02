@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 16:05:28 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/02 12:17:45 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ int			place_cursor_after_token(const char *prompt, int i);
 int			place_cursor_before_prefix(const char *prompt, int index);
 
 int			skip_quote_parenthesis(const char *prompt, int index);
+
+int			skip_single_quote(char *str, int i);
 
 // is_type.c
 

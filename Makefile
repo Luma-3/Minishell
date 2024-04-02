@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anthony <anthony@student.42.fr>            +#+  +:+       +#+         #
+#    By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/03/30 16:25:38 by anthony          ###   ########.fr        #
+#    Updated: 2024/04/02 12:18:09 by antgabri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -163,6 +163,7 @@ SRC_PARSER_LIST			=	parser.c			\
 							is_type.c			\
 							is_type2.c			\
 							place_cursor.c		\
+							place_cursor2.c		\
 							$(ATS)				\
 							$(POST_PARSER)		\
 							$(PRE_PARSER)
