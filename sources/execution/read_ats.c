@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 16:48:47 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:07:41 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ static int	read_node(t_maindata *core_data, t_ats *node, t_ats *preview_node)
 		exec_std(core_data, node);
 	}
 	if (node->data->pid >= 0 && node->data->require_wait == true)
-	{
 		return (wait_process(core_data, node));
-	}
+	else
+		core_data->last_status = node->data->exit_code;
 	return (SUCCESS);
 }
 

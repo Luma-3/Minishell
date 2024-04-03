@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:33:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 18:17:24 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:56:36 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	exec_builtin(const char **tab_cmd, t_list **env, t_error *errors)
 {
 	t_builtin	builtins[NB_BUILTINS];
 	int			i;
+	int			ret;
 
 	i = 0;
 	init_builtins(builtins);
@@ -36,10 +37,9 @@ int	exec_builtin(const char **tab_cmd, t_list **env, t_error *errors)
 		if (ft_strncmp(builtins[i].name, tab_cmd[0],
 				ft_strlen(tab_cmd[0])) == 0)
 		{
-			// TODO EXIT
-			builtins[i].func((char **)tab_cmd, env, errors);
+			ret = builtins[i].func((char **)tab_cmd, env, errors);
 			ft_rm_split((char **)tab_cmd);
-			return (EXIT_SUCCESS);
+			return (ret);
 		}
 		i++;
 	}

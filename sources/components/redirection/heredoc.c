@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:04:47 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/25 20:27:54 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:27:10 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@
 
 static void	heredoc_error(const char *delimiter)
 {
-	ft_putstr_fd("minishell: warning: here-document \
-		delimited by end-of-file (wanted `", STDERR_FILENO);
+	ft_putstr_fd("kikishell: warning: here-document \
+delimited by end-of-file (wanted '", STDERR_FILENO);
 	ft_putstr_fd((char *)delimiter, STDERR_FILENO);
 	ft_putstr_fd("')\n", STDERR_FILENO);
 }
 
 static bool	stop_heredoc(char *line, const char *delimiter)
 {
-	if (ft_strncmp(line, delimiter, ft_strlen(line)) == 0)
-	{
-		free(line);
-		return (true);
-	}
 	if (line == NULL)
 	{
 		heredoc_error(delimiter);
+		return (true);
+	}
+	if (ft_strncmp(line, delimiter, ft_strlen(line)) == 0)
+	{
+		free(line);
 		return (true);
 	}
 	return (false);
@@ -57,14 +57,15 @@ static int	open_heredoc(const char *delimiter, int fd)
 	return (free(heredoc_display), SUCCESS);
 }
 
-static int	create_enqueue_heredoc(t_queue *heredoc_queue, char *delimiter)
+static int	create_enqueue_heredoc(t_queue *heredoc_queue, char *delimiter,
+									int id)
 {
 	t_queue_heredoc	*heredoc;
 	char			*heredoc_name;
 	int				fd;
 
 	heredoc = (t_queue_heredoc *)malloc(sizeof(t_queue_heredoc));
-	heredoc_name = ft_strjoin(".heredoc_", delimiter);
+	heredoc_name = ft_strjoin(".heredoc_", ft_itoa(id));
 	if (heredoc_name == NULL || heredoc == NULL)
 	{
 		errno = ENOMEM;
@@ -77,7 +78,7 @@ static int	create_enqueue_heredoc(t_queue *heredoc_queue, char *delimiter)
 	{
 		free(heredoc->file_name);
 		free(heredoc);
-		perror("minishell: heredoc");
+		perror("kikishell: heredoc");
 		return (errno);
 	}
 	if (heredoc_queue == NULL)
@@ -90,10 +91,12 @@ void	handle_heredoc(const char *prompt, t_maindata *ats)
 {
 	int		i;
 	int		j;
+	int		id;
 	char	*delimiteur;
 
 	i = 0;
 	j = 0;
+	id = 0;
 	delimiteur = NULL;
 	while (prompt[i])
 	{
@@ -106,7 +109,8 @@ void	handle_heredoc(const char *prompt, t_maindata *ats)
 			while (prompt[i + j] && ft_iswhitespace(prompt[i + j]) == false)
 				j++;
 			delimiteur = ft_strndup(prompt + i, j);
-			create_enqueue_heredoc(ats->queue_heredoc, delimiteur);
+			create_enqueue_heredoc(ats->queue_heredoc, delimiteur, id);
+			id++;
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:39:34 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/03 16:34:15 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:44:44 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ char	*path_to_tilde(t_list *env)
 	while (path_home[i] == path_absolute[i]
 		&& path_home[i] && path_absolute[i])
 		i++;
+	if (i < (int)ft_strlen(path_home))
+		return (ft_strjoin(" ", path_absolute));
 	free(path_home);
 	path_home = ft_strjoin(" ~", path_absolute + i);
 	if (path_home == NULL)
@@ -42,8 +44,7 @@ char	*get_current_dir(void)
 	char	*working_directory;
 	int		len;
 
-	absolute_path = NULL;
-	absolute_path = getcwd(absolute_path, 0);
+	absolute_path = getcwd(NULL, 0);
 	if (absolute_path == NULL)
 		return (NULL);
 	len = ft_strlen(absolute_path);

@@ -1,0 +1,13 @@
+in
+includes
+libs
+LICENSE.txt
+Makefile
+minishell
+objects
+out
+readline.supp
+README.md
+sources
+test.c
+/home/luma/Documents/42/WIP_project/Minishell

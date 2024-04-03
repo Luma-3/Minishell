@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/03 15:44:29 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:55:10 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,16 @@ void	exec_std(t_maindata *core_data, const t_ats *node)
 {
 	char	**args;
 
+	if (node->data->cmd == NULL)
+	{
+		node->data->exit_code = 0;
+		node->data->require_wait = false;
+		return ;
+	}
 	args = late_parser(core_data, (t_ats *)node);
 	if (args == NULL)
 	{
 		errno = ENOMEM;
-		clear_ats(core_data, CORE_ALL);
 		return ;
 	}
 	if (is_builtin(args[0]) == true)
