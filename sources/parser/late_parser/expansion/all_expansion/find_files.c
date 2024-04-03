@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 00:18:28 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/03 10:40:52 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/03 10:42:49 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@ static char	*file_to_directory(t_match_file *match_file, char *file_name)
 {
 	struct stat		stat_file;
 	char			*path;
-	char			buffer_name[257];
+	char			*buffer_name;
 
+	buffer_name = ft_calloc(257, sizeof(char));
+	if (buffer_name == NULL)
+		return (NULL);
 	path = ft_strjoin4(match_file->path, "/", file_name, "\0");
 	stat(path, &stat_file);
 	ft_strlcpy(buffer_name, file_name, 256);
