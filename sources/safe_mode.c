@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   safe_mode.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 20:45:55 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 10:03:42 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/03 14:24:53 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,21 @@ static char	*take_path(void)
 	return (path);
 }
 
-static int	safe_env(t_list *env)
+static int	safe_env(t_list **env)
 {
 	char	*cwd;
 
+	if (ms_setenv(env, "_", "]") == FAILURE)
+		return (FAILURE);
 	cwd = getcwd(NULL, 0);
 	if (cwd == NULL)
 		return (errno = ENOMEM, FAILURE);
-	if (ms_setenv(&env, "PWD", cwd) == FAILURE)
+	if (ms_setenv(env, "PWD", cwd) == FAILURE)
 	{
 		printf("PWD\n");
 		return (free(cwd), FAILURE);
 	}
 	free(cwd);
-	if (ms_setenv(&env, "_", "]") == FAILURE)
-		return (FAILURE);
 	return (SUCCESS);
 }
 
@@ -73,7 +73,7 @@ int	init_safe_mode(t_maindata *core_data)
 		perror_switch(core_data->errors, "Safe Mode");
 		return (FAILURE);
 	}
-	if (safe_env(core_data->env) == FAILURE)
+	if (safe_env(&(core_data->env)) == FAILURE)
 	{
 		perror_switch(core_data->errors, "Safe Mode");
 		return (FAILURE);

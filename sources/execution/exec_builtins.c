@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:50:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 17:14:53 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:22:18 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,11 @@ static void	restore_stdout(t_error *errors, int save_fd)
 	}
 }
 
-
 void	process_built_in(t_maindata *core_data, t_ats *node, char **args)
 {
 	int		error;
 	int		save_fd;
-	
+
 	save_fd = copy_stdout(core_data);
 	if (pre_process_exec(core_data, node) == FAILURE)
 	{
