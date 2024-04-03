@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/03 01:41:30 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/03 02:10:15 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 # include "ms_error.h"
 # include "stackft.h"
 # include <dirent.h>
-
-
 # include <stdbool.h>
 
 # define WEIGHT_CMD 1

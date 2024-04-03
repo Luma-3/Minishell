@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 00:18:28 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/03 01:41:17 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/03 02:13:13 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,4 +126,3 @@ bool	find_match_file(char *entry, char *prefix, char *suffix)
 	}
 	return (false);
 }
-
