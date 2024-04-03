@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 17:19:49 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:44:29 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	pre_process_exec(t_maindata *core_data, t_ats *node)
 	}
 	if (open_redir(core_data, node) != SUCCESS)
 	{
-
 		return (FAILURE);
 	}
 	if (node->data->index != -1)
@@ -79,7 +78,6 @@ static void	process_built_out(t_maindata *core_data, t_ats *node, char **args)
 	}
 	clean_parent(core_data, node);
 }
-
 
 void	exec_std(t_maindata *core_data, const t_ats *node)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/03/30 09:46:40 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/03 16:05:55 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	display_msg(t_maindata *ats, t_list *env, char *msg)
 	exec_process(ats, env, command);
 }
 
-static char	*create_sh_prompt(t_list *env, char *uname, int last_status)
+char	*create_sh_prompt(t_list *env, char *uname, int last_status)
 {
 	char	*display[15];
 	char	*prompt;
@@ -55,23 +55,22 @@ static char	*create_sh_prompt(t_list *env, char *uname, int last_status)
 	return (prompt);
 }
 
-// static char	*create_safe_prompt(t_list *env, char *uname)
-// {
-// 	char	*display[7];
-// 	char	*prompt;
+static char	*create_safe_prompt(t_list *env, char *uname)
+{
+	char	*display[7];
+	char	*prompt;
 
-// 	display[0] = " ";
-// 	display[1] = uname;
-// 	display[2] = " @ ";
-// 	display[3] = path_to_tilde(env);
-// 	display[4] = " ";
-// 	display[5] = "| SAFE MODE";
-// 	display[6] = '\0';
-// 	prompt = assemble(display);
-// 	free(display[3]);
-// 	return (prompt);
-// }
-//😃🦆
+	display[0] = " ";
+	display[1] = uname;
+	display[2] = " @ ";
+	display[3] = path_to_tilde(env);
+	display[4] = " ";
+	display[5] = "| SAFE MODE";
+	display[6] = '\0';
+	prompt = assemble(display);
+	free(display[3]);
+	return (prompt);
+}
 
 char	*shell_prompt(t_maindata *core_data)
 {
@@ -80,16 +79,17 @@ char	*shell_prompt(t_maindata *core_data)
 	char	*line;
 
 	prompt = NULL;
-	// if (core_data->path != NULL)
-	// {
-	// 	prompt = create_safe_prompt(core_data->env, core_data->uname);
-	// 	line = PROMPT_SAFE;
-	// }
-	// else
-	// {
-	prompt = create_sh_prompt(core_data->env, core_data->uname,
-			core_data->last_status);
-	line = PROMPT_SHELL;
+	if (core_data->path != NULL)
+	{
+		prompt = create_safe_prompt(core_data->env, core_data->uname);
+		line = PROMPT_SAFE;
+	}
+	else
+	{
+		prompt = create_sh_prompt(core_data->env, core_data->uname,
+				core_data->last_status);
+		line = PROMPT_SHELL;
+	}
 	if (prompt != NULL)
 		ft_putendl_fd(prompt, 1);
 	else
