@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:52:44 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 13:12:26 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/03 13:54:37 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <errno.h>
 # include <stdio.h>
 
-# define __NB_ERRORS_ 4
+# define __NB_ERRORS_ 5
 
 # define ENOCNF 137
 # define ENVHOM 138

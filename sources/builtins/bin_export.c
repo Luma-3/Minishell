@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:16:34 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 13:25:30 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/03 14:08:23 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 
 static bool	is_valid_name(char *name)
 {
-	while (name)
+	while (name && *name)
 	{
+		printf("char: %c\n", *name);
 		if (valid_env_char(*name) == false)
 			return (false);
 		name++;
