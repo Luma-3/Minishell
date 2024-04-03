@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 14:08:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/03 02:09:01 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/03 10:22:57 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static int	find_all_files(t_dstack *stack, t_match_file *match_file,
 		ft_lstadd_front(lst, ft_lstnew(match_file->old_data));
 		return (FAILURE);
 	}
+	closedir(dir);//Verifier son retour
+	free(match_file->old_data);
 	return (SUCCESS);
 }
 
@@ -77,6 +79,7 @@ void	rec_all(t_dstack *stack, t_list **list)
 			if (access(match_file.path, F_OK) == FAILURE)
 			{
 				ft_lstadd_front(list, ft_lstnew(d_pop_stk(stack)));
+				//TODO : free match_file
 				return ;
 			}
 			break ;
@@ -85,6 +88,8 @@ void	rec_all(t_dstack *stack, t_list **list)
 			i++;
 	}
 	call_recursion(&match_file, stack, list, i);
+	(free(match_file.suffix), free(match_file.path));
+	free(match_file.prefix);
 }
 
 t_list	*get_all_file(t_list **head, t_list *arg)

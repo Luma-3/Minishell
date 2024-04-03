@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 00:18:28 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/03 02:13:13 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/03 10:40:52 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,17 @@ static char	*file_to_directory(t_match_file *match_file, char *file_name)
 {
 	struct stat		stat_file;
 	char			*path;
-	char			*tmp;
+	char			buffer_name[257];
 
-	tmp = ft_calloc(257, sizeof(char));
-	if (tmp == NULL)
-		return (NULL);
-	path = ft_strjoin(match_file->path, "/");
-	if (path == NULL)
-		return (free(tmp), NULL);
-	path = ft_strjoin(path, file_name);
-	if (path == NULL)
-	{
-		free(path);
-		return (free(tmp), NULL);
-	}
+	path = ft_strjoin4(match_file->path, "/", file_name, "\0");
 	stat(path, &stat_file);
-	ft_strlcpy(tmp, file_name, 256);
+	ft_strlcpy(buffer_name, file_name, 256);
 	if (S_ISDIR(stat_file.st_mode))
 	{
-		ft_strlcat(tmp, "/", 257);
+		ft_strlcat(buffer_name, "/", 257);
 	}
 	free(path);
-	return (tmp);
+	return (buffer_name);
 }
 
 bool	find_and_push(t_dstack *stack, t_match_file *match_file,
@@ -65,11 +54,11 @@ bool	find_and_push(t_dstack *stack, t_match_file *match_file,
 				match_file->suffix) == true)
 		{
 			have_file = true;
-			d_push_stk(stack,
-				ft_insert_str(match_file->old_data, entry->d_name, token, i));
+			d_push_stk(stack, ft_insert_str(match_file->old_data,
+					entry->d_name, token, i));
 		}
 	}
-	return (have_file);
+	return (free(token), have_file);
 }
 
 static bool	final_judge(char *entry, char *suffix, int len_entry)
