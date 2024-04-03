@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 00:18:28 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/03 10:42:49 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/03 22:48:55 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,30 @@ bool	find_and_push(t_dstack *stack, t_match_file *match_file,
 	return (free(token), have_file);
 }
 
-static bool	final_judge(char *entry, char *suffix, int len_entry)
+int	ft_findstr(char *str, char *to_find, int i)
+{
+	int		j;
+
+	j = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == to_find[j])
+		{
+			while (str[i + j] == to_find[j]
+				&& to_find[j] != '\0' && str[i + j] != '\0')
+			{
+				j++;
+			}
+			if (to_find[j] == '\0')
+				return (i);
+			j = 0;
+		}
+		i++;
+	}
+	return (-1);
+}
+
+static bool	get_last_suffix(char *suffix, char *entry, int j, int i)
 {
 	int		len_suff;
 	int		len_suff_dir;
@@ -72,21 +95,64 @@ static bool	final_judge(char *entry, char *suffix, int len_entry)
 
 	suffix_dir = NULL;
 	len_suff_dir = 0;
-	len_suff = ft_strlen(suffix);
-	if (suffix != NULL && ft_strchr(suffix, '/') == 0)
+	len_suff = ft_strlen(suffix + j);
+	if (len_suff == 0)
+		return (true);
+	if (ft_strchr(suffix + j, '/') == 0)
 	{
-		suffix_dir = ft_strjoin(suffix, "/");
+		suffix_dir = ft_strjoin(suffix + j, "/");
 		len_suff_dir = ft_strlen(suffix_dir);
-		if ((ft_strncmp(entry + len_entry - len_suff, suffix, len_suff) == 0)
-			|| (ft_strncmp(entry + len_entry - len_suff_dir,
-					suffix_dir, len_suff_dir) == 0))
-			return (true);
+		if ((ft_strncmp(entry + ft_strlen(entry) - ft_strlen(suffix + j), suffix + j, ft_strlen(suffix + j)) == 0)
+			|| (ft_strncmp(entry + ft_strlen(entry) - len_suff_dir, suffix_dir, len_suff_dir) == 0))
+		{
+			if (ft_findstr(entry, suffix + j, i) != -1
+				|| ft_findstr(entry, suffix_dir + j, i) != -1)
+				return (true);
+		}
+		return (false);
 	}
-	else
+	if (ft_strncmp(entry + (int)ft_strlen(entry) - len_suff, suffix + j, len_suff) == 0)
 	{
-		if (ft_strncmp(entry + len_entry - len_suff, suffix, len_suff) == 0)
+		if (ft_findstr(entry, suffix + j, i) != -1)
 			return (true);
 	}
+	return (false);
+}
+
+static	bool	final_decision(char *entry, char *suffix)
+{
+	char	*to_find;
+	int		i;
+	int		j;
+	int		start;
+
+	i = 0;
+	j = 0;
+	start = 0;
+	while (true)
+	{
+		if (ft_strchr(suffix + j, '*') == 0)
+			return (get_last_suffix(suffix, entry, j, i));
+		while (suffix[j] != '\0' && suffix[j] != '*')
+			j++;
+		to_find = ft_strndup(suffix + start, j - start);
+		if (ft_findstr(entry, to_find, i) == -1)
+			return (false);
+		i = ft_findstr(entry, to_find, i) + ft_strlen(to_find);
+		j++;
+		start = j;
+	}
+	return (true);
+}
+bool	only_all(char *prefix, char *suffix)
+{
+	int	i;
+
+	i = 0;
+	while(suffix[i] == '*')
+		i++;
+	if (suffix[i] == '\0' && prefix[0] == '\0')
+		return (true);
 	return (false);
 }
 
@@ -94,11 +160,9 @@ bool	find_match_file(char *entry, char *prefix, char *suffix)
 {
 	int		len_prefix;
 	int		len_suffix;
-	int		len_entry;
 
 	len_prefix = 0;
 	len_suffix = 0;
-	len_entry = ft_strlen(entry);
 	if (suffix != NULL)
 		len_suffix = ft_strlen(suffix);
 	if (prefix != NULL)
@@ -111,8 +175,13 @@ bool	find_match_file(char *entry, char *prefix, char *suffix)
 	}
 	if (len_prefix == 0 && entry[0] == '.')
 		return (false);
-	if (ft_strncmp(entry, prefix, len_prefix) == 0
-		&& final_judge(entry, suffix, len_entry) == true)
+	printf("prefix: %s\n", prefix);
+	printf("suffix: %s\n", suffix);
+	if (only_all(prefix, suffix) == true)
+		return (true);
+	if ((ft_strncmp(entry, prefix, len_prefix) == 0
+			&& len_suffix == 0)
+		|| (ft_strncmp(entry, prefix, len_prefix) == 0 && final_decision(entry, suffix) == true))
 	{
 		return (true);
 	}

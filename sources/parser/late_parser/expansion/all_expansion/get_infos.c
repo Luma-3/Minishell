@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:40:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/03 02:13:39 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/03 22:50:26 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,8 @@ char	*get_suffix(char *arg, int index)
 
 	suffix = NULL;
 	i = index + 1;
-	while (arg[i] != '\0' && arg[i] != '/' && arg[i] != '*')
+	while (arg[i] != '\0' && arg[i] != '/')
 		i++;
-	if (i == index + 1 && arg[i] == '*')
-		return (NULL);
 	suffix = ft_strndup(arg + index + 1, i - index);
 	if (suffix == NULL)
 		return (NULL);
