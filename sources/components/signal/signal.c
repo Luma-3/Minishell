@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:03:56 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 11:30:49 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:06:22 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,25 @@ extern volatile int	g_sigreciever;
 
 void	sigint_handler(int sig)
 {
-	char	*prompt;
 	char	*uname;
 
 	g_sigreciever = sig;
+	write(STDOUT_FILENO, "\n", 1);
 	uname = get_uname();
-	prompt = create_sh_prompt(NULL, uname, 1);
+	close(STDIN_FILENO);
 	free(uname);
-	printf("\n\n%s\n", prompt);
-	free(prompt);
 	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+}
+
+void	sigquit_handler(int sig)
+{
+	g_sigreciever = sig;
+	write(STDOUT_FILENO, "\n", 1);
+	rl_on_new_line();
 }
 
 void	init_signal(void)
 {
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, sigquit_handler);
 	signal(SIGINT, sigint_handler);
 }

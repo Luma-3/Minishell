@@ -6,13 +6,15 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:04:47 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/03 17:27:10 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:57:49 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirection.h"
 #include <readline/readline.h>
 #include "parser.h"
+
+extern volatile int	g_sigreciever;
 
 static void	heredoc_error(const char *delimiter)
 {
@@ -41,19 +43,27 @@ static int	open_heredoc(const char *delimiter, int fd)
 {
 	char	*line;
 	char	*heredoc_display;
+	int		stdin_fd;
 
 	heredoc_display = ft_strjoin(delimiter, " > ");
 	if (heredoc_display == NULL)
 		return (ENOMEM);
+	stdin_fd = dup(STDIN_FILENO);
 	while (true)
 	{
 		line = readline(heredoc_display);
+		if (g_sigreciever == SIGINT)
+		{
+			g_sigreciever = 0;
+			break;
+		}
 		if (stop_heredoc(line, delimiter) == true)
 			break ;
 		ft_putendl_fd(line, fd);
 		ft_putchar_fd('\n', fd);
 		free(line);
 	}
+	dup2(stdin_fd, STDIN_FILENO);
 	return (free(heredoc_display), SUCCESS);
 }
 

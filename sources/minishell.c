@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 12:56:12 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/04 15:11:06 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,19 @@ void	exec_process(t_maindata *core_data, t_list *env, char *input)
 void	read_input(t_maindata *core_data)
 {
 	char		*input;
+	int			stdin_fd;
 
 	while (true)
 	{
+		stdin_fd = dup(STDIN_FILENO);
 		input = shell_prompt(core_data);
 		if (g_sigreciever == SIGINT)
 		{
 			g_sigreciever = 0;
+			dup2(stdin_fd, STDIN_FILENO);
+			continue;
 		}
-		if (input == NULL)
+		else if (input == NULL)
 		{
 			free(input);
 			display_msg(core_data, core_data->env, BYE_MSG);
@@ -88,6 +92,7 @@ void	read_input(t_maindata *core_data)
 		}
 		ft_add_history(input, core_data->history_fd);
 		exec_process(core_data, core_data->env, input);
+		dup2(stdin_fd, STDIN_FILENO);
 	}
 	clear_ats(core_data, CORE_UNAME | CORE_ENV | CORE_PATH);
 }

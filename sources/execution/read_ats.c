@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 11:54:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:59:59 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static int	wait_process(t_maindata *core_data, t_ats *node)
 			core_data->last_status = WEXITSTATUS(node->data->exit_code);
 			return (SUCCESS);
 		}
-		if (g_sigreciever == SIGINT)
+		if (g_sigreciever != 0)
 		{
-			kill(node->data->pid, SIGINT);
-			
+			kill(node->data->pid, g_sigreciever);
+			g_sigreciever = 0;
 			waitpid(node->data->pid, &node->data->exit_code, 0);
 			core_data->last_status = WEXITSTATUS(node->data->exit_code);
 			return (FAILURE);
