@@ -6,13 +6,12 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:19:12 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/26 15:02:03 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 16:58:35 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "error.h"
-
 
 int	verif_if_quote_closed(const char *prompt)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 15:11:06 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/04 16:58:27 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	read_input(t_maindata *core_data)
 		{
 			g_sigreciever = 0;
 			dup2(stdin_fd, STDIN_FILENO);
-			continue;
+			continue ;
 		}
 		else if (input == NULL)
 		{
