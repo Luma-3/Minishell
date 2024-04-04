@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 14:08:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 15:52:28 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 16:20:30 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,8 @@ t_list	*get_all_file(t_list **head, t_list *arg)
 	start_content = ft_strdup(tmp->content);
 	if (d_push_stk(stack, tmp->content) == FAILURE)
 	{
-		ft_lstadd_front(head, tmp);
-		return (*head);
+		ft_lstadd_front(new_head, tmp);
+		return (new_head);
 	}
 	free(tmp);
 	rec_all(stack, &new_head);
