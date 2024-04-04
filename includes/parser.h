@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 13:34:35 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/04/03 02:10:15 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "core_data.h"
 # include "ms_error.h"
 # include "stackft.h"
-
+# include <dirent.h>
 # include <stdbool.h>
 
 # define WEIGHT_CMD 1
@@ -34,6 +34,7 @@ typedef struct s_match_file
 	char		*prefix;
 	char		*suffix;
 	char		*path;
+	char		*old_data;
 }				t_match_file;
 
 /////////////////////////
@@ -150,20 +151,32 @@ bool		valid_env_char(const char c);
 //////////////////////////
 /////// EXPANSION  ///////
 //////////////////////////
-// TODO Trie par fichier
 
 int			expansion_cmd(t_maindata *core_data, t_list **args);
 
+// expansion_env
+
+char		*handle_env(t_maindata *core_data, const char *arg);
+
 char		*copy_data_env(t_maindata *core_data, char *arg, int index);
+
+// expansion_tilde
+
+char		*handle_tilde(const char *arg, const char *uname);
 
 char		*copy_data_tilde(const char *uname, char *arg, int index);
 
 bool		check_tilde(const char *arg, const int prev_i,
 				const int next_i);
 
+// expansion_all
+
 t_list		*get_all_file(t_list **head, t_list *arg);
 
-//all_utils.c
+void		rec_all(t_dstack *stack, t_list **list);
+
+// get_infos
+
 char		*get_token(char *prefix, char *suffix);
 
 char		*get_suffix(char *prompt, int index);
@@ -172,13 +185,17 @@ char		*get_prefix(char *prompt, int index);
 
 char		*get_path_wildcard(char *arg, int index);
 
+// find_files
+
 bool		find_match_file(char *entry, char *prefix, char *suffix);
 
-void		rec_all(t_dstack *stack, t_list **list);
+bool		find_and_push(t_dstack *stack, t_match_file *match_file,
+				DIR *dir, int i);
 
-char		*handle_tilde(const char *arg, const char *uname);
+// lst_utils
 
-char		*handle_env(t_maindata *core_data, const char *arg);
+void		clean_access_lst(t_list **head, char *start_content);
 
+void		pop_stack_to_list(t_dstack *stack, t_list **list);
 
 #endif // PARSER_H
