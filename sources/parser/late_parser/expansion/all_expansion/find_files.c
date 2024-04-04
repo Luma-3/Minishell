@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 00:18:28 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/03 22:48:55 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/04 10:47:02 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,14 +144,14 @@ static	bool	final_decision(char *entry, char *suffix)
 	}
 	return (true);
 }
-bool	only_all(char *prefix, char *suffix)
+bool	only_all(char *suffix)
 {
 	int	i;
 
 	i = 0;
-	while(suffix[i] == '*')
+	while (suffix != NULL && suffix[i] == '*')
 		i++;
-	if (suffix[i] == '\0' && prefix[0] == '\0')
+	if (suffix != NULL && suffix[i] == 0)
 		return (true);
 	return (false);
 }
@@ -175,15 +175,12 @@ bool	find_match_file(char *entry, char *prefix, char *suffix)
 	}
 	if (len_prefix == 0 && entry[0] == '.')
 		return (false);
-	printf("prefix: %s\n", prefix);
-	printf("suffix: %s\n", suffix);
-	if (only_all(prefix, suffix) == true)
+	if (len_prefix == 0 && only_all(suffix) == true)
 		return (true);
 	if ((ft_strncmp(entry, prefix, len_prefix) == 0
 			&& len_suffix == 0)
-		|| (ft_strncmp(entry, prefix, len_prefix) == 0 && final_decision(entry, suffix) == true))
-	{
+		|| (ft_strncmp(entry, prefix, len_prefix) == 0
+			&& final_decision(entry, suffix) == true))
 		return (true);
-	}
 	return (false);
 }
