@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:46:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 16:03:26 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 15:30:57 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static t_list	*split_arg(const char *prompt)
 	t_list	*args_lst;
 	int		len;
 	int		i;
+	char	copy_prompt;
 
 	i = 0;
 	args_lst = NULL;
@@ -26,8 +27,10 @@ static t_list	*split_arg(const char *prompt)
 		len = count_letters(&prompt[i]);
 		if (len != 0)
 		{
-			ft_lstadd_back(&args_lst,
-				ft_lstnew(ft_strndup(&prompt[i], len)));
+			copy_prompt = ft_strndup(&prompt[i], len);
+			if (copy_prompt == NULL)
+				return (NULL);
+			ft_lstadd_back(&args_lst, ft_lstnew(copy_prompt));
 			i += len;
 		}
 	}

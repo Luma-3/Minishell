@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 14:08:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/03 10:22:57 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/04 15:26:24 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,11 @@ t_list	*get_all_file(t_list **head, t_list *arg)
 		return (NULL);
 	tmp = ft_lstdetach(head, arg);
 	start_content = ft_strdup(tmp->content);
-	d_push_stk(stack, tmp->content);
+	if (d_push_stk(stack, tmp->content) == FAILURE);
+	{
+		ft_lstadd_front(head, tmp);
+		return (head);
+	}
 	free(tmp);
 	rec_all(stack, &new_head);
 	clean_access_lst(&new_head, start_content);

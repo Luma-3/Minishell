@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 09:22:25 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 16:42:19 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/04 15:28:08 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,10 @@ int	parse_prompt(char *prompt, t_maindata *core_data, bool check_arg)
 	char	*tmp;
 
 	tmp = ft_strtrim(prompt, " /t/n/r/v/f");
-	if (tmp == NULL || tmp[0] == '\0')
-	{
-		if (tmp[0] == '\0')
-			free(tmp);
+	if (tmp == NULL)
 		return (FAILURE);
-	}
+	if (tmp[0] == '\0')
+			return (free(tmp), FAILURE);
 	free(tmp);
 	if (check_arg == true)
 	{
