@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:04:47 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 13:57:49 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 17:05:31 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	handle_heredoc(const char *prompt, t_maindata *ats)
 			while (prompt[i + j] && ft_iswhitespace(prompt[i + j]) == false)
 				j++;
 			delimiteur = ft_strndup(prompt + i, j);
-			create_enqueue_heredoc(ats->queue_heredoc, delimiteur, id);
+			create_enqueue_heredoc(ats->queue_heredoc, delimiteur, id); // TODO : check return value
 			id++;
 		}
 		i++;
