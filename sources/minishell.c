@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/03 16:29:18 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 12:01:28 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,6 @@ char	*get_home(const char *uname)
 void	exec_process(t_maindata *core_data, t_list *env, char *input)
 {
 	ft_putchar_fd('\n', 1);
-	if (g_sigreciever == SIGINT)
-	{
-		g_sigreciever = 0;
-		ft_putchar_fd('\n', 1);
-	}
 	if (init_core_data(core_data, input, env) == FAILURE)
 		return ;
 	if (parse_prompt(input, core_data, true) == FAILURE)
@@ -69,7 +64,7 @@ void	exec_process(t_maindata *core_data, t_list *env, char *input)
 		return ;
 	}
 	read_ats(core_data, core_data->root);
-	ft_putchar_fd('\n', 1);
+	//ft_putchar_fd('\n', 1);
 	clear_ats(core_data, CORE_REDIR | CORE_ROOT | CORE_PROMPT
 		| CORE_HEREDOC | CORE_PIPE);
 }
@@ -81,6 +76,10 @@ void	read_input(t_maindata *core_data)
 	while (true)
 	{
 		input = shell_prompt(core_data);
+		if (g_sigreciever == SIGINT)
+		{
+			g_sigreciever = 0;
+		}
 		if (input == NULL)
 		{
 			free(input);

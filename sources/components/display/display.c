@@ -6,11 +6,13 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/03 16:38:19 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 12:02:44 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "display.h"
+
+extern volatile int	g_sigreciever;
 
 void	display_msg(t_maindata *ats, t_list *env, char *msg)
 {
@@ -61,14 +63,22 @@ char	*shell_prompt(t_maindata *core_data)
 	char	*prompt;
 	char	*line;
 
-	prompt = create_sh_prompt(core_data->env, core_data->uname,
-			core_data->last_status);
 	line = PROMPT_SHELL;
-	if (prompt != NULL)
-		ft_putendl_fd(prompt, 1);
+	if (g_sigreciever != SIGINT)
+	{
+		prompt = create_sh_prompt(core_data->env, core_data->uname,
+			core_data->last_status);
+		if (prompt != NULL)
+			ft_putendl_fd(prompt, 1);
+		else
+			ft_putendl_fd("| Kikishell |", 1);
+		free(prompt);
+		input = readline(line);
+	}
 	else
-		ft_putendl_fd("| Kikishell |", 1);
-	free(prompt);
-	input = readline(line);
+	{
+		g_sigreciever = 0;
+		input = readline("");
+	}
 	return (input);
 }
