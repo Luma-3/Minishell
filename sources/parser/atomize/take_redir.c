@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:10:20 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 17:44:20 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 16:02:25 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ static int	add_queue(t_maindata *ats, const char *prompt, int redir_type,
 	i = 0;
 	j = 0;
 	data = (t_queue_redir *)malloc(sizeof(t_queue_redir));
-	if (!data || !ats->queue_redir)
+	if (!data)
 		return (FAILURE);
+	if (!ats->queue_redir)
+		return (free(data), FAILURE);
 	data->type_redir = redir_type;
 	ft_enqueue(ats->queue_redir, data);
 	if (data->type_redir > 2)

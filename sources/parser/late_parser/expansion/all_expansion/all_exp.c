@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 14:08:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 15:38:08 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 15:52:28 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	call_recursion(t_match_file *match_file, t_dstack *stack,
 	int	len;
 
 	len = 0;
-	if (match_file->prefix != NULL)
+	if (match_file != NULL && match_file->prefix != NULL)
 	{
 		len = ft_strlen(match_file->prefix);
 	}
@@ -70,6 +70,7 @@ void	rec_all(t_dstack *stack, t_list **list)
 
 	i = 0;
 	data = (char *)stack->top->data;
+	init_match_file(&match_file, data, i);
 	while (data[i])
 	{
 		i = skip_quote_parenthesis(data, i);

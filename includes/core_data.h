@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core_data.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 14:59:08 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/04 16:00:50 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define CORE_PATH		0x80
 # define CORE_ALL		0xFF
 
-# define FAILURE -1
+# define FAILURE	-1
 # define SUCCESS	0 
 
 # define READ 0

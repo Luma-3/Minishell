@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_subshell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:12:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 18:26:41 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/04 15:59:23 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	exec_subshell(t_maindata *core_data, t_ats *node)
 	pid_t			pid;
 	int				status;
 
-	status = 0;
 	pid = fork();
 	if (pid == -1)
 		return (FAILURE);

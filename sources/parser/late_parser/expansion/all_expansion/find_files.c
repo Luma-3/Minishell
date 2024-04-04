@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 00:18:28 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/04 10:47:02 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/04 15:58:07 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ft_findstr(char *str, char *to_find, int i)
 	j = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == to_find[j])
+		if (to_find != NULL && str[i] == to_find[j])
 		{
 			while (str[i + j] == to_find[j]
 				&& to_find[j] != '\0' && str[i + j] != '\0')
@@ -94,7 +94,6 @@ static bool	get_last_suffix(char *suffix, char *entry, int j, int i)
 	char	*suffix_dir;
 
 	suffix_dir = NULL;
-	len_suff_dir = 0;
 	len_suff = ft_strlen(suffix + j);
 	if (len_suff == 0)
 		return (true);
@@ -133,7 +132,7 @@ static	bool	final_decision(char *entry, char *suffix)
 	{
 		if (ft_strchr(suffix + j, '*') == 0)
 			return (get_last_suffix(suffix, entry, j, i));
-		while (suffix[j] != '\0' && suffix[j] != '*')
+		while (suffix != NULL && suffix[j] != '\0' && suffix[j] != '*')
 			j++;
 		to_find = ft_strndup(suffix + start, j - start);
 		if (ft_findstr(entry, to_find, i) == -1)
