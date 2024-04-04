@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 00:18:28 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/04 18:35:05 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/04 18:46:02 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ static bool	get_last_suffix(char *suffix, char *entry, int j, int i)
 	if (ft_strchr(suffix + j, '/') == 0)
 	{
 		suffix_dir = ft_strjoin(suffix + j, "/");
-		if (decision_file(entry, suffix + j, j) == true
-			|| decision_directory(entry, suffix_dir, j) == true)
+		if (decision_file(entry, suffix + j) == true
+			|| decision_directory(entry, suffix_dir) == true)
 		{
 			if (ft_findstr(entry, suffix + j, i) != -1
 				|| ft_findstr(entry, suffix_dir + j, i) != -1)
@@ -76,7 +76,7 @@ static bool	get_last_suffix(char *suffix, char *entry, int j, int i)
 		}
 		return (false);
 	}
-	if (decision_directory(entry, suffix + j, j) == true)
+	if (decision_directory(entry, suffix + j) == true)
 	{
 		if (ft_findstr(entry, suffix + j, i) != -1)
 			return (true);
