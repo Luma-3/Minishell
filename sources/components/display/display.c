@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/04 15:12:13 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/04 17:08:59 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*shell_prompt(t_maindata *core_data)
 
 	line = PROMPT_SHELL;
 	prompt = create_sh_prompt(core_data->env, core_data->uname,
-		core_data->last_status);
+			core_data->last_status);
 	if (prompt != NULL)
 		ft_putendl_fd(prompt, 1);
 	else

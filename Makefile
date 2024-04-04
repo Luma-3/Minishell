@@ -6,7 +6,7 @@
 #    By: anthony <anthony@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/03 00:57:07 by anthony          ###   ########.fr        #
+#    Updated: 2024/04/04 18:33:39 by anthony          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ COMP_ENV				=	$(addprefix $(COMP_ENV_DIR), $(COMP_ENV_LIST))
 COMP_ERROR_DIR		=	error/
 COMP_ERROR_LIST		=	error.c				\
 						clear_ats.c			\
+						free.c				\
 						error_utils.c		\
 						print_error_msg.c
 COMP_ERROR			=	$(addprefix $(COMP_ERROR_DIR), $(COMP_ERROR_LIST))
@@ -144,6 +145,8 @@ ALL_EXPAND_DIR		=	all_expansion/
 ALL_EXPAND_LIST		= 	all_exp.c			\
 						get_infos.c			\
 						find_files.c		\
+						decision.c			\
+						utils.c				\
 						lst_utils.c			
 ALL_EXPAND			=	$(addprefix $(ALL_EXPAND_DIR), $(ALL_EXPAND_LIST))
 
@@ -166,6 +169,7 @@ SRC_PARSER_LIST		=	parser.c			\
 						is_type2.c			\
 						place_cursor.c		\
 						place_cursor2.c		\
+						check_char.c		\
 						$(ATS)				\
 						$(POST_PARSER)		\
 						$(PRE_PARSER)

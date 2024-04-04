@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:04:47 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 17:05:31 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 18:43:12 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	open_heredoc(const char *delimiter, int fd)
 		if (g_sigreciever == SIGINT)
 		{
 			g_sigreciever = 0;
-			break;
+			break ;
 		}
 		if (stop_heredoc(line, delimiter) == true)
 			break ;
@@ -114,12 +114,12 @@ void	handle_heredoc(const char *prompt, t_maindata *ats)
 			i = place_cursor_quote(prompt, i);
 		if (is_redir_type(prompt + i) == REDIR_HEREDOC)
 		{
-			i += 2;
-			i = ft_skip_whitespaces(prompt, i);
+			i = ft_skip_whitespaces(prompt, i) + 2;
 			while (prompt[i + j] && ft_iswhitespace(prompt[i + j]) == false)
 				j++;
 			delimiteur = ft_strndup(prompt + i, j);
-			create_enqueue_heredoc(ats->queue_heredoc, delimiteur, id); // TODO : check return value
+			create_enqueue_heredoc(ats->queue_heredoc,
+				delimiteur, id); // TODO : check return value
 			id++;
 		}
 		i++;

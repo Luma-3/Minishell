@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:49:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/03 15:56:30 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 17:42:23 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ char	*get_uname(void)
 				close(fd);
 				return (errno = ENOMEM, NULL);
 			}
-			close(fd);
-			return (uname);
+			return (close(fd), uname);
 		}
 	}
 	close(fd);

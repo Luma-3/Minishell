@@ -3,69 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:35:19 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 12:51:01 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/04/04 18:20:26 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "minishell.h"
-
-char	*handle_tilde(const char *arg, const char *uname)
-{
-	int		i;
-	char	*new_arg;
-
-	i = 0;
-	new_arg = (char *)arg;
-	while (new_arg[i])
-	{
-		i = skip_quote_parenthesis(new_arg, i);
-		if (new_arg[i] == '~' && check_tilde(new_arg, i - 1, i + 1) == true)
-		{
-			new_arg = copy_data_tilde(uname, new_arg, i);
-		}
-		if (new_arg[i] != '\0')
-			i++;
-	}
-	return (new_arg);
-}
-
-char	*handle_env(t_maindata *core_data, const char *arg)
-{
-	int		i;
-	char	quote;
-	char	*new_arg;
-
-	i = 0;
-	quote = '\0';
-	new_arg = (char *)arg;
-	while (new_arg[i])
-	{
-		if (new_arg[i] == '\"' && quote == '\0')
-		{
-			quote = '\"';
-			i++;
-		}
-		if (new_arg[i] == '\"' && quote != '\0')
-		{
-			quote = '\0';
-			i++;
-		}
-		if (new_arg[i] == '\'' && quote == '\0')
-			i = skip_quote_parenthesis(new_arg, i);
-		if (new_arg[i] == '$' && (ft_iswhitespace(new_arg[i + 1]) == false
-				|| new_arg[i + 1] != '\0'))
-		{
-			new_arg = copy_data_env(core_data, new_arg, i);
-		}
-		if (new_arg[i] != '\0')
-			i++;
-	}
-	return (new_arg);
-}
 
 static t_list	*handle_all(t_list **lst, t_list *current_index)
 {
@@ -104,6 +50,15 @@ static void	connect_list(t_list *index_prev, t_list *match_files, t_list **args)
 	ft_lstadd_back(&match_files, tmp);
 }
 
+static void	first_expansions(t_maindata *core_data, t_list *indexer)
+{
+	if (ft_strchr((const char *)indexer->content, '~') != NULL)
+		indexer->content = (void *)handle_tilde(indexer->content,
+				core_data->uname);
+	if (ft_strchr((const char *)indexer->content, '$') != NULL)
+		indexer->content = (void *)handle_env(core_data, indexer->content);
+}
+
 int	expansion_cmd(t_maindata *core_data, t_list **args)
 {
 	t_list	*indexer;
@@ -114,11 +69,7 @@ int	expansion_cmd(t_maindata *core_data, t_list **args)
 	index_prev = NULL;
 	while (indexer)
 	{
-		if (ft_strchr((const char *)indexer->content, '~') != NULL)
-			indexer->content = (void *)handle_tilde(indexer->content,
-					core_data->uname);
-		if (ft_strchr((const char *)indexer->content, '$') != NULL)
-			indexer->content = (void *)handle_env(core_data, indexer->content);
+		first_expansions(core_data, indexer);
 		if (ft_strchr((const char *)indexer->content, '*') != NULL)
 		{
 			match_files = handle_all(args, indexer);

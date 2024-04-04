@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 14:08:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 16:59:57 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 18:11:10 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ static int	find_all_files(t_dstack *stack, t_match_file *match_file,
 		ft_lstadd_front(lst, ft_lstnew(match_file->old_data));
 		return (FAILURE);
 	}
-	closedir(dir);//Verifier son retour
 	free(match_file->old_data);
+	if (closedir(dir) == -1)
+		return (FAILURE);
 	return (SUCCESS);
 }
 
@@ -53,15 +54,6 @@ static void	call_recursion(t_match_file *match_file, t_dstack *stack,
 	}
 }
 
-t_match_file	*init_match_file(t_match_file *match_file, char *data, int i)
-{
-	match_file->suffix = get_suffix(data, i);
-	match_file->path = get_path_wildcard(data, i);
-	match_file->prefix = get_prefix(data, i);
-	match_file->old_data = NULL;
-	return (match_file);
-}
-
 void	rec_all(t_dstack *stack, t_list **list)
 {
 	t_match_file	match_file;
@@ -78,11 +70,7 @@ void	rec_all(t_dstack *stack, t_list **list)
 		{
 			init_match_file(&match_file, data, i);
 			if (access(match_file.path, F_OK) == FAILURE)
-			{
-				ft_lstadd_front(list, ft_lstnew(d_pop_stk(stack)));
-				//TODO : free match_file
-				return ;
-			}
+				return (no_access_file(stack, list, &match_file));
 			break ;
 		}
 		if (data[i] != '\0')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   take_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:10:20 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 16:58:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 17:35:27 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ static int	add_queue(t_maindata *ats, const char *prompt, int redir_type,
 char	*take_redir(t_maindata *ats, const char *prompt, int size_prompt,
 					int *nb_redir)
 {
+	char	*new_prompt;
 	int		i;
 	int		j;
-	char	*new_prompt;
-	char	quote;
 	int		parenthesis;
+	char	quote;
 
 	parenthesis = 0;
 	new_prompt = ft_calloc(ft_strlen(prompt) + 1, sizeof(char));
@@ -60,17 +60,14 @@ char	*take_redir(t_maindata *ats, const char *prompt, int size_prompt,
 	quote = '\0';
 	while (prompt[i] && i < size_prompt)
 	{
-		if (is_quote(prompt[i]) == true && quote == '\0')
-			quote = prompt[i];
-		else if (is_quote(prompt[i]) == true && quote == prompt[i])
-			quote = '\0';
-		else if (prompt[i] == '(')
-			parenthesis++;
-		else if (prompt[i] == ')')
-			parenthesis--;
+		if (is_quote(prompt[i]) == true)
+			quote = check_quote(quote, prompt[i]);
+		else if (prompt[i] == '(' || prompt[i] == ')')
+			parenthesis += check_parenthesis(prompt[i]);
 		if (is_redir_type(prompt + i) > 0 && quote == '\0' && parenthesis == 0)
 		{
-			i += add_queue(ats, prompt + i, is_redir_type(prompt + i), size_prompt);
+			i += add_queue(ats, prompt + i,
+					is_redir_type(prompt + i), size_prompt);
 			*nb_redir += 1;
 		}
 		else if (i < size_prompt && prompt[i] != '\0')

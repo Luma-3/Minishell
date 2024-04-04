@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:16:35 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 17:01:24 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 17:43:26 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int	open_redir_heredoc(t_queue *queue_heredoc)
 	int				fd;
 
 	heredoc = (t_queue_heredoc *)ft_dequeue(queue_heredoc);
-
 	if (access(heredoc->file_name, F_OK | R_OK) != 0)
 		return (FAILURE);
 	fd = open(heredoc->file_name, O_RDONLY, 0644);

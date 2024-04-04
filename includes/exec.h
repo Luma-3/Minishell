@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:39:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 17:03:42 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 18:18:54 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int		clean_parent(t_maindata *core_data, const t_ats *node);
 //BUILTINS
 
 void	process_built_in(t_maindata *core_data, t_ats *node, char **args);
-
 
 //PATH HANDLING
 

@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:40:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 10:26:51 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/04 18:25:38 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ char	*get_prefix(char *arg, int index)
 		return (NULL);
 	if (arg[i] == '/')
 		i++;
+	if (index - i == -1)
+		return (NULL);
 	prefix = ft_strndup(arg + i, index - i);
 	if (prefix == NULL)
 		return (NULL);
