@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/04 12:02:44 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 12:55:48 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*shell_prompt(t_maindata *core_data)
 	if (g_sigreciever != SIGINT)
 	{
 		prompt = create_sh_prompt(core_data->env, core_data->uname,
-			core_data->last_status);
+				core_data->last_status);
 		if (prompt != NULL)
 			ft_putendl_fd(prompt, 1);
 		else

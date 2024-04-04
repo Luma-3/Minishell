@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 12:01:28 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 12:56:12 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	init_core_data(t_maindata *core_data, char *prompt, t_list *env)
 		return (FAILURE);
 	}
 	core_data->root = root;
-	core_data->last_status = 1;
 	return (SUCCESS);
 }
 
@@ -64,7 +63,8 @@ void	exec_process(t_maindata *core_data, t_list *env, char *input)
 		return ;
 	}
 	read_ats(core_data, core_data->root);
-	//ft_putchar_fd('\n', 1);
+	if (g_sigreciever != SIGINT)
+		ft_putchar_fd('\n', 1);
 	clear_ats(core_data, CORE_REDIR | CORE_ROOT | CORE_PROMPT
 		| CORE_HEREDOC | CORE_PIPE);
 }
