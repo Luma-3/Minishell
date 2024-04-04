@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 13:59:59 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 16:29:50 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static int	wait_process(t_maindata *core_data, t_ats *node)
 {
 	int	ret;
 
-	while (true)
+	ret = 0;
+	while (ret == 0)
 	{
 		ret = waitpid(node->data->pid, &node->data->exit_code, WNOHANG);
 		if (ret == FAILURE)

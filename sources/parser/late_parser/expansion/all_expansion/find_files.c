@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 00:18:28 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/04 16:06:05 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 16:32:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ bool	find_and_push(t_dstack *stack, t_match_file *match_file,
 		if (entry == NULL)
 			break ;
 		file_name = file_to_directory(match_file, entry->d_name);
+		if (file_name == NULL)
+			return (free(token), false);
 		if (find_match_file(file_name, match_file->prefix,
 				match_file->suffix) == true)
 		{
@@ -143,6 +145,7 @@ static	bool	final_decision(char *entry, char *suffix)
 	}
 	return (true);
 }
+
 bool	only_all(char *suffix)
 {
 	int	i;

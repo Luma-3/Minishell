@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:33:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/03 17:56:36 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/04 16:34:47 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,14 @@ int	exec_builtin(const char **tab_cmd, t_list **env, t_error *errors)
 	return (EXIT_FAILURE);
 }
 
-int	is_builtin(const char *cmd)
+bool	is_builtin(const char *cmd)
 {
 	t_builtin	builtins[NB_BUILTINS];
 	int			i;
 
 	i = 0;
+	if (cmd == NULL)
+		return (false);
 	init_builtins(builtins);
 	while (i < NB_BUILTINS)
 	{
