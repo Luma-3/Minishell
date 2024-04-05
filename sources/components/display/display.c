@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/04 17:08:59 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/05 18:26:32 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*create_sh_prompt(t_list *env, char *uname, int last_status)
 	else
 		display[12] = " 🌙 ";
 	display[13] = RESET;
-	display[14] = '\0';
+	display[14] = NULL;
 	prompt = assemble(display);
 	free(display[6]);
 	free(display[10]);

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:33:39 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/19 13:33:34 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:41:13 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	count_letters(const char *start_word)
 		if (ft_iswhitespace(start_word[i]) == true)
 			break ;
 		else if (is_quote(start_word[i]) == true)
-			i = place_cursor_quote(start_word, i);
+			i = place_cursor_quote(start_word, i) + 1;
 		else
 			i++;
 	}

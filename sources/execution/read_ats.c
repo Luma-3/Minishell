@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/05 18:10:39 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:08:57 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,30 @@
 
 extern volatile int	g_sigreciever;
 
-static void	wait_pipeline(t_maindata *core_data)
+static int	wait_pipeline(t_maindata *core_data, t_ats *node)
 {	
-	(void)core_data;
-	while (true)
+	int	ret;
+
+	ret = 0;
+	while (ret >= 0)
 	{
-		if (wait3(NULL, 0, NULL) > 0)
-			break ;
+		ret = wait3(NULL, WNOHANG ,NULL);
+		if (ret == FAILURE)
+			return (FAILURE);
+		if (g_sigreciever != 0)
+		{
+			while (node->left != NULL)
+			{
+				kill(node->data->pid, g_sigreciever);
+				node = node->left;
+			}
+			g_sigreciever = 0;
+			node->data->exit_code = g_sigreciever;
+			core_data->last_status = g_sigreciever;
+			return (FAILURE);
+		}
 	}
+	return (SUCCESS);
 }
 
 static int	wait_process(t_maindata *core_data, t_ats *node)
@@ -32,7 +48,7 @@ static int	wait_process(t_maindata *core_data, t_ats *node)
 
 	ret = 0;
 	if (core_data->is_pipeline == true && node->data->require_wait == true)
-		wait_pipeline(core_data);
+		return (wait_pipeline(core_data, node));
 	while (ret == 0)
 	{
 		ret = waitpid(node->data->pid, &node->data->exit_code, WNOHANG);
