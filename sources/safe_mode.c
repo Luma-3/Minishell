@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 20:45:55 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/03 14:24:53 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/05 17:25:30 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static int	safe_env(t_list **env)
 		return (errno = ENOMEM, FAILURE);
 	if (ms_setenv(env, "PWD", cwd) == FAILURE)
 	{
-		printf("PWD\n");
 		return (free(cwd), FAILURE);
 	}
 	free(cwd);

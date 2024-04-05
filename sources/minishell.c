@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 16:59:57 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:12:42 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "parser.h"
 #include "ms_error.h"
 #include "display.h"
+#include "ms_builtins.h"
 
 volatile int	g_sigreciever = 0;
 
@@ -36,6 +37,7 @@ int	init_core_data(t_maindata *core_data, char *prompt, t_list *env)
 		return (FAILURE);
 	}
 	core_data->root = root;
+	core_data->is_pipeline = false;
 	return (SUCCESS);
 }
 
@@ -50,6 +52,7 @@ char	*get_home(const char *uname)
 	}
 	return (home);
 }
+
 
 void	exec_process(t_maindata *core_data, t_list *env, char *input)
 {
@@ -72,27 +75,31 @@ void	exec_process(t_maindata *core_data, t_list *env, char *input)
 void	read_input(t_maindata *core_data)
 {
 	char		*input;
-	int			stdin_fd;
 
 	while (true)
 	{
-		stdin_fd = dup(STDIN_FILENO);
+		core_data->stdin_fd = dup(STDIN_FILENO);
 		input = shell_prompt(core_data);
 		if (g_sigreciever == SIGINT)
 		{
 			g_sigreciever = 0;
-			dup2(stdin_fd, STDIN_FILENO);
+			dup2(core_data->stdin_fd, STDIN_FILENO);
+			close(core_data->stdin_fd);
 			continue ;
 		}
 		else if (input == NULL)
 		{
 			free(input);
+			dup2(core_data->stdin_fd, STDIN_FILENO);
+			close(core_data->stdin_fd);
+			close(core_data->history_fd);
 			display_msg(core_data, core_data->env, BYE_MSG);
 			break ;
 		}
 		ft_add_history(input, core_data->history_fd);
 		exec_process(core_data, core_data->env, input);
-		dup2(stdin_fd, STDIN_FILENO);
+		dup2(core_data->stdin_fd, STDIN_FILENO);
+		close(core_data->stdin_fd);
 	}
 	clear_ats(core_data, CORE_UNAME | CORE_ENV | CORE_PATH);
 }

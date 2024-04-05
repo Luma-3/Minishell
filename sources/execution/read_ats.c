@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 16:59:57 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:10:39 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,23 @@
 
 extern volatile int	g_sigreciever;
 
+static void	wait_pipeline(t_maindata *core_data)
+{	
+	(void)core_data;
+	while (true)
+	{
+		if (wait3(NULL, 0, NULL) > 0)
+			break ;
+	}
+}
+
 static int	wait_process(t_maindata *core_data, t_ats *node)
 {
 	int	ret;
 
 	ret = 0;
+	if (core_data->is_pipeline == true && node->data->require_wait == true)
+		wait_pipeline(core_data);
 	while (ret == 0)
 	{
 		ret = waitpid(node->data->pid, &node->data->exit_code, WNOHANG);

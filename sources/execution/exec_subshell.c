@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:12:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 16:59:47 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:06:07 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	init_new_ats(t_maindata *core_data, t_maindata *new_core,
 	new_core->uname = core_data->uname;
 	new_core->path = core_data->path;
 	new_core->history_fd = core_data->history_fd;
+	new_core->stdin_fd = core_data->stdin_fd;
 	new_core->errors = core_data->errors;
 	new_core->queue_redir = ft_init_queue();
 	new_core->queue_pipe = ft_init_queue();

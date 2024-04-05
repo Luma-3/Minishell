@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   atomizer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 18:03:04 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/05 16:40:33 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,30 +73,33 @@ static int	atomize_pipeline(t_maindata *ats)
 	return (SUCCESS);
 }
 
-int	atomize_prompt(t_maindata *ats)
+int	atomize_prompt(t_maindata *core_data)
 {
 	int		i_copy;
 	int		i_read;
 
 	i_copy = 0;
 	i_read = 0;
-	if (is_pipeline(ats->prompt) == true)
-		return (atomize_pipeline(ats));
-	while (ats->prompt[i_read])
+	if (is_pipeline(core_data->prompt) == true)
 	{
-		i_read = skip_quote_parenthesis(ats->prompt, i_read);
-		if (is_operator(ats->prompt + i_read) == true)
+		core_data->is_pipeline = true;
+		return (atomize_pipeline(core_data));
+	}
+	while (core_data->prompt[i_read])
+	{
+		i_read = skip_quote_parenthesis(core_data->prompt, i_read);
+		if (is_operator(core_data->prompt + i_read) == true)
 		{
-			if (copy_cmd_operator(ats, &i_copy, &i_read) == FAILURE)
+			if (copy_cmd_operator(core_data, &i_copy, &i_read) == FAILURE)
 				return (FAILURE);
 		}
 		else
 		{
-			if (ats->prompt[i_read] != '\0')
+			if (core_data->prompt[i_read] != '\0')
 				i_read++;
 		}
 	}
-	if (copy_insert_node(ats, i_copy, i_read) == NULL)
+	if (copy_insert_node(core_data, i_copy, i_read) == NULL)
 		return (FAILURE);
 	return (SUCCESS);
 }

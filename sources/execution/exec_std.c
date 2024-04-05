@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/03 17:55:10 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:03:57 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	clean_parent(t_maindata *core_data, const t_ats *node)
 	t_queue_redir	*free_data_redir;
 	t_queue_heredoc	*free_data_heredoc;
 
+	if (node->data->index - 1 >= 0)
+		close_pipe(core_data);
 	while (node->data->nb_redir > 0)
 	{
 		free_data_redir = (t_queue_redir *)ft_dequeue(core_data->queue_redir);
@@ -34,14 +36,12 @@ int	clean_parent(t_maindata *core_data, const t_ats *node)
 		free(free_data_redir->file_name);
 		free(free_data_redir);
 	}
-	if (node->data->index - 1 >= 0)
-		return (close_pipe(core_data));
 	return (SUCCESS);
 }
 
 int	pre_process_exec(t_maindata *core_data, t_ats *node)
 {
-	if (handle_pipeline(core_data, node) == FAILURE)
+	if (handle_pipeline_redir(core_data, node) == FAILURE)
 	{
 		return (FAILURE);
 	}
@@ -53,6 +53,8 @@ int	pre_process_exec(t_maindata *core_data, t_ats *node)
 		dup_pipe(core_data, node->data->index);
 	return (SUCCESS);
 }
+
+
 
 static void	process_built_out(t_maindata *core_data, t_ats *node, char **args)
 {
@@ -71,6 +73,7 @@ static void	process_built_out(t_maindata *core_data, t_ats *node, char **args)
 		if (path == NULL)
 			path = ft_strdup(core_data->path);
 		close(core_data->history_fd);
+		close(core_data->stdin_fd);
 		exec_command(args, &(core_data->env),
 			core_data->errors, path);
 		clear_ats(core_data, CORE_ALL);

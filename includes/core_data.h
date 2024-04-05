@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 16:59:57 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/05 17:57:20 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ typedef struct s_maindata
 	char		*path;
 	char		*uname;
 	int			history_fd;
+	int			stdin_fd;
+	bool		is_pipeline;
 }				t_maindata;
 
 // queue

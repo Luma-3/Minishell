@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anthony <anthony@student.42.fr>            +#+  +:+       +#+         #
+#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/04 18:33:39 by anthony          ###   ########.fr        #
+#    Updated: 2024/04/05 13:17:40 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -120,7 +120,8 @@ SRC_EXEC_LIST		=	exec_builtins.c		\
 						read_ats.c			\
 						exec_command.c		\
 						get_path.c			\
-						pipe_utils.c
+						pipe_utils.c		\
+						pipe_exec.c
 SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 
 SRC_PARSER_DIR		=	parser/

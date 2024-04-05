@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:43:18 by antgabri          #+#    #+#             */
-/*   Updated: 2024/03/30 17:20:35 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/05 17:25:49 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static int	verif_token_before(const char *prompt, int i)
 			return (SUCCESS);
 		else
 		{
-			printf("ERROR: %c\n", prompt[i]);
 			return (FAILURE);
 		}
 	}
