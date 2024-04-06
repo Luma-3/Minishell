@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 00:18:28 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/06 12:34:54 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 14:31:51 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,34 @@
 bool	identify_file(struct dirent *entry, t_match_file *match_file)
 {
 	char	*file_name;
+	bool	result;
 
 	file_name = file_to_directory(match_file, entry->d_name);
 	if (file_name == NULL)
 		return (false);
 	if (find_match_file(file_name, match_file->prefix,
-			match_file->suffix) == false)
-		return (free(file_name), false);
+		match_file->suffix) == false)
+		result = false;
+	else
+		result = true;
 	free(file_name);
-	return (true);
+	return (result);
+}
+
+static char	*get_replace_token(t_match_file *match_file, t_dstack *stack)
+{
+	char	*token;
+	char	*suffix_tmp;
+
+	match_file->old_data = (char *)d_pop_stk(stack);
+	suffix_tmp = ft_strtrim(match_file->suffix, "/");
+	if (suffix_tmp == NULL)
+		return (NULL);
+	token = get_token(match_file->prefix, suffix_tmp);
+	free(suffix_tmp);
+	if (token == NULL)
+		return (NULL);
+	return (token);
 }
 
 bool	find_and_push(t_dstack *stack, t_match_file *match_file,
@@ -33,15 +52,10 @@ bool	find_and_push(t_dstack *stack, t_match_file *match_file,
 {
 	struct dirent	*entry;
 	char			*token;
-	char			*suffix_tmp;
 	bool			have_file;
 
 	have_file = false;
-	match_file->old_data = (char *)d_pop_stk(stack);
-	suffix_tmp = ft_strtrim(match_file->suffix, "/");
-	if (suffix_tmp == NULL)
-		return (false);
-	token = get_token(match_file->prefix, suffix_tmp);
+	token = get_replace_token(match_file, stack);
 	if (token == NULL)
 		return (false);
 	while (true)

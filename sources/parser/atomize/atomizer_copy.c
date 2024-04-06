@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 17:19:09 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 14:25:48 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static t_token	*init_node(const char *cmd, int size_cmd)
 		data->is_subshell = true;
 	data->cmd = copy_whitout_parenthesis((char *)cmd);
 	if (data->cmd == NULL)
-		return (free(data), NULL);
+		return (free_data_tree(data), NULL);
 	data->require_wait = true;
 	data->exit_code = 0;
 	data->pid = -1;
@@ -58,7 +58,7 @@ t_token	*copy_insert_node(t_maindata *core_data, int i_copy, int i_read)
 	if (data == NULL)
 		return (NULL);
 	if (insert_node(&(core_data->root), data, compare_token) == FAILURE)
-		return (free(data), NULL);
+		return (free_data_tree(data), NULL);
 	return (data);
 }
 

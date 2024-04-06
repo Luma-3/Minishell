@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:04:47 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 18:43:12 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 14:35:25 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,20 +79,23 @@ static int	create_enqueue_heredoc(t_queue *heredoc_queue, char *delimiter,
 	if (heredoc_name == NULL || heredoc == NULL)
 	{
 		errno = ENOMEM;
-		return (free(heredoc), FAILURE);
+		return (FAILURE);
 	}
 	heredoc->file_name = heredoc_name;
 	heredoc->delimiter = delimiter;
 	fd = open(heredoc->file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (fd == -1)
 	{
-		free(heredoc->file_name);
 		free(heredoc);
+		free(heredoc->file_name);
 		perror("kikishell: heredoc");
 		return (errno);
 	}
 	if (heredoc_queue == NULL)
+	{
+		free(heredoc);
 		return (close(fd), FAILURE);
+	}
 	ft_enqueue(heredoc_queue, heredoc);
 	return (open_heredoc(delimiter, fd));
 }

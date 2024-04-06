@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
+#    By: anthony <anthony@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/05 18:36:03 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/04/06 13:45:44 by anthony          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -295,6 +295,9 @@ norme:
 	else \
 		echo "$(COLOR_GREEN)Norme : OK!$(COLOR_RESET)"; \
 	fi; \
+
+splint:
+	splint $(SRC) $(INCLUDE) -warnposix > splint_log
 
 re: fclean all
 

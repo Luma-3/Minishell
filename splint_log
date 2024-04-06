@@ -1,0 +1,1871 @@
+< Location unknown >: Field name reused: 
+  Code cannot be parsed.  For help on parse errors, see splint -help
+  parseerrors. (Use -syntax to inhibit warning)
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+sources/minishell.c: (in function init_core_data)
+sources/minishell.c:27:2: Implicitly only storage core_data->env (type t_list
+    *) not released before assignment: core_data->env = env
+  A memory leak has been detected. Only-qualified storage is not released
+  before the last reference to it is lost. (Use -mustfreeonly to inhibit
+  warning)
+sources/minishell.c:27:2: Implicitly temp storage env assigned to implicitly
+                             only: core_data->env = env
+  Temp storage (associated with a formal parameter) is transferred to a
+  non-temporary reference. The storage may be released or new aliases created.
+  (Use -temptrans to inhibit warning)
+sources/minishell.c:28:2: Implicitly only storage core_data->prompt (type char
+    *) not released before assignment: core_data->prompt = prompt
+sources/minishell.c:28:2: Implicitly temp storage prompt assigned to implicitly
+                             only: core_data->prompt = prompt
+sources/minishell.c:29:2: Implicitly only storage core_data->queue_redir (type
+    t_queue *) not released before assignment:
+    core_data->queue_redir = ft_init_queue()
+sources/minishell.c:30:2: Implicitly only storage core_data->queue_heredoc
+    (type t_queue *) not released before assignment:
+    core_data->queue_heredoc = ft_init_queue()
+sources/minishell.c:31:2: Implicitly only storage core_data->queue_pipe (type
+    t_queue *) not released before assignment:
+    core_data->queue_pipe = ft_init_queue()
+sources/minishell.c:35:11: Unrecognized identifier: ENOMEM
+  Identifier used in code has not been declared. (Use -unrecog to inhibit
+  warning)
+sources/minishell.c:39:2: Implicitly only storage core_data->root (type t_ats
+    *) not released before assignment: core_data->root = root
+sources/minishell.c:41:13: Function returns with null storage derivable from
+                              parameter core_data->root
+  A possibly null pointer is reachable from a parameter or global variable that
+  is not declared using a /*@null@*/ annotation. (Use -nullstate to inhibit
+  warning)
+   sources/minishell.c:39:20: Storage core_data->root becomes null
+sources/minishell.c: (in function get_home)
+sources/minishell.c:51:10: Null storage returned as non-null:
+                              (errno = ENOMEM, NULL)
+  Function returns a possibly null pointer, but is not declared using
+  /*@null@*/ annotation of result.  If function may return NULL, add /*@null@*/
+  annotation to the return value declaration. (Use -nullret to inhibit warning)
+sources/minishell.c: (in function exec_process)
+sources/minishell.c:68:2: Return value (type int) ignored: read_ats(core_da...
+  Result returned by function call is not used. If this is intended, can cast
+  result to (void) to eliminate message. (Use -retvalint to inhibit warning)
+sources/minishell.c: (in function read_input)
+sources/minishell.c:86:4: Return value (type int) ignored: dup2(core_data->...
+sources/minishell.c:87:4: Return value (type int) ignored: close(core_data-...
+sources/minishell.c:93:4: Return value (type int) ignored: dup2(core_data->...
+sources/minishell.c:94:4: Return value (type int) ignored: close(core_data-...
+sources/minishell.c:95:4: Return value (type int) ignored: close(core_data-...
+sources/minishell.c:99:3: Return value (type int) ignored: ft_add_history(i...
+sources/minishell.c:101:3: Return value (type int) ignored: dup2(core_data->...
+sources/minishell.c:102:3: Return value (type int) ignored: close(core_data-...
+sources/minishell.c:105:2: Fresh storage input not released before return
+  A memory leak has been detected. Storage allocated locally is not released
+  before the last reference to it is lost. (Use -mustfreefresh to inhibit
+  warning)
+   sources/minishell.c:82:3: Fresh storage input created
+sources/minishell.c:107:5: Function main declared with 3 args, should have 2
+                              (int argc, char *argv[])
+  The function main does not match the expected type. (Use -maintype to inhibit
+  warning)
+sources/minishell.c: (in function main)
+sources/minishell.c:112:2: Statement has no effect: (void)av
+  Statement has no visible effect --- no values are modified. (Use -noeffect to
+  inhibit warning)
+sources/minishell.c:115:17: Passed storage core_data contains 13 undefined
+    fields: root, env, queue_heredoc, queue_redir, ...
+  Storage derivable from a parameter, return value or global is not defined.
+  Use /*@out@*/ to denote passed or returned storage which need not be defined.
+  (Use -compdef to inhibit warning)
+sources/minishell.c:115:29: Passed storage *errors contains 2 undefined fields:
+                               code, msg
+sources/minishell.c:116:25: Only storage core_data.root (type t_ats *) derived
+    from variable declared in this scope is not released (memory leak)
+  A storage leak due to incomplete deallocation of a structure or deep pointer
+  is suspected. Unshared storage that is reachable from a reference that is
+  being deallocated has not yet been deallocated. Splint assumes when an object
+  is passed as an out only void pointer that the outer object will be
+  deallocated, but the inner objects will not. (Use -compdestroy to inhibit
+  warning)
+sources/minishell.c:116:25: Only storage core_data.env (type t_list *) derived
+    from variable declared in this scope is not released (memory leak)
+sources/minishell.c:116:25: Only storage core_data.queue_heredoc (type t_queue
+    *) derived from variable declared in this scope is not released (memory
+    leak)
+sources/minishell.c:116:25: Only storage core_data.queue_redir (type t_queue *)
+    derived from variable declared in this scope is not released (memory leak)
+sources/minishell.c:116:25: Only storage core_data.queue_pipe (type t_queue *)
+    derived from variable declared in this scope is not released (memory leak)
+sources/minishell.c:116:25: Only storage core_data.prompt (type char *) derived
+    from variable declared in this scope is not released (memory leak)
+sources/minishell.c:116:25: Only storage core_data.errors (type t_error *)
+    derived from variable declared in this scope is not released (memory leak)
+sources/minishell.c:116:25: Only storage core_data.path (type char *) derived
+    from variable declared in this scope is not released (memory leak)
+sources/minishell.c:116:25: Only storage core_data.uname (type char *) derived
+    from variable declared in this scope is not released (memory leak)
+sources/minishell.c:118:24: Only storage core_data.root (type t_ats *) derived
+    from variable declared in this scope is not released (memory leak)
+sources/minishell.c:118:24: Only storage core_data.env (type t_list *) derived
+    from variable declared in this scope is not released (memory leak)
+sources/minishell.c:118:24: Only storage core_data.queue_heredoc (type t_queue
+    *) derived from variable declared in this scope is not released (memory
+    leak)
+sources/minishell.c:118:24: Only storage core_data.queue_redir (type t_queue *)
+    derived from variable declared in this scope is not released (memory leak)
+sources/minishell.c:118:24: Only storage core_data.queue_pipe (type t_queue *)
+    derived from variable declared in this scope is not released (memory leak)
+sources/minishell.c:118:24: Only storage core_data.prompt (type char *) derived
+    from variable declared in this scope is not released (memory leak)
+sources/minishell.c:118:24: Only storage core_data.errors (type t_error *)
+    derived from variable declared in this scope is not released (memory leak)
+sources/minishell.c:118:24: Only storage core_data.path (type char *) derived
+    from variable declared in this scope is not released (memory leak)
+sources/minishell.c:118:24: Only storage core_data.uname (type char *) derived
+    from variable declared in this scope is not released (memory leak)
+sources/safe_mode.c: (in function take_path)
+sources/safe_mode.c:37:10: Null storage returned as non-null:
+                              (perror("Safe Mode"), NULL)
+sources/safe_mode.c:40:2: Return value (type int) ignored: close(fd)
+sources/safe_mode.c:42:10: Null storage returned as non-null:
+                              (errno = ENOMEM, NULL)
+sources/safe_mode.c:46:10: Null storage returned as non-null:
+                              (errno = ENOMEM, NULL)
+sources/safe_mode.c: (in function safe_env)
+sources/safe_mode.c:56:15: Null storage passed as non-null param:
+                              getcwd (NULL, ...)
+  A possibly null pointer is passed as a parameter corresponding to a formal
+  parameter with no /*@null@*/ annotation.  If NULL may be used for this
+  parameter, add a /*@null@*/ annotation to the function parameter declaration.
+  (Use -nullpass to inhibit warning)
+sources/safe_mode.c: (in function init_safe_mode)
+sources/safe_mode.c:69:2: Implicitly only storage core_data->path (type char *)
+    not released before assignment: core_data->path = take_path()
+< Location unknown >: Field name reused: 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+sources/init_shell.c: (in function get_uname)
+sources/init_shell.c:27:11: Unrecognized identifier: ENOENT
+sources/init_shell.c:32:7: Field user.ut_type used before definition
+  An rvalue is used that may not be initialized to a value on some execution
+  path. (Use -usedef to inhibit warning)
+sources/init_shell.c:34:22: Passed storage user.ut_user not completely defined
+    (*(user.ut_user) is undefined): ft_strdup (user.ut_user)
+sources/init_shell.c:37:5: Return value (type int) ignored: close(fd)
+sources/init_shell.c:38:12: Null storage returned as non-null:
+                               (errno = ENOMEM, NULL)
+sources/init_shell.c:43:2: Return value (type int) ignored: close(fd)
+sources/init_shell.c:44:9: Null storage returned as non-null:
+                              (errno = ENOENT, NULL)
+sources/init_shell.c: (in function launch_shell)
+sources/init_shell.c:67:2: Return value (type int) ignored: get_history(core...
+sources/init_shell.c:73:3: Implicitly only storage core_data->env (type t_list
+    *) not released before assignment: core_data->env = env
+sources/init_shell.c:79:2: Implicitly only storage core_data->env (type t_list
+    *) not released before assignment: core_data->env = env
+sources/init_shell.c:80:14: Storage core_data->env reachable from passed
+    parameter is kept (should be implicitly only): core_data
+  Storage derivable from a parameter does not match the alias kind expected for
+  the formal parameter. (Use -compmempass to inhibit warning)
+   sources/init_shell.c:79:2: Storage core_data->env becomes kept
+sources/init_shell.c: (in function init_shell)
+sources/init_shell.c:88:2: Implicitly only storage core_data->errors (type
+    t_error *) not released before assignment: core_data->errors = errors
+sources/init_shell.c:88:2: Implicitly temp storage errors assigned to
+                              implicitly only: core_data->errors = errors
+sources/init_shell.c:90:2: Implicitly only storage core_data->uname (type char
+    *) not released before assignment: core_data->uname = get_uname()
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+sources/components/display/display.c: (in function display_msg)
+sources/components/display/display.c:29:2:
+    Fresh storage command not released before return
+   sources/components/display/display.c:21:2: Fresh storage command created
+sources/components/display/display.c: (in function create_sh_prompt)
+sources/components/display/display.c:36:2:
+    Observer storage assigned to unqualified reference: display[0] =
+    "\033[1;32m┏\033[0m""\033[40;7m"
+  Observer storage is transferred to a non-observer reference. (Use
+  -observertrans to inhibit warning)
+   sources/components/display/display.c:36:15: Storage becomes observer
+sources/components/display/display.c:37:2:
+    Observer storage assigned to unqualified reference: display[1] =
+    "\033[1;32m"" "
+   sources/components/display/display.c:37:15: Storage becomes observer
+sources/components/display/display.c:39:2:
+    Observer storage assigned to unqualified reference:
+    display[3] = " 😃 ""\033[0m"
+   sources/components/display/display.c:39:15: Storage becomes observer
+sources/components/display/display.c:40:2:
+    Observer storage assigned to unqualified reference: display[4] = "\033[40m"
+   sources/components/display/display.c:40:15: Storage becomes observer
+sources/components/display/display.c:41:2:
+    Observer storage assigned to unqualified reference: display[5] =
+    "\033[1;34m"
+   sources/components/display/display.c:41:15: Storage becomes observer
+sources/components/display/display.c:43:2:
+    Observer storage assigned to unqualified reference:
+    display[7] = " ""\033[0m"
+   sources/components/display/display.c:43:15: Storage becomes observer
+sources/components/display/display.c:44:2:
+    Observer storage assigned to unqualified reference: display[8] =
+    "\033[40;7m"
+   sources/components/display/display.c:44:15: Storage becomes observer
+sources/components/display/display.c:45:2:
+    Observer storage assigned to unqualified reference: display[9] =
+    "\033[1;34m"" "
+   sources/components/display/display.c:45:15: Storage becomes observer
+sources/components/display/display.c:47:2:
+    Observer storage assigned to unqualified reference: display[11] = " "
+   sources/components/display/display.c:47:16: Storage becomes observer
+sources/components/display/display.c:49:3:
+    Observer storage assigned to unqualified reference:
+    display[12] = " ☀️  "
+   sources/components/display/display.c:49:17: Storage becomes observer
+sources/components/display/display.c:51:3:
+    Observer storage assigned to unqualified reference: display[12] = " 🌙 "
+   sources/components/display/display.c:51:17: Storage becomes observer
+sources/components/display/display.c:52:2:
+    Observer storage assigned to unqualified reference: display[13] = "\033[0m"
+   sources/components/display/display.c:52:16: Storage becomes observer
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+sources/components/display/display_utils.c: (in function path_to_tilde)
+sources/components/display/display_utils.c:22:25:
+    Null storage passed as non-null param: getcwd (NULL, ...)
+sources/components/display/display_utils.c:27:43:
+    Fresh storage path_absolute not released before return
+   sources/components/display/display_utils.c:22:2:
+   Fresh storage path_absolute created
+sources/components/display/display_utils.c:29:6:
+    Right operand of && is non-boolean (char):
+    path_home[i] == path_absolute[i] && path_home[i]
+  The operand of a boolean operator is not a boolean. Use +ptrnegate to allow !
+  to be used on pointers. (Use -boolops to inhibit warning)
+sources/components/display/display_utils.c:29:22:
+    Right operand of && is non-boolean (char):
+    path_home[i] == path_absolute[i] && path_home[i] && path_absolute[i]
+sources/components/display/display_utils.c:32:43:
+    Fresh storage path_absolute not released before return
+   sources/components/display/display_utils.c:22:2:
+   Fresh storage path_absolute created
+sources/components/display/display_utils.c:32:43:
+    Fresh storage path_home not released before return
+   sources/components/display/display_utils.c:25:2:
+   Fresh storage path_home created
+sources/components/display/display_utils.c: (in function get_current_dir)
+sources/components/display/display_utils.c:47:25:
+    Null storage passed as non-null param: getcwd (NULL, ...)
+sources/components/display/display_utils.c:49:10:
+    Null storage returned as non-null: (NULL)
+sources/components/display/display_utils.c:50:2: Assignment of size_t to int:
+    len = ft_strlen(absolute_path)
+  To allow arbitrary integral types to match any integral type, use
+  +matchanyintegral.
+sources/components/display/display_utils.c:59:10:
+    Null storage returned as non-null: (NULL)
+sources/components/display/display_utils.c: (in function assemble)
+sources/components/display/display_utils.c:75:42:
+    Function ft_calloc expects arg 2 to be size_t gets int: len + 1
+sources/components/display/display_utils.c:77:10:
+    Null storage returned as non-null: (NULL)
+sources/components/display/display_utils.c:80:43:
+    Function ft_strlcat expects arg 3 to be size_t gets int: len + 1
+sources/components/display/display_utils.c:80:3:
+    Return value (type size_t) ignored: ft_strlcat(displ...
+  Result returned by function call is not used. If this is intended, can cast
+  result to (void) to eliminate message. (Use -retvalother to inhibit warning)
+sources/components/env/transform_env.c: (in function free_tab)
+sources/components/env/transform_env.c:20:8:
+    Unqualified storage tab[index] passed as only param: free (tab[index])
+  Unqualified storage is transferred in an inconsistent way. (Use
+  -unqualifiedtrans to inhibit warning)
+sources/components/env/transform_env.c:22:7:
+    Implicitly temp storage tab passed as only param: free (tab)
+sources/components/env/transform_env.c: (in function env_to_tab)
+sources/components/env/transform_env.c:30:27:
+    Function ft_calloc expects arg 1 to be size_t gets int:
+    ft_lstsize(env_lst) + 1
+sources/components/env/transform_env.c:32:10:
+    Null storage returned as non-null: (NULL)
+sources/components/env/transform_env.c:41:11:
+    Null storage returned as non-null: (NULL)
+sources/components/env/transform_env.c:41:18:
+    Fresh storage env not released before return
+   sources/components/env/transform_env.c:30:2: Fresh storage env created
+sources/components/env/transform_env.c:48:9:
+    Null storage env[] derivable from return value: (env)
+   sources/components/env/transform_env.c:47:11: Storage env[] becomes null
+sources/components/env/transform_env.c: (in function env_to_lst)
+sources/components/env/transform_env.c:65:16:
+    Null storage head_env_list derivable from parameter ft_lstclear
+    (&head_env_list, ...)
+   sources/components/env/transform_env.c:58:18:
+   Storage head_env_list becomes null
+sources/components/env/transform_env.c:66:11:
+    Null storage returned as non-null: (NULL)
+sources/components/env/transform_env.c:68:18:
+    Null storage head_env_list derivable from parameter ft_lstadd_back
+    (&head_env_list, ...)
+   sources/components/env/transform_env.c:58:18:
+   Storage head_env_list becomes null
+sources/components/env/transform_env.c:68:34:
+    New fresh storage (type t_list *) passed as implicitly temp (not released):
+    ft_lstnew(tmp)
+sources/components/env/transform_env.c:70:9:
+    Null storage head_env_list returned as non-null: (head_env_list)
+   sources/components/env/transform_env.c:58:18:
+   Storage head_env_list becomes null
+sources/components/env/transform_env.c:70:25:
+    Fresh storage tmp not released before return
+   sources/components/env/transform_env.c:61:3: Fresh storage tmp created
+sources/components/env/env_utils.c: (in function ms_getenv)
+sources/components/env/env_utils.c:22:10: Null storage returned as non-null:
+                                             (NULL)
+sources/components/env/env_utils.c:23:2: Assignment of size_t to int:
+                                            name_len = ft_strlen(format_name)
+sources/components/env/env_utils.c:26:45:
+    Function ft_strncmp expects arg 3 to be size_t gets int: name_len
+sources/components/env/env_utils.c:34:9: Null storage returned as non-null:
+                                            (NULL)
+sources/components/env/env_utils.c: (in function ms_setenv)
+sources/components/env/env_utils.c:56:22:
+    New fresh storage (type char *) passed as implicitly temp (not released):
+    ft_strjoin(format_name, value)
+sources/components/env/env_utils.c:58:32:
+    Fresh storage format_name not released before return
+   sources/components/env/env_utils.c:43:2: Fresh storage format_name created
+sources/components/env/env_utils.c:61:13:
+    Fresh storage new_var not released before return
+   sources/components/env/env_utils.c:56:2: Fresh storage new_var created
+sources/components/error/error.c: (in function _init_msg_error_)
+sources/components/error/error.c:18:2:
+    Observer storage assigned to unqualified reference:
+    msg_error[0] = "Command not found"
+   sources/components/error/error.c:18:17: Storage becomes observer
+sources/components/error/error.c:19:2:
+    Observer storage assigned to unqualified reference:
+    msg_error[1] = "HOME not set"
+   sources/components/error/error.c:19:17: Storage becomes observer
+sources/components/error/error.c:20:2:
+    Observer storage assigned to unqualified reference:
+    msg_error[2] = "Environment not set"
+   sources/components/error/error.c:20:17: Storage becomes observer
+sources/components/error/error.c:21:2:
+    Observer storage assigned to unqualified reference:
+    msg_error[3] = "User not found"
+   sources/components/error/error.c:21:17: Storage becomes observer
+sources/components/error/error.c:22:2:
+    Observer storage assigned to unqualified reference:
+    msg_error[4] = "not a valid identifier"
+   sources/components/error/error.c:22:17: Storage becomes observer
+sources/components/error/error.c: (in function _init_struct)
+sources/components/error/error.c:35:3:
+    Unqualified storage msg_error[i] assigned to implicitly only:
+    errors[i].msg = msg_error[i]
+sources/components/error/error.c: (in function __init_error__)
+sources/components/error/error.c:45:19:
+    Passed storage msg_error not completely defined (*msg_error is undefined):
+    _init_msg_error_ (msg_error)
+sources/components/error/error.c: (in function ft_perror)
+sources/components/error/error.c:53:16:
+    New fresh storage (type char *) passed as implicitly temp (not released):
+    ft_strerror(errors, errno)
+sources/components/error/error.c: (in function ft_strerror)
+sources/components/error/error.c:63:25:
+    Released storage errors[].msg reachable from parameter at return point
+  Memory is used after it has been released (either by passing as an only param
+  or assigning to an only global). (Use -usereleased to inhibit warning)
+   sources/components/error/error.c:63:9: Storage errors[].msg released
+sources/components/error/clear_ats.c: (in function clear_heredoc_queue)
+sources/components/error/clear_ats.c:23:3: Return value (type int) ignored:
+                                              unlink(heredoc->...
+sources/components/error/clear_ats.c:26:7:
+    Implicitly temp storage content passed as only param (heredoc aliases
+    content): free (heredoc)
+sources/components/error/clear_ats.c: (in function clear_redir_queue)
+sources/components/error/clear_ats.c:35:7:
+    Implicitly temp storage content passed as only param (redir aliases
+    content): free (redir)
+sources/components/error/clear_ats.c: (in function clear_pipe_queue)
+sources/components/error/clear_ats.c:43:7:
+    Implicitly temp storage content passed as only param (pipe aliases
+    content): free (pipe)
+sources/components/error/clear_ats.c: (in function clear_else)
+sources/components/error/clear_ats.c:48:6:
+    Left operand of && is non-boolean (int):
+    flag & 0x20 && ats->queue_pipe != NULL
+sources/components/error/clear_ats.c:51:3:
+    Implicitly only storage ats->queue_pipe (type t_queue *) not released
+    before assignment: ats->queue_pipe = NULL
+sources/components/error/clear_ats.c:53:6:
+    Left operand of && is non-boolean (int): flag & 0x04 && ats->env != NULL
+sources/components/error/clear_ats.c:56:3:
+    Implicitly only storage ats->env (type t_list *) not released before
+    assignment: ats->env = NULL
+sources/components/error/clear_ats.c:58:6:
+    Left operand of && is non-boolean (int): flag & 0x40 && ats->uname != NULL
+sources/components/error/clear_ats.c:63:6:
+    Left operand of && is non-boolean (int): flag & 0x80 && ats->path != NULL
+sources/components/error/clear_ats.c:68:2:
+    Function returns with null storage derivable from parameter ats->queue_pipe
+   sources/components/error/clear_ats.c:51:21:
+   Storage ats->queue_pipe becomes null
+sources/components/error/clear_ats.c:68:2:
+    Function returns with null storage derivable from parameter ats->env
+   sources/components/error/clear_ats.c:56:14: Storage ats->env becomes null
+sources/components/error/clear_ats.c:68:2:
+    Function returns with null storage derivable from parameter ats->uname
+   sources/components/error/clear_ats.c:61:16: Storage ats->uname becomes null
+sources/components/error/clear_ats.c:68:2:
+    Function returns with null storage derivable from parameter ats->path
+   sources/components/error/clear_ats.c:66:15: Storage ats->path becomes null
+sources/components/error/clear_ats.c: (in function clear_ats)
+sources/components/error/clear_ats.c:72:6:
+    Left operand of && is non-boolean (int): flag & 0x10 && ats->root != NULL
+sources/components/error/clear_ats.c:75:3:
+    Implicitly only storage ats->root (type t_ats *) not released before
+    assignment: ats->root = NULL
+sources/components/error/clear_ats.c:77:6:
+    Left operand of && is non-boolean (int): flag & 0x08 && ats->prompt != NULL
+sources/components/error/clear_ats.c:82:6:
+    Left operand of && is non-boolean (int):
+    flag & 0x01 && ats->queue_redir != NULL
+sources/components/error/clear_ats.c:85:3:
+    Implicitly only storage ats->queue_redir (type t_queue *) not released
+    before assignment: ats->queue_redir = NULL
+sources/components/error/clear_ats.c:87:6:
+    Left operand of && is non-boolean (int):
+    flag & 0x02 && ats->queue_heredoc != NULL
+sources/components/error/clear_ats.c:90:3:
+    Implicitly only storage ats->queue_heredoc (type t_queue *) not released
+    before assignment: ats->queue_heredoc = NULL
+sources/components/error/clear_ats.c:92:13:
+    Null storage ats->root derivable from parameter clear_else (ats, ...)
+sources/components/error/clear_ats.c:92:13:
+    Null storage ats->prompt derivable from parameter clear_else (ats, ...)
+sources/components/error/clear_ats.c:92:13:
+    Null storage ats->queue_redir derivable from parameter clear_else (ats,
+    ...)
+sources/components/error/clear_ats.c:92:13:
+    Null storage ats->queue_heredoc derivable from parameter clear_else (ats,
+    ...)
+sources/components/error/clear_ats.c:93:2:
+    Function returns with null storage derivable from parameter ats->root
+   sources/components/error/clear_ats.c:75:15: Storage ats->root becomes null
+sources/components/error/clear_ats.c:93:2:
+    Function returns with null storage derivable from parameter ats->prompt
+   sources/components/error/clear_ats.c:80:17: Storage ats->prompt becomes null
+sources/components/error/clear_ats.c:93:2:
+    Function returns with null storage derivable from parameter
+    ats->queue_redir
+   sources/components/error/clear_ats.c:85:22:
+   Storage ats->queue_redir becomes null
+sources/components/error/clear_ats.c:93:2:
+    Function returns with null storage derivable from parameter
+    ats->queue_heredoc
+   sources/components/error/clear_ats.c:90:24:
+   Storage ats->queue_heredoc becomes null
+sources/components/error/free.c: (in function free_data_tree)
+sources/components/error/free.c:24:7:
+    Implicitly temp storage content passed as only param (data aliases
+    content): free (data)
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+sources/components/history/handle_history.c: (in function ft_add_history)
+sources/components/history/handle_history.c:31:2:
+    Return value (type ssize_t) ignored: write(fd, "\n", 1)
+sources/components/history/handle_history.c: (in function open_history)
+sources/components/history/handle_history.c:42:2:
+    Observer storage assigned to unqualified reference: path_atom[0] = "/home/"
+   sources/components/history/handle_history.c:42:17: Storage becomes observer
+sources/components/history/handle_history.c:44:2:
+    Observer storage assigned to unqualified reference: path_atom[2] = "/"
+   sources/components/history/handle_history.c:44:17: Storage becomes observer
+sources/components/history/handle_history.c:51:19: Unrecognized identifier:
+                                                      EBADFD
+sources/components/history/handle_history.c: (in function get_history)
+sources/components/history/handle_history.c:59:9:
+    Test expression for while not boolean, type int: 1
+  Test expression type is not boolean or int. (Use -predboolint to inhibit
+  warning)
+sources/components/redirection/heredoc.c: (in function stop_heredoc)
+sources/components/redirection/heredoc.c:36:8:
+    Implicitly temp storage line passed as only param: free (line)
+sources/components/redirection/heredoc.c: (in function open_heredoc)
+sources/components/redirection/heredoc.c:66:2: Return value (type int) ignored:
+                                                  dup2(stdin_fd, 0)
+sources/components/redirection/heredoc.c: (in function create_enqueue_heredoc)
+sources/components/redirection/heredoc.c:78:41:
+    New fresh storage (type char *) passed as implicitly temp (not released):
+    ft_itoa(id)
+sources/components/redirection/heredoc.c:85:2:
+    Implicitly temp storage delimiter assigned to implicitly only:
+    heredoc->delimiter = delimiter
+sources/components/redirection/heredoc.c:90:8:
+    Only storage heredoc->delimiter (type char *) derived from released storage
+    is not released (memory leak): heredoc
+sources/components/redirection/heredoc.c:95:27:
+    Fresh storage heredoc not released before return
+   sources/components/redirection/heredoc.c:77:2: Fresh storage heredoc created
+sources/components/redirection/heredoc.c:97:39:
+    Fresh storage heredoc not released before return
+   sources/components/redirection/heredoc.c:77:2: Fresh storage heredoc created
+sources/components/redirection/heredoc.c: (in function handle_heredoc)
+sources/components/redirection/heredoc.c:111:9:
+    Test expression for while not boolean, type char: prompt[i]
+  Test expression type is not boolean. (Use -predboolothers to inhibit warning)
+sources/components/redirection/heredoc.c:113:7:
+    Operands of == have incompatible types (int, boolean):
+    is_quote(prompt[i]) == true
+  To make bool and int types equivalent, use +boolint.
+sources/components/redirection/heredoc.c:118:28:
+    Incompatible types for == (int, boolean):
+    ft_iswhitespace(prompt[i + j]) == false
+sources/components/redirection/heredoc.c:118:11:
+    Left operand of && is non-boolean (char):
+    prompt[i + j] && ft_iswhitespace(prompt[i + j]) == false
+sources/components/redirection/heredoc.c:120:40:
+    Function ft_strndup expects arg 2 to be size_t gets int: j
+sources/components/redirection/heredoc.c:121:4:
+    Return value (type int) ignored: create_enqueue_h...
+sources/components/redirection/open_redir.c: (in function open_redirs_pipe)
+sources/components/redirection/open_redir.c:20:2:
+    Return value (type int) ignored: open_redirs_pipe...
+sources/components/redirection/open_redir.c: (in function expand_redir)
+sources/components/redirection/open_redir.c:45:47:
+    Function ft_strchr expects arg 2 to be int gets char: '~'
+  A character constant is used as an int. Use +charintliteral to allow
+  character constants to be used as ints.  (This is safe since the actual type
+  of a char constant is int.)
+sources/components/redirection/open_redir.c:46:3:
+    Implicitly only storage node->file_name (type char *) not released before
+    assignment: node->file_name = (void *)handle_tilde(node->file_name,
+    core_data->uname)
+sources/components/redirection/open_redir.c:48:47:
+    Function ft_strchr expects arg 2 to be int gets char: '$'
+sources/components/redirection/open_redir.c:49:3:
+    Implicitly only storage node->file_name (type char *) not released before
+    assignment: node->file_name = (void *)handle_env(core_data,
+    node->file_name)
+sources/components/redirection/open_redir.c: (in function open_redir)
+sources/components/redirection/open_redir.c:79:21:
+    Fresh storage node_redir not released before return
+   sources/components/redirection/open_redir.c:65:3:
+   Fresh storage node_redir created
+sources/components/redirection/redir_utils.c: (in function open_redir_out)
+sources/components/redirection/redir_utils.c:29:2:
+    Return value (type int) ignored: dup2(fd, 1)
+sources/components/redirection/redir_utils.c:30:2:
+    Return value (type int) ignored: close(fd)
+sources/components/redirection/redir_utils.c: (in function open_redir_in)
+sources/components/redirection/redir_utils.c:47:2:
+    Return value (type int) ignored: dup2(fd, 0)
+sources/components/redirection/redir_utils.c:48:2:
+    Return value (type int) ignored: close(fd)
+sources/components/redirection/redir_utils.c: (in function open_redir_append)
+sources/components/redirection/redir_utils.c:64:2:
+    Return value (type int) ignored: dup2(fd, 1)
+sources/components/redirection/redir_utils.c:65:2:
+    Return value (type int) ignored: close(fd)
+sources/components/redirection/redir_utils.c: (in function open_redir_heredoc)
+sources/components/redirection/redir_utils.c:76:16:
+    Fresh storage heredoc not released before return
+   sources/components/redirection/redir_utils.c:74:2:
+   Fresh storage heredoc created
+sources/components/redirection/redir_utils.c:79:16:
+    Fresh storage heredoc not released before return
+   sources/components/redirection/redir_utils.c:74:2:
+   Fresh storage heredoc created
+sources/components/redirection/redir_utils.c:80:2:
+    Return value (type int) ignored: dup2(fd, 0)
+sources/components/redirection/redir_utils.c:81:2:
+    Return value (type int) ignored: close(fd)
+sources/components/redirection/redir_utils.c:82:2:
+    Return value (type int) ignored: unlink(heredoc->...
+sources/components/redirection/redir_utils.c:83:13:
+    Fresh storage heredoc not released before return
+   sources/components/redirection/redir_utils.c:74:2:
+   Fresh storage heredoc created
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+sources/components/signal/signal.c: (in function sigint_handler)
+sources/components/signal/signal.c:26:2: Return value (type ssize_t) ignored:
+                                            write(1, "\n", 1)
+sources/components/signal/signal.c:28:2: Return value (type int) ignored:
+                                            close(0)
+sources/components/signal/signal.c:30:2: Return value (type int) ignored:
+                                            rl_on_new_line()
+sources/components/signal/signal.c: (in function sigquit_handler)
+sources/components/signal/signal.c:36:2: Return value (type ssize_t) ignored:
+                                            write(1, "\n", 1)
+sources/components/signal/signal.c:37:2: Return value (type int) ignored:
+                                            rl_on_new_line()
+sources/components/signal/signal.c: (in function init_signal)
+sources/components/signal/signal.c:42:9: Unrecognized identifier: SIGQUIT
+sources/components/signal/signal.c:42:2:
+    Return value (type [function (int) returns void]) ignored:
+    signal(SIGQUIT, ...
+sources/components/signal/signal.c:43:2:
+    Return value (type [function (int) returns void]) ignored:
+    signal(SIGINT, s...
+sources/builtins/bin_cd.c: (in function spec_token)
+sources/builtins/bin_cd.c:25:10: Null storage returned as non-null: (NULL)
+sources/builtins/bin_cd.c:32:10: Null storage returned as non-null: (NULL)
+sources/builtins/bin_cd.c: (in function oldpwd_token)
+sources/builtins/bin_cd.c:45:10: Null storage returned as non-null: (NULL)
+sources/builtins/bin_cd.c: (in function set_pwds)
+sources/builtins/bin_cd.c:56:15: Null storage passed as non-null param:
+                                    getcwd (NULL, ...)
+sources/builtins/bin_cd.c:66:18: Fresh storage oldpwd not released before
+                                    return
+   sources/builtins/bin_cd.c:55:2: Fresh storage oldpwd created
+sources/builtins/bin_cd.c:68:13: Fresh storage pwd not released before return
+   sources/builtins/bin_cd.c:56:2: Fresh storage pwd created
+sources/builtins/bin_cd.c:68:13: Fresh storage oldpwd not released before
+                                    return
+   sources/builtins/bin_cd.c:55:2: Fresh storage oldpwd created
+sources/builtins/bin_cd.c: (in function get_chdir_path)
+sources/builtins/bin_cd.c:79:11: Null storage returned as non-null: (NULL)
+sources/builtins/bin_cd.c:81:11: Left operand of && is non-boolean (char *):
+                                    args[1] && ft_strncmp(args[1], "-", 2) == 0
+sources/builtins/bin_cd.c:85:11: Null storage returned as non-null: (NULL)
+sources/builtins/bin_cd.c:91:11: Null storage returned as non-null: (NULL)
+sources/builtins/bin_cd.c: (in function ms_cd)
+sources/builtins/bin_cd.c:108:18: Fresh storage chdir_path not released before
+                                     return
+   sources/builtins/bin_cd.c:100:2: Fresh storage chdir_path created
+sources/builtins/bin_echo.c: (in function print_arg)
+sources/builtins/bin_echo.c:46:4: Return value (type ssize_t) ignored:
+                                     write(1, " ", 1)
+sources/builtins/bin_echo.c: (in function ms_echo)
+sources/builtins/bin_echo.c:55:2: Statement has no effect: (void)envp
+sources/builtins/bin_echo.c:56:2: Statement has no effect: (void)errors
+sources/builtins/bin_echo.c:60:3: Return value (type ssize_t) ignored:
+                                     write(1, "\n", 1)
+sources/builtins/bin_env.c: (in function ms_env)
+sources/builtins/bin_env.c:22:2: Statement has no effect: (void)args
+sources/builtins/bin_env.c:23:2: Statement has no effect: (void)errors
+sources/builtins/bin_exit.c: (in function ms_exit)
+sources/builtins/bin_exit.c:18:2: Statement has no effect: (void)envp
+sources/builtins/bin_exit.c:19:2: Statement has no effect: (void)args
+sources/builtins/bin_exit.c:20:2: Statement has no effect: (void)errors
+sources/builtins/bin_export.c: (in function is_valid_name)
+sources/builtins/bin_export.c:19:9: Operands of && are non-booleans (char *,
+                                       char): name && *name
+sources/builtins/bin_export.c: (in function ms_export)
+sources/builtins/bin_export.c:38:10: Left operand of && is non-boolean (char):
+                                        args[i][j] && args[i][j] != '='
+sources/builtins/bin_export.c:40:32: Function ft_substr expects arg 3 to be
+                                        size_t gets int: j
+sources/builtins/bin_export.c:50:3: Return value (type int) ignored:
+                                       ms_setenv(envp, ...
+sources/builtins/bin_export.c:53:24: Fresh storage name not released before
+                                        return
+   sources/builtins/bin_export.c:40:3: Fresh storage name created
+sources/builtins/bin_pwd.c: (in function ms_pwd)
+sources/builtins/bin_pwd.c:19:2: Statement has no effect: (void)errors
+sources/builtins/bin_pwd.c:20:2: Statement has no effect: (void)args
+sources/builtins/bin_pwd.c:21:2: Statement has no effect: (void)envp
+sources/builtins/bin_pwd.c:22:15: Null storage passed as non-null param:
+                                     getcwd (NULL, ...)
+sources/builtins/bin_unset.c: (in function ms_unset)
+sources/builtins/bin_unset.c:18:2: Statement has no effect: (void)errors
+sources/builtins/bin_unset.c:22:3: Return value (type int) ignored:
+                                      ms_unsetenv(envp...
+sources/builtins/builtins.c: (in function exec_builtin)
+sources/builtins/builtins.c:34:16: Passed storage *builtins contains 2
+                                      undefined fields: name, func
+sources/builtins/builtins.c: (in function is_builtin)
+sources/builtins/builtins.c:58:16: Passed storage *builtins contains 2
+                                      undefined fields: name, func
+sources/parser/parser.c: (in function parse_prompt)
+sources/parser/parser.c:25:6: Use of == with boolean variables (risks
+    inconsistency because of multiple true values): check_arg == true
+  Two bool values are compared directly using a C primitive. This may produce
+  unexpected results since all non-zero values are considered true, so
+  different true values may not be equal. The file bool.h (included in
+  splint/lib) provides bool_equal for safe bool comparisons. (Use -boolcompare
+  to inhibit warning)
+sources/parser/is_type.c: (in function is_parenthesis)
+sources/parser/is_type.c:19:10: Return value type boolean does not match
+                                   declared type int: (true)
+sources/parser/is_type.c: (in function is_pipe)
+sources/parser/is_type.c:28:10: Return value type boolean does not match
+                                   declared type int: (true)
+sources/parser/is_type.c: (in function is_operator)
+sources/parser/is_type.c:37:10: Return value type boolean does not match
+                                   declared type int: (true)
+sources/parser/is_type.c:41:10: Return value type boolean does not match
+                                   declared type int: (true)
+sources/parser/is_type.c: (in function is_quote)
+sources/parser/is_type.c:50:10: Return value type boolean does not match
+                                   declared type int: (true)
+sources/parser/is_type2.c: (in function is_subshell)
+sources/parser/is_type2.c:20:9: Left operand of && is non-boolean (char):
+                                   cmd[i] && i < size_cmd
+sources/parser/is_type2.c:22:7: Operands of == have incompatible types (int,
+                                   boolean): is_quote(cmd[i]) == true
+sources/parser/is_type2.c: (in function is_pipeline)
+sources/parser/is_type2.c:39:9: Test expression for while not boolean, type
+                                   char: prompt[i]
+sources/parser/is_type2.c:41:7: Operands of == have incompatible types (int,
+                                   boolean): is_pipe(prompt + i) == true
+sources/parser/is_type2.c:43:7: Operands of == have incompatible types (int,
+                                   boolean): is_operator(prompt + i) == true
+sources/parser/is_type2.c: (in function valid_env_char)
+sources/parser/is_type2.c:57:17: Function ft_isalnum expects arg 1 to be int
+                                    gets char: c
+  To make char and int types equivalent, use +charint.
+sources/parser/is_type2.c:57:6: Operands of == have incompatible types (int,
+                                   boolean): ft_isalnum(c) == true
+sources/parser/place_cursor.c: (in function place_cursor_parenthesis)
+sources/parser/place_cursor.c:21:9: Left operand of && is non-boolean (char):
+                                       prompt[index] && parenthesis != 0
+sources/parser/place_cursor.c: (in function place_cursor_quote)
+sources/parser/place_cursor.c:45:9: Left operand of && is non-boolean (char):
+                                       prompt[i] && prompt[i] != c
+sources/parser/place_cursor.c: (in function skip_quote_parenthesis)
+sources/parser/place_cursor.c:62:6: Operands of == have incompatible types
+    (int, boolean): is_quote(prompt[index]) == true
+sources/parser/place_cursor.c: (in function place_cursor_before_prefix)
+sources/parser/place_cursor.c:71:9: Incompatible types for == (int, boolean):
+                                       ft_iswhitespace(prompt[index]) == false
+includes/parser.h:122:8: Function place_cursor_quote defined more than once
+  A function or variable is redefined. One of the declarations should use
+  extern. (Use -redef to inhibit warning)
+   sources/parser/place_cursor.c:48:1:
+   Previous definition of place_cursor_quote
+sources/parser/place_cursor2.c: (in function skip_single_quote)
+sources/parser/place_cursor2.c:18:9: Left operand of && is non-boolean (char):
+                                        str[i] && str[i] != '\''
+sources/parser/atomize/atomizer.c: (in function add_queue_pipe)
+sources/parser/atomize/atomizer.c:24:11:
+    Passed storage data->pipe_fd not completely defined (*(data->pipe_fd) is
+    undefined): pipe (data->pipe_fd)
+sources/parser/atomize/atomizer.c:30:13:
+    Fresh storage data not released before return
+   sources/parser/atomize/atomizer.c:20:2: Fresh storage data created
+sources/parser/atomize/atomizer.c: (in function copy_cmd_pipe)
+sources/parser/atomize/atomizer.c:42:2: Return value (type int) ignored:
+                                           add_queue_pipe(a...
+sources/parser/atomize/atomizer.c:44:13:
+    Fresh storage data not released before return
+   sources/parser/atomize/atomizer.c:37:2: Fresh storage data created
+sources/parser/atomize/atomizer.c: (in function atomize_pipeline)
+sources/parser/atomize/atomizer.c:57:9:
+    Test expression for while not boolean, type char: ats->prompt[i_read]
+sources/parser/atomize/atomizer.c:60:7:
+    Operands of == have incompatible types (int, boolean):
+    is_pipe(ats->prompt + i_read) == true
+sources/parser/atomize/atomizer.c:73:13:
+    Fresh storage data not released before return
+   sources/parser/atomize/atomizer.c:69:2: Fresh storage data created
+sources/parser/atomize/atomizer.c: (in function atomize_prompt)
+sources/parser/atomize/atomizer.c:88:9:
+    Test expression for while not boolean, type char: core_data->prompt[i_read]
+sources/parser/atomize/atomizer.c:91:7:
+    Operands of == have incompatible types (int, boolean):
+    is_operator(core_data->prompt + i_read) == true
+sources/parser/atomize/atomizer_copy.c: (in function copy_whitout_parenthesis)
+sources/parser/atomize/atomizer_copy.c:22:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/atomize/atomizer_copy.c:23:7:
+    Implicitly temp storage cmd passed as only param: free (cmd)
+sources/parser/atomize/atomizer_copy.c:28:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/atomize/atomizer_copy.c:28:17:
+    Fresh storage tmp not released before return
+   sources/parser/atomize/atomizer_copy.c:20:2: Fresh storage tmp created
+sources/parser/atomize/atomizer_copy.c: (in function init_node)
+sources/parser/atomize/atomizer_copy.c:39:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/atomize/atomizer_copy.c:45:10:
+    Null storage returned as non-null: (free(data), NULL)
+sources/parser/atomize/atomizer_copy.c:50:9:
+    Returned storage *data contains 1 undefined field: nb_redir
+sources/parser/atomize/atomizer_copy.c: (in function copy_insert_node)
+sources/parser/atomize/atomizer_copy.c:59:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/atomize/atomizer_copy.c:61:16:
+    Only storage data->cmd (type char *) derived from released storage is not
+    released (memory leak): data
+sources/parser/atomize/atomizer_copy.c:61:10:
+    Null storage returned as non-null: (free(data), NULL)
+sources/parser/atomize/atomizer_copy.c: (in function copy_cmd_operator)
+sources/parser/atomize/atomizer_copy.c:73:16:
+    Only storage data->cmd (type char *) derived from released storage is not
+    released (memory leak): data
+sources/parser/atomize/atomizer_copy.c:76:2:
+    Fresh storage data (type t_token *) not released before assignment:
+    data = copy_token(core, core->prompt + *i_copy, *i_read - *i_copy)
+   sources/parser/atomize/atomizer_copy.c:69:2: Fresh storage data created
+sources/parser/atomize/atomizer_copy.c:80:16:
+    Only storage data->cmd (type char *) derived from released storage is not
+    released (memory leak): data
+sources/parser/atomize/atomizer_copy.c:86:13:
+    Fresh storage data not released before return
+   sources/parser/atomize/atomizer_copy.c:76:2: Fresh storage data created
+sources/parser/atomize/atomizer_copy.c: (in function copy_token)
+sources/parser/atomize/atomizer_copy.c:99:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/atomize/atomizer_copy.c:103:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/atomize/atomizer_copy.c:103:17:
+    Fresh storage prompt_copy not released before return
+   sources/parser/atomize/atomizer_copy.c:97:2:
+   Fresh storage prompt_copy created
+sources/parser/atomize/atomizer_copy.c:109:17:
+    Fresh storage prompt_copy not released before return
+   sources/parser/atomize/atomizer_copy.c:97:2:
+   Fresh storage prompt_copy created
+sources/parser/atomize/bin_tree.c: (in function create_node)
+sources/parser/atomize/bin_tree.c:22:10: Null storage returned as non-null:
+                                            (NULL)
+sources/parser/atomize/bin_tree.c:23:2:
+    Implicitly temp storage data assigned to implicitly only: node->data = data
+sources/parser/atomize/bin_tree.c:26:9:
+    Null storage node->left derivable from return value: (node)
+   sources/parser/atomize/bin_tree.c:24:15: Storage node->left becomes null
+sources/parser/atomize/bin_tree.c:26:9:
+    Null storage node->right derivable from return value: (node)
+   sources/parser/atomize/bin_tree.c:25:16: Storage node->right becomes null
+sources/parser/atomize/bin_tree.c: (in function insert_node)
+sources/parser/atomize/bin_tree.c:67:3:
+    Implicitly only storage node->left (type struct s_ats *) not released
+    before assignment: node->left = (*root)
+sources/parser/atomize/bin_tree.c:67:3:
+    Unqualified storage (*root) assigned to implicitly only:
+    node->left = (*root)
+sources/parser/atomize/bin_tree.c:70:13:
+    Fresh storage node not released before return
+   sources/parser/atomize/bin_tree.c:64:3: Fresh storage node created
+sources/parser/atomize/bin_tree.c:70:13:
+    Storage *root reachable from parameter is kept (should be unqualified)
+   sources/parser/atomize/bin_tree.c:67:3: Storage *root becomes kept
+sources/parser/atomize/bin_tree.c: (in function clear_tree)
+sources/parser/atomize/bin_tree.c:79:2: Statement has no effect:
+                                           free_data(root->...
+sources/parser/atomize/bin_tree.c:80:7:
+    Only storage root->data (type t_token *) derived from released storage is
+    not released (memory leak): root
+sources/parser/atomize/bin_tree.c:80:7:
+    Only storage root->left (type struct s_ats *) derived from released storage
+    is not released (memory leak): root
+sources/parser/atomize/bin_tree.c:80:7:
+    Only storage root->right (type struct s_ats *) derived from released
+    storage is not released (memory leak): root
+sources/parser/atomize/bin_tree.c:80:7:
+    Implicitly temp storage root passed as only param: free (root)
+sources/parser/atomize/take_redir.c: (in function add_queue)
+sources/parser/atomize/take_redir.c:37:9:
+    Left operand of && is non-boolean (char):
+    prompt[i + j] && i + j < size_prompt
+sources/parser/atomize/take_redir.c:38:6:
+    Incompatible types for == (int, boolean):
+    ft_iswhitespace(prompt[i + j]) == false
+sources/parser/atomize/take_redir.c:41:43:
+    Function ft_strndup expects arg 2 to be size_t gets int: j
+sources/parser/atomize/take_redir.c:42:17:
+    Fresh storage data not released before return
+   sources/parser/atomize/take_redir.c:25:2: Fresh storage data created
+sources/parser/atomize/take_redir.c: (in function check_quote_parenthesis)
+sources/parser/atomize/take_redir.c:47:6:
+    Operands of == have incompatible types (int, boolean): is_quote(c) == true
+sources/parser/atomize/take_redir.c: (in function take_redir)
+sources/parser/atomize/take_redir.c:67:9:
+    Operands of && are non-booleans (char *, char): new_prompt && prompt[i]
+sources/parser/atomize/take_redir.c:79:9:
+    Null storage new_prompt returned as non-null: (new_prompt)
+   sources/parser/atomize/take_redir.c:66:15: Storage new_prompt becomes null
+sources/parser/late_parser/late_parser.c: (in function split_arg)
+sources/parser/late_parser/late_parser.c:24:9:
+    Test expression for while not boolean, type char: prompt[i]
+sources/parser/late_parser/late_parser.c:30:41:
+    Function ft_strndup expects arg 2 to be size_t gets int: len
+sources/parser/late_parser/late_parser.c:32:12:
+    Null storage returned as non-null: (NULL)
+sources/parser/late_parser/late_parser.c:33:19:
+    Null storage args_lst derivable from parameter ft_lstadd_back (&args_lst,
+    ...)
+   sources/parser/late_parser/late_parser.c:23:13:
+   Storage args_lst becomes null
+sources/parser/late_parser/late_parser.c:33:30:
+    New fresh storage (type t_list *) passed as implicitly temp (not released):
+    ft_lstnew(copy_prompt)
+sources/parser/late_parser/late_parser.c:37:9:
+    Null storage args_lst returned as non-null: (args_lst)
+   sources/parser/late_parser/late_parser.c:23:13:
+   Storage args_lst becomes null
+sources/parser/late_parser/late_parser.c:37:20:
+    Fresh storage copy_prompt not released before return
+   sources/parser/late_parser/late_parser.c:30:4:
+   Fresh storage copy_prompt created
+sources/parser/late_parser/late_parser.c: (in function late_parser)
+sources/parser/late_parser/late_parser.c:48:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/late_parser/late_parser.c:49:2: Return value (type int) ignored:
+                                                  expansion_cmd(co...
+sources/parser/late_parser/late_parser.c:51:20:
+    Fresh storage lst_args not released before return
+   sources/parser/late_parser/late_parser.c:46:2:
+   Fresh storage lst_args created
+sources/parser/late_parser/alloc_tab.c: (in function list_to_tab)
+sources/parser/late_parser/alloc_tab.c:24:18:
+    Function ft_calloc expects arg 1 to be size_t gets int:
+    ft_lstsize(*lst) + 1
+sources/parser/late_parser/alloc_tab.c:26:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/late_parser/count_utils.c: (in function count_words_without_quote)
+sources/parser/late_parser/count_utils.c:17:22:
+    Incompatible types for == (int, boolean):
+    ft_iswhitespace(prompt[i]) == false
+sources/parser/late_parser/count_utils.c:17:9:
+    Left operand of && is non-boolean (char):
+    prompt[i] && ft_iswhitespace(prompt[i]) == false
+sources/parser/late_parser/count_utils.c:19:7:
+    Operands of == have incompatible types (int, boolean):
+    is_quote(prompt[i]) == true
+sources/parser/late_parser/count_utils.c: (in function count_words)
+sources/parser/late_parser/count_utils.c:39:7:
+    Operands of == have incompatible types (int, boolean):
+    is_quote(prompt[i]) == true
+sources/parser/late_parser/count_utils.c:43:28:
+    Operands of == have incompatible types (int, boolean):
+    ft_iswhitespace(prompt[i]) == true
+sources/parser/late_parser/count_utils.c: (in function count_letters)
+sources/parser/late_parser/count_utils.c:54:9:
+    Test expression for while not boolean, type char: start_word[i]
+sources/parser/late_parser/count_utils.c:56:7:
+    Operands of == have incompatible types (int, boolean):
+    ft_iswhitespace(start_word[i]) == true
+sources/parser/late_parser/count_utils.c:58:12:
+    Operands of == have incompatible types (int, boolean):
+    is_quote(start_word[i]) == true
+sources/parser/late_parser/clean_quote.c: (in function copy_word_clean)
+sources/parser/late_parser/clean_quote.c:21:2: Assignment of int to char:
+                                                  quote_type = 0
+  Types are incompatible. (Use -type to inhibit warning)
+sources/parser/late_parser/clean_quote.c:24:9:
+    Test expression for while not boolean, type char: word[i]
+sources/parser/late_parser/clean_quote.c:26:7:
+    Operands of == have incompatible types (char, int): quote_type == 0
+sources/parser/late_parser/clean_quote.c:30:4: Assignment of int to char:
+                                                  quote_type = 0
+sources/parser/late_parser/clean_quote.c:33:12:
+    Incompatible types for == (int, boolean): is_quote(word[i]) == false
+sources/parser/late_parser/clean_quote.c:33:42:
+    Operands of != have incompatible types (char, int): quote_type != 0
+sources/parser/late_parser/clean_quote.c: (in function count_quote)
+sources/parser/late_parser/clean_quote.c:46:2: Assignment of int to char:
+                                                  quote_type = 0
+sources/parser/late_parser/clean_quote.c:47:9:
+    Test expression for while not boolean, type char: word[i]
+sources/parser/late_parser/clean_quote.c:49:7:
+    Operands of == have incompatible types (char, int): quote_type == 0
+sources/parser/late_parser/clean_quote.c:54:4: Assignment of int to char:
+                                                  quote_type = 0
+sources/parser/late_parser/clean_quote.c: (in function clean_quote)
+sources/parser/late_parser/clean_quote.c:71:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/late_parser/expansion/expansion.c: (in function handle_all)
+sources/parser/late_parser/expansion/expansion.c:25:9:
+    Test expression for while not boolean, type char: arg[i]
+sources/parser/late_parser/expansion/expansion.c:36:9:
+    Null storage match_files returned as non-null: (match_files)
+   sources/parser/late_parser/expansion/expansion.c:23:16:
+   Storage match_files becomes null
+sources/parser/late_parser/expansion/expansion.c: (in function connect_list)
+sources/parser/late_parser/expansion/expansion.c:49:2:
+    Implicitly temp storage match_files assigned to implicitly only:
+    index_prev->next = match_files
+sources/parser/late_parser/expansion/expansion.c:51:2:
+    Last reference tmp to implicitly only storage index_prev->next not released
+    before return
+   sources/parser/late_parser/expansion/expansion.c:49:2:
+   Original reference lost
+sources/parser/late_parser/expansion/expansion.c: (in function first_expansions)
+sources/parser/late_parser/expansion/expansion.c:55:48:
+    Function ft_strchr expects arg 2 to be int gets char: '~'
+sources/parser/late_parser/expansion/expansion.c:56:3:
+    Implicitly only storage indexer->content (type void *) not released before
+    assignment: indexer->content = (void *)handle_tilde(indexer->content,
+    core_data->uname)
+sources/parser/late_parser/expansion/expansion.c:58:48:
+    Function ft_strchr expects arg 2 to be int gets char: '$'
+sources/parser/late_parser/expansion/expansion.c:59:3:
+    Implicitly only storage indexer->content (type void *) not released before
+    assignment: indexer->content = (void *)handle_env(core_data,
+    indexer->content)
+sources/parser/late_parser/expansion/expansion.c: (in function expansion_cmd)
+sources/parser/late_parser/expansion/expansion.c:75:50:
+    Function ft_strchr expects arg 2 to be int gets char: '*'
+sources/parser/late_parser/expansion/expansion.c:81:19:
+    Null storage index_prev passed as non-null param:
+    connect_list (index_prev, ...)
+   sources/parser/late_parser/expansion/expansion.c:69:15:
+   Storage index_prev becomes null
+sources/parser/late_parser/expansion/env_exp.c: (in function copy_data_env)
+sources/parser/late_parser/expansion/env_exp.c:27:5:
+    New fresh storage (type char *) passed as implicitly temp (not released):
+    ft_itoa(core_data->last_status)
+sources/parser/late_parser/expansion/env_exp.c:28:8:
+    Implicitly temp storage arg passed as only param: free (arg)
+sources/parser/late_parser/expansion/env_exp.c:33:25:
+    Function ft_substr expects arg 2 to be unsigned int gets int: index
+  To ignore signs in type comparisons use +ignoresigns
+sources/parser/late_parser/expansion/env_exp.c:33:32:
+    Function ft_substr expects arg 3 to be size_t gets int: i - index
+sources/parser/late_parser/expansion/env_exp.c:35:10:
+    Implicitly temp storage arg returned as implicitly only: (arg)
+sources/parser/late_parser/expansion/env_exp.c:39:33:
+    Fresh storage env_value not released before return
+   sources/parser/late_parser/expansion/env_exp.c:36:2:
+   Fresh storage env_value created
+sources/parser/late_parser/expansion/env_exp.c:40:7:
+    Implicitly temp storage arg passed as only param: free (arg)
+sources/parser/late_parser/expansion/env_exp.c:42:19:
+    Fresh storage env_value not released before return
+   sources/parser/late_parser/expansion/env_exp.c:36:2:
+   Fresh storage env_value created
+sources/parser/late_parser/expansion/env_exp.c: (in function handle_env)
+sources/parser/late_parser/expansion/env_exp.c:54:9:
+    Test expression for while not boolean, type char: new_arg[i]
+sources/parser/late_parser/expansion/env_exp.c:63:29:
+    Incompatible types for == (int, boolean):
+    ft_iswhitespace(new_arg[i + 1]) == false
+sources/parser/late_parser/expansion/env_exp.c:67:3:
+    Clauses exit with new_arg referencing fresh storage in true branch, local
+    storage in continuation
+  The state of a variable is different depending on which branch is taken. This
+  means no annotation can sensibly be applied to the storage. (Use -branchstate
+  to inhibit warning)
+   sources/parser/late_parser/expansion/env_exp.c:66:4:
+   Fresh storage new_arg created
+sources/parser/late_parser/expansion/env_exp.c:71:9:
+    Implicitly temp storage arg returned as implicitly only (new_arg aliases
+    arg): (new_arg)
+sources/parser/late_parser/expansion/tilde_exp.c: (in function check_tilde)
+sources/parser/late_parser/expansion/tilde_exp.c:18:6:
+    Operands of == have incompatible types (int, boolean):
+    ft_iswhitespace(arg[next_i]) == true
+sources/parser/late_parser/expansion/tilde_exp.c:21:21:
+    Operands of == have incompatible types (int, boolean):
+    ft_iswhitespace(arg[prev_i]) == true
+sources/parser/late_parser/expansion/tilde_exp.c: (in function copy_data_tilde)
+sources/parser/late_parser/expansion/tilde_exp.c:35:10:
+    Implicitly temp storage arg returned as implicitly only: (arg)
+sources/parser/late_parser/expansion/tilde_exp.c:37:7:
+    Implicitly temp storage arg passed as only param: free (arg)
+sources/parser/late_parser/expansion/tilde_exp.c:38:19:
+    Fresh storage home not released before return
+   sources/parser/late_parser/expansion/tilde_exp.c:33:2:
+   Fresh storage home created
+sources/parser/late_parser/expansion/tilde_exp.c: (in function handle_tilde)
+sources/parser/late_parser/expansion/tilde_exp.c:48:9:
+    Test expression for while not boolean, type char: new_arg[i]
+sources/parser/late_parser/expansion/tilde_exp.c:54:3:
+    Clauses exit with new_arg referencing fresh storage in true branch, local
+    storage in continuation
+   sources/parser/late_parser/expansion/tilde_exp.c:53:4:
+   Fresh storage new_arg created
+sources/parser/late_parser/expansion/tilde_exp.c:58:9:
+    Implicitly temp storage arg returned as implicitly only (new_arg aliases
+    arg): (new_arg)
+sources/parser/late_parser/expansion/all_expansion/all_exp.c: (in function find_all_files)
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:31:3:
+    Return value (type int) ignored: closedir(dir)
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:32:16:
+    Fresh storage tmp not released before return
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:28:3:
+   Fresh storage tmp created
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:32:16:
+    Fresh storage dir not released before return
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:23:2:
+   Fresh storage dir created
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:35:16:
+    Fresh storage dir not released before return
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:23:2:
+   Fresh storage dir created
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:36:13:
+    Fresh storage dir not released before return
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:23:2:
+   Fresh storage dir created
+sources/parser/late_parser/expansion/all_expansion/all_exp.c: (in function call_recursion)
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:47:3:
+    Assignment of size_t to int: len = ft_strlen(match_file->prefix)
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:49:28:
+    Possibly null storage match_file passed as non-null param:
+    find_all_files (..., match_file, ...)
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:49:28:
+    Possibly null storage match_file->prefix derivable from parameter
+    find_all_files (..., match_file, ...)
+sources/parser/late_parser/expansion/all_expansion/all_exp.c: (in function rec_all)
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:68:18:
+    Passed storage match_file contains 4 undefined fields:
+    prefix, suffix, path, old_data
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:68:2:
+    Return value (type t_match_file *) ignored: init_match_file(...
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:69:9:
+    Test expression for while not boolean, type char: data[i]
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:74:4:
+    Return value (type t_match_file *) ignored: init_match_file(...
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:76:12:
+    Return expression from function declared void:
+    (no_access_file(stack, list, &match_file))
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:76:55:
+    Only storage match_file.prefix (type char *) derived from variable declared
+    in this scope is not released (memory leak)
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:76:55:
+    Only storage match_file.suffix (type char *) derived from variable declared
+    in this scope is not released (memory leak)
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:76:55:
+    Only storage match_file.path (type char *) derived from variable declared
+    in this scope is not released (memory leak)
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:76:55:
+    Only storage match_file.old_data (type char *) derived from variable
+    declared in this scope is not released (memory leak)
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:85:2:
+    Only storage match_file.old_data (type char *) derived from variable
+    declared in this scope is not released (memory leak)
+sources/parser/late_parser/expansion/all_expansion/all_exp.c: (in function get_all_file)
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:97:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:102:8:
+    Only storage tmp->content (type void *) derived from released storage is
+    not released (memory leak): tmp
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:102:8:
+    Only storage tmp->next (type struct s_list *) derived from released storage
+    is not released (memory leak): tmp
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:103:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:103:17:
+    Fresh storage stack not released before return
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:95:2:
+   Fresh storage stack created
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:107:19:
+    Null storage new_head derivable from parameter ft_lstadd_front (&new_head,
+    ...)
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:94:13:
+   Storage new_head becomes null
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:108:21:
+    Fresh storage tmp not released before return
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:98:2:
+   Fresh storage tmp created
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:108:21:
+    Fresh storage stack not released before return
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:95:2:
+   Fresh storage stack created
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:108:21:
+    Fresh storage start_content not released before return
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:99:2:
+   Fresh storage start_content created
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:110:7:
+    Only storage tmp->content (type void *) derived from released storage is
+    not released (memory leak): tmp
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:110:7:
+    Only storage tmp->next (type struct s_list *) derived from released storage
+    is not released (memory leak): tmp
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:111:17:
+    Null storage new_head derivable from parameter rec_all (..., &new_head)
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:94:13:
+   Storage new_head becomes null
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:113:20:
+    Fresh storage stack not released before return
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:95:2:
+   Fresh storage stack created
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:113:20:
+    Fresh storage start_content not released before return
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:99:2:
+   Fresh storage start_content created
+sources/parser/late_parser/expansion/all_expansion/get_infos.c: (in function get_path_wildcard)
+sources/parser/late_parser/expansion/all_expansion/get_infos.c:27:19:
+    Null storage passed as non-null param: getcwd (NULL, ...)
+sources/parser/late_parser/expansion/all_expansion/get_infos.c:33:25:
+    Function ft_strndup expects arg 2 to be size_t gets int: len + 1
+sources/parser/late_parser/expansion/all_expansion/get_infos.c:35:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/late_parser/expansion/all_expansion/get_infos.c: (in function get_prefix)
+sources/parser/late_parser/expansion/all_expansion/get_infos.c:53:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/late_parser/expansion/all_expansion/get_infos.c:57:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/late_parser/expansion/all_expansion/get_infos.c:58:31:
+    Function ft_strndup expects arg 2 to be size_t gets int: index - i
+sources/parser/late_parser/expansion/all_expansion/get_infos.c:60:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/late_parser/expansion/all_expansion/get_infos.c: (in function get_suffix)
+sources/parser/late_parser/expansion/all_expansion/get_infos.c:73:39:
+    Function ft_strndup expects arg 2 to be size_t gets int: i - index
+sources/parser/late_parser/expansion/all_expansion/get_infos.c:75:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/late_parser/expansion/all_expansion/get_infos.c: (in function get_token)
+sources/parser/late_parser/expansion/all_expansion/get_infos.c:92:3:
+    Assignment of size_t to int: len_prefix = ft_strlen(prefix)
+sources/parser/late_parser/expansion/all_expansion/get_infos.c:94:3:
+    Assignment of size_t to int: len_suffix = ft_strlen(suffix)
+sources/parser/late_parser/expansion/all_expansion/get_infos.c:95:18:
+    Function ft_calloc expects arg 1 to be size_t gets int:
+    len_prefix + len_suffix + 2
+sources/parser/late_parser/expansion/all_expansion/get_infos.c:97:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/late_parser/expansion/all_expansion/get_infos.c:99:14:
+    Index of possibly null pointer prefix: prefix
+  A possibly null pointer is dereferenced.  Value is either the result of a
+  function which may return null (in which case, code should check it is not
+  null), or a global, parameter or structure field declared with the null
+  qualifier. (Use -nullderef to inhibit warning)
+sources/parser/late_parser/expansion/all_expansion/get_infos.c:103:14:
+    Index of possibly null pointer suffix: suffix
+sources/parser/late_parser/expansion/all_expansion/find_files.c: (in function get_replace_token)
+sources/parser/late_parser/expansion/all_expansion/find_files.c:36:2:
+    Implicitly only storage match_file->old_data (type char *) not released
+    before assignment: match_file->old_data = (char *)d_pop_stk(stack)
+sources/parser/late_parser/expansion/all_expansion/find_files.c:39:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/late_parser/expansion/all_expansion/find_files.c:43:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/late_parser/expansion/all_expansion/find_files.c: (in function find_and_push)
+sources/parser/late_parser/expansion/all_expansion/find_files.c:67:22:
+    New fresh storage (type char *) passed as implicitly temp (not released):
+    ft_insert_str(match_file->old_data, entry->d_name, token, i)
+sources/parser/late_parser/expansion/all_expansion/find_files.c:67:4:
+    Return value (type int) ignored: d_push_stk(stack...
+sources/parser/late_parser/expansion/all_expansion/find_files.c:71:7:
+    Unallocated storage suffix_tmp passed as out parameter: suffix_tmp
+sources/parser/late_parser/expansion/all_expansion/find_files.c:72:34:
+    Fresh storage entry not released before return
+   sources/parser/late_parser/expansion/all_expansion/find_files.c:61:3:
+   Fresh storage entry created
+sources/parser/late_parser/expansion/all_expansion/find_files.c: (in function get_last_suffix)
+sources/parser/late_parser/expansion/all_expansion/find_files.c:80:2:
+    Assignment of size_t to int: len_suff = ft_strlen(suffix + j)
+sources/parser/late_parser/expansion/all_expansion/find_files.c:83:29:
+    Function ft_strchr expects arg 2 to be int gets char: '/'
+sources/parser/late_parser/expansion/all_expansion/find_files.c:90:66:
+    Fresh storage suffix_dir not released before return
+   sources/parser/late_parser/expansion/all_expansion/find_files.c:85:4:
+   Fresh storage suffix_dir created
+sources/parser/late_parser/expansion/all_expansion/find_files.c:94:48:
+    Null storage passed as non-null param: verif_suffix_ptr (..., NULL, ...)
+sources/parser/late_parser/expansion/all_expansion/find_files.c:96:17:
+    Fresh storage suffix_dir not released before return
+   sources/parser/late_parser/expansion/all_expansion/find_files.c:85:4:
+   Fresh storage suffix_dir created
+sources/parser/late_parser/expansion/all_expansion/find_files.c: (in function final_decision)
+sources/parser/late_parser/expansion/all_expansion/find_files.c:113:29:
+    Function ft_strchr expects arg 2 to be int gets char: '*'
+sources/parser/late_parser/expansion/all_expansion/find_files.c:117:40:
+    Function ft_strndup expects arg 2 to be size_t gets int: j - start
+sources/parser/late_parser/expansion/all_expansion/find_files.c:121:19:
+    Fresh storage to_find not released before return
+   sources/parser/late_parser/expansion/all_expansion/find_files.c:117:3:
+   Fresh storage to_find created
+sources/parser/late_parser/expansion/all_expansion/find_files.c:122:3:
+    Assignment of arbitrary unsigned integral type to int:
+    i = ft_findstr(entry, to_find, i) + ft_strlen(to_find)
+sources/parser/late_parser/expansion/all_expansion/find_files.c:125:16:
+    Fresh storage to_find not released before return
+   sources/parser/late_parser/expansion/all_expansion/find_files.c:117:3:
+   Fresh storage to_find created
+sources/parser/late_parser/expansion/all_expansion/find_files.c:125:9:
+    Unreachable code: return (true)
+  This code will never be reached on any possible execution. (Use -unreachable
+  to inhibit warning)
+sources/parser/late_parser/expansion/all_expansion/find_files.c:126:2:
+    Fresh storage to_find not released before return
+   sources/parser/late_parser/expansion/all_expansion/find_files.c:117:3:
+   Fresh storage to_find created
+sources/parser/late_parser/expansion/all_expansion/find_files.c: (in function find_match_file)
+sources/parser/late_parser/expansion/all_expansion/find_files.c:136:3:
+    Assignment of size_t to int: len_suffix = ft_strlen(suffix)
+sources/parser/late_parser/expansion/all_expansion/find_files.c:138:3:
+    Assignment of size_t to int: len_prefix = ft_strlen(prefix)
+sources/parser/late_parser/expansion/all_expansion/find_files.c:147:34:
+    Possibly null storage suffix passed as non-null param: only_all (suffix)
+sources/parser/late_parser/expansion/all_expansion/find_files.c:149:33:
+    Function ft_strncmp expects arg 3 to be size_t gets int: len_prefix
+sources/parser/late_parser/expansion/all_expansion/find_files.c:149:25:
+    Possibly null storage prefix passed as non-null param:
+    ft_strncmp (..., prefix, ...)
+sources/parser/late_parser/expansion/all_expansion/find_files.c:151:33:
+    Function ft_strncmp expects arg 3 to be size_t gets int: len_prefix
+sources/parser/late_parser/expansion/all_expansion/find_files.c:152:29:
+    Possibly null storage suffix passed as non-null param:
+    final_decision (..., suffix)
+sources/parser/late_parser/expansion/all_expansion/decision.c: (in function decision_file)
+sources/parser/late_parser/expansion/all_expansion/decision.c:22:2:
+    Assignment of size_t to int: len_suff = ft_strlen(suffix)
+sources/parser/late_parser/expansion/all_expansion/decision.c:23:2:
+    Assignment of size_t to int: len_entry = ft_strlen(entry)
+sources/parser/late_parser/expansion/all_expansion/decision.c:25:13:
+    Function ft_strncmp expects arg 3 to be size_t gets int: len_suff
+sources/parser/late_parser/expansion/all_expansion/decision.c: (in function decision_directory)
+sources/parser/late_parser/expansion/all_expansion/decision.c:35:2:
+    Assignment of size_t to int: len_suff_dir = ft_strlen(suffix_dir)
+sources/parser/late_parser/expansion/all_expansion/decision.c:36:2:
+    Assignment of size_t to int: len_entry = ft_strlen(entry)
+sources/parser/late_parser/expansion/all_expansion/decision.c:38:17:
+    Function ft_strncmp expects arg 3 to be size_t gets int: len_suff_dir
+sources/parser/late_parser/expansion/all_expansion/utils.c: (in function file_to_directory)
+sources/parser/late_parser/expansion/all_expansion/utils.c:25:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/late_parser/expansion/all_expansion/utils.c:30:10:
+    Null storage returned as non-null: (NULL)
+sources/parser/late_parser/expansion/all_expansion/utils.c:32:13:
+    Passed storage stat_file.st_atim contains 2 undefined fields:
+    tv_sec, tv_nsec
+sources/parser/late_parser/expansion/all_expansion/utils.c:32:13:
+    Passed storage stat_file.st_mtim contains 2 undefined fields:
+    tv_sec, tv_nsec
+sources/parser/late_parser/expansion/all_expansion/utils.c:32:13:
+    Passed storage stat_file.st_ctim contains 2 undefined fields:
+    tv_sec, tv_nsec
+sources/parser/late_parser/expansion/all_expansion/utils.c:32:13:
+    Passed storage stat_file contains 14 undefined fields:
+    st_dev, __pad1, st_ino, st_mode, ...
+sources/parser/late_parser/expansion/all_expansion/utils.c:32:2:
+    Return value (type int) ignored: stat(path, &stat...
+sources/parser/late_parser/expansion/all_expansion/utils.c:33:2:
+    Return value (type size_t) ignored: ft_strlcpy(buffe...
+sources/parser/late_parser/expansion/all_expansion/utils.c:36:3:
+    Return value (type size_t) ignored: ft_strlcat(buffe...
+sources/parser/late_parser/expansion/all_expansion/utils.c: (in function init_match_file)
+sources/parser/late_parser/expansion/all_expansion/utils.c:44:2:
+    Implicitly only storage match_file->suffix (type char *) not released
+    before assignment: match_file->suffix = get_suffix(data, i)
+sources/parser/late_parser/expansion/all_expansion/utils.c:45:2:
+    Implicitly only storage match_file->path (type char *) not released before
+    assignment: match_file->path = get_path_wildcard(data, i)
+sources/parser/late_parser/expansion/all_expansion/utils.c:46:2:
+    Implicitly only storage match_file->prefix (type char *) not released
+    before assignment: match_file->prefix = get_prefix(data, i)
+sources/parser/late_parser/expansion/all_expansion/utils.c:47:2:
+    Implicitly only storage match_file->old_data (type char *) not released
+    before assignment: match_file->old_data = NULL
+sources/parser/late_parser/expansion/all_expansion/utils.c:48:9:
+    Implicitly temp storage match_file returned as implicitly only:
+    (match_file)
+sources/parser/late_parser/expansion/all_expansion/utils.c:48:9:
+    Null storage match_file->old_data derivable from return value: (match_file)
+   sources/parser/late_parser/expansion/all_expansion/utils.c:47:25:
+   Storage match_file->old_data becomes null
+sources/parser/late_parser/expansion/all_expansion/utils.c: (in function no_access_file)
+sources/parser/late_parser/expansion/all_expansion/utils.c:53:34:
+    New fresh storage (type void *) passed as implicitly temp (not released):
+    d_pop_stk(stack)
+sources/parser/late_parser/expansion/all_expansion/utils.c:53:24:
+    New fresh storage (type t_list *) passed as implicitly temp (not released):
+    ft_lstnew(d_pop_stk(stack))
+sources/parser/late_parser/expansion/all_expansion/utils.c:62:10:
+    Released storage match_file->path reachable from parameter at return point
+   sources/parser/late_parser/expansion/all_expansion/utils.c:55:8:
+   Storage match_file->path released
+sources/parser/late_parser/expansion/all_expansion/utils.c:62:10:
+    Released storage match_file->prefix reachable from parameter at return
+    point
+   sources/parser/late_parser/expansion/all_expansion/utils.c:57:8:
+   Storage match_file->prefix released
+sources/parser/late_parser/expansion/all_expansion/utils.c:62:10:
+    Released storage match_file->suffix reachable from parameter at return
+    point
+   sources/parser/late_parser/expansion/all_expansion/utils.c:59:8:
+   Storage match_file->suffix released
+sources/parser/late_parser/expansion/all_expansion/utils.c:62:10:
+    Released storage match_file->old_data reachable from parameter at return
+    point
+   sources/parser/late_parser/expansion/all_expansion/utils.c:61:8:
+   Storage match_file->old_data released
+sources/parser/late_parser/expansion/all_expansion/utils.c: (in function only_all)
+sources/parser/late_parser/expansion/all_expansion/utils.c:72:24:
+    Operands of == have incompatible types (char, int): suffix[i] == 0
+sources/parser/late_parser/expansion/all_expansion/lst_utils.c: (in function pop_stack_to_list)
+sources/parser/late_parser/expansion/all_expansion/lst_utils.c:32:34:
+    New fresh storage (type void *) passed as implicitly temp (not released):
+    d_pop_stk(stack)
+sources/parser/late_parser/expansion/all_expansion/lst_utils.c:32:24:
+    New fresh storage (type t_list *) passed as implicitly temp (not released):
+    ft_lstnew(d_pop_stk(stack))
+sources/parser/late_parser/expansion/all_expansion/lst_utils.c: (in function clean_access_lst)
+sources/parser/late_parser/expansion/all_expansion/lst_utils.c:43:2:
+    Statement has no effect: (void)start_content
+sources/parser/late_parser/expansion/all_expansion/lst_utils.c:56:25:
+    New fresh storage (type t_list *) passed as implicitly temp (not released):
+    ft_lstnew(start_content)
+sources/parser/pre_parser/verif_utils.c: (in function verif_if_quote_closed)
+sources/parser/pre_parser/verif_utils.c:22:2: Assignment of int to char:
+                                                 quote_type = 0
+sources/parser/pre_parser/verif_utils.c:25:9:
+    Test expression for while not boolean, type char: prompt[i]
+sources/parser/pre_parser/verif_utils.c:27:7:
+    Operands of == have incompatible types (int, boolean):
+    is_quote(prompt[i]) == true
+sources/parser/pre_parser/verif_utils.c:32:39:
+    Use of == with boolean variables (risks inconsistency because of multiple
+    true values): quote == true
+sources/parser/pre_parser/verif_utils.c:36:6:
+    Use of == with boolean variables (risks inconsistency because of multiple
+    true values): quote == true
+sources/parser/pre_parser/verif_utils.c: (in function verif_if_parenthesis_closed)
+sources/parser/pre_parser/verif_utils.c:48:9:
+    Test expression for while not boolean, type char: prompt[i]
+sources/parser/pre_parser/verif_utils.c:50:7:
+    Operands of == have incompatible types (int, boolean):
+    is_quote(prompt[i]) == true
+sources/parser/pre_parser/verif_utils.c: (in function verif_token_separation)
+sources/parser/pre_parser/verif_utils.c:70:36:
+    Passed storage &token not completely defined:
+    verif_before_operator (..., &token)
+sources/parser/pre_parser/verif_utils.c:72:9:
+    Test expression for while not boolean, type char: prompt[i]
+sources/parser/pre_parser/verif_utils.c:74:7:
+    Operands of == have incompatible types (int, boolean):
+    is_operator(prompt + i) == true
+sources/parser/pre_parser/verif_utils.c:74:42:
+    Operands of == have incompatible types (int, boolean):
+    is_pipe(prompt + i) == true
+sources/parser/pre_parser/verif_utils.c:82:8:
+    Operands of == have incompatible types (int, boolean):
+    is_operator(prompt + i) == true
+sources/parser/pre_parser/verif_utils.c:83:8:
+    Operands of == have incompatible types (int, boolean):
+    is_pipe(prompt + i) == true
+sources/parser/pre_parser/verif_utils.c: (in function verif_before_operator)
+sources/parser/pre_parser/verif_utils.c:99:9:
+    Test expression for while not boolean, type char: prompt[i]
+sources/parser/pre_parser/verif_utils.c:101:7:
+    Operands of == have incompatible types (int, boolean):
+    ft_iswhitespace(prompt[i]) == true
+sources/parser/pre_parser/verif_utils.c:103:7:
+    Operands of == have incompatible types (int, boolean):
+    is_operator(prompt + i) == true
+sources/parser/pre_parser/verif_utils.c:103:42:
+    Operands of == have incompatible types (int, boolean):
+    is_pipe(prompt + i) == true
+includes/parser.h:56:8: Function verif_before_operator defined more than once
+   sources/parser/pre_parser/verif_utils.c:115:1:
+   Previous definition of verif_before_operator
+sources/parser/pre_parser/verif_utils2.c: (in function error_subshell)
+sources/parser/pre_parser/verif_utils2.c:19:9:
+    Left operand of && is non-boolean (char): *prompt && *prompt != ')'
+sources/parser/pre_parser/verif_utils2.c:22:6:
+    Incompatible types for == (int, boolean): is_operator(prompt) == false
+sources/parser/pre_parser/verif_utils2.c:23:6:
+    Incompatible types for == (int, boolean): ft_iswhitespace(*prompt) == false
+sources/parser/pre_parser/verif_utils2.c:24:6:
+    Incompatible types for == (int, boolean): is_pipe(prompt) == false
+sources/parser/pre_parser/verif_utils2.c: (in function verif_token_before)
+sources/parser/pre_parser/verif_utils2.c:36:7:
+    Operands of == have incompatible types (int, boolean):
+    ft_iswhitespace(prompt[i]) == true
+sources/parser/pre_parser/verif_utils2.c:38:7:
+    Operands of == have incompatible types (int, boolean):
+    is_operator(prompt + i - 1) == true
+sources/parser/pre_parser/verif_utils2.c:39:7:
+    Operands of == have incompatible types (int, boolean):
+    is_quote(prompt[i]) == true
+sources/parser/pre_parser/verif_utils2.c: (in function verif_arg_parenthesis)
+sources/parser/pre_parser/verif_utils2.c:55:9:
+    Test expression for while not boolean, type char: prompt[i]
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+sources/execution/exec_builtins.c: (in function copy_stdout)
+sources/execution/exec_builtins.c:25:11: Unrecognized identifier: EIO
+sources/execution/exec_builtins.c: (in function process_built_in)
+sources/execution/exec_builtins.c:68:10:
+    Argument to exit has implementation defined behavior: 1
+  The argument to exit should be 0, EXIT_SUCCESS or EXIT_FAILURE (Use -exitarg
+  to inhibit warning)
+sources/execution/exec_builtins.c:73:4: Return value (type int) ignored:
+                                           close(core_data-...
+sources/execution/exec_builtins.c:74:4: Return value (type int) ignored:
+                                           close(core_data-...
+sources/execution/exec_builtins.c:79:3: Return value (type int) ignored:
+                                           clean_parent(cor...
+sources/execution/exec_builtins.c:93:3: Return value (type int) ignored:
+                                           close_pipe(core_...
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+sources/execution/exec_std.c: (in function clean_parent)
+sources/execution/exec_std.c:24:3: Return value (type int) ignored:
+                                      close_pipe(core_...
+sources/execution/exec_std.c: (in function pre_process_exec)
+sources/execution/exec_std.c:53:3: Return value (type int) ignored:
+                                      dup_pipe(core_da...
+sources/execution/exec_std.c: (in function process_built_out)
+sources/execution/exec_std.c:75:3: Return value (type int) ignored:
+                                      close(core_data-...
+sources/execution/exec_std.c:76:3: Return value (type int) ignored:
+                                      close(core_data-...
+sources/execution/exec_std.c:77:3: Return value (type int) ignored:
+                                      exec_command(arg...
+sources/execution/exec_std.c:82:2: Return value (type int) ignored:
+                                      clean_parent(cor...
+sources/execution/exec_std.c: (in function exec_std)
+sources/execution/exec_std.c:109:2: Fresh storage args not released before
+                                       return
+   sources/execution/exec_std.c:95:2: Fresh storage args created
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+sources/execution/exec_subshell.c: (in function init_new_ats)
+sources/execution/exec_subshell.c:21:2:
+    Implicitly only storage new_core->prompt (type char *) not released before
+    assignment: new_core->prompt = ft_strdup(node->data->cmd)
+sources/execution/exec_subshell.c:23:2:
+    Implicitly only storage new_core->env (type t_list *) not released before
+    assignment: new_core->env = core_data->env
+sources/execution/exec_subshell.c:24:2:
+    Implicitly only storage new_core->queue_heredoc (type t_queue *) not
+    released before assignment: new_core->queue_heredoc = core_data->queue_hered
+    oc
+sources/execution/exec_subshell.c:26:2:
+    Implicitly only storage new_core->uname (type char *) not released before
+    assignment: new_core->uname = core_data->uname
+sources/execution/exec_subshell.c:27:2:
+    Implicitly only storage new_core->path (type char *) not released before
+    assignment: new_core->path = core_data->path
+sources/execution/exec_subshell.c:30:2:
+    Implicitly only storage new_core->errors (type t_error *) not released
+    before assignment: new_core->errors = core_data->errors
+sources/execution/exec_subshell.c:31:2:
+    Implicitly only storage new_core->queue_redir (type t_queue *) not released
+    before assignment: new_core->queue_redir = ft_init_queue()
+sources/execution/exec_subshell.c:32:2:
+    Implicitly only storage new_core->queue_pipe (type t_queue *) not released
+    before assignment: new_core->queue_pipe = ft_init_queue()
+sources/execution/exec_subshell.c:33:2:
+    Implicitly only storage new_core->root (type t_ats *) not released before
+    assignment: new_core->root = NULL
+sources/execution/exec_subshell.c:34:2:
+    Storage core_data->env reachable from parameter is kept (should be
+    implicitly only)
+   sources/execution/exec_subshell.c:23:2: Storage core_data->env becomes kept
+sources/execution/exec_subshell.c:34:2:
+    Storage core_data->queue_heredoc reachable from parameter is kept (should
+    be implicitly only)
+   sources/execution/exec_subshell.c:24:2:
+   Storage core_data->queue_heredoc becomes kept
+sources/execution/exec_subshell.c:34:2:
+    Storage core_data->uname reachable from parameter is kept (should be
+    implicitly only)
+   sources/execution/exec_subshell.c:26:2:
+   Storage core_data->uname becomes kept
+sources/execution/exec_subshell.c:34:2:
+    Storage core_data->path reachable from parameter is kept (should be
+    implicitly only)
+   sources/execution/exec_subshell.c:27:2: Storage core_data->path becomes kept
+sources/execution/exec_subshell.c:34:2:
+    Storage core_data->errors reachable from parameter is kept (should be
+    implicitly only)
+   sources/execution/exec_subshell.c:30:2:
+   Storage core_data->errors becomes kept
+sources/execution/exec_subshell.c:34:2:
+    Function returns with null storage derivable from parameter new_core->root
+   sources/execution/exec_subshell.c:33:19: Storage new_core->root becomes null
+sources/execution/exec_subshell.c: (in function exec_subshell)
+sources/execution/exec_subshell.c:48:3: Return value (type int) ignored:
+                                           open_redir(core_...
+sources/execution/exec_subshell.c:49:27:
+    Passed storage new_ats contains 13 undefined fields:
+    root, env, queue_heredoc, queue_redir, ...
+sources/execution/exec_subshell.c:50:3: Return value (type int) ignored:
+                                           parse_prompt(new...
+sources/execution/exec_subshell.c:51:3: Return value (type int) ignored:
+                                           read_ats(&new_at...
+sources/execution/exec_subshell.c:54:3: Return value (type int) ignored:
+                                           close(core_data-...
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+sources/execution/read_ats.c: (in function wait_pipeline)
+sources/execution/read_ats.c:26:15: Null storage passed as non-null param:
+                                       wait3 (NULL, ...)
+sources/execution/read_ats.c:26:24: Null storage passed as non-null param:
+                                       wait3 (..., NULL)
+sources/execution/read_ats.c:33:5: Unrecognized identifier: kill
+sources/execution/read_ats.c: (in function wait_process)
+sources/execution/read_ats.c:59:30: Left operand of >> may be negative (int):
+                                       ((node->data->exit_code) & 0xff00) >> 8
+  The left operand to a shift operator may be negative (behavior is
+  implementation-defined). (Use -shiftimplementation to inhibit warning)
+sources/execution/read_ats.c:66:4: Return value (type __pid_t) ignored:
+                                      waitpid(node->da...
+sources/execution/read_ats.c:67:30: Left operand of >> may be negative (int):
+                                       ((node->data->exit_code) & 0xff00) >> 8
+sources/execution/read_ats.c: (in function read_node)
+sources/execution/read_ats.c:76:6: Operands of == have incompatible types (int,
+    boolean): is_operator(node->data->cmd) == true
+sources/execution/read_ats.c:83:3: Return value (type int) ignored:
+                                      exec_subshell(co...
+sources/execution/read_ats.c: (in function read_ats)
+sources/execution/read_ats.c:104:6: Operands of == have incompatible types
+    (int, boolean): is_operator(root->data->cmd) == true
+sources/execution/read_ats.c:116:6: Operands of == have incompatible types
+    (int, boolean): is_operator(root->data->cmd) == true
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+sources/execution/exec_command.c: (in function exec_command)
+sources/execution/exec_command.c:33:16:
+    Fresh storage env_tab not released before return
+   sources/execution/exec_command.c:27:2: Fresh storage env_tab created
+sources/execution/exec_command.c:35:13:
+    Fresh storage path_command not released before return
+   sources/execution/exec_command.c:20:2: Fresh storage path_command created
+sources/execution/exec_command.c:35:13:
+    Fresh storage env_tab not released before return
+   sources/execution/exec_command.c:27:2: Fresh storage env_tab created
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+sources/execution/get_path.c: (in function get_path_command)
+sources/execution/get_path.c:39:10: Null storage returned as non-null: (NULL)
+sources/execution/get_path.c:44:46: Fresh storage path_command not released
+                                       before return
+   sources/execution/get_path.c:37:2: Fresh storage path_command created
+sources/execution/get_path.c:48:9: Null storage returned as non-null:
+                                      (ft_rm_split(path_command), NULL)
+sources/execution/get_path.c:48:43: Fresh storage path_command not released
+                                       before return
+   sources/execution/get_path.c:37:2: Fresh storage path_command created
+sources/execution/get_path.c: (in function is_path)
+sources/execution/get_path.c:56:9: Test expression for while not boolean, type
+                                      char: tab[i]
+sources/execution/get_path.c:59:11: Return value type boolean does not match
+                                       declared type int: (true)
+sources/execution/get_path.c: (in function path_to_relative)
+sources/execution/get_path.c:71:10: Null storage returned as non-null: (NULL)
+sources/execution/get_path.c:74:9: Null storage returned as non-null: (NULL)
+sources/execution/get_path.c:74:16: Fresh storage temp not released before
+                                       return
+   sources/execution/get_path.c:69:2: Fresh storage temp created
+sources/execution/get_path.c: (in function get_path)
+sources/execution/get_path.c:82:10: Implicitly temp storage tab returned as
+                                       implicitly only: (tab)
+sources/execution/get_path.c:85:7: Operands of == have incompatible types (int,
+                                      boolean): is_path(tab) == true
+sources/execution/get_path.c:90:8: Implicitly temp storage path passed as only
+                                      param: free (path)
+sources/execution/get_path.c:93:2: Variable path is released in false branch,
+                                      but live in true branch.
+   sources/execution/get_path.c:93:2: in false branch:
+   sources/execution/get_path.c:90:8: Storage path released
+sources/execution/get_path.c:95:9: Null storage returned as non-null: (NULL)
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+< Location unknown >: Previous use of 
+sources/execution/pipe_exec.c: (in function dup_in)
+sources/execution/pipe_exec.c:27:3: Return value (type int) ignored:
+                                       close(data->pipe...
+sources/execution/pipe_exec.c: (in function dup_out)
+sources/execution/pipe_exec.c:48:3: Return value (type int) ignored:
+                                       close(data->pipe...
+sources/execution/pipe_exec.c: (in function dup_pipe)
+sources/execution/pipe_exec.c:68:17: Fresh storage data not released before
+                                        return
+   sources/execution/pipe_exec.c:66:3: Fresh storage data created
+sources/execution/pipe_exec.c:74:17: Fresh storage data not released before
+                                        return
+   sources/execution/pipe_exec.c:70:2: Fresh storage data created
+sources/execution/pipe_exec.c:76:13: Fresh storage data not released before
+                                        return
+   sources/execution/pipe_exec.c:70:2: Fresh storage data created
+sources/execution/pipe_exec.c: (in function handle_pipeline_redir)
+sources/execution/pipe_exec.c:113:56:
+    Fresh storage tmp_redir not released before return
+   sources/execution/pipe_exec.c:109:2: Fresh storage tmp_redir created
+sources/execution/pipe_exec.c:113:56:
+    Fresh storage tmp_heredoc not released before return
+   sources/execution/pipe_exec.c:110:2: Fresh storage tmp_heredoc created
+includes/components/display.h:24:7: Function exported but not used outside
+                                       display: create_sh_prompt
+  A declaration is exported, but not used outside this module. Declaration can
+  use static qualifier. (Use -exportlocal to inhibit warning)
+   sources/components/display/display.c:58:1: Definition of create_sh_prompt
+sources/minishell.c:75:6: Function exported but not used outside minishell:
+                             read_input
+   sources/minishell.c:105:1: Definition of read_input
+sources/init_shell.c:47:6: Function exported but not used outside init_shell:
+                              has_path
+   sources/init_shell.c:59:1: Definition of has_path
+sources/components/error/clear_ats.c:46:6:
+    Function exported but not used outside clear_ats: clear_else
+   sources/components/error/clear_ats.c:68:1: Definition of clear_else
+sources/components/signal/signal.c:21:6:
+    Function exported but not used outside signal: sigint_handler
+   sources/components/signal/signal.c:31:1: Definition of sigint_handler
+sources/components/signal/signal.c:33:6:
+    Function exported but not used outside signal: sigquit_handler
+   sources/components/signal/signal.c:38:1: Definition of sigquit_handler
+sources/parser/atomize/take_redir.c:45:6:
+    Function exported but not used outside take_redir: check_quote_parenthesis
+   sources/parser/atomize/take_redir.c:51:1:
+   Definition of check_quote_parenthesis
+sources/parser/late_parser/expansion/all_expansion/find_files.c:17:6:
+    Function exported but not used outside find_files: identify_file
+   sources/parser/late_parser/expansion/all_expansion/find_files.c:29:1:
+   Definition of identify_file
+

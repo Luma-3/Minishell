@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:10:20 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 17:35:27 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 13:32:28 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,14 @@ static int	add_queue(t_maindata *ats, const char *prompt, int redir_type,
 	return (i + j);
 }
 
+void	check_quote_parenthesis(const char c, char *quote, int *parenthesis)
+{
+	if (is_quote(c) == true)
+		*quote = check_quote(*quote, c);
+	else if (c == '(' || c == ')')
+		*parenthesis += check_parenthesis(c);
+}
+
 char	*take_redir(t_maindata *ats, const char *prompt, int size_prompt,
 					int *nb_redir)
 {
@@ -52,18 +60,13 @@ char	*take_redir(t_maindata *ats, const char *prompt, int size_prompt,
 	char	quote;
 
 	parenthesis = 0;
-	new_prompt = ft_calloc(ft_strlen(prompt) + 1, sizeof(char));
-	if (!new_prompt)
-		return (NULL);
 	i = 0;
 	j = 0;
 	quote = '\0';
-	while (prompt[i] && i < size_prompt)
+	new_prompt = ft_calloc(ft_strlen(prompt) + 1, sizeof(char));
+	while (new_prompt && prompt[i] && i < size_prompt)
 	{
-		if (is_quote(prompt[i]) == true)
-			quote = check_quote(quote, prompt[i]);
-		else if (prompt[i] == '(' || prompt[i] == ')')
-			parenthesis += check_parenthesis(prompt[i]);
+		check_quote_parenthesis(prompt[i], &quote, &parenthesis);
 		if (is_redir_type(prompt + i) > 0 && quote == '\0' && parenthesis == 0)
 		{
 			i += add_queue(ats, prompt + i,
