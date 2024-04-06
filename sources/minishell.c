@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 18:13:46 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 22:46:00 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,8 @@
 
 volatile int	g_sigreciever = 0;
 
-int	init_core_data(t_maindata *core_data, char *prompt, t_list *env)
+static int	init_core_data(t_maindata *core_data, char *prompt)
 {
-	t_ats	*root;
-
-	root = NULL;
-	core_data->env = env;
 	core_data->prompt = prompt;
 	core_data->queue_redir = ft_init_queue();
 	core_data->queue_heredoc = ft_init_queue();
@@ -36,7 +32,7 @@ int	init_core_data(t_maindata *core_data, char *prompt, t_list *env)
 		perror_switch(core_data->errors, "KikiShell");
 		return (FAILURE);
 	}
-	core_data->root = root;
+	core_data->root = NULL;
 	core_data->is_pipeline = false;
 	return (SUCCESS);
 }
@@ -48,16 +44,16 @@ char	*get_home(const char *uname)
 	home = ft_strjoin("/home/", uname);
 	if (home == NULL)
 	{
-		return (errno = ENOMEM, NULL);
+		errno = ENOMEM;
+		return (NULL);
 	}
 	return (home);
 }
 
-
-void	exec_process(t_maindata *core_data, t_list *env, char *input)
+void	exec_process(t_maindata *core_data, char *input)
 {
 	ft_putchar_fd('\n', 1);
-	if (init_core_data(core_data, input, env) == FAILURE)
+	if (init_core_data(core_data, input) == FAILURE)
 		return ;
 	if (parse_prompt(input, core_data, true) == FAILURE)
 	{
@@ -91,13 +87,12 @@ void	read_input(t_maindata *core_data)
 		{
 			free(input);
 			dup2(core_data->stdin_fd, STDIN_FILENO);
-			close(core_data->stdin_fd);
-			close(core_data->history_fd);
-			display_msg(core_data, core_data->env, BYE_MSG);
+			(close(core_data->stdin_fd), close(core_data->history_fd));
+			display_msg(core_data, BYE_MSG);
 			break ;
 		}
 		ft_add_history(input, core_data->history_fd);
-		exec_process(core_data, core_data->env, input);
+		exec_process(core_data, input);
 		dup2(core_data->stdin_fd, STDIN_FILENO);
 		close(core_data->stdin_fd);
 	}

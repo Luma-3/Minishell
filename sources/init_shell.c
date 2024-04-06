@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:49:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 17:42:23 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 22:46:05 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ static int	launch_shell(t_maindata *core_data, char **envp)
 		core_data->env = env;
 		if (init_safe_mode(core_data) == FAILURE)
 			return (FAILURE);
-		display_msg(core_data, core_data->env, SAFE_MSG);
+		display_msg(core_data, SAFE_MSG);
 		return (SUCCESS);
 	}
 	core_data->env = env;
-	display_msg(core_data, core_data->env, HELLO_MSG);
+	display_msg(core_data, HELLO_MSG);
 	return (SUCCESS);
 }
 

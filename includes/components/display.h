@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:41:17 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/03 16:07:46 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/06 22:05:02 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "environement.h"
 # include "color.h"
 
-void	display_msg(t_maindata *ats, t_list *env, char *msg);
+void	display_msg(t_maindata *core_data, char *msg);
 
 char	*create_sh_prompt(t_list *env, char *uname, int last_status);
 

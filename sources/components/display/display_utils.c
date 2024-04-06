@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:39:34 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/03 16:44:44 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/07 00:10:31 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	*path_to_tilde(t_list *env)
 {
 	char	*path_home;
 	char	*path_absolute;
+	char	*tmp_path;
 	int		i;
 
 	i = 0;
@@ -24,18 +25,31 @@ char	*path_to_tilde(t_list *env)
 		return (ft_strdup("I am lost"));
 	path_home = ms_getenv(env, "HOME");
 	if (path_home == NULL)
-		return (ft_strjoin(" ", path_absolute));
-	while (path_home[i] == path_absolute[i]
-		&& path_home[i] && path_absolute[i])
+	{
+		tmp_path = ft_strjoin(" ", path_absolute);
+		if (tmp_path == NULL)
+			return (path_absolute);
+		free(path_absolute);
+		return (tmp_path);
+	}
+	while (path_home[i] && path_absolute[i]
+		&& path_home[i] == path_absolute[i])
 		i++;
 	if (i < (int)ft_strlen(path_home))
-		return (ft_strjoin(" ", path_absolute));
+	{
+		free(path_home);
+		tmp_path = ft_strjoin(" ", path_absolute);
+		if (tmp_path == NULL)
+			return (path_absolute);
+		free(path_absolute);
+		return (tmp_path);
+	}
 	free(path_home);
-	path_home = ft_strjoin(" ~", path_absolute + i);
-	if (path_home == NULL)
+	tmp_path = ft_strjoin(" ~", path_absolute + i);
+	if (tmp_path == NULL)
 		return (path_absolute);
 	free(path_absolute);
-	return (path_home);
+	return (tmp_path);
 }
 
 char	*get_current_dir(void)
@@ -66,7 +80,7 @@ char	*assemble(char **display)
 {
 	char	*display_final;
 	int		i;
-	int		len;
+	size_t	len;
 
 	i = 0;
 	len = 0;

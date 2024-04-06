@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 18:16:34 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/07 00:10:01 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ void			handle_heredoc(const char *prompt, t_maindata *ats);
 ////// POST PARSER //////
 /////////////////////////
 
-int				count_words(const char *prompt);
-
 int				count_letters(const char *start_word);
 
 char			**list_to_tab(t_list **lst);
@@ -75,8 +73,6 @@ char			*clean_quote(char *word);
 ///////////////////////////
 ////// ATOMIC PARSER //////
 ///////////////////////////
-
-int				init_core_data(t_maindata *ats, char *prompt, t_list *env);
 
 int				parse_prompt(char *prompt, t_maindata *core_data,
 					bool check_arg);

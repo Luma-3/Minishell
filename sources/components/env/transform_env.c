@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:52:52 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 13:30:18 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/06 23:56:10 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	free_tab(char **tab, int index)
 	while (index >= 0)
 	{
 		index--;
-		free(tab[index]);
+		free(tab + index);
 	}
 	free(tab);
 }
@@ -38,6 +38,7 @@ char	**env_to_tab(t_list *env_lst)
 		if (!env[i])
 		{
 			free_tab(env, i);
+			free(env);
 			return (NULL);
 		}
 		env[i] = ft_strdup(env_lst->content);
@@ -53,6 +54,7 @@ t_list	*env_to_lst(char **envp)
 	int		i;
 	char	*tmp;
 	t_list	*head_env_list;
+	t_list	*new;
 
 	i = -1;
 	head_env_list = NULL;
@@ -65,7 +67,15 @@ t_list	*env_to_lst(char **envp)
 			ft_lstclear(&head_env_list, free);
 			return (NULL);
 		}
-		ft_lstadd_back(&head_env_list, ft_lstnew(tmp));
+		new = ft_lstnew(tmp);
+		if (!new)
+		{
+			errno = ENOMEM;
+			free(tmp);
+			ft_lstclear(&head_env_list, free);
+			return (NULL);
+		}
+		ft_lstadd_back(&head_env_list, new);
 	}
 	return (head_env_list);
 }

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/05 18:26:32 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/06 23:30:01 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern volatile int	g_sigreciever;
 
-void	display_msg(t_maindata *ats, t_list *env, char *msg)
+void	display_msg(t_maindata *core_data, char *msg)
 {
 	char	*command;
 
@@ -22,10 +22,10 @@ void	display_msg(t_maindata *ats, t_list *env, char *msg)
 	if (command == NULL)
 	{
 		errno = ENOMEM;
-		perror_switch(ats->errors, "KikiShell");
+		perror_switch(core_data->errors, "KikiShell");
 		return ;
 	}
-	exec_process(ats, env, command);
+	exec_process(core_data, command);
 }
 
 char	*create_sh_prompt(t_list *env, char *uname, int last_status)

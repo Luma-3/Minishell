@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 11:18:05 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/06 22:00:21 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 //SIGNAL
 void		init_signal(void);
 
-void		exec_process(t_maindata *ats, t_list *env, char *input);
+void		exec_process(t_maindata *ats, char *input);
 
 int			init_shell(t_maindata *core_data, t_error *errors, char **envp);
 

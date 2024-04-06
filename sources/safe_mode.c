@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   safe_mode.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 20:45:55 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 14:32:39 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 23:02:50 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ static int	safe_env(t_list **env)
 		return (errno = ENOMEM, FAILURE);
 	if (ms_setenv(env, "PWD", cwd) == FAILURE)
 	{
+		free(cwd);
 		return (FAILURE);
 	}
+	free(cwd);
 	return (SUCCESS);
 }
 

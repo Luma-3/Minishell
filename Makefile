@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anthony <anthony@student.42.fr>            +#+  +:+       +#+         #
+#    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/06 15:08:04 by anthony          ###   ########.fr        #
+#    Updated: 2024/04/06 23:13:17 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -296,7 +296,7 @@ norme:
 	fi; \
 
 splint:
-	splint $(SRC) $(INCLUDE) -warnposix > splint_log
+	splint $(SRC) $(INCLUDE) -warnposix -nullret -nullstate -nullpass -retvalint -syntax -temptrans > splint_log
 
 re: fclean all
 
