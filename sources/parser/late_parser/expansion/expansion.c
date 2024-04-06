@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:35:19 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 18:20:26 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 12:11:35 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,17 @@ int	expansion_cmd(t_maindata *core_data, t_list **args)
 	index_prev = NULL;
 	while (indexer)
 	{
-		first_expansions(core_data, indexer);
-		if (ft_strchr((const char *)indexer->content, '*') != NULL)
+		if (indexer->content != NULL)
 		{
-			match_files = handle_all(args, indexer);
-			if (match_files != NULL)
+			first_expansions(core_data, indexer);
+			if (ft_strchr((const char *)indexer->content, '*') != NULL)
 			{
-				indexer = match_files;
-				connect_list(index_prev, match_files, args);
+				match_files = handle_all(args, indexer);
+				if (match_files != NULL)
+				{
+					indexer = match_files;
+					connect_list(index_prev, match_files, args);
+				}
 			}
 		}
 		index_prev = indexer;

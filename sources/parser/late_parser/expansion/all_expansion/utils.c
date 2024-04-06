@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:49:00 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/04 17:58:11 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 10:35:18 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ char	*file_to_directory(t_match_file *match_file, char *file_name)
 	if (buffer_name == NULL)
 		return (NULL);
 	path = ft_strjoin4(match_file->path, "/", file_name, "\0");
+	if (path == NULL)
+	{
+		free(buffer_name);
+		return (NULL);
+	}
 	stat(path, &stat_file);
 	ft_strlcpy(buffer_name, file_name, 256);
 	if (S_ISDIR(stat_file.st_mode))

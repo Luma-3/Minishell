@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 18:36:04 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 12:28:09 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,9 @@ bool			find_and_push(t_dstack *stack, t_match_file *match_file,
 bool			decision_file(char *entry, char *suffix);
 
 bool			decision_directory(char *entry, char *suffix);
+
+bool			verif_suffix_ptr(char *entry, char *suffix,
+					char *suffix_dir, int i);
 
 // utils
 

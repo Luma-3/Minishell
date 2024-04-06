@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 14:08:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 18:11:10 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 10:26:18 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,19 @@ static int	find_all_files(t_dstack *stack, t_match_file *match_file,
 	t_list **lst, int i)
 {
 	DIR				*dir;
+	t_list			*tmp;
 
 	dir = opendir(match_file->path);
 	if (dir == NULL)
 		return (FAILURE);
 	if (find_and_push(stack, match_file, dir, i) == false)
 	{
-		ft_lstadd_front(lst, ft_lstnew(match_file->old_data));
+		tmp = ft_lstnew(match_file->old_data);
+		if (tmp != NULL)
+			ft_lstadd_front(lst, tmp);
+		closedir(dir);
 		return (FAILURE);
 	}
-	free(match_file->old_data);
 	if (closedir(dir) == -1)
 		return (FAILURE);
 	return (SUCCESS);
@@ -94,6 +97,11 @@ t_list	*get_all_file(t_list **head, t_list *arg)
 		return (NULL);
 	tmp = ft_lstdetach(head, arg);
 	start_content = ft_strdup(tmp->content);
+	if (start_content == NULL)
+	{
+		free(tmp);
+		return (NULL);
+	}
 	if (d_push_stk(stack, tmp->content) == FAILURE)
 	{
 		ft_lstadd_front(&new_head, tmp);
