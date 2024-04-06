@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   is_type.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:52:59 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/19 19:19:41 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/06 15:08:32 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-int	is_parenthesis(const char token)
-{
-	if (token == '(' || token == ')')
-	{
-		return (true);
-	}
-	return (false);
-}
 
 int	is_pipe(const char *prompt)
 {

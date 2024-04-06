@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:10:20 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 13:32:28 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 15:17:07 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*take_redir(t_maindata *ats, const char *prompt, int size_prompt,
 					is_redir_type(prompt + i), size_prompt);
 			*nb_redir += 1;
 		}
-		else if (i < size_prompt && prompt[i] != '\0')
+		else if (prompt[i] != '\0')
 			new_prompt[j++] = prompt[i++];
 	}
 	return (new_prompt);

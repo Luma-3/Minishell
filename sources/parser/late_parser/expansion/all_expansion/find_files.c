@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 00:18:28 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/06 14:31:51 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 15:14:38 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,10 @@ static	bool	final_decision(char *entry, char *suffix)
 			return (get_last_suffix(suffix, entry, j, i));
 		while (suffix != NULL && suffix[j] != '\0' && suffix[j] != '*')
 			j++;
+		if (suffix == NULL)
+			break;
 		to_find = ft_strndup(suffix + start, j - start);
-		if (to_find == NULL)
-			return (false);
-		if (ft_findstr(entry, to_find, i) == -1)
+		if (to_find == NULL || ft_findstr(entry, to_find, i) == -1)
 			return (false);
 		i = ft_findstr(entry, to_find, i) + ft_strlen(to_find);
 		start = ++j;

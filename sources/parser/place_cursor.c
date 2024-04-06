@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   place_cursor.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:55:46 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/05 18:39:47 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/06 15:08:17 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,3 @@ int	skip_quote_parenthesis(const char *prompt, int index)
 	return (index);
 }
 
-int	place_cursor_before_prefix(const char *prompt, int index)
-{
-	while (ft_iswhitespace(prompt[index]) == false
-		&& index >= 0 && prompt[index] != '/')
-		index--;
-	return (index);
-}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:39:53 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 13:12:10 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/06 15:02:12 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*ft_strerror(t_error *errors, int code)
 	int		i;
 
 	i = 0;
-	while (errors[i].code != code && i <= 255)
+	while (i <= 255 && errors[i].code != code)
 		i++;
 	return (errors[i].msg);
 }

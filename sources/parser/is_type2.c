@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_type2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:00:57 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 13:05:26 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/06 15:15:01 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	is_subshell(const char *cmd, int size_cmd)
 	int	i;
 
 	i = 0;
-	while (cmd[i] && i < size_cmd)
+	while (i < size_cmd && cmd[i])
 	{
 		if (is_quote(cmd[i]) == true)
 			i = place_cursor_quote(cmd, i);

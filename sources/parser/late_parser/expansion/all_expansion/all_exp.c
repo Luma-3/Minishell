@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 14:08:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 10:26:18 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 15:04:47 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static int	find_all_files(t_dstack *stack, t_match_file *match_file,
 	DIR				*dir;
 	t_list			*tmp;
 
+	if (match_file == NULL || match_file->path == NULL)
+		return (FAILURE);
 	dir = opendir(match_file->path);
 	if (dir == NULL)
 		return (FAILURE);

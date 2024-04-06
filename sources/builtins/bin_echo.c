@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_echo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:10:35 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 14:28:36 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/06 14:59:41 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ static int	have_flag(char **arg)
 		j = 1;
 		while (arg[i][j] == '\0')
 		{
+			j++;
 			if (arg[i][j] != 'n')
 				return (i);
-			j++;
 		}
 		i++;
 	}

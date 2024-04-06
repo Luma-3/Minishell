@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 14:25:48 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 15:19:10 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,19 +91,19 @@ t_token	*copy_token(t_maindata *core_data, const char *prompt, int size_copy)
 	t_token	*token;
 	char	*prompt_copy;
 	int		nb_redir;
-	bool	is_subshell;
+	bool	subshell;
 
 	nb_redir = 0;
 	prompt_copy = take_redir(core_data, prompt, size_copy, &nb_redir);
 	if (prompt_copy == NULL)
 		return (NULL);
-	is_subshell = is_pipeline(prompt_copy);
+	subshell = is_pipeline(prompt_copy);
 	token = init_node(prompt_copy, size_copy);
 	if (token == NULL)
 		return (NULL);
 	if (token->is_subshell == false)
 	{
-		token->is_subshell = is_subshell;
+		token->is_subshell = subshell;
 	}
 	token->nb_redir = nb_redir;
 	return (token);

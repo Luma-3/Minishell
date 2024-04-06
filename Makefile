@@ -6,7 +6,7 @@
 #    By: anthony <anthony@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/06 13:45:44 by anthony          ###   ########.fr        #
+#    Updated: 2024/04/06 15:08:04 by anthony          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -169,7 +169,6 @@ SRC_PARSER_LIST		=	parser.c			\
 						is_type.c			\
 						is_type2.c			\
 						place_cursor.c		\
-						place_cursor2.c		\
 						check_char.c		\
 						$(ATS)				\
 						$(POST_PARSER)		\

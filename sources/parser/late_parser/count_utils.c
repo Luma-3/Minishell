@@ -3,48 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   count_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:33:39 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/05 18:41:13 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/06 15:06:04 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-static int	count_words_without_quote(const char *prompt, int i)
-{
-	while (prompt[i] && ft_iswhitespace(prompt[i]) == false)
-	{
-		if (is_quote(prompt[i]) == true)
-			break ;
-		else
-			i++;
-	}
-	return (i);
-}
-
-int	count_words(const char *prompt)
-{
-	int	nb_words;
-	int	i;
-
-	i = 0;
-	nb_words = 0;
-	while (prompt[i] != '\0')
-	{
-		i = ft_skip_whitespaces(prompt, i);
-		if (prompt[i] == '\0')
-			break ;
-		if (is_quote(prompt[i]) == true)
-			i = place_cursor_quote(prompt, i);
-		else
-			i = count_words_without_quote(prompt, i);
-		if (prompt[i] == '\0' || ft_iswhitespace(prompt[i]) == true)
-			nb_words++;
-	}
-	return (nb_words);
-}
 
 int	count_letters(const char *start_word)
 {

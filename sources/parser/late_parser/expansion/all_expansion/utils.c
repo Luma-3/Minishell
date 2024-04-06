@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:49:00 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/06 10:35:18 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 15:11:48 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	ft_findstr(char *str, char *to_find, int i)
 		if (to_find != NULL && str[i] == to_find[j])
 		{
 			while (str[i + j] == to_find[j]
-				&& to_find[j] != '\0' && str[i + j] != '\0')
+				&& to_find[j] != '\0')
 			{
 				j++;
 			}

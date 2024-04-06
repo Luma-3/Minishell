@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:43:18 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/05 17:25:49 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/06 15:10:48 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	error_subshell(const char *prompt)
 	print_error_arg_msg();
 	while (*prompt
 		&& *prompt != ')'
-		&& *prompt != '\0'
 		&& is_operator(prompt) == false
 		&& ft_iswhitespace(*prompt) == false
 		&& is_pipe(prompt) == false)
