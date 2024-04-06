@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   atomizer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/05 16:40:33 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/06 18:17:12 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,8 @@ int	atomize_prompt(t_maindata *core_data)
 			if (copy_cmd_operator(core_data, &i_copy, &i_read) == FAILURE)
 				return (FAILURE);
 		}
-		else
-		{
-			if (core_data->prompt[i_read] != '\0')
-				i_read++;
-		}
+		else if (core_data->prompt[i_read] != '\0')
+			i_read++;
 	}
 	if (copy_insert_node(core_data, i_copy, i_read) == NULL)
 		return (FAILURE);

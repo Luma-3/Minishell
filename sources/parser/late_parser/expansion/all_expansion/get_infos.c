@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:40:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 18:25:38 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 18:15:57 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,20 @@ char	*get_token(char *prefix, char *suffix)
 	while (j < len_suffix)
 		tmp[i++] = suffix[j++];
 	return (tmp);
+}
+
+char	*get_replace_token(t_match_file *match_file, t_dstack *stack)
+{
+	char	*token;
+	char	*suffix_tmp;
+
+	match_file->old_data = (char *)d_pop_stk(stack);
+	suffix_tmp = ft_strtrim(match_file->suffix, "/");
+	if (suffix_tmp == NULL)
+		return (NULL);
+	token = get_token(match_file->prefix, suffix_tmp);
+	free(suffix_tmp);
+	if (token == NULL)
+		return (NULL);
+	return (token);
 }

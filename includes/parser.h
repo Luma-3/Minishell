@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 12:28:09 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 18:16:34 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,8 @@ char			*get_suffix(char *prompt, int index);
 char			*get_prefix(char *prompt, int index);
 
 char			*get_path_wildcard(char *arg, int index);
+
+char			*get_replace_token(t_match_file *match_file, t_dstack *stack);
 
 // find_files
 

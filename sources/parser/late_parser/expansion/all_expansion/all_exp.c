@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 14:08:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 15:04:47 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 18:06:23 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static void	call_recursion(t_match_file *match_file, t_dstack *stack,
 	if (stack->top != NULL)
 	{
 		rec_all(stack, list);
+		(free(match_file->suffix), free(match_file->path));
+		free(match_file->prefix);
 	}
 }
 

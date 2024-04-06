@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 09:22:25 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 14:33:35 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 17:37:35 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	parse_prompt(char *prompt, t_maindata *core_data, bool check_arg)
 	if (check_arg == true)
 	{
 		if (verif_prompt(prompt) == FAILURE)
-			return (FAILURE);
+			return (free(tmp), FAILURE);
 		handle_heredoc(prompt, core_data);
 	}
 	if (atomize_prompt(core_data) == FAILURE)
@@ -32,5 +32,6 @@ int	parse_prompt(char *prompt, t_maindata *core_data, bool check_arg)
 		perror("atomize_prompt");
 		return (FAILURE);
 	}
+	free(tmp);
 	return (SUCCESS);
 }

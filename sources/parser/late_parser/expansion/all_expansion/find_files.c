@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 00:18:28 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/06 15:14:38 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 18:15:40 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,12 @@ bool	identify_file(struct dirent *entry, t_match_file *match_file)
 	if (file_name == NULL)
 		return (false);
 	if (find_match_file(file_name, match_file->prefix,
-		match_file->suffix) == false)
+			match_file->suffix) == false)
 		result = false;
 	else
 		result = true;
 	free(file_name);
 	return (result);
-}
-
-static char	*get_replace_token(t_match_file *match_file, t_dstack *stack)
-{
-	char	*token;
-	char	*suffix_tmp;
-
-	match_file->old_data = (char *)d_pop_stk(stack);
-	suffix_tmp = ft_strtrim(match_file->suffix, "/");
-	if (suffix_tmp == NULL)
-		return (NULL);
-	token = get_token(match_file->prefix, suffix_tmp);
-	free(suffix_tmp);
-	if (token == NULL)
-		return (NULL);
-	return (token);
 }
 
 bool	find_and_push(t_dstack *stack, t_match_file *match_file,
@@ -116,7 +100,7 @@ static	bool	final_decision(char *entry, char *suffix)
 		while (suffix != NULL && suffix[j] != '\0' && suffix[j] != '*')
 			j++;
 		if (suffix == NULL)
-			break;
+			break ;
 		to_find = ft_strndup(suffix + start, j - start);
 		if (to_find == NULL || ft_findstr(entry, to_find, i) == -1)
 			return (false);

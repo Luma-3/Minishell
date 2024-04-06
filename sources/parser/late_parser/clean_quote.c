@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:39:12 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 16:14:39 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 17:58:19 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,12 @@ char	*clean_quote(char *word)
 
 	nb_quote = count_quote(word);
 	if (nb_quote == 0)
-		return (ft_strdup(word));
+	{
+		new_word = ft_strdup(word);
+		if (new_word == NULL)
+			return (NULL);
+		return (new_word);
+	}
 	new_word = (char *)ft_calloc(ft_strlen(word) - nb_quote + 1, sizeof(char));
 	if (new_word == NULL)
 		return (NULL);

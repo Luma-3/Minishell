@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:55:46 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 15:08:17 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/06 18:17:23 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,3 @@ int	skip_quote_parenthesis(const char *prompt, int index)
 		index = place_cursor_parenthesis(prompt, index);
 	return (index);
 }
-

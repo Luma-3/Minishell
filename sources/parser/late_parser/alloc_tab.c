@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_tab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:48:17 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/05 18:40:32 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/06 17:54:26 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,15 @@ char	**list_to_tab(t_list **lst)
 	{
 		tmp_data = (char *)indexer->content;
 		tab[i] = clean_quote(tmp_data);
-		i++;
+		if (tab[i] == NULL)
+		{
+			ft_rm_split(tab);
+			return (NULL);
+		}
 		indexer = indexer->next;
+		i++;
 	}
 	ft_lstclear(lst, free);
+	tab[i] = NULL;
 	return (tab);
 }

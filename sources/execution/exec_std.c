@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_std.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/05 18:03:57 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/06 18:09:16 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,6 @@ void	exec_std(t_maindata *core_data, const t_ats *node)
 	else
 	{
 		process_built_out(core_data, (t_ats *)node, args);
+		ft_rm_split(args);
 	}
 }

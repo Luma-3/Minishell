@@ -147,8 +147,12 @@ sources/safe_mode.c:56:15: Null storage passed as non-null param:
   parameter with no /*@null@*/ annotation.  If NULL may be used for this
   parameter, add a /*@null@*/ annotation to the function parameter declaration.
   (Use -nullpass to inhibit warning)
+sources/safe_mode.c:61:16: Fresh storage cwd not released before return
+   sources/safe_mode.c:56:2: Fresh storage cwd created
+sources/safe_mode.c:63:13: Fresh storage cwd not released before return
+   sources/safe_mode.c:56:2: Fresh storage cwd created
 sources/safe_mode.c: (in function init_safe_mode)
-sources/safe_mode.c:69:2: Implicitly only storage core_data->path (type char *)
+sources/safe_mode.c:68:2: Implicitly only storage core_data->path (type char *)
     not released before assignment: core_data->path = take_path()
 < Location unknown >: Field name reused: 
 < Location unknown >: Previous use of 
@@ -568,32 +572,41 @@ sources/components/redirection/heredoc.c:78:41:
 sources/components/redirection/heredoc.c:85:2:
     Implicitly temp storage delimiter assigned to implicitly only:
     heredoc->delimiter = delimiter
-sources/components/redirection/heredoc.c:90:8:
+sources/components/redirection/heredoc.c:89:8:
     Only storage heredoc->delimiter (type char *) derived from released storage
     is not released (memory leak): heredoc
-sources/components/redirection/heredoc.c:95:27:
-    Fresh storage heredoc not released before return
-   sources/components/redirection/heredoc.c:77:2: Fresh storage heredoc created
-sources/components/redirection/heredoc.c:97:39:
+sources/components/redirection/heredoc.c:89:8:
+    Only storage heredoc->file_name (type char *) derived from released storage
+    is not released (memory leak): heredoc
+sources/components/redirection/heredoc.c:90:8:
+    Variable heredoc used after being released
+   sources/components/redirection/heredoc.c:89:8: Storage heredoc released
+sources/components/redirection/heredoc.c:96:8:
+    Only storage heredoc->delimiter (type char *) derived from released storage
+    is not released (memory leak): heredoc
+sources/components/redirection/heredoc.c:96:8:
+    Only storage heredoc->file_name (type char *) derived from released storage
+    is not released (memory leak): heredoc
+sources/components/redirection/heredoc.c:100:39:
     Fresh storage heredoc not released before return
    sources/components/redirection/heredoc.c:77:2: Fresh storage heredoc created
 sources/components/redirection/heredoc.c: (in function handle_heredoc)
-sources/components/redirection/heredoc.c:111:9:
+sources/components/redirection/heredoc.c:114:9:
     Test expression for while not boolean, type char: prompt[i]
   Test expression type is not boolean. (Use -predboolothers to inhibit warning)
-sources/components/redirection/heredoc.c:113:7:
+sources/components/redirection/heredoc.c:116:7:
     Operands of == have incompatible types (int, boolean):
     is_quote(prompt[i]) == true
   To make bool and int types equivalent, use +boolint.
-sources/components/redirection/heredoc.c:118:28:
+sources/components/redirection/heredoc.c:121:28:
     Incompatible types for == (int, boolean):
     ft_iswhitespace(prompt[i + j]) == false
-sources/components/redirection/heredoc.c:118:11:
+sources/components/redirection/heredoc.c:121:11:
     Left operand of && is non-boolean (char):
     prompt[i + j] && ft_iswhitespace(prompt[i + j]) == false
-sources/components/redirection/heredoc.c:120:40:
+sources/components/redirection/heredoc.c:123:40:
     Function ft_strndup expects arg 2 to be size_t gets int: j
-sources/components/redirection/heredoc.c:121:4:
+sources/components/redirection/heredoc.c:124:4:
     Return value (type int) ignored: create_enqueue_h...
 sources/components/redirection/open_redir.c: (in function open_redirs_pipe)
 sources/components/redirection/open_redir.c:20:2:
@@ -757,30 +770,33 @@ sources/builtins/builtins.c: (in function is_builtin)
 sources/builtins/builtins.c:58:16: Passed storage *builtins contains 2
                                       undefined fields: name, func
 sources/parser/parser.c: (in function parse_prompt)
-sources/parser/parser.c:25:6: Use of == with boolean variables (risks
+sources/parser/parser.c:24:6: Use of == with boolean variables (risks
     inconsistency because of multiple true values): check_arg == true
   Two bool values are compared directly using a C primitive. This may produce
   unexpected results since all non-zero values are considered true, so
   different true values may not be equal. The file bool.h (included in
   splint/lib) provides bool_equal for safe bool comparisons. (Use -boolcompare
   to inhibit warning)
-sources/parser/is_type.c: (in function is_parenthesis)
+sources/parser/parser.c:27:17: Fresh storage tmp not released before return
+   sources/parser/parser.c:19:2: Fresh storage tmp created
+sources/parser/parser.c:33:16: Fresh storage tmp not released before return
+   sources/parser/parser.c:19:2: Fresh storage tmp created
+sources/parser/parser.c:35:13: Fresh storage tmp not released before return
+   sources/parser/parser.c:19:2: Fresh storage tmp created
+sources/parser/is_type.c: (in function is_pipe)
 sources/parser/is_type.c:19:10: Return value type boolean does not match
                                    declared type int: (true)
-sources/parser/is_type.c: (in function is_pipe)
+sources/parser/is_type.c: (in function is_operator)
 sources/parser/is_type.c:28:10: Return value type boolean does not match
                                    declared type int: (true)
-sources/parser/is_type.c: (in function is_operator)
-sources/parser/is_type.c:37:10: Return value type boolean does not match
-                                   declared type int: (true)
-sources/parser/is_type.c:41:10: Return value type boolean does not match
+sources/parser/is_type.c:32:10: Return value type boolean does not match
                                    declared type int: (true)
 sources/parser/is_type.c: (in function is_quote)
-sources/parser/is_type.c:50:10: Return value type boolean does not match
+sources/parser/is_type.c:41:10: Return value type boolean does not match
                                    declared type int: (true)
 sources/parser/is_type2.c: (in function is_subshell)
-sources/parser/is_type2.c:20:9: Left operand of && is non-boolean (char):
-                                   cmd[i] && i < size_cmd
+sources/parser/is_type2.c:20:25: Right operand of && is non-boolean (char):
+                                    i < size_cmd && cmd[i]
 sources/parser/is_type2.c:22:7: Operands of == have incompatible types (int,
                                    boolean): is_quote(cmd[i]) == true
 sources/parser/is_type2.c: (in function is_pipeline)
@@ -805,17 +821,11 @@ sources/parser/place_cursor.c:45:9: Left operand of && is non-boolean (char):
 sources/parser/place_cursor.c: (in function skip_quote_parenthesis)
 sources/parser/place_cursor.c:62:6: Operands of == have incompatible types
     (int, boolean): is_quote(prompt[index]) == true
-sources/parser/place_cursor.c: (in function place_cursor_before_prefix)
-sources/parser/place_cursor.c:71:9: Incompatible types for == (int, boolean):
-                                       ft_iswhitespace(prompt[index]) == false
 includes/parser.h:122:8: Function place_cursor_quote defined more than once
   A function or variable is redefined. One of the declarations should use
   extern. (Use -redef to inhibit warning)
    sources/parser/place_cursor.c:48:1:
    Previous definition of place_cursor_quote
-sources/parser/place_cursor2.c: (in function skip_single_quote)
-sources/parser/place_cursor2.c:18:9: Left operand of && is non-boolean (char):
-                                        str[i] && str[i] != '\''
 sources/parser/atomize/atomizer.c: (in function add_queue_pipe)
 sources/parser/atomize/atomizer.c:24:11:
     Passed storage data->pipe_fd not completely defined (*(data->pipe_fd) is
@@ -858,17 +868,20 @@ sources/parser/atomize/atomizer_copy.c: (in function init_node)
 sources/parser/atomize/atomizer_copy.c:39:10:
     Null storage returned as non-null: (NULL)
 sources/parser/atomize/atomizer_copy.c:45:10:
-    Null storage returned as non-null: (free(data), NULL)
+    Null storage returned as non-null: (free_data_tree(data), NULL)
+sources/parser/atomize/atomizer_copy.c:45:39:
+    Fresh storage data not released before return
+   sources/parser/atomize/atomizer_copy.c:37:2: Fresh storage data created
 sources/parser/atomize/atomizer_copy.c:50:9:
     Returned storage *data contains 1 undefined field: nb_redir
 sources/parser/atomize/atomizer_copy.c: (in function copy_insert_node)
 sources/parser/atomize/atomizer_copy.c:59:10:
     Null storage returned as non-null: (NULL)
-sources/parser/atomize/atomizer_copy.c:61:16:
-    Only storage data->cmd (type char *) derived from released storage is not
-    released (memory leak): data
 sources/parser/atomize/atomizer_copy.c:61:10:
-    Null storage returned as non-null: (free(data), NULL)
+    Null storage returned as non-null: (free_data_tree(data), NULL)
+sources/parser/atomize/atomizer_copy.c:61:39:
+    Fresh storage data not released before return
+   sources/parser/atomize/atomizer_copy.c:57:2: Fresh storage data created
 sources/parser/atomize/atomizer_copy.c: (in function copy_cmd_operator)
 sources/parser/atomize/atomizer_copy.c:73:16:
     Only storage data->cmd (type char *) derived from released storage is not
@@ -993,30 +1006,13 @@ sources/parser/late_parser/alloc_tab.c:24:18:
     ft_lstsize(*lst) + 1
 sources/parser/late_parser/alloc_tab.c:26:10:
     Null storage returned as non-null: (NULL)
-sources/parser/late_parser/count_utils.c: (in function count_words_without_quote)
-sources/parser/late_parser/count_utils.c:17:22:
-    Incompatible types for == (int, boolean):
-    ft_iswhitespace(prompt[i]) == false
-sources/parser/late_parser/count_utils.c:17:9:
-    Left operand of && is non-boolean (char):
-    prompt[i] && ft_iswhitespace(prompt[i]) == false
-sources/parser/late_parser/count_utils.c:19:7:
-    Operands of == have incompatible types (int, boolean):
-    is_quote(prompt[i]) == true
-sources/parser/late_parser/count_utils.c: (in function count_words)
-sources/parser/late_parser/count_utils.c:39:7:
-    Operands of == have incompatible types (int, boolean):
-    is_quote(prompt[i]) == true
-sources/parser/late_parser/count_utils.c:43:28:
-    Operands of == have incompatible types (int, boolean):
-    ft_iswhitespace(prompt[i]) == true
 sources/parser/late_parser/count_utils.c: (in function count_letters)
-sources/parser/late_parser/count_utils.c:54:9:
+sources/parser/late_parser/count_utils.c:20:9:
     Test expression for while not boolean, type char: start_word[i]
-sources/parser/late_parser/count_utils.c:56:7:
+sources/parser/late_parser/count_utils.c:22:7:
     Operands of == have incompatible types (int, boolean):
     ft_iswhitespace(start_word[i]) == true
-sources/parser/late_parser/count_utils.c:58:12:
+sources/parser/late_parser/count_utils.c:24:12:
     Operands of == have incompatible types (int, boolean):
     is_quote(start_word[i]) == true
 sources/parser/late_parser/clean_quote.c: (in function copy_word_clean)
@@ -1150,110 +1146,110 @@ sources/parser/late_parser/expansion/tilde_exp.c:58:9:
     Implicitly temp storage arg returned as implicitly only (new_arg aliases
     arg): (new_arg)
 sources/parser/late_parser/expansion/all_expansion/all_exp.c: (in function find_all_files)
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:31:3:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:33:3:
     Return value (type int) ignored: closedir(dir)
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:32:16:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:34:16:
     Fresh storage tmp not released before return
-   sources/parser/late_parser/expansion/all_expansion/all_exp.c:28:3:
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:30:3:
    Fresh storage tmp created
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:32:16:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:34:16:
     Fresh storage dir not released before return
-   sources/parser/late_parser/expansion/all_expansion/all_exp.c:23:2:
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:25:2:
    Fresh storage dir created
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:35:16:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:37:16:
     Fresh storage dir not released before return
-   sources/parser/late_parser/expansion/all_expansion/all_exp.c:23:2:
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:25:2:
    Fresh storage dir created
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:36:13:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:38:13:
     Fresh storage dir not released before return
-   sources/parser/late_parser/expansion/all_expansion/all_exp.c:23:2:
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:25:2:
    Fresh storage dir created
 sources/parser/late_parser/expansion/all_expansion/all_exp.c: (in function call_recursion)
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:47:3:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:49:3:
     Assignment of size_t to int: len = ft_strlen(match_file->prefix)
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:49:28:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:51:28:
     Possibly null storage match_file passed as non-null param:
     find_all_files (..., match_file, ...)
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:49:28:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:51:28:
     Possibly null storage match_file->prefix derivable from parameter
     find_all_files (..., match_file, ...)
 sources/parser/late_parser/expansion/all_expansion/all_exp.c: (in function rec_all)
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:68:18:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:70:18:
     Passed storage match_file contains 4 undefined fields:
     prefix, suffix, path, old_data
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:68:2:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:70:2:
     Return value (type t_match_file *) ignored: init_match_file(...
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:69:9:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:71:9:
     Test expression for while not boolean, type char: data[i]
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:74:4:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:76:4:
     Return value (type t_match_file *) ignored: init_match_file(...
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:76:12:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:78:12:
     Return expression from function declared void:
     (no_access_file(stack, list, &match_file))
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:76:55:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:78:55:
     Only storage match_file.prefix (type char *) derived from variable declared
     in this scope is not released (memory leak)
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:76:55:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:78:55:
     Only storage match_file.suffix (type char *) derived from variable declared
     in this scope is not released (memory leak)
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:76:55:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:78:55:
     Only storage match_file.path (type char *) derived from variable declared
     in this scope is not released (memory leak)
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:76:55:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:78:55:
     Only storage match_file.old_data (type char *) derived from variable
     declared in this scope is not released (memory leak)
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:85:2:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:87:2:
     Only storage match_file.old_data (type char *) derived from variable
     declared in this scope is not released (memory leak)
 sources/parser/late_parser/expansion/all_expansion/all_exp.c: (in function get_all_file)
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:97:10:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:99:10:
     Null storage returned as non-null: (NULL)
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:102:8:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:104:8:
     Only storage tmp->content (type void *) derived from released storage is
     not released (memory leak): tmp
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:102:8:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:104:8:
     Only storage tmp->next (type struct s_list *) derived from released storage
     is not released (memory leak): tmp
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:103:10:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:105:10:
     Null storage returned as non-null: (NULL)
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:103:17:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:105:17:
     Fresh storage stack not released before return
-   sources/parser/late_parser/expansion/all_expansion/all_exp.c:95:2:
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:97:2:
    Fresh storage stack created
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:107:19:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:109:19:
     Null storage new_head derivable from parameter ft_lstadd_front (&new_head,
     ...)
-   sources/parser/late_parser/expansion/all_expansion/all_exp.c:94:13:
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:96:13:
    Storage new_head becomes null
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:108:21:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:110:21:
     Fresh storage tmp not released before return
-   sources/parser/late_parser/expansion/all_expansion/all_exp.c:98:2:
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:100:2:
    Fresh storage tmp created
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:108:21:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:110:21:
     Fresh storage stack not released before return
-   sources/parser/late_parser/expansion/all_expansion/all_exp.c:95:2:
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:97:2:
    Fresh storage stack created
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:108:21:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:110:21:
     Fresh storage start_content not released before return
-   sources/parser/late_parser/expansion/all_expansion/all_exp.c:99:2:
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:101:2:
    Fresh storage start_content created
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:110:7:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:112:7:
     Only storage tmp->content (type void *) derived from released storage is
     not released (memory leak): tmp
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:110:7:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:112:7:
     Only storage tmp->next (type struct s_list *) derived from released storage
     is not released (memory leak): tmp
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:111:17:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:113:17:
     Null storage new_head derivable from parameter rec_all (..., &new_head)
-   sources/parser/late_parser/expansion/all_expansion/all_exp.c:94:13:
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:96:13:
    Storage new_head becomes null
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:113:20:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:115:20:
     Fresh storage stack not released before return
-   sources/parser/late_parser/expansion/all_expansion/all_exp.c:95:2:
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:97:2:
    Fresh storage stack created
-sources/parser/late_parser/expansion/all_expansion/all_exp.c:113:20:
+sources/parser/late_parser/expansion/all_expansion/all_exp.c:115:20:
     Fresh storage start_content not released before return
-   sources/parser/late_parser/expansion/all_expansion/all_exp.c:99:2:
+   sources/parser/late_parser/expansion/all_expansion/all_exp.c:101:2:
    Fresh storage start_content created
 sources/parser/late_parser/expansion/all_expansion/get_infos.c: (in function get_path_wildcard)
 sources/parser/late_parser/expansion/all_expansion/get_infos.c:27:19:
@@ -1295,79 +1291,65 @@ sources/parser/late_parser/expansion/all_expansion/get_infos.c:99:14:
 sources/parser/late_parser/expansion/all_expansion/get_infos.c:103:14:
     Index of possibly null pointer suffix: suffix
 sources/parser/late_parser/expansion/all_expansion/find_files.c: (in function get_replace_token)
-sources/parser/late_parser/expansion/all_expansion/find_files.c:36:2:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:39:2:
     Implicitly only storage match_file->old_data (type char *) not released
     before assignment: match_file->old_data = (char *)d_pop_stk(stack)
-sources/parser/late_parser/expansion/all_expansion/find_files.c:39:10:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:42:10:
     Null storage returned as non-null: (NULL)
-sources/parser/late_parser/expansion/all_expansion/find_files.c:43:10:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:46:10:
     Null storage returned as non-null: (NULL)
 sources/parser/late_parser/expansion/all_expansion/find_files.c: (in function find_and_push)
-sources/parser/late_parser/expansion/all_expansion/find_files.c:67:22:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:69:22:
     New fresh storage (type char *) passed as implicitly temp (not released):
     ft_insert_str(match_file->old_data, entry->d_name, token, i)
-sources/parser/late_parser/expansion/all_expansion/find_files.c:67:4:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:69:4:
     Return value (type int) ignored: d_push_stk(stack...
-sources/parser/late_parser/expansion/all_expansion/find_files.c:71:7:
-    Unallocated storage suffix_tmp passed as out parameter: suffix_tmp
-sources/parser/late_parser/expansion/all_expansion/find_files.c:72:34:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:73:34:
     Fresh storage entry not released before return
-   sources/parser/late_parser/expansion/all_expansion/find_files.c:61:3:
+   sources/parser/late_parser/expansion/all_expansion/find_files.c:63:3:
    Fresh storage entry created
 sources/parser/late_parser/expansion/all_expansion/find_files.c: (in function get_last_suffix)
-sources/parser/late_parser/expansion/all_expansion/find_files.c:80:2:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:81:2:
     Assignment of size_t to int: len_suff = ft_strlen(suffix + j)
-sources/parser/late_parser/expansion/all_expansion/find_files.c:83:29:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:84:29:
     Function ft_strchr expects arg 2 to be int gets char: '/'
-sources/parser/late_parser/expansion/all_expansion/find_files.c:90:66:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:91:66:
     Fresh storage suffix_dir not released before return
-   sources/parser/late_parser/expansion/all_expansion/find_files.c:85:4:
+   sources/parser/late_parser/expansion/all_expansion/find_files.c:86:4:
    Fresh storage suffix_dir created
-sources/parser/late_parser/expansion/all_expansion/find_files.c:94:48:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:95:48:
     Null storage passed as non-null param: verif_suffix_ptr (..., NULL, ...)
-sources/parser/late_parser/expansion/all_expansion/find_files.c:96:17:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:97:17:
     Fresh storage suffix_dir not released before return
-   sources/parser/late_parser/expansion/all_expansion/find_files.c:85:4:
+   sources/parser/late_parser/expansion/all_expansion/find_files.c:86:4:
    Fresh storage suffix_dir created
 sources/parser/late_parser/expansion/all_expansion/find_files.c: (in function final_decision)
-sources/parser/late_parser/expansion/all_expansion/find_files.c:113:29:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:114:29:
     Function ft_strchr expects arg 2 to be int gets char: '*'
-sources/parser/late_parser/expansion/all_expansion/find_files.c:117:40:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:120:40:
     Function ft_strndup expects arg 2 to be size_t gets int: j - start
-sources/parser/late_parser/expansion/all_expansion/find_files.c:121:19:
-    Fresh storage to_find not released before return
-   sources/parser/late_parser/expansion/all_expansion/find_files.c:117:3:
-   Fresh storage to_find created
-sources/parser/late_parser/expansion/all_expansion/find_files.c:122:3:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:123:3:
     Assignment of arbitrary unsigned integral type to int:
     i = ft_findstr(entry, to_find, i) + ft_strlen(to_find)
-sources/parser/late_parser/expansion/all_expansion/find_files.c:125:16:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:126:16:
     Fresh storage to_find not released before return
-   sources/parser/late_parser/expansion/all_expansion/find_files.c:117:3:
-   Fresh storage to_find created
-sources/parser/late_parser/expansion/all_expansion/find_files.c:125:9:
-    Unreachable code: return (true)
-  This code will never be reached on any possible execution. (Use -unreachable
-  to inhibit warning)
-sources/parser/late_parser/expansion/all_expansion/find_files.c:126:2:
-    Fresh storage to_find not released before return
-   sources/parser/late_parser/expansion/all_expansion/find_files.c:117:3:
+   sources/parser/late_parser/expansion/all_expansion/find_files.c:120:3:
    Fresh storage to_find created
 sources/parser/late_parser/expansion/all_expansion/find_files.c: (in function find_match_file)
-sources/parser/late_parser/expansion/all_expansion/find_files.c:136:3:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:137:3:
     Assignment of size_t to int: len_suffix = ft_strlen(suffix)
-sources/parser/late_parser/expansion/all_expansion/find_files.c:138:3:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:139:3:
     Assignment of size_t to int: len_prefix = ft_strlen(prefix)
-sources/parser/late_parser/expansion/all_expansion/find_files.c:147:34:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:148:34:
     Possibly null storage suffix passed as non-null param: only_all (suffix)
-sources/parser/late_parser/expansion/all_expansion/find_files.c:149:33:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:150:33:
     Function ft_strncmp expects arg 3 to be size_t gets int: len_prefix
-sources/parser/late_parser/expansion/all_expansion/find_files.c:149:25:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:150:25:
     Possibly null storage prefix passed as non-null param:
     ft_strncmp (..., prefix, ...)
-sources/parser/late_parser/expansion/all_expansion/find_files.c:151:33:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:152:33:
     Function ft_strncmp expects arg 3 to be size_t gets int: len_prefix
-sources/parser/late_parser/expansion/all_expansion/find_files.c:152:29:
+sources/parser/late_parser/expansion/all_expansion/find_files.c:153:29:
     Possibly null storage suffix passed as non-null param:
     final_decision (..., suffix)
 sources/parser/late_parser/expansion/all_expansion/decision.c: (in function decision_file)
@@ -1525,24 +1507,24 @@ includes/parser.h:56:8: Function verif_before_operator defined more than once
 sources/parser/pre_parser/verif_utils2.c: (in function error_subshell)
 sources/parser/pre_parser/verif_utils2.c:19:9:
     Left operand of && is non-boolean (char): *prompt && *prompt != ')'
-sources/parser/pre_parser/verif_utils2.c:22:6:
+sources/parser/pre_parser/verif_utils2.c:21:6:
     Incompatible types for == (int, boolean): is_operator(prompt) == false
-sources/parser/pre_parser/verif_utils2.c:23:6:
+sources/parser/pre_parser/verif_utils2.c:22:6:
     Incompatible types for == (int, boolean): ft_iswhitespace(*prompt) == false
-sources/parser/pre_parser/verif_utils2.c:24:6:
+sources/parser/pre_parser/verif_utils2.c:23:6:
     Incompatible types for == (int, boolean): is_pipe(prompt) == false
 sources/parser/pre_parser/verif_utils2.c: (in function verif_token_before)
-sources/parser/pre_parser/verif_utils2.c:36:7:
+sources/parser/pre_parser/verif_utils2.c:35:7:
     Operands of == have incompatible types (int, boolean):
     ft_iswhitespace(prompt[i]) == true
-sources/parser/pre_parser/verif_utils2.c:38:7:
+sources/parser/pre_parser/verif_utils2.c:37:7:
     Operands of == have incompatible types (int, boolean):
     is_operator(prompt + i - 1) == true
-sources/parser/pre_parser/verif_utils2.c:39:7:
+sources/parser/pre_parser/verif_utils2.c:38:7:
     Operands of == have incompatible types (int, boolean):
     is_quote(prompt[i]) == true
 sources/parser/pre_parser/verif_utils2.c: (in function verif_arg_parenthesis)
-sources/parser/pre_parser/verif_utils2.c:55:9:
+sources/parser/pre_parser/verif_utils2.c:54:9:
     Test expression for while not boolean, type char: prompt[i]
 < Location unknown >: Previous use of 
 < Location unknown >: Previous use of 
@@ -1866,6 +1848,6 @@ sources/parser/atomize/take_redir.c:45:6:
    Definition of check_quote_parenthesis
 sources/parser/late_parser/expansion/all_expansion/find_files.c:17:6:
     Function exported but not used outside find_files: identify_file
-   sources/parser/late_parser/expansion/all_expansion/find_files.c:29:1:
+   sources/parser/late_parser/expansion/all_expansion/find_files.c:32:1:
    Definition of identify_file
 
