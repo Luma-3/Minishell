@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 22:46:00 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/07 18:37:08 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	exec_process(t_maindata *core_data, char *input)
 		| CORE_HEREDOC | CORE_PIPE);
 }
 
-void	read_input(t_maindata *core_data)
+static void	read_input(t_maindata *core_data)
 {
 	char		*input;
 

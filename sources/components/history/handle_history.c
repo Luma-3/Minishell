@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:39:31 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/02 12:23:36 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/07 16:23:39 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ int	ft_add_history(char *input, int fd)
 
 int	open_history(const char *name, const char *uname)
 {
-	int		fd;
-	char	*path_atom[5];
-	char	*path;
+	int			fd;
+	const char	*path_atom[5] = {
+		"/home/",
+		(char *)uname,
+		"/",
+		(char *)name,
+		NULL};
+	char		*path;
 
-	path_atom[0] = "/home/";
-	path_atom[1] = (char *)uname;
-	path_atom[2] = "/";
-	path_atom[3] = (char *)name;
-	path_atom[4] = NULL;
 	path = assemble(path_atom);
 	fd = open(path, O_CREAT | O_RDWR, 0644);
 	free(path);
@@ -56,7 +56,7 @@ int	get_history(int fd)
 {
 	char	*input;
 
-	while (1)
+	while (true)
 	{
 		input = get_next_line(fd);
 		if (input == NULL)

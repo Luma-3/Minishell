@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_ats.c                                        :+:      :+:    :+:   */
+/*   clear_core.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:52:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 17:15:08 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/07 18:38:49 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	clear_pipe_queue(void *content)
 	free(pipe);
 }
 
-void	clear_else(t_maindata *ats, int flag)
+static void	clear_else(t_maindata *ats, int flag)
 {
 	if (flag & CORE_PIPE && ats->queue_pipe != NULL)
 	{

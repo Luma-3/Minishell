@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:26:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 17:22:58 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/07 16:41:18 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int	open_redir(t_maindata *core_data, const t_ats *node)
 			perror_switch(core_data->errors, node_redir->file_name);
 			exit_code = FAILURE;
 		}
-		//TODO FREE
+		free(node_redir->file_name);
+		free(node_redir);
 		index--;
 	}
 	return (exit_code);

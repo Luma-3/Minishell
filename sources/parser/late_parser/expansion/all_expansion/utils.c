@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:49:00 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/06 15:11:48 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/07 18:08:11 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,15 @@ t_match_file	*init_match_file(t_match_file *match_file, char *data, int i)
 
 void	no_access_file(t_dstack *stack, t_list **list, t_match_file *match_file)
 {
-	ft_lstadd_front(list, ft_lstnew(d_pop_stk(stack)));
+	t_list	*new_node;
+	char	*tmp;
+
+	tmp = d_pop_stk(stack);
+	new_node = ft_lstnew(tmp);
+	if (new_node != NULL)
+		ft_lstadd_front(list, new_node);
+	else
+		free(tmp);
 	if (match_file->path != NULL)
 		free(match_file->path);
 	if (match_file->prefix != NULL)

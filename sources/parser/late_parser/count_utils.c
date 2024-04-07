@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   count_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:33:39 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 15:06:04 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/07 17:37:34 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int	count_letters(const char *start_word)
+long	count_letters(const char *start_word)
 {
 	int	i;
 

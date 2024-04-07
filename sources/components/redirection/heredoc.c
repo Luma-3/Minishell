@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:04:47 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 14:35:25 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/07 16:37:11 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,27 +72,40 @@ static int	create_enqueue_heredoc(t_queue *heredoc_queue, char *delimiter,
 {
 	t_queue_heredoc	*heredoc;
 	char			*heredoc_name;
+	char			*heredoc_id;
 	int				fd;
 
 	heredoc = (t_queue_heredoc *)malloc(sizeof(t_queue_heredoc));
-	heredoc_name = ft_strjoin(".heredoc_", ft_itoa(id));
-	if (heredoc_name == NULL || heredoc == NULL)
+	if (heredoc == NULL)
+		return (errno = ENOMEM, FAILURE);
+	heredoc_id = ft_itoa(id);
+	if (heredoc_id == NULL)
 	{
-		errno = ENOMEM;
-		return (FAILURE);
+		free(heredoc);
+		return (errno = ENOMEM, FAILURE);
+	}
+	heredoc_name = ft_strjoin(".heredoc_", heredoc_id);
+	free(heredoc_id);
+	if (heredoc_name == NULL)
+	{
+		free(heredoc);
+		return (errno = ENOMEM, FAILURE);
 	}
 	heredoc->file_name = heredoc_name;
 	heredoc->delimiter = delimiter;
 	fd = open(heredoc->file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (fd == -1)
 	{
-		free(heredoc);
 		free(heredoc->file_name);
+		free(heredoc->delimiter);
+		free(heredoc);
 		perror("kikishell: heredoc");
 		return (errno);
 	}
 	if (heredoc_queue == NULL)
 	{
+		free(heredoc->file_name);
+		free(heredoc->delimiter);
 		free(heredoc);
 		return (close(fd), FAILURE);
 	}
@@ -120,9 +133,13 @@ void	handle_heredoc(const char *prompt, t_maindata *ats)
 			i = ft_skip_whitespaces(prompt, i) + 2;
 			while (prompt[i + j] && ft_iswhitespace(prompt[i + j]) == false)
 				j++;
-			delimiteur = ft_strndup(prompt + i, j);
-			create_enqueue_heredoc(ats->queue_heredoc,
-				delimiteur, id); // TODO : check return value
+			delimiteur = ft_strndup(prompt + i, (size_t)j);
+			if (create_enqueue_heredoc(ats->queue_heredoc,
+					delimiteur, id) == FAILURE)
+			{
+				free(delimiteur);
+				return ;
+			}
 			id++;
 		}
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tilde_exp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 17:10:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 18:16:24 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/07 17:54:27 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ char	*copy_data_tilde(const char *uname, char *arg, int index)
 	if (home == NULL)
 		return (arg);
 	new_arg = ft_insert_str(arg, home, "~", index);
+	free(home);
+	if (new_arg == arg)
+		return (arg);
 	free(arg);
 	return (new_arg);
 }

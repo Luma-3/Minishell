@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:39:34 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/07 00:10:31 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/07 16:20:12 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*get_current_dir(void)
 {
 	char	*absolute_path;
 	char	*working_directory;
-	int		len;
+	long	len;
 
 	absolute_path = getcwd(NULL, 0);
 	if (absolute_path == NULL)
@@ -76,7 +76,7 @@ char	*get_current_dir(void)
 	return (working_directory);
 }
 
-char	*assemble(char **display)
+char	*assemble(const char **display)
 {
 	char	*display_final;
 	int		i;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   atomizer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 18:17:12 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/07 17:15:12 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,15 @@ static int	copy_cmd_pipe(t_maindata *ats, int i_copy, int i_read, int *nb_pipe)
 	t_token	*data;
 
 	data = copy_insert_node(ats, i_copy, i_read);
-	if (data == NULL || ats->queue_pipe == NULL)
+	if (data == NULL)
 		return (FAILURE);
 	data->require_wait = false;
 	data->index = *nb_pipe;
-	add_queue_pipe(ats->queue_pipe, *nb_pipe);
+	if (add_queue_pipe(ats->queue_pipe, *nb_pipe == FAILURE))
+	{
+		free_data_tree(data);
+		return (FAILURE);
+	}
 	(*nb_pipe)++;
 	return (SUCCESS);
 }

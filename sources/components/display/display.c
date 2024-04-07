@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/06 23:30:01 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/07 18:36:24 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	display_msg(t_maindata *core_data, char *msg)
 	exec_process(core_data, command);
 }
 
-char	*create_sh_prompt(t_list *env, char *uname, int last_status)
+static char	*create_sh_prompt(t_list *env, char *uname, int last_status)
 {
 	char	*display[15];
 	char	*prompt;
@@ -51,7 +51,7 @@ char	*create_sh_prompt(t_list *env, char *uname, int last_status)
 		display[12] = " 🌙 ";
 	display[13] = RESET;
 	display[14] = NULL;
-	prompt = assemble(display);
+	prompt = assemble((const char **)display);
 	free(display[6]);
 	free(display[10]);
 	return (prompt);

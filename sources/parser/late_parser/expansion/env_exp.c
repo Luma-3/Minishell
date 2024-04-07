@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 11:48:27 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 18:15:54 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/07 17:52:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,17 @@ char	*copy_data_env(t_maindata *core_data, char *arg, int index)
 	char	*new_arg;
 	char	*token;
 	char	*env_value;
+	char	*tmp;
 	int		i;
 
 	i = index + 1;
 	if (arg[i] == '?')
 	{
-		new_arg = ft_insert_str(arg,
-				ft_itoa(core_data->last_status), "$?", index);
+		tmp = ft_itoa(core_data->last_status);
+		new_arg = ft_insert_str(arg, tmp, "$?", index);
+		free(tmp);
+		if (new_arg == arg)
+			return (arg);
 		free(arg);
 		return (new_arg);
 	}
@@ -35,6 +39,7 @@ char	*copy_data_env(t_maindata *core_data, char *arg, int index)
 		return (arg);
 	env_value = ms_getenv(core_data->env, token + 1);
 	new_arg = ft_insert_str(arg, env_value, token, index);
+	free(env_value);
 	if (new_arg == arg)
 		return (free(token), new_arg);
 	free(arg);

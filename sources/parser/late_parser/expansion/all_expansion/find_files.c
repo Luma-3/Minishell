@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 00:18:28 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/06 18:15:40 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/07 18:41:12 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "minishell.h"
 #include "stackft.h"
 
-bool	identify_file(struct dirent *entry, t_match_file *match_file)
+static bool	identify_file(struct dirent *entry, t_match_file *match_file)
 {
 	char	*file_name;
 	bool	result;

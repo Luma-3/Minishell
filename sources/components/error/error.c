@@ -3,26 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:39:53 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 15:02:12 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/07 16:09:02 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_error.h"
 #include "core_data.h"
 
-static void	_init_msg_error_(char **msg_error)
-{
-	msg_error[0] = EMSG_ENOCNF;
-	msg_error[1] = EMSG_ENVHOM;
-	msg_error[2] = EMSG_ENOENV;
-	msg_error[3] = EMSG_ENOUSR;
-	msg_error[4] = EMSG_EINVID;
-}
-
-static void	_init_struct(t_error *errors, char **msg_error)
+static void	_init_struct(t_error *errors, const char **msg_error)
 {
 	int		i;
 	int		code;
@@ -32,7 +23,7 @@ static void	_init_struct(t_error *errors, char **msg_error)
 	while (i < __NB_ERRORS_)
 	{
 		errors[i].code = code;
-		errors[i].msg = msg_error[i];
+		errors[i].msg = (char *)msg_error[i];
 		i++;
 		code++;
 	}
@@ -40,9 +31,9 @@ static void	_init_struct(t_error *errors, char **msg_error)
 
 void	__init_error__(t_error *errors)
 {
-	char	*msg_error[__NB_ERRORS_];
+	const char	*msg_error[__NB_ERRORS_] = {EMSG_ENOCNF, EMSG_ENVHOM,
+		EMSG_ENOENV, EMSG_ENOUSR, EMSG_EINVID};
 
-	_init_msg_error_(msg_error);
 	_init_struct(errors, msg_error);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/07 00:10:01 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/07 18:19:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,13 @@ int				verif_before_operator(const char *prompt, char *token);
 
 int				verif_token_separation(const char *prompt);
 
-int				verif_before_operator(const char *prompt, char *token);
-
 void			handle_heredoc(const char *prompt, t_maindata *ats);
 
 /////////////////////////
 ////// POST PARSER //////
 /////////////////////////
 
-int				count_letters(const char *start_word);
+long			count_letters(const char *start_word);
 
 char			**list_to_tab(t_list **lst);
 
@@ -115,27 +113,19 @@ int				place_cursor_parenthesis(const char *prompt, int index);
 
 int				place_cursor_quote(const char *prompt, int i);
 
-int				place_cursor_quote(const char *prompt, int i);
-
 int				place_cursor_after_token(const char *prompt, int i);
-
-int				place_cursor_before_prefix(const char *prompt, int index);
 
 int				skip_quote_parenthesis(const char *prompt, int index);
 
-int				skip_single_quote(char *str, int i);
-
 // is_type.c
 
-int				is_parenthesis(const char token);
+bool			is_pipe(const char *prompt);
 
-int				is_pipe(const char *prompt);
-
-int				is_operator(const char *token);
+bool			is_operator(const char *token);
 
 int				is_redir_type(const char *prompt);
 
-int				is_quote(const char c);
+bool			is_quote(const char c);
 
 //is_type2.c
 

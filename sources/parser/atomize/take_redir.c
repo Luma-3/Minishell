@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   take_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:10:20 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 15:17:07 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/07 18:40:51 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ static int	add_queue(t_maindata *ats, const char *prompt, int redir_type,
 		&& ft_iswhitespace(prompt[i + j]) == false
 		&& is_redir_type(prompt + i + j) == 0)
 		j++;
-	data->file_name = ft_strndup(&prompt[i], j);
+	data->file_name = ft_strndup(&prompt[i], (size_t)j);
 	return (i + j);
 }
 
-void	check_quote_parenthesis(const char c, char *quote, int *parenthesis)
+static void	check_quote_parenthesis(const char c, char *quote, int *parenthesis)
 {
 	if (is_quote(c) == true)
 		*quote = check_quote(*quote, c);

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:16:34 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/05 12:15:42 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/07 16:59:17 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	ms_export(char **args, t_list **envp, t_error *errors)
 		j = 0;
 		while (args[i][j] && args[i][j] != '=')
 			j++;
-		name = ft_substr(args[i], 0, j);
+		name = ft_substr(args[i], 0, (size_t)j);
 		if (name == NULL)
 			return (ENOMEM);
 		if (is_valid_name(name) == false)
@@ -48,6 +48,7 @@ int	ms_export(char **args, t_list **envp, t_error *errors)
 			return (free(name), errno);
 		}
 		ms_setenv(envp, name, &args[i][j + 1]);
+		free(name);
 		i++;
 	}
 	return (EXIT_SUCCESS);

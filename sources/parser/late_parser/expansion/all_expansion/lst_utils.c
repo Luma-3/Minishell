@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 00:28:27 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/03 02:13:45 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/07 18:18:17 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	pop_stack_to_list(t_dstack *stack, t_list **list)
 {
 	char	*data;
+	char	*tmp;
+	t_list	*new_node;
 	int		i;
 
 	while (stack->top != NULL)
@@ -29,7 +31,12 @@ void	pop_stack_to_list(t_dstack *stack, t_list **list)
 			}
 			i++;
 		}
-		ft_lstadd_back(list, ft_lstnew(d_pop_stk(stack)));
+		tmp = d_pop_stk(stack);
+		new_node = ft_lstnew(tmp);
+		if (new_node != NULL)
+			ft_lstadd_back(list, new_node);
+		else
+			free(tmp);
 	}
 }
 
@@ -38,9 +45,9 @@ void	clean_access_lst(t_list **head, char *start_content)
 	t_list	*tmp;
 	t_list	*next;
 	t_list	*free_node;
+	t_list	*new_node;
 
 	tmp = *head;
-	(void)start_content;
 	while (tmp != NULL)
 	{
 		next = tmp->next;
@@ -53,5 +60,9 @@ void	clean_access_lst(t_list **head, char *start_content)
 		tmp = next;
 	}
 	if (ft_lstsize(*head) == 0)
-		ft_lstadd_front(head, ft_lstnew(start_content));
+	{
+		new_node = ft_lstnew(start_content);
+		if (new_node != NULL)
+			ft_lstadd_front(head, new_node);
+	}
 }

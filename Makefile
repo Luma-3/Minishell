@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/06 23:13:17 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/04/07 18:43:46 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ COMP_ENV				=	$(addprefix $(COMP_ENV_DIR), $(COMP_ENV_LIST))
 
 COMP_ERROR_DIR		=	error/
 COMP_ERROR_LIST		=	error.c				\
-						clear_ats.c			\
+						clear_core.c		\
 						free.c				\
 						error_utils.c		\
 						print_error_msg.c
@@ -294,9 +294,6 @@ norme:
 	else \
 		echo "$(COLOR_GREEN)Norme : OK!$(COLOR_RESET)"; \
 	fi; \
-
-splint:
-	splint $(SRC) $(INCLUDE) -warnposix -nullret -nullstate -nullpass -retvalint -syntax -temptrans > splint_log
 
 re: fclean all
 

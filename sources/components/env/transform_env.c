@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:52:52 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 23:56:10 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/07 15:52:55 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	**env_to_tab(t_list *env_lst)
 	char	**env;
 	int		i;
 
-	env = (char **)ft_calloc(ft_lstsize(env_lst) + 1, sizeof(char *));
+	env = (char **)ft_calloc((size_t)(ft_lstsize(env_lst) + 1), sizeof(char *));
 	if (!env)
 		return (NULL);
 	i = 0;

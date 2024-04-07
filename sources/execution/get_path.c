@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:47:27 by Monsieur_Ca       #+#    #+#             */
-/*   Updated: 2024/03/27 12:52:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/07 18:28:51 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static char	*path_to_relative(char *tab)
 		return (NULL);
 	if (access(temp, X_OK) == SUCCESS)
 		return (temp);
+	free(temp);
 	return (NULL);
 }
 

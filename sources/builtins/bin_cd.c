@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:00:31 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/02 14:47:48 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/07 16:57:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,15 @@ static int	set_pwds(t_list **env, t_error *error)
 	char	*oldpwd;
 
 	oldpwd = ms_getenv(*env, "PWD");
-	pwd = getcwd(NULL, 0);
-	if (oldpwd == NULL || pwd == NULL)
+	if (oldpwd == NULL)
 	{
+		ft_putstr_fd("cd: PWD not set\n", STDERR_FILENO);
+		return (FAILURE);
+	}
+	pwd = getcwd(NULL, 0);
+	if (pwd == NULL)
+	{
+		free(oldpwd);
 		perror_switch(error, "cd");
 		return (errno);
 	}
@@ -63,6 +69,7 @@ static int	set_pwds(t_list **env, t_error *error)
 		|| ms_setenv(env, "OLDPWD", oldpwd) == FAILURE)
 	{
 		free(pwd);
+		free(oldpwd);
 		return (errno);
 	}
 	return (SUCCESS);
@@ -102,6 +109,7 @@ int	ms_cd(char **args, t_list **env, t_error *errors)
 		return (errno);
 	else if (chdir(chdir_path) == -1)
 	{
+		free(chdir_path);
 		perror("cd");
 		ft_putstr_fd(": ", STDERR_FILENO);
 		ft_putendl_fd(args[1], STDERR_FILENO);

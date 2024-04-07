@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:49:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 22:46:05 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/07 18:38:13 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*get_uname(void)
 	return (errno = ENOENT, NULL);
 }
 
-bool	has_path(t_list *env)
+static bool	has_path(t_list *env)
 {
 	char	*path;
 

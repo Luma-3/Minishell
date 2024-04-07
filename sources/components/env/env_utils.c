@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:09:50 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 14:52:14 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/07 16:00:15 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ms_getenv(t_list *env, const char *name)
 {
 	char	*format_name;
-	int		name_len;
+	size_t	name_len;
 
 	format_name = ft_strjoin(name, "=");
 	if (!format_name)
@@ -37,10 +37,13 @@ char	*ms_getenv(t_list *env, const char *name)
 int	ms_setenv(t_list **env, const char *name, const char *value)
 {
 	char	*format_name;
+	char	*new_content;
 	t_list	*new_var;
 	t_list	*tmp;
 
 	format_name = ft_strjoin(name, "=");
+	if (!format_name)
+		return (FAILURE);
 	tmp = *env;
 	while (tmp)
 	{
@@ -53,11 +56,17 @@ int	ms_setenv(t_list **env, const char *name, const char *value)
 		}
 		tmp = tmp->next;
 	}
-	new_var = ft_lstnew(ft_strjoin(format_name, value));
-	if (!new_var)
-		return (errno = ENOMEM, FAILURE);
-	ft_lstadd_front(env, new_var);
+	new_content = ft_strjoin(format_name, value);
 	free(format_name);
+	if (!new_content)
+		return (FAILURE);
+	new_var = ft_lstnew(new_content);
+	if (!new_var)
+	{
+		free(new_content);
+		return (errno = ENOMEM, FAILURE);
+	}
+	ft_lstadd_front(env, new_var);
 	return (SUCCESS);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   atomizer_copy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 15:27:03 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/07 18:12:24 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@ static char	*copy_whitout_parenthesis(char *cmd)
 	tmp = ft_strtrim(cmd, " \t\n\v\f\r");
 	if (tmp == NULL)
 		return (NULL);
-	free(cmd);
 	if (*tmp != '(')
 		return (tmp);
 	cmd = ft_strndup(tmp + 1, ft_strlen(tmp) - 2);
+	free(tmp);
 	if (cmd == NULL)
 		return (NULL);
-	free(tmp);
 	return (cmd);
 }
 
@@ -41,6 +40,7 @@ static t_token	*init_node(const char *cmd, int size_cmd)
 	if (is_subshell(cmd, size_cmd) == true)
 		data->is_subshell = true;
 	data->cmd = copy_whitout_parenthesis((char *)cmd);
+	free((char *)cmd);
 	if (data->cmd == NULL)
 		return (free_data_tree(data), NULL);
 	data->require_wait = true;

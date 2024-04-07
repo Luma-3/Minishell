@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   late_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:46:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 17:44:26 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/07 17:40:01 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 static t_list	*split_arg(const char *prompt)
 {
 	t_list	*args_lst;
-	int		len;
+	t_list	*new_node;
+	long	len;
 	int		i;
 	char	*copy_prompt;
 
@@ -27,10 +28,13 @@ static t_list	*split_arg(const char *prompt)
 		len = count_letters(&prompt[i]);
 		if (len != 0)
 		{
-			copy_prompt = ft_strndup(&prompt[i], len);
+			copy_prompt = ft_strndup(&prompt[i], (size_t)len);
 			if (copy_prompt == NULL)
 				return (NULL);
-			ft_lstadd_back(&args_lst, ft_lstnew(copy_prompt));
+			new_node = ft_lstnew(copy_prompt);
+			if (new_node == NULL)
+				return (ft_lstclear(&args_lst, free), NULL);
+			ft_lstadd_back(&args_lst, new_node);
 			i += len;
 		}
 	}
