@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 00:18:28 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/08 11:05:25 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/08 11:23:07 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,11 @@ bool	find_and_push(t_dstack *stack, t_match_file *match_file,
 static bool	get_last_suffix(char *suffix, char *entry, int j, int i)
 {
 	size_t		len_suff;
-	char	*suffix_dir;
+	char		*suffix_dir;
 
 	len_suff = ft_strlen(suffix + j);
+	if (len_suff == 0)
+		return (true);
 	if (len_suff != 0)
 	{
 		if (ft_strchr(suffix + j, '/') == NULL)
@@ -95,7 +97,6 @@ static	bool	final_decision(char *entry, char *suffix)
 		return (true);
 	while (true)
 	{
-		printf("suffix: %s\n", suffix + j);
 		if (ft_strchr(suffix + j, '*') == 0)
 			return (get_last_suffix(suffix, entry, j, i));
 		while (suffix != NULL && suffix[j] != '\0' && suffix[j] != '*')
@@ -105,7 +106,6 @@ static	bool	final_decision(char *entry, char *suffix)
 		to_find = ft_strndup(suffix + start, j - start);
 		if (to_find == NULL || ft_findstr(entry, to_find, i) == -1)
 			return (false);
-		printf("to_find: %s\n", to_find);
 		i = ft_findstr(entry, to_find, i) + ft_strlen(to_find);
 		j++;
 		start = j;
@@ -120,9 +120,6 @@ bool	find_match_file(char *entry, char *prefix, char *suffix)
 
 	len_prefix = 0;
 	len_suffix = 0;
-	printf("entry: %s\n", entry);
-	printf("prefix: %s\n", prefix);
-	printf("suffix: %s\n", suffix);
 	if (suffix != NULL)
 		len_suffix = ft_strlen(suffix);
 	if (prefix != NULL)
