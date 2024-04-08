@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 14:08:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/07 17:59:54 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/08 10:49:08 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ void	rec_all(t_dstack *stack, t_list **list)
 			i++;
 	}
 	call_recursion(&match_file, stack, list, i);
-	(free(match_file.suffix), free(match_file.path));
-	free(match_file.prefix);
 }
 
 t_list	*get_all_file(t_list **head, t_list *arg)

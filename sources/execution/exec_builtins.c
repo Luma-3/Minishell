@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:50:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 17:55:23 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/08 10:54:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	process_built_in(t_maindata *core_data, t_ats *node, char **args)
 				node->data->exit_code = 1;
 				exit(1);
 			}
-			error = exec_builtin((const char **)args, &(core_data->env),
+			error = chr_exec_bt((const char **)args, &(core_data->env),
 					core_data->errors);
 			close_all_pipes(core_data);
 			close(core_data->history_fd);
@@ -86,7 +86,7 @@ void	process_built_in(t_maindata *core_data, t_ats *node, char **args)
 		return ;
 	}
 	node->data->require_wait = false;
-	error = exec_builtin((const char **)args, &(core_data->env),
+	error = chr_exec_bt((const char **)args, &(core_data->env),
 			core_data->errors);
 	node->data->exit_code = error;
 	if (node->data->index > 0)

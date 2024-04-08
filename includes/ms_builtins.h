@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_builtins.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:11:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 18:18:42 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/08 10:54:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_builtin
 
 bool	is_builtin(const char *cmd);
 
-int		exec_builtin(const char **tab_cmd, t_list **env, t_error *errors);
+int		chr_exec_bt(const char **tab_cmd, t_list **env, t_error *errors);
 
 // BUILTINS
 

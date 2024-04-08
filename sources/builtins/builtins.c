@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:33:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/04 16:59:57 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/08 10:54:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	init_builtins(t_builtin *builtins)
 	builtins[6] = (t_builtin){"exit", ms_exit};
 }
 
-int	exec_builtin(const char **tab_cmd, t_list **env, t_error *errors)
+int	chr_exec_bt(const char **tab_cmd, t_list **env, t_error *errors)
 {
 	t_builtin	builtins[NB_BUILTINS];
 	int			i;
@@ -38,7 +38,6 @@ int	exec_builtin(const char **tab_cmd, t_list **env, t_error *errors)
 				ft_strlen(tab_cmd[0])) == 0)
 		{
 			ret = builtins[i].func((char **)tab_cmd, env, errors);
-			ft_rm_split((char **)tab_cmd);
 			return (ret);
 		}
 		i++;
