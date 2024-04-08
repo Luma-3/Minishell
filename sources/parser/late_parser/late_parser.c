@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:46:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/07 17:40:01 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/08 11:31:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ char	**late_parser(t_maindata *core_data, t_ats *node)
 	char	**tab_args;
 
 	tab_args = NULL;
+	errno = 0;
+	if (node->data->cmd == NULL)
+		return (NULL);
 	lst_args = split_arg(node->data->cmd);
 	if (lst_args == NULL)
 		return (NULL);

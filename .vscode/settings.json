@@ -23,6 +23,7 @@
 		"error.h": "c",
 		"ms_error.h": "c",
 		"environement.h": "c",
-		"stackft.h": "c"
+		"stackft.h": "c",
+		"unistd.h": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/07 18:22:02 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/08 11:36:44 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ static void	process_built_out(t_maindata *core_data, t_ats *node, char **args)
 	{
 		if (pre_process_exec(core_data, (t_ats *)node) == FAILURE)
 			exit (errno);
+		if (args == NULL)
+			exit (errno);
 		path = ms_getenv(core_data->env, "PATH");
 		if (path == NULL)
 			path = ft_strdup(core_data->path);
@@ -86,19 +88,13 @@ void	exec_std(t_maindata *core_data, const t_ats *node)
 {
 	char	**args;
 
-	if (node->data->cmd == NULL)
-	{
-		node->data->exit_code = 0;
-		node->data->require_wait = false;
-		return ;
-	}
 	args = late_parser(core_data, (t_ats *)node);
-	if (args == NULL)
+	if (errno != 0)
 	{
-		errno = ENOMEM;
+		perror_switch(core_data->errors, "Kikishell");
 		return ;
 	}
-	if (is_builtin(args[0]) == true)
+	if (args != NULL && is_builtin(args[0]) == true)
 	{
 		process_built_in(core_data, (t_ats *)node, args);
 	}
