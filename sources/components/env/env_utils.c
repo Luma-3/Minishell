@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:09:50 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/07 16:00:15 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:51:24 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ int	ms_setenv(t_list **env, const char *name, const char *value)
 		if (ft_strncmp(tmp->content, format_name, ft_strlen(format_name)) == 0)
 		{
 			free(tmp->content);
-			tmp->content = ft_strjoin(format_name, value);
+			if (!value || !*value)
+				tmp->content = ft_strdup(format_name);
+			else
+				tmp->content = ft_strjoin(format_name, value);
 			free(format_name);
 			return (SUCCESS);
 		}

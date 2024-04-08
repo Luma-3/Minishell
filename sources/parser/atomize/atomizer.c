@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/07 17:15:12 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:31:56 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	atomize_pipeline(t_maindata *ats)
 				return (FAILURE);
 			i_copy = ++i_read;
 		}
-		else
+		else if (ats->prompt[i_read] != '\0')
 			i_read++;
 	}
 	data = copy_insert_node(ats, i_copy, i_read);

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:04:47 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/08 11:20:25 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/08 13:01:15 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,8 @@ void	handle_heredoc(const char *prompt, t_maindata *ats)
 			i = place_cursor_quote(prompt, i);
 		if (is_redir_type(prompt + i) == REDIR_HEREDOC)
 		{
-			i = ft_skip_whitespaces(prompt, i) + 2;
+			i += 2;
+			i = ft_skip_whitespaces(prompt, i);
 			while (prompt[i + j] && ft_iswhitespace(prompt[i + j]) == false)
 				j++;
 			delimiteur = ft_strndup(prompt + i, (size_t)j);

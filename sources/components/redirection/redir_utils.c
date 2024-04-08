@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:16:35 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/07 16:49:16 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/08 13:09:10 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,8 @@ int	open_redir_heredoc(t_queue *queue_heredoc)
 	dup2(fd, STDIN_FILENO);
 	close(fd);
 	unlink(heredoc->file_name);
+	free(heredoc->file_name);
+	free(heredoc->delimiter);
+	free(heredoc);
 	return (SUCCESS);
 }

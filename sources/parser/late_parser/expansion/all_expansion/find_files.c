@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 00:18:28 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/08 11:23:07 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:37:56 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,24 @@ static bool	get_last_suffix(char *suffix, char *entry, int j, int i)
 	len_suff = ft_strlen(suffix + j);
 	if (len_suff == 0)
 		return (true);
-	if (len_suff != 0)
+	if (ft_strchr(suffix + j, '/') == NULL)
 	{
-		if (ft_strchr(suffix + j, '/') == NULL)
+		suffix_dir = ft_strjoin(suffix + j, "/");
+		if (suffix_dir == NULL)
 		{
-			suffix_dir = ft_strjoin(suffix + j, "/");
-			if (suffix_dir != NULL)
-			{
-				if (decision_file(entry, suffix + j) == true
-					|| decision_directory(entry, suffix_dir) == true)
-					return (verif_suffix_ptr(entry, suffix + j, suffix_dir, i));
-			}
+			return (false);
 		}
-		else if (decision_directory(entry, suffix + j) == true)
-			return (verif_suffix_ptr(entry, suffix + j, NULL, i));
+		if (decision_file(entry, suffix + j) == true
+			|| decision_directory(entry, suffix_dir) == true)
+		{
+			if (verif_suffix_ptr(entry, suffix + j, i) == true || verif_suffix_ptr(entry, suffix_dir, i) == true)
+				return (free(suffix_dir), true);
+			return (free(suffix_dir), false);
+		}
+		free(suffix_dir);
 	}
+	else if (decision_directory(entry, suffix + j) == true)
+		return (verif_suffix_ptr(entry, suffix + j, i));
 	return (false);
 }
 
@@ -104,11 +107,14 @@ static	bool	final_decision(char *entry, char *suffix)
 		if (suffix == NULL)
 			break ;
 		to_find = ft_strndup(suffix + start, j - start);
-		if (to_find == NULL || ft_findstr(entry, to_find, i) == -1)
+		if (to_find == NULL)
 			return (false);
+		if (ft_findstr(entry, to_find, i) == -1)
+			return (free(to_find), false);
 		i = ft_findstr(entry, to_find, i) + ft_strlen(to_find);
 		j++;
 		start = j;
+		free(to_find);
 	}
 	return (true);
 }

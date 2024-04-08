@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_subshell.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:12:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 18:12:20 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/08 16:34:24 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ static void	init_new_ats(t_maindata *core_data, t_maindata *new_core,
 	new_core->last_status = 0;
 	new_core->uname = core_data->uname;
 	new_core->path = core_data->path;
-	new_core->history_fd = core_data->history_fd;
-	new_core->stdin_fd = core_data->stdin_fd;
+	new_core->history_fd =  -1;
+	new_core->stdin_fd = -1;
 	new_core->errors = core_data->errors;
 	new_core->queue_redir = ft_init_queue();
 	new_core->queue_pipe = ft_init_queue();
 	new_core->root = NULL;
+	new_core->is_pipeline = false;
 }
 
 int	exec_subshell(t_maindata *core_data, t_ats *node)
@@ -45,13 +46,15 @@ int	exec_subshell(t_maindata *core_data, t_ats *node)
 	node->data->pid = pid;
 	if (pid == 0)
 	{
+		close(core_data->stdin_fd);
+		close(core_data->history_fd);
 		open_redir(core_data, node);
+		close_all_pipes(core_data);
 		init_new_ats(core_data, &new_ats, node);
 		parse_prompt(new_ats.prompt, &new_ats, false);
 		read_ats(&new_ats, new_ats.root);
 		status = new_ats.last_status;
 		clear_ats(&new_ats, CORE_ALL);
-		close(core_data->history_fd);
 		exit(status);
 	}
 	return (clean_parent(core_data, node));

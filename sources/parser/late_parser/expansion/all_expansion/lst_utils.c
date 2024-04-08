@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 00:28:27 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/07 18:18:17 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:41:15 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,7 @@ void	clean_access_lst(t_list **head, char *start_content)
 		new_node = ft_lstnew(start_content);
 		if (new_node != NULL)
 			ft_lstadd_front(head, new_node);
+		return ;
 	}
+	free(start_content);
 }

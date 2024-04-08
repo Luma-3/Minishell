@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:19:12 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/04 16:58:56 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:28:33 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,31 @@ int	verif_if_quote_closed(const char *prompt)
 int	verif_if_parenthesis_closed(const char *prompt)
 {
 	int	i;
+	int	index_parenthesis;
 	int	parenthesis;
 
 	i = 0;
 	parenthesis = 0;
+	index_parenthesis = 0;
 	while (prompt[i])
 	{
 		if (is_quote(prompt[i]) == true)
 			i = place_cursor_quote(prompt, i);
 		else if (prompt[i] == '(')
+		{
+			index_parenthesis = i;
 			parenthesis++;
+		}
 		else if (prompt[i] == ')')
+		{
+			index_parenthesis = i;
 			parenthesis--;
-		i++;
+		}
+		if (prompt[i] != '\0')
+			i++;
 	}
 	if (parenthesis != 0)
-		return (print_error_arg('('), FAILURE);
+		return (print_error_arg(prompt[index_parenthesis]), FAILURE);
 	return (SUCCESS);
 }
 

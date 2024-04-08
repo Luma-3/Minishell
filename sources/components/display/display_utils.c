@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:39:34 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/07 16:20:12 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:49:59 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,31 @@
 
 char	*path_to_tilde(t_list *env)
 {
-	char	*path_home;
-	char	*path_absolute;
-	char	*tmp_path;
+	char	*cwd;
+	char	*home;
+	char 	*path;
 	int		i;
 
+	cwd = getcwd(NULL, 0);
+	if (cwd == NULL)
+		return (NULL);
+	home = ms_getenv(env, "HOME");
+	if (home == NULL)
+		return (cwd);
 	i = 0;
-	path_absolute = getcwd(NULL, 0);
-	if (path_absolute == NULL)
-		return (ft_strdup("I am lost"));
-	path_home = ms_getenv(env, "HOME");
-	if (path_home == NULL)
-	{
-		tmp_path = ft_strjoin(" ", path_absolute);
-		if (tmp_path == NULL)
-			return (path_absolute);
-		free(path_absolute);
-		return (tmp_path);
-	}
-	while (path_home[i] && path_absolute[i]
-		&& path_home[i] == path_absolute[i])
+	while (cwd[i] && home[i] && cwd[i] == home[i])
 		i++;
-	if (i < (int)ft_strlen(path_home))
+	if (home[i] == '\0' && (cwd[i] == '/' || cwd[i] == '\0'))
 	{
-		free(path_home);
-		tmp_path = ft_strjoin(" ", path_absolute);
-		if (tmp_path == NULL)
-			return (path_absolute);
-		free(path_absolute);
-		return (tmp_path);
+		path = ft_insert_str(cwd, "~", home, 0);
+		free(home);
+		if (path == cwd)
+			return (cwd);
+		free(cwd);
+		return (path);
 	}
-	free(path_home);
-	tmp_path = ft_strjoin(" ~", path_absolute + i);
-	if (tmp_path == NULL)
-		return (path_absolute);
-	free(path_absolute);
-	return (tmp_path);
+	free(home);
+	return (cwd);
 }
 
 char	*get_current_dir(void)

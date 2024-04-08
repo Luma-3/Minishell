@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   decision.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 18:27:09 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/06 12:28:16 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/08 12:15:43 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,9 @@ bool	decision_directory(char *entry, char *suffix_dir)
 	return (false);
 }
 
-bool	verif_suffix_ptr(char *entry, char *suffix, char *suffix_dir, int i)
+bool	verif_suffix_ptr(char *entry, char *suffix, int i)
 {
 	if (ft_findstr(entry, suffix, i) != -1)
-		return (true);
-	if (suffix_dir != NULL && ft_findstr(entry, suffix_dir, i) != -1)
 		return (true);
 	return (false);
 }

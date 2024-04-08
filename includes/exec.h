@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:39:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/05 16:46:00 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:02:43 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@
 int		dup_pipe(t_maindata *core_data, int index);
 
 int		close_pipe(t_maindata *core_data);
-
-int		handle_pipeline_redir(t_maindata *core_data, const t_ats *node);
 
 // EXEC
 

@@ -6,20 +6,12 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:26:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/07 16:41:18 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/08 14:46:11 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "redirection.h"
-
-int	open_redirs_pipe(t_maindata *core_data, t_ats *root)
-{
-	if (!root)
-		return (SUCCESS);
-	open_redirs_pipe(core_data, root->left);
-	return (open_redir(core_data, root));
-}
 
 static int	open_redir_type(t_queue_redir *node, t_queue *heredoc)
 {

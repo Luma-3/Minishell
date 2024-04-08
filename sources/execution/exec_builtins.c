@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:50:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/08 10:54:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:22:40 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	process_built_in(t_maindata *core_data, t_ats *node, char **args)
 	int		error;
 	int		save_fd;
 
-	save_fd = copy_stdout(core_data);
 	if (node->data->index != -1)
 	{
 		pid = fork();
@@ -62,23 +61,28 @@ void	process_built_in(t_maindata *core_data, t_ats *node, char **args)
 		node->data->pid = pid;
 		if (pid == 0)
 		{
+			if (core_data->history_fd != -1)
+				close(core_data->history_fd);
+			if (core_data->stdin_fd != -1)
+				close(core_data->stdin_fd);
 			if (pre_process_exec(core_data, node) == FAILURE)
 			{
-				node->data->exit_code = 1;
+				ft_rm_split(args);
+				clear_ats(core_data, CORE_ALL);
 				exit(1);
 			}
 			error = chr_exec_bt((const char **)args, &(core_data->env),
 					core_data->errors);
 			close_all_pipes(core_data);
-			close(core_data->history_fd);
-			close(core_data->stdin_fd);
-			node->data->exit_code = error;
+			ft_rm_split(args);
+			clear_ats(core_data, CORE_ALL);
 			exit(error);
 		}
-		restore_stdout(core_data->errors, save_fd);
+		// restore_stdout(core_data->errors, save_fd);
 		clean_parent(core_data, node);
 		return ;
 	}
+	save_fd = copy_stdout(core_data);
 	if (pre_process_exec(core_data, node) == FAILURE)
 	{
 		node->data->exit_code = 1;

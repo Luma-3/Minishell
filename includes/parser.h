@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/07 18:19:19 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:16:16 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,8 @@ bool			check_tilde(const char *arg, const int prev_i,
 
 // expansion_all
 
+void			free_match_file(t_match_file *match_file);
+
 t_list			*get_all_file(t_list **head, t_list *arg);
 
 void			rec_all(t_dstack *stack, t_list **list);
@@ -192,8 +194,7 @@ bool			decision_file(char *entry, char *suffix);
 
 bool			decision_directory(char *entry, char *suffix);
 
-bool			verif_suffix_ptr(char *entry, char *suffix,
-					char *suffix_dir, int i);
+bool			verif_suffix_ptr(char *entry, char *suffix, int i);
 
 // utils
 

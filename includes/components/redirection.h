@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:00:24 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/30 15:54:50 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/08 14:59:51 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 // int			create_enqueue_heredoc(t_queue *heredoc_queue, char *delimiter);
 int		open_redir(t_maindata *core_data, const t_ats *node);
 
-int		open_redirs_pipe(t_maindata *core_data, t_ats *root);
+void	handle_pipeline_redir(t_maindata *core_data);
 
 int		open_redir_out(t_queue_redir *redir);
 

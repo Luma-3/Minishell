@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/08 11:36:44 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:27:13 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,7 @@ int	clean_parent(t_maindata *core_data, const t_ats *node)
 
 int	pre_process_exec(t_maindata *core_data, t_ats *node)
 {
-	if (handle_pipeline_redir(core_data, node) == FAILURE)
-	{
-		return (FAILURE);
-	}
+	handle_pipeline_redir(core_data);
 	if (open_redir(core_data, node) != SUCCESS)
 	{
 		return (FAILURE);
@@ -67,15 +64,24 @@ static void	process_built_out(t_maindata *core_data, t_ats *node, char **args)
 	node->data->pid = pid;
 	if (pid == 0)
 	{
+		if (core_data->history_fd != -1)
+			close(core_data->history_fd);
+		if (core_data->stdin_fd != -1)
+			close(core_data->stdin_fd);
 		if (pre_process_exec(core_data, (t_ats *)node) == FAILURE)
+		{
+			clear_ats(core_data, CORE_ALL);
 			exit (errno);
+		}
 		if (args == NULL)
+		{
+			clear_ats(core_data, CORE_ALL);
 			exit (errno);
+		}
 		path = ms_getenv(core_data->env, "PATH");
 		if (path == NULL)
 			path = ft_strdup(core_data->path);
-		close(core_data->history_fd);
-		close(core_data->stdin_fd);
+		close_all_pipes(core_data);
 		exec_command(args, &(core_data->env),
 			core_data->errors, path);
 		clear_ats(core_data, CORE_ALL);
@@ -89,9 +95,9 @@ void	exec_std(t_maindata *core_data, const t_ats *node)
 	char	**args;
 
 	args = late_parser(core_data, (t_ats *)node);
-	if (errno != 0)
+	if (errno != 0 && args == NULL)
 	{
-		perror_switch(core_data->errors, "Kikishell");
+		perror_switch(core_data->errors, "Kikishell: parsing");
 		return ;
 	}
 	if (args != NULL && is_builtin(args[0]) == true)
@@ -102,5 +108,6 @@ void	exec_std(t_maindata *core_data, const t_ats *node)
 	{
 		process_built_out(core_data, (t_ats *)node, args);
 	}
-	ft_rm_split(args);
+	if (args != NULL)
+		ft_rm_split(args);
 }

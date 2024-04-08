@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 14:08:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/08 10:49:08 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:41:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static int	find_all_files(t_dstack *stack, t_match_file *match_file,
 		closedir(dir);
 		return (FAILURE);
 	}
+	free(match_file->old_data);
 	if (closedir(dir) == -1)
 		return (FAILURE);
 	return (SUCCESS);
@@ -56,13 +57,21 @@ static void	call_recursion(t_match_file *match_file, t_dstack *stack,
 	if (stack->top != NULL)
 	{
 		rec_all(stack, list);
-		(free(match_file->suffix), free(match_file->path));
-		free(match_file->prefix);
 	}
 	else
 	{
 		free(stack);
 	}
+}
+
+void	free_match_file(t_match_file *match_file)
+{
+	if (match_file->path != NULL)
+		free(match_file->path);
+	if (match_file->prefix != NULL)
+		free(match_file->prefix);
+	if (match_file->suffix != NULL)
+		free(match_file->suffix);
 }
 
 void	rec_all(t_dstack *stack, t_list **list)
@@ -73,21 +82,19 @@ void	rec_all(t_dstack *stack, t_list **list)
 
 	i = 0;
 	data = (char *)stack->top->data;
-	init_match_file(&match_file, data, i);
 	while (data[i])
 	{
 		i = skip_quote_parenthesis(data, i);
 		if (data[i] == '*')
-		{
-			init_match_file(&match_file, data, i);
-			if (access(match_file.path, F_OK) == FAILURE)
-				return (no_access_file(stack, list, &match_file));
 			break ;
-		}
 		if (data[i] != '\0')
 			i++;
 	}
+	init_match_file(&match_file, data, i);
+	if (access(match_file.path, F_OK) == FAILURE)
+		return (no_access_file(stack, list, &match_file));
 	call_recursion(&match_file, stack, list, i);
+	free_match_file(&match_file);
 }
 
 t_list	*get_all_file(t_list **head, t_list *arg)
@@ -104,17 +111,14 @@ t_list	*get_all_file(t_list **head, t_list *arg)
 	tmp = ft_lstdetach(head, arg);
 	start_content = ft_strdup(tmp->content);
 	if (start_content == NULL)
-	{
-		free(tmp);
-		return (NULL);
-	}
+		return (free(tmp), NULL);
 	if (d_push_stk(stack, tmp->content) == FAILURE)
 	{
 		ft_lstadd_front(&new_head, tmp);
-		return (new_head);
+		return (free(start_content), new_head);
 	}
-	free(tmp);
 	rec_all(stack, &new_head);
 	clean_access_lst(&new_head, start_content);
+	free(tmp);
 	return (new_head);
 }

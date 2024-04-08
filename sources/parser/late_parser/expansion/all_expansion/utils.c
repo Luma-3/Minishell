@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:49:00 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/08 10:49:08 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:06:39 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,7 @@ void	no_access_file(t_dstack *stack, t_list **list, t_match_file *match_file)
 		ft_lstadd_front(list, new_node);
 	else
 		free(tmp);
-	if (match_file->path != NULL)
-		free(match_file->path);
-	if (match_file->prefix != NULL)
-		free(match_file->prefix);
-	if (match_file->suffix != NULL)
-		free(match_file->suffix);
-	if (match_file->old_data != NULL)
-		free(match_file->old_data);
+	free_match_file(match_file);
 	return ;
 }
 

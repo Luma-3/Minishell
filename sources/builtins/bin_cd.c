@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:00:31 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/07 16:57:19 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:23:34 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ static int	set_pwds(t_list **env, t_error *error)
 		free(oldpwd);
 		return (errno);
 	}
+	free(pwd);
+	free(oldpwd);
 	return (SUCCESS);
 }
 
@@ -104,6 +106,11 @@ int	ms_cd(char **args, t_list **env, t_error *errors)
 {
 	char	*chdir_path;
 
+	if (args[2])
+	{
+		ft_putstr_fd("cd: too many arguments\n", STDERR_FILENO);
+		return (FAILURE);
+	}
 	chdir_path = get_chdir_path(args, env, errors);
 	if (chdir_path == NULL)
 		return (errno);

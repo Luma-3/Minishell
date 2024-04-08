@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/07 18:43:46 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/04/08 15:00:35 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,8 @@ COMP_HISTORY			=	$(addprefix $(COMP_HISTORY_DIR), $(COMP_HISTORY_LIST))
 COMP_REDIR_DIR		=	redirection/
 COMP_REDIR_LIST		=	heredoc.c 			\
 						open_redir.c		\
-						redir_utils.c
+						redir_utils.c		\
+						pipe_redir.c
 COMP_REDIR			=	$(addprefix $(COMP_REDIR_DIR), $(COMP_REDIR_LIST))
 
 COMP_SIGNAL_DIR		=	signal/
@@ -120,8 +121,7 @@ SRC_EXEC_LIST		=	exec_builtins.c		\
 						read_ats.c			\
 						exec_command.c		\
 						get_path.c			\
-						pipe_utils.c		\
-						pipe_exec.c
+						pipe_utils.c
 SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 
 SRC_PARSER_DIR		=	parser/

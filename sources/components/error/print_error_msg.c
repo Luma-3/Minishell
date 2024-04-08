@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_error_msg.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:20:43 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/06 15:10:19 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/08 13:18:11 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,9 @@ void	print_error_message(void)
 
 void	print_error_arg(char token)
 {
-	ft_putstr_fd("parse error near '", STDERR_FILENO);
+	ft_putstr_fd("parse error near unexpected token '", STDERR_FILENO);
 	ft_putchar_fd(token, STDERR_FILENO);
 	ft_putstr_fd("'\n", STDERR_FILENO);
-}
-
-void	print_error_arg_msg(void)
-{
-	ft_putstr_fd("kikishell: syntax error near", STDERR_FILENO);
-	ft_putstr_fd("unexpected token `", STDERR_FILENO);
 }
 
 void	print_error_why(void)
