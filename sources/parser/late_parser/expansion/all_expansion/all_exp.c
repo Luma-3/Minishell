@@ -6,13 +6,15 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 14:08:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/08 12:41:19 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:37:10 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "minishell.h"
 #include "stackft.h"
+
+extern volatile int	g_sigreceiver;
 
 static int	find_all_files(t_dstack *stack, t_match_file *match_file,
 	t_list **lst, int i)
@@ -54,13 +56,9 @@ static void	call_recursion(t_match_file *match_file, t_dstack *stack,
 		d_drop_stk(stack, free);
 	}
 	pop_stack_to_list(stack, list);
-	if (stack->top != NULL)
+	if (stack->top != NULL && g_sigreceiver == 0)
 	{
 		rec_all(stack, list);
-	}
-	else
-	{
-		free(stack);
 	}
 }
 
@@ -93,6 +91,8 @@ void	rec_all(t_dstack *stack, t_list **list)
 	init_match_file(&match_file, data, i);
 	if (access(match_file.path, F_OK) == FAILURE)
 		return (no_access_file(stack, list, &match_file));
+	if (g_sigreceiver == SIGINT)
+		return (free_match_file(&match_file));
 	call_recursion(&match_file, stack, list, i);
 	free_match_file(&match_file);
 }
@@ -118,6 +118,8 @@ t_list	*get_all_file(t_list **head, t_list *arg)
 		return (free(start_content), new_head);
 	}
 	rec_all(stack, &new_head);
+	d_clear_stk(stack, free);
+	free(stack);
 	clean_access_lst(&new_head, start_content);
 	free(tmp);
 	return (new_head);

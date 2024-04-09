@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/09 11:46:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/09 12:21:18 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@
 # define CORE_PIPE		0x20
 # define CORE_UNAME		0x40
 # define CORE_PATH		0x80
-# define CORE_ALL		0xFF
+# define CORE_HISTORY	0x100
+# define CORE_STDIN		0x200
+# define CORE_ALL		0x3FF
 
 # define FAILURE	-1
 # define SUCCESS	0 

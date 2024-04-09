@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/05 19:08:57 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:31:56 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "parser.h"
 #include "minishell.h"
 
-extern volatile int	g_sigreciever;
+extern volatile int	g_sigreceiver;
 
 static int	wait_pipeline(t_maindata *core_data, t_ats *node)
 {	
@@ -23,19 +23,19 @@ static int	wait_pipeline(t_maindata *core_data, t_ats *node)
 	ret = 0;
 	while (ret >= 0)
 	{
-		ret = wait3(NULL, WNOHANG ,NULL);
+		ret = wait3(NULL, WNOHANG, NULL);
 		if (ret == FAILURE)
 			return (FAILURE);
-		if (g_sigreciever != 0)
+		if (g_sigreceiver != 0)
 		{
 			while (node->left != NULL)
 			{
-				kill(node->data->pid, g_sigreciever);
+				kill(node->data->pid, g_sigreceiver);
 				node = node->left;
 			}
-			g_sigreciever = 0;
-			node->data->exit_code = g_sigreciever;
-			core_data->last_status = g_sigreciever;
+			g_sigreceiver = 0;
+			node->data->exit_code = g_sigreceiver;
+			core_data->last_status = g_sigreceiver;
 			return (FAILURE);
 		}
 	}
@@ -59,10 +59,10 @@ static int	wait_process(t_maindata *core_data, t_ats *node)
 			core_data->last_status = WEXITSTATUS(node->data->exit_code);
 			return (SUCCESS);
 		}
-		if (g_sigreciever != 0)
+		if (g_sigreceiver != 0)
 		{
-			kill(node->data->pid, g_sigreciever);
-			g_sigreciever = 0;
+			kill(node->data->pid, g_sigreceiver);
+			g_sigreceiver = 0;
 			waitpid(node->data->pid, &node->data->exit_code, 0);
 			core_data->last_status = WEXITSTATUS(node->data->exit_code);
 			return (FAILURE);

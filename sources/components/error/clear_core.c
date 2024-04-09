@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:52:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/07 18:38:49 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/09 12:29:14 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,51 +43,60 @@ static void	clear_pipe_queue(void *content)
 	free(pipe);
 }
 
-static void	clear_else(t_maindata *ats, int flag)
+static void	clear_else(t_maindata *core_data, int flag)
 {
-	if (flag & CORE_PIPE && ats->queue_pipe != NULL)
+	if (flag & CORE_PIPE && core_data->queue_pipe != NULL)
 	{
-		ft_clear_queue(ats->queue_pipe, &clear_pipe_queue);
-		ats->queue_pipe = NULL;
+		ft_clear_queue(core_data->queue_pipe, &clear_pipe_queue);
+		core_data->queue_pipe = NULL;
 	}
-	if (flag & CORE_ENV && ats->env != NULL)
+	if (flag & CORE_ENV && core_data->env != NULL)
 	{
-		ft_lstclear(&(ats->env), &free);
-		ats->env = NULL;
+		ft_lstclear(&(core_data->env), &free);
+		core_data->env = NULL;
 	}
-	if (flag & CORE_UNAME && ats->uname != NULL)
+	if (flag & CORE_UNAME && core_data->uname != NULL)
 	{
-		free(ats->uname);
-		ats->uname = NULL;
+		free(core_data->uname);
+		core_data->uname = NULL;
 	}
-	if (flag & CORE_PATH && ats->path != NULL)
+	if (flag & CORE_PATH && core_data->path != NULL)
 	{
-		free(ats->path);
-		ats->path = NULL;
+		free(core_data->path);
+		core_data->path = NULL;
+	}
+	if (flag & CORE_HISTORY && core_data->history_fd != -1)
+	{
+		close(core_data->history_fd);
+		core_data->history_fd = -1;
 	}
 }
 
-void	clear_ats(t_maindata *ats, int flag)
+void	clear_ats(t_maindata *core_data, int flag)
 {
-	if (flag & CORE_ROOT && ats->root != NULL)
+	if (flag & CORE_ROOT && core_data->root != NULL)
 	{
-		clear_tree(ats->root, &free_data_tree);
-		ats->root = NULL;
+		clear_tree(core_data->root, &free_data_tree);
+		core_data->root = NULL;
 	}
-	if (flag & CORE_PROMPT && ats->prompt != NULL)
+	if (flag & CORE_PROMPT && core_data->prompt != NULL)
 	{
-		free(ats->prompt);
-		ats->prompt = NULL;
+		free(core_data->prompt);
+		core_data->prompt = NULL;
 	}
-	if (flag & CORE_REDIR && ats->queue_redir != NULL)
+	if (flag & CORE_REDIR && core_data->queue_redir != NULL)
 	{
-		ft_clear_queue(ats->queue_redir, &clear_redir_queue);
-		ats->queue_redir = NULL;
+		ft_clear_queue(core_data->queue_redir, &clear_redir_queue);
+		core_data->queue_redir = NULL;
 	}
-	if (flag & CORE_HEREDOC && ats->queue_heredoc != NULL)
+	if (flag & CORE_HEREDOC && core_data->queue_heredoc != NULL)
 	{
-		ft_clear_queue(ats->queue_heredoc, &clear_heredoc_queue);
-		ats->queue_heredoc = NULL;
+		ft_clear_queue(core_data->queue_heredoc, &clear_heredoc_queue);
+		core_data->queue_heredoc = NULL;
 	}
-	clear_else(ats, flag);
+	if (flag & CORE_STDIN && core_data->stdin_fd != -1)
+	{
+		(close(core_data->stdin_fd), core_data->stdin_fd = -1);
+	}
+	clear_else(core_data, flag);
 }

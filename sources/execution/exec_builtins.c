@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:50:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/09 11:13:25 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/09 12:34:44 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static int	copy_stdout(t_maindata *core_data)
 
 static void	restore_stdout(t_error *errors, int save_fd)
 {
+	if (save_fd == -1)
+		return ;
 	if (dup2(save_fd, STDOUT_FILENO) == FAILURE)
 	{
 		errno = EIO;
@@ -82,7 +84,9 @@ void	process_built_in(t_maindata *core_data, t_ats *node, char **args)
 		clean_parent(core_data, node);
 		return ;
 	}
-	save_fd = copy_stdout(core_data);
+	save_fd = -1;
+	if (ft_strncmp(args[0], "exit", 5) != 0)
+		save_fd = copy_stdout(core_data);
 	if (pre_process_exec(core_data, node) == FAILURE)
 	{
 		node->data->exit_code = 1;

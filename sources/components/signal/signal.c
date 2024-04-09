@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:03:56 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/07 18:40:15 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:32:22 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 #include "display.h"
 #include <readline/readline.h>
 
-extern volatile int	g_sigreciever;
+extern volatile int	g_sigreceiver;
 
 static void	sigint_handler(int sig)
 {
 	char	*uname;
 
-	g_sigreciever = sig;
+	g_sigreceiver = sig;
 	write(STDOUT_FILENO, "\n", 1);
 	uname = get_uname();
 	close(STDIN_FILENO);
@@ -32,7 +32,7 @@ static void	sigint_handler(int sig)
 
 static void	sigquit_handler(int sig)
 {
-	g_sigreciever = sig;
+	g_sigreceiver = sig;
 	write(STDOUT_FILENO, "\n", 1);
 	rl_on_new_line();
 }

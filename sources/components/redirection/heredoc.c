@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:04:47 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/08 13:01:15 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:32:22 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <readline/readline.h>
 #include "parser.h"
 
-extern volatile int	g_sigreciever;
+extern volatile int	g_sigreceiver;
 
 static void	heredoc_error(const char *delimiter)
 {
@@ -52,9 +52,9 @@ static int	open_heredoc(const char *delimiter, int fd)
 	while (true)
 	{
 		line = readline(heredoc_display);
-		if (g_sigreciever == SIGINT)
+		if (g_sigreceiver == SIGINT)
 		{
-			g_sigreciever = 0;
+			g_sigreceiver = 0;
 			break ;
 		}
 		if (stop_heredoc(line, delimiter) == true)
