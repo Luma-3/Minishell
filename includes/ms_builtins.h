@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:11:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/08 10:54:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:35:22 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,33 @@
 typedef struct s_builtin
 {
 	const char	*name;
-	int			(*func)(char **args, t_list **envp, t_error *errors);
+	int			(*func)(char **args, t_list **envp, void *data);
 }	t_builtin;
 
 bool	is_builtin(const char *cmd);
 
-int		chr_exec_bt(const char **tab_cmd, t_list **env, t_error *errors);
+int		chr_exec_bt(const char **tab_cmd, t_list **env, t_maindata *core_data);
 
 // BUILTINS
 
-int		ms_echo(char **args, t_list **envp, t_error *errors);
+int		ms_echo(char **args, t_list **envp, void *data);
 
-int		ms_pwd(char **args, t_list **envp, t_error *errors);
+int		ms_pwd(char **args, t_list **envp, void *data);
 
-int		ms_cd(char **args, t_list **envp, t_error *errors);
+int		ms_cd(char **args, t_list **envp, void *data);
 
-int		ms_unset(char **args, t_list **envp, t_error *errors);
+char	*spec_token(t_error *errors);
 
-int		ms_env(char **args, t_list **envp, t_error *errors);
+char	*oldpwd_token(t_list **env);
 
-int		ms_export(char **args, t_list **envp, t_error *errors);
+int		set_pwds(t_list **env, t_error *error);
 
-int		ms_exit(char **args, t_list **envp, t_error *errors);
+int		ms_unset(char **args, t_list **envp, void *data);
+
+int		ms_env(char **args, t_list **envp, void *data);
+
+int		ms_export(char **args, t_list **envp, void *data);
+
+int		ms_exit(char **args, t_list **envp, void *data);
 
 #endif

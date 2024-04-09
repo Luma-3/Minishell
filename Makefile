@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/08 15:00:35 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/04/09 11:35:45 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,6 +103,7 @@ COMPONENTS			=	$(addprefix $(COMPONENTS_DIR), $(COMPONENTS_LIST))
 
 SRC_BUILTINS_DIR	=	builtins/
 SRC_BUILTINS_LIST	=	bin_cd.c		\
+						cd_utils.c		\
 						bin_echo.c		\
 						bin_env.c		\
 						bin_exit.c		\

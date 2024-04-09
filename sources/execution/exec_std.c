@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/08 16:27:13 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:13:04 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ int	pre_process_exec(t_maindata *core_data, t_ats *node)
 		dup_pipe(core_data, node->data->index);
 	return (SUCCESS);
 }
-
-
 
 static void	process_built_out(t_maindata *core_data, t_ats *node, char **args)
 {

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:33:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/08 10:54:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:46:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	init_builtins(t_builtin *builtins)
 	builtins[6] = (t_builtin){"exit", ms_exit};
 }
 
-int	chr_exec_bt(const char **tab_cmd, t_list **env, t_error *errors)
+int	chr_exec_bt(const char **tab_cmd, t_list **env, t_maindata *core_data)
 {
 	t_builtin	builtins[NB_BUILTINS];
 	int			i;
@@ -37,12 +37,15 @@ int	chr_exec_bt(const char **tab_cmd, t_list **env, t_error *errors)
 		if (ft_strncmp(builtins[i].name, tab_cmd[0],
 				ft_strlen(tab_cmd[0])) == 0)
 		{
-			ret = builtins[i].func((char **)tab_cmd, env, errors);
+			if (ft_strncmp(builtins[i].name, "exit", 4) == 0)
+				ret = builtins[i].func((char **)tab_cmd, env, core_data);
+			else
+				ret = builtins[i].func((char **)tab_cmd, env,
+						core_data->errors);
 			return (ret);
 		}
 		i++;
 	}
-	ft_rm_split((char **)tab_cmd);
 	return (EXIT_FAILURE);
 }
 
@@ -57,7 +60,7 @@ bool	is_builtin(const char *cmd)
 	init_builtins(builtins);
 	while (i < NB_BUILTINS)
 	{
-		if (ft_strncmp(builtins[i].name, cmd, ft_strlen(builtins[i].name)) == 0)
+		if (ft_strncmp(builtins[i].name, cmd, ft_strlen(cmd)) == 0)
 		{
 			return (true);
 		}

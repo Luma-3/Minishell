@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:49:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/07 18:38:13 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:46:35 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*get_uname(void)
 	if (fd == -1)
 	{
 		errno = ENOENT;
-		return (ft_strdup("anthony"));
+		return (NULL); // TODO EXIT SHELL
 	}
 	while (read(fd, &user, sizeof(struct utmp)) > 0)
 	{

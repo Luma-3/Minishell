@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:16:34 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/08 18:12:46 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:08:58 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static bool	is_valid_name(char *name)
 	return (true);
 }
 
-int	ms_export(char **args, t_list **envp, t_error *errors)
+int	ms_export(char **args, t_list **envp, void *data)
 {
 	int		i;
 	int		j;
@@ -51,7 +51,7 @@ int	ms_export(char **args, t_list **envp, t_error *errors)
 			errno = EINVID;
 			ft_putstr_fd("Kikishell: export: '", STDERR_FILENO);
 			ft_putstr_fd(name, STDERR_FILENO);
-			perror_switch(errors, "'");
+			perror_switch((t_error *)data, "'");
 			free(name);
 			ret = 1;
 			i++;

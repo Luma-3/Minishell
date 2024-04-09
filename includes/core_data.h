@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/05 17:57:20 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:46:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@
 # define SAFE_MSG 	"toilet -tf future --gay -F border Welcome in SAFEKIKI"
 
 # define PROMPT_SHELL	"\001\033[1;32m┗━━▶\002\033[0m "
-# define PROMPT_SAFE	"> "
 
 // ERRORS
 
@@ -56,10 +55,10 @@ typedef struct s_error
 
 typedef struct s_token
 {
+	pid_t			pid;
 	int				index;
 	int				nb_redir;
 	int				exit_code;
-	pid_t			pid;
 	char			*cmd;
 	bool			is_subshell;
 	bool			require_wait;
@@ -67,8 +66,8 @@ typedef struct s_token
 
 typedef struct s_tree_asterisk
 {
-	char		*data;
 	t_queue		*branch;
+	char		*data;
 }			t_tree_asterisk;
 
 typedef struct s_ats
@@ -82,16 +81,16 @@ typedef struct s_maindata
 {
 	t_ats		*root;
 	t_list		*env;
+	t_error		*errors;
 	t_queue		*queue_heredoc;
 	t_queue		*queue_redir;
 	t_queue		*queue_pipe;
+	int			stdin_fd;
+	int			history_fd;
 	int			last_status;
 	char		*prompt;
-	t_error		*errors;
-	char		*path;
 	char		*uname;
-	int			history_fd;
-	int			stdin_fd;
+	char		*path;
 	bool		is_pipeline;
 }				t_maindata;
 

@@ -6,76 +6,12 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:00:31 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/08 16:23:34 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:37:51 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_builtins.h"
 #include "minishell.h"
-
-static char	*spec_token(t_error *errors)
-{
-	char	*home;
-	char	*uname;
-
-	uname = get_uname();
-	if (uname == NULL)
-	{
-		perror_switch(errors, "cd");
-		return (NULL);
-	}
-	home = get_home(uname);
-	free(uname);
-	if (home == NULL)
-	{
-		perror_switch(errors, "cd");
-		return (NULL);
-	}
-	return (home);
-}
-
-static char	*oldpwd_token(t_list **env)
-{
-	char	*oldpwd;
-
-	oldpwd = ms_getenv(*env, "OLDPWD");
-	if (oldpwd == NULL)
-	{
-		ft_putstr_fd("cd: OLDPWD not set\n", STDERR_FILENO);
-		return (NULL);
-	}
-	return (oldpwd);
-}
-
-static int	set_pwds(t_list **env, t_error *error)
-{
-	char	*pwd;
-	char	*oldpwd;
-
-	oldpwd = ms_getenv(*env, "PWD");
-	if (oldpwd == NULL)
-	{
-		ft_putstr_fd("cd: PWD not set\n", STDERR_FILENO);
-		return (FAILURE);
-	}
-	pwd = getcwd(NULL, 0);
-	if (pwd == NULL)
-	{
-		free(oldpwd);
-		perror_switch(error, "cd");
-		return (errno);
-	}
-	if (ms_setenv(env, "PWD", pwd) == FAILURE
-		|| ms_setenv(env, "OLDPWD", oldpwd) == FAILURE)
-	{
-		free(pwd);
-		free(oldpwd);
-		return (errno);
-	}
-	free(pwd);
-	free(oldpwd);
-	return (SUCCESS);
-}
 
 static char	*get_chdir_path(char **args, t_list **env, t_error *errors)
 {
@@ -102,7 +38,7 @@ static char	*get_chdir_path(char **args, t_list **env, t_error *errors)
 	return (chdir_path);
 }
 
-int	ms_cd(char **args, t_list **env, t_error *errors)
+int	ms_cd(char **args, t_list **env, void *data)
 {
 	char	*chdir_path;
 
@@ -111,7 +47,7 @@ int	ms_cd(char **args, t_list **env, t_error *errors)
 		ft_putstr_fd("cd: too many arguments\n", STDERR_FILENO);
 		return (FAILURE);
 	}
-	chdir_path = get_chdir_path(args, env, errors);
+	chdir_path = get_chdir_path(args, env, (t_error *)data);
 	if (chdir_path == NULL)
 		return (errno);
 	else if (chdir(chdir_path) == -1)
@@ -123,5 +59,5 @@ int	ms_cd(char **args, t_list **env, t_error *errors)
 		return (errno);
 	}
 	free(chdir_path);
-	return (set_pwds(env, errors));
+	return (set_pwds(env, (t_error *)data));
 }

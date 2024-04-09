@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:50:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/08 15:22:40 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/09 11:13:25 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	process_built_in(t_maindata *core_data, t_ats *node, char **args)
 				exit(1);
 			}
 			error = chr_exec_bt((const char **)args, &(core_data->env),
-					core_data->errors);
+					core_data);
 			close_all_pipes(core_data);
 			ft_rm_split(args);
 			clear_ats(core_data, CORE_ALL);
@@ -91,7 +91,7 @@ void	process_built_in(t_maindata *core_data, t_ats *node, char **args)
 	}
 	node->data->require_wait = false;
 	error = chr_exec_bt((const char **)args, &(core_data->env),
-			core_data->errors);
+			core_data);
 	node->data->exit_code = error;
 	if (node->data->index > 0)
 		close_pipe(core_data);

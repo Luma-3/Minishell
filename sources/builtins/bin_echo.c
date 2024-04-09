@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_echo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:10:35 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 14:59:41 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/09 11:07:14 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ static void	print_arg(char **arg)
 	}
 }
 
-int	ms_echo(char **args, t_list **envp, t_error *errors)
+int	ms_echo(char **args, t_list **envp, void *data)
 {
 	int	end_flag;
 
 	(void)envp;
-	(void)errors;
+	(void)data;
 	end_flag = have_flag(args);
 	print_arg(args + end_flag);
 	if (end_flag > 0)
