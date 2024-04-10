@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 00:18:28 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/08 12:37:56 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:07:43 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,28 @@ static bool	identify_file(struct dirent *entry, t_match_file *match_file)
 	return (result);
 }
 
+static char	*dup_push(char *old_data, char *entry, char *token, int i)
+{
+	char	*filename;
+	char	*tmp;
+
+	filename = ft_insert_str(old_data, entry, token, i);
+	if (filename == old_data)
+	{
+		tmp = ft_strdup(old_data);
+		if (tmp == NULL)
+			return (NULL);
+		return (tmp);
+	}
+	return (filename);
+}
+
 bool	find_and_push(t_dstack *stack, t_match_file *match_file,
 	DIR *dir, int i)
 {
 	struct dirent	*entry;
 	char			*token;
+	char			*tmp;
 	bool			have_file;
 
 	have_file = false;
@@ -50,8 +67,10 @@ bool	find_and_push(t_dstack *stack, t_match_file *match_file,
 		if (identify_file(entry, match_file) == true)
 		{
 			have_file = true;
-			d_push_stk(stack, ft_insert_str(match_file->old_data,
-					entry->d_name, token, i));
+			tmp = dup_push(match_file->old_data, entry->d_name, token, i);
+			if (tmp == NULL)
+				return (free(token), false);
+			d_push_stk(stack, tmp);
 		}
 	}
 	return (free(token), have_file);

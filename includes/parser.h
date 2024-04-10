@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 13:37:19 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:25:43 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int				verif_token_before(const char *prompt, int i);
 
 int				handle_heredoc(const char *prompt, t_maindata *ats);
 
+bool			verif_filename(char *filename, t_error *errors);
+
 /////////////////////////
 ////// POST PARSER //////
 /////////////////////////
@@ -97,14 +99,13 @@ size_t			count_nodes(t_ats *root, size_t count);
 
 int				copy_cmd_operator(t_maindata *ats, int *i_copy, int *i_read);
 
-t_token			*copy_token(t_maindata *ats, const char *prompt, int size_copy);
+t_token			*copy_token(t_maindata *ats, const char *prompt, size_t size_copy);
 
 t_token			*copy_insert_node(t_maindata *ats, int i_copy, int i_read);
 
 // take_redir.c
 
-char			*take_redir(t_maindata *ats, const char *prompt,
-					int size_prompt, int *nb_redir);
+char			*take_redir(t_maindata *ats, const char *prompt, int *nb_redir);
 
 //////////////////////////
 ////// PARSER UTILS //////
@@ -132,7 +133,7 @@ bool			is_quote(const char c);
 
 //is_type2.c
 
-bool			is_subshell(const char *cmd, int size_cmd);
+bool			is_subshell(const char *cmd);
 
 bool			is_pipeline(const char *prompt);
 

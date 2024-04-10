@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:39:53 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 13:44:16 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:22:31 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static void	ft_perror(t_error *errors, const char *str, const char *token)
 		ft_putstr_fd((char *)token, STDERR_FILENO);
 		ft_putchar_fd('\'', STDERR_FILENO);
 	}
+	if (errno == EEOF)
+		ft_putstr_fd(")", STDERR_FILENO);
 	ft_putchar_fd('\n', STDERR_FILENO);
 }
 

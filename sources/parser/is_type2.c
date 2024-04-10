@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   is_type2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:00:57 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 15:15:01 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/10 15:37:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-bool	is_subshell(const char *cmd, int size_cmd)
+bool	is_subshell(const char *cmd)
 {
 	int	i;
 
 	i = 0;
-	while (i < size_cmd && cmd[i])
+	while (cmd[i])
 	{
 		if (is_quote(cmd[i]) == true)
 			i = place_cursor_quote(cmd, i);

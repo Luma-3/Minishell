@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:04:47 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 14:37:39 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:31:50 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ char	*get_delimiter(const char *prompt, int index, t_error *errors)
 {
 	size_t		i;
 	char		*delimiter;
+	char		*clean_delimiter;
 
 	i = 0;
 	index += 2;
@@ -122,14 +123,19 @@ char	*get_delimiter(const char *prompt, int index, t_error *errors)
 	delimiter = ft_strndup(prompt + index, i);
 	if (delimiter == NULL)
 		return (NULL);
+	if (verif_filename(delimiter, errors) == false)
+		return (free(delimiter), NULL);
 	if (delimiter[0] == '\0')
 	{
 		errno = ESYNTAX;
 		perror_switch(errors, "kikishell", "newline");
-		free(delimiter);
-		return (NULL);
+		return (free(delimiter), NULL);
 	}
-	return (delimiter);
+	clean_delimiter = clean_quote(delimiter);
+	free(delimiter);
+	if (clean_delimiter == NULL)
+		return (NULL);
+	return (clean_delimiter);
 }
 
 int	handle_heredoc(const char *prompt, t_maindata *core)
