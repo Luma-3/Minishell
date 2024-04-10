@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:35:19 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 12:11:35 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/10 14:48:53 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int	expansion_cmd(t_maindata *core_data, t_list **args)
 					indexer = match_files;
 					connect_list(index_prev, match_files, args);
 				}
+				else
+					return (FAILURE);
 			}
 		}
 		index_prev = indexer;

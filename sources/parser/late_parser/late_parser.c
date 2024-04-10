@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   late_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:46:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/08 11:31:19 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:50:01 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ char	**late_parser(t_maindata *core_data, t_ats *node)
 	lst_args = split_arg(node->data->cmd);
 	if (lst_args == NULL)
 		return (NULL);
-	expansion_cmd(core_data, &lst_args);
+	if (expansion_cmd(core_data, &lst_args) == FAILURE)
+		return (NULL);
 	tab_args = list_to_tab(&lst_args);
 	return (tab_args);
 }
