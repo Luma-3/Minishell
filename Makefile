@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/10 17:52:45 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/04/11 01:00:59 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -214,50 +214,33 @@ UNDERLINE		=	\033[4m
 
 TOTAL_SRCS		=	$(words $(SRC))
 COMPILED_SRCS	:=	0
+MAX_PATH_LENGTH := $(shell find . -name '*.c' -exec sh -c 'echo "$$1" | wc -c' _ {} \; | sort -nr | head -n1)
 
 define print_progress
 	@printf "\033[2K"
-	@printf "$(COLOR_BLUE)Compiling: [$(COLOR_GREEN)"
-	@for i in $(shell seq 1 25); do \
-		if [ $$i -le $$(($(1)*25/$(2))) ]; then \
-			printf "#"; \
-		else \
-			printf "."; \
-		fi; \
-	done
-	@printf "$(COLOR_BLUE)] $(BOLD)$(1)/$(2) $(COLOR_GREEN)$(3)$(COLOR_RESET)\r"
+	$(eval WIDTH := $(shell tput cols))
+	$(eval LEN := $(shell expr $(WIDTH) - $(MAX_PATH_LENGTH) - 26))
+
+	@if [ $(LEN) -lt 5 ]; then \
+		printf "$(COLOR_BLUE)$(BOLD)$(1)/$(2)$(COLOR_RESET)\r"; \
+	else \
+		printf "$(COLOR_BLUE)Compiling: [$(COLOR_GREEN)"; \
+		for i in $$(seq 1 $(LEN)); do \
+			if [ $$i -le $$(($(1)*$(LEN)/$(2))) ]; then \
+				printf "#"; \
+			else \
+				printf "."; \
+			fi; \
+		done; \
+		printf "$(COLOR_BLUE)] $(BOLD)$(1)/$(2) $(COLOR_GREEN)$(3)$(COLOR_RESET)\r"; \
+	fi
 endef
 
 #################
 ##    RULES    ##
 #################
 
-
-
 all: $(LIBFT) $(STACKFT) $(NAME)
-
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
-	@mkdir -p $(OBJ_DIR)$(COMPONENTS_DIR)
-	@mkdir -p $(OBJ_DIR)$(COMPONENTS_DIR)$(COMP_DISPLAY_DIR)
-	@mkdir -p $(OBJ_DIR)$(COMPONENTS_DIR)$(COMP_ENV_DIR)
-	@mkdir -p $(OBJ_DIR)$(COMPONENTS_DIR)$(COMP_ERROR_DIR)
-	@mkdir -p $(OBJ_DIR)$(COMPONENTS_DIR)$(COMP_HISTORY_DIR)
-	@mkdir -p $(OBJ_DIR)$(COMPONENTS_DIR)$(COMP_REDIR_DIR)
-	@mkdir -p $(OBJ_DIR)$(COMPONENTS_DIR)$(COMP_SIGNAL_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_BUILTINS_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_EXEC_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(ATS_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(POST_PARSER_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(POST_PARSER_DIR)$(EXPAND_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(POST_PARSER_DIR)$(EXPAND_DIR)$(ALL_EXPAND_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_PARSER_DIR)$(PRE_PARSER_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_HISTORY_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_REDIR_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_SIGNAL_DIR)
-	@mkdir -p $(OBJ_DIR)$(SRC_ERROR_DIR)
-	
 
 $(LIBFT):
 	@make -sC $(LIBFT_DIR)
@@ -265,27 +248,31 @@ $(LIBFT):
 $(STACKFT):
 	@make -sC $(STACKFT_DIR)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 	@$(eval COMPILED_SRCS=$(shell expr $(COMPILED_SRCS) + 1))
 	@$(call print_progress,$(COMPILED_SRCS),$(TOTAL_SRCS), $<)
 
+
 $(NAME): $(OBJ_LIST)
 	@echo "\033[2K$(COLOR_ORANGE)$(BOLD)Compilation complete ! $(COLOR_BLUE)Minishell is Ready !$(COLOR_RESET)"
-	@$(CC) $(CFLAGS) $(OBJ_LIST) $(LIBFT) $(STACKFT) -o $(NAME) -lreadline -lcurses
+	@$(CC) $(CFLAGS) $^ $(INCLUDE) $(LIBFT) $(STACKFT) -o $@ -lreadline -lcurses
 
 clean:
 	@echo "$(COLOR_RED)$(BOLD)Delete $(NAME) objects$(COLOR_RESET)"
 	@rm -rf $(OBJ_DIR) $(NORM_LOG)
-	@make clean -sC $(LIBFT_DIR) 
+	@make clean -sC $(LIBFT_DIR)
 	@make clean -sC $(STACKFT_DIR)
 
 fclean: clean
 	@echo "$(COLOR_RED)$(BOLD)Delete Minishell$(COLOR_RESET)"
 	@rm -f $(NAME)
-	@make fclean -sC $(LIBFT_DIR) 
-	@make fclean -sC $(STACKFT_DIR)
+	@echo "$(COLOR_RED)$(BOLD)Delete Libft$(COLOR_RESET)"
+	@rm -f $(LIBFT)
+	@echo "$(COLOR_RED)$(BOLD)Delete Stackft$(COLOR_RESET)"
+	@rm -f $(STACKFT)
 
 norme:
 	@echo "$(COLOR_BLUE)Norminette...$(COLOR_RESET)"
