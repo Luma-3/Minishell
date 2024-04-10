@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:47:27 by Monsieur_Ca       #+#    #+#             */
-/*   Updated: 2024/04/07 18:28:51 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:41:41 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,15 @@ static char	*path_to_relative(char *tab)
 
 char	*get_path(char *path, char *tab)
 {
-	char	*cmd_path;
+	char		*cmd_path;
 
 	if (tab[0] == '/' || ft_strncmp(tab, "./", 2) == 0)
-		return (tab);
+	{
+		cmd_path = ft_strdup(tab);
+		if (cmd_path == NULL)
+			return (NULL);
+		return (cmd_path);
+	}
 	else
 	{
 		if (is_path(tab) == true)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:39:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/08 15:02:43 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:34:30 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		read_ats(t_maindata *core_data, t_ats *root);
 
 void	exec_std(t_maindata *core_data, const t_ats *node);
 
-int		exec_command(char **tab_cmd, t_list **env, t_error *errors, char *path);
+void	exec_command(char **tab_cmd, t_list **env, t_error *errors, char *path);
 
 int		exec_subshell(t_maindata *core_data, t_ats *node);
 

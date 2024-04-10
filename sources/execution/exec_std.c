@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_std.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/09 11:13:04 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:38:40 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,14 @@ static void	process_built_out(t_maindata *core_data, t_ats *node, char **args)
 			close(core_data->history_fd);
 		if (core_data->stdin_fd != -1)
 			close(core_data->stdin_fd);
-		if (pre_process_exec(core_data, (t_ats *)node) == FAILURE)
+		if (args == NULL)
 		{
 			clear_ats(core_data, CORE_ALL);
 			exit (errno);
 		}
-		if (args == NULL)
+		if (pre_process_exec(core_data, (t_ats *)node) == FAILURE)
 		{
+			ft_rm_split(args);
 			clear_ats(core_data, CORE_ALL);
 			exit (errno);
 		}
@@ -82,6 +83,7 @@ static void	process_built_out(t_maindata *core_data, t_ats *node, char **args)
 		close_all_pipes(core_data);
 		exec_command(args, &(core_data->env),
 			core_data->errors, path);
+		ft_rm_split(args);
 		clear_ats(core_data, CORE_ALL);
 		exit (errno);
 	}

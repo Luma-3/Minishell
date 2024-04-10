@@ -3,35 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:06:49 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/07 18:25:50 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:45:31 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include <sys/stat.h>
 
-int	exec_command(char **tab_cmd, t_list **env, t_error *errors, char *path)
+void	exec_command(char **tab_cmd, t_list **env, t_error *errors, char *path)
 {
-	char	*path_command;
-	char	**env_tab;
+	struct stat	stat_path;
+	char		*path_command;
+	char		**env_tab;
 
 	path_command = get_path(path, tab_cmd[0]);
 	if (path_command == NULL)
 	{
 		ft_perror(errors, tab_cmd[0]);
-		ft_rm_split(tab_cmd);
-		return (FAILURE);
+		return ;
+	}
+	if (access(path_command, F_OK) == -1)
+	{
+		errno = ENOENT;
+		perror_switch(errors, tab_cmd[0]);
+		free(path_command);
+		free(path);
+		return ;
+	}
+	stat(path_command, &stat_path);
+	if (S_ISDIR(stat_path.st_mode))
+	{
+		errno = EISDIR;
+		perror_switch(errors, tab_cmd[0]);
+		free(path_command);
+		free(path);
+		return ;
 	}
 	env_tab = env_to_tab(*env);
 	if (execve(path_command, tab_cmd, env_tab) == -1)
 	{
 		free(path_command);
-		ft_rm_split(tab_cmd);
+		free(path);
 		ft_rm_split(env_tab);
 		perror("execve");
-		return (FAILURE);
+		return ;
 	}
-	return (SUCCESS);
 }
