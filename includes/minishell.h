@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 22:00:21 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:42:37 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int			get_history(int fd);
 int			open_history(const char *name, const char *uname);
 
 int			ft_add_history(char *input, int fd);
+
+void		verif_add_history(char *input, int fd);
 
 char		*get_home(const char *uname);
 

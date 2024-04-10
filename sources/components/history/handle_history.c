@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:39:31 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/07 16:23:39 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:42:11 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,13 @@ int	get_history(int fd)
 		free(input);
 	}
 	return (SUCCESS);
+}
+
+void	verif_add_history(char *input, int fd)
+{
+	size_t	nb_space;
+
+	nb_space = ft_skip_whitespaces(input, 0);
+	if (nb_space != ft_strlen(input))
+		ft_add_history(input, fd);
 }

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 13:40:11 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:42:50 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static void	read_input(t_maindata *core_data)
 			display_msg(core_data, BYE_MSG);
 			break ;
 		}
-		ft_add_history(input, core_data->history_fd);
+		verif_add_history(input, core_data->history_fd);
 		exec_process(core_data, input);
 		dup2(core_data->stdin_fd, STDIN_FILENO);
 		close(core_data->stdin_fd);

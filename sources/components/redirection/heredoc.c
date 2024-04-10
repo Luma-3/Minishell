@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:04:47 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 13:48:16 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 14:37:39 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static bool	stop_heredoc(char *line, const char *delimiter, t_error *errors)
 		perror_switch(errors, "kikishell", delimiter);
 		return (true);
 	}
-	if (ft_strncmp(line, delimiter, ft_strlen(line)) == 0)
+	if (ft_strncmp(line, delimiter, ft_strlen(line)) == 0
+		&& ft_strlen(line) != 0)
 	{
 		free(line);
 		return (true);
@@ -95,7 +96,7 @@ static int	create_enqueue_heredoc(t_queue *heredoc_queue, char *delimiter,
 		free(heredoc->delimiter);
 		free(heredoc);
 		perror("kikishell: heredoc");
-		return (errno);
+		return (FAILURE);
 	}
 	if (heredoc_queue == NULL)
 	{
@@ -108,9 +109,10 @@ static int	create_enqueue_heredoc(t_queue *heredoc_queue, char *delimiter,
 	return (open_heredoc(delimiter, fd, errors));
 }
 
-int	get_delimiter(const char *prompt, char *delimiter, int index, t_error *errors)
+char	*get_delimiter(const char *prompt, int index, t_error *errors)
 {
 	size_t		i;
+	char		*delimiter;
 
 	i = 0;
 	index += 2;
@@ -119,16 +121,15 @@ int	get_delimiter(const char *prompt, char *delimiter, int index, t_error *error
 		i++;
 	delimiter = ft_strndup(prompt + index, i);
 	if (delimiter == NULL)
-		return (FAILURE);
-	printf("delimiter: %s\n", delimiter);
+		return (NULL);
 	if (delimiter[0] == '\0')
 	{
 		errno = ESYNTAX;
 		perror_switch(errors, "kikishell", "newline");
 		free(delimiter);
-		return (FAILURE);
+		return (NULL);
 	}
-	return (SUCCESS);
+	return (delimiter);
 }
 
 int	handle_heredoc(const char *prompt, t_maindata *core)
@@ -146,7 +147,8 @@ int	handle_heredoc(const char *prompt, t_maindata *core)
 			i = place_cursor_quote(prompt, i);
 		if (is_redir_type(prompt + i) == REDIR_HEREDOC)
 		{
-			if (get_delimiter(prompt, delimiter, i, core->errors) == FAILURE)
+			delimiter = get_delimiter(prompt, i, core->errors);
+			if (delimiter == NULL)
 				return (FAILURE);
 			if (create_enqueue_heredoc(core->queue_heredoc,
 					delimiter, id, core->errors) == FAILURE)
