@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:03:56 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/09 17:32:22 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:24:12 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ static void	sigint_handler(int sig)
 static void	sigquit_handler(int sig)
 {
 	g_sigreceiver = sig;
-	write(STDOUT_FILENO, "\n", 1);
+	printf("\033[2D\033[0K");
 	rl_on_new_line();
+	rl_redisplay();
 }
 
 void	init_signal(void)

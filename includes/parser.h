@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/08 12:16:16 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:37:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,22 @@ typedef struct s_match_file
 ////// PRE PARSER //////
 /////////////////////////
 
-int				verif_prompt(const char *prompt);
+int				verif_prompt(const char *prompt, t_error *errors);
 
-int				verif_if_quote_closed(const char *prompt);
+int				verif_if_quote_closed(const char *prompt, t_error *errors);
 
-int				verif_if_parenthesis_closed(const char *prompt);
+int				verif_if_parenthesis_closed(const char *prompt,
+					t_error *errors);
 
-int				verif_arg_parenthesis(const char *prompt);
+int				verif_arg_parenthesis(const char *prompt, t_error *errors);
+
+int				verif_token_separation(const char *prompt, t_error *errors);
 
 int				verif_before_operator(const char *prompt, char *token);
 
-int				verif_token_separation(const char *prompt);
+int				verif_token_before(const char *prompt, int i);
 
-void			handle_heredoc(const char *prompt, t_maindata *ats);
+int				handle_heredoc(const char *prompt, t_maindata *ats);
 
 /////////////////////////
 ////// POST PARSER //////

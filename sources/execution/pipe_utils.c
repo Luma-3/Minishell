@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 13:16:43 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/08 14:47:32 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:43:09 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,13 +116,13 @@ void	close_all_pipes(t_maindata *core_data)
 			break ;
 		if (close(data->pipe_fd[READ]) == FAILURE)
 		{
-			perror_switch(core_data->errors, "close read all");
+			perror_switch(core_data->errors, "close", NULL);
 			free(data);
 			return ;
 		}
 		if (close(data->pipe_fd[WRITE]) == FAILURE)
 		{
-			perror_switch(core_data->errors, "close write all");
+			perror_switch(core_data->errors, "close", NULL);
 			free(data);
 			return ;
 		}

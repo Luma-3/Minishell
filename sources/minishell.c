@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/09 17:32:22 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:40:11 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	init_core_data(t_maindata *core_data, char *prompt)
 		|| core_data->queue_pipe == NULL)
 	{
 		errno = ENOMEM;
-		perror_switch(core_data->errors, "KikiShell");
+		perror_switch(core_data->errors, "KikiShell", NULL);
 		return (FAILURE);
 	}
 	core_data->root = NULL;
@@ -76,6 +76,8 @@ static void	read_input(t_maindata *core_data)
 	{
 		core_data->stdin_fd = dup(STDIN_FILENO);
 		input = shell_prompt(core_data);
+		if (g_sigreceiver == SIGQUIT)
+			g_sigreceiver = 0;
 		if (g_sigreceiver == SIGINT)
 		{
 			g_sigreceiver = 0;

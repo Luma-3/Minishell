@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_std.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 11:38:40 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:42:57 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	exec_std(t_maindata *core_data, const t_ats *node)
 	args = late_parser(core_data, (t_ats *)node);
 	if (errno != 0 && args == NULL)
 	{
-		perror_switch(core_data->errors, "Kikishell: parsing");
+		perror_switch(core_data->errors, "Kikishell: parsing", NULL);
 		return ;
 	}
 	if (args != NULL && is_builtin(args[0]) == true)

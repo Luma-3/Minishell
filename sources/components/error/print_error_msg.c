@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:20:43 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/08 13:18:11 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:57:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,6 @@
 #include "exec.h"
 #include "parser.h"
 #include "ms_error.h"
-
-void	print_error_message(void)
-{
-	perror(ERROR_FORMAT);
-}
-
-void	print_error_arg(char token)
-{
-	ft_putstr_fd("parse error near unexpected token '", STDERR_FILENO);
-	ft_putchar_fd(token, STDERR_FILENO);
-	ft_putstr_fd("'\n", STDERR_FILENO);
-}
 
 void	print_error_why(void)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:06:49 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/10 11:45:31 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:32:05 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	exec_command(char **tab_cmd, t_list **env, t_error *errors, char *path)
 	path_command = get_path(path, tab_cmd[0]);
 	if (path_command == NULL)
 	{
-		ft_perror(errors, tab_cmd[0]);
+		perror_switch(errors, tab_cmd[0], NULL);
 		return ;
 	}
 	if (access(path_command, F_OK) == -1)
 	{
 		errno = ENOENT;
-		perror_switch(errors, tab_cmd[0]);
+		perror_switch(errors, tab_cmd[0], NULL);
 		free(path_command);
 		free(path);
 		return ;
@@ -37,7 +37,7 @@ void	exec_command(char **tab_cmd, t_list **env, t_error *errors, char *path)
 	if (S_ISDIR(stat_path.st_mode))
 	{
 		errno = EISDIR;
-		perror_switch(errors, tab_cmd[0]);
+		perror_switch(errors, tab_cmd[0], NULL);
 		free(path_command);
 		free(path);
 		return ;
@@ -48,7 +48,7 @@ void	exec_command(char **tab_cmd, t_list **env, t_error *errors, char *path)
 		free(path_command);
 		free(path);
 		ft_rm_split(env_tab);
-		perror("execve");
+		perror_switch(errors, tab_cmd[0], NULL);
 		return ;
 	}
 }

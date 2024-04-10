@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:50:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/09 12:34:44 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:42:51 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	copy_stdout(t_maindata *core_data)
 	if (fd == FAILURE)
 	{
 		errno = EIO;
-		perror_switch(core_data->errors, "dup");
+		perror_switch(core_data->errors, "dup", NULL);
 		return (FAILURE);
 	}
 	return (fd);
@@ -36,12 +36,12 @@ static void	restore_stdout(t_error *errors, int save_fd)
 	if (dup2(save_fd, STDOUT_FILENO) == FAILURE)
 	{
 		errno = EIO;
-		perror_switch(errors, "dup2");
+		perror_switch(errors, "dup2", NULL);
 	}
 	if (close(save_fd) == FAILURE)
 	{
 		errno = EIO;
-		perror_switch(errors, "close");
+		perror_switch(errors, "close", NULL);
 	}
 }
 
@@ -57,7 +57,7 @@ void	process_built_in(t_maindata *core_data, t_ats *node, char **args)
 		if (pid == FAILURE)
 		{
 			errno = EIO;
-			perror_switch(core_data->errors, "fork");
+			perror_switch(core_data->errors, "fork", NULL);
 			return ;
 		}
 		node->data->pid = pid;
@@ -80,7 +80,6 @@ void	process_built_in(t_maindata *core_data, t_ats *node, char **args)
 			clear_ats(core_data, CORE_ALL);
 			exit(error);
 		}
-		// restore_stdout(core_data->errors, save_fd);
 		clean_parent(core_data, node);
 		return ;
 	}

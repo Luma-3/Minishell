@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/09 12:21:18 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:18:49 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define WRITE 1
 
 # define SIGINT 2
+# define SIGQUIT 3
 
 # define HELLO_MSG 	"toilet -tf future --gay -F border Welcome in KIKISHELL"
 # define BYE_MSG 	"toilet -tf future --gay -F border See you soon !!!"

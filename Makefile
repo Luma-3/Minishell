@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/09 11:35:45 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/04/10 13:10:55 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,6 @@ COMP_ERROR_DIR		=	error/
 COMP_ERROR_LIST		=	error.c				\
 						clear_core.c		\
 						free.c				\
-						error_utils.c		\
 						print_error_msg.c
 COMP_ERROR			=	$(addprefix $(COMP_ERROR_DIR), $(COMP_ERROR_LIST))
 

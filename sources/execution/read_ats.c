@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/09 17:31:56 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:27:37 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ static int	wait_pipeline(t_maindata *core_data, t_ats *node)
 			return (FAILURE);
 		if (g_sigreceiver != 0)
 		{
+			if (g_sigreceiver == SIGQUIT)
+			{
+				printf("\r^\\\033[0KQuit (Core dumped)\n");
+			}
 			while (node->left != NULL)
 			{
 				kill(node->data->pid, g_sigreceiver);
@@ -61,6 +65,10 @@ static int	wait_process(t_maindata *core_data, t_ats *node)
 		}
 		if (g_sigreceiver != 0)
 		{
+			if (g_sigreceiver == SIGQUIT)
+			{
+				printf("\r^\\\033[0KQuit (Core dumped)\n");
+			}
 			kill(node->data->pid, g_sigreceiver);
 			g_sigreceiver = 0;
 			waitpid(node->data->pid, &node->data->exit_code, 0);

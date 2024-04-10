@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:26:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/08 14:46:11 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:42:31 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	open_redir(t_maindata *core_data, const t_ats *node)
 		expand_redir(core_data, node_redir);
 		if (open_redir_type(node_redir, core_data->queue_heredoc) == FAILURE)
 		{
-			perror_switch(core_data->errors, node_redir->file_name);
+			perror_switch(core_data->errors, node_redir->file_name, NULL);
 			exit_code = FAILURE;
 		}
 		free(node_redir->file_name);

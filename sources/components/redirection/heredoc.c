@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:04:47 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/09 17:32:22 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:48:16 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,12 @@
 
 extern volatile int	g_sigreceiver;
 
-static void	heredoc_error(const char *delimiter)
-{
-	ft_putstr_fd("kikishell: warning: here-document \
-delimited by end-of-file (wanted '", STDERR_FILENO);
-	ft_putstr_fd((char *)delimiter, STDERR_FILENO);
-	ft_putstr_fd("')\n", STDERR_FILENO);
-}
-
-static bool	stop_heredoc(char *line, const char *delimiter)
+static bool	stop_heredoc(char *line, const char *delimiter, t_error *errors)
 {
 	if (line == NULL)
 	{
-		heredoc_error(delimiter);
+		errno = EEOF;
+		perror_switch(errors, "kikishell", delimiter);
 		return (true);
 	}
 	if (ft_strncmp(line, delimiter, ft_strlen(line)) == 0)
@@ -39,7 +32,7 @@ static bool	stop_heredoc(char *line, const char *delimiter)
 	return (false);
 }
 
-static int	open_heredoc(const char *delimiter, int fd)
+static int	open_heredoc(const char *delimiter, int fd, t_error *errors)
 {
 	char	*line;
 	char	*heredoc_display;
@@ -57,7 +50,7 @@ static int	open_heredoc(const char *delimiter, int fd)
 			g_sigreceiver = 0;
 			break ;
 		}
-		if (stop_heredoc(line, delimiter) == true)
+		if (stop_heredoc(line, delimiter, errors) == true)
 			break ;
 		ft_putendl_fd(line, fd);
 		ft_putchar_fd('\n', fd);
@@ -70,7 +63,7 @@ static int	open_heredoc(const char *delimiter, int fd)
 }
 
 static int	create_enqueue_heredoc(t_queue *heredoc_queue, char *delimiter,
-									int id)
+									int id, t_error *errors)
 {
 	t_queue_heredoc	*heredoc;
 	char			*heredoc_name;
@@ -112,39 +105,58 @@ static int	create_enqueue_heredoc(t_queue *heredoc_queue, char *delimiter,
 		return (close(fd), FAILURE);
 	}
 	ft_enqueue(heredoc_queue, heredoc);
-	return (open_heredoc(delimiter, fd));
+	return (open_heredoc(delimiter, fd, errors));
 }
 
-void	handle_heredoc(const char *prompt, t_maindata *ats)
+int	get_delimiter(const char *prompt, char *delimiter, int index, t_error *errors)
 {
-	int		i;
-	int		j;
-	int		id;
-	char	*delimiteur;
+	size_t		i;
 
 	i = 0;
-	j = 0;
+	index += 2;
+	index = ft_skip_whitespaces(prompt, index);
+	while (prompt[index + i] && ft_iswhitespace(prompt[index + i]) == false)
+		i++;
+	delimiter = ft_strndup(prompt + index, i);
+	if (delimiter == NULL)
+		return (FAILURE);
+	printf("delimiter: %s\n", delimiter);
+	if (delimiter[0] == '\0')
+	{
+		errno = ESYNTAX;
+		perror_switch(errors, "kikishell", "newline");
+		free(delimiter);
+		return (FAILURE);
+	}
+	return (SUCCESS);
+}
+
+int	handle_heredoc(const char *prompt, t_maindata *core)
+{
+	int		i;
+	int		id;
+	char	*delimiter;
+
+	i = 0;
 	id = 0;
-	delimiteur = NULL;
+	delimiter = NULL;
 	while (prompt[i])
 	{
 		if (is_quote(prompt[i]) == true)
 			i = place_cursor_quote(prompt, i);
 		if (is_redir_type(prompt + i) == REDIR_HEREDOC)
 		{
-			i += 2;
-			i = ft_skip_whitespaces(prompt, i);
-			while (prompt[i + j] && ft_iswhitespace(prompt[i + j]) == false)
-				j++;
-			delimiteur = ft_strndup(prompt + i, (size_t)j);
-			if (create_enqueue_heredoc(ats->queue_heredoc,
-					delimiteur, id) == FAILURE)
+			if (get_delimiter(prompt, delimiter, i, core->errors) == FAILURE)
+				return (FAILURE);
+			if (create_enqueue_heredoc(core->queue_heredoc,
+					delimiter, id, core->errors) == FAILURE)
 			{
-				free(delimiteur);
-				return ;
+				printf("error\n");
+				return (free(delimiter), FAILURE);
 			}
 			id++;
 		}
 		i++;
 	}
+	return (SUCCESS);
 }

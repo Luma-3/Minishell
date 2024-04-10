@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 10:20:41 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/08 18:21:29 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:41:07 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	display_msg(t_maindata *core_data, char *msg)
 	if (command == NULL)
 	{
 		errno = ENOMEM;
-		perror_switch(core_data->errors, "KikiShell");
+		perror_switch(core_data->errors, "KikiShell", NULL);
 		return ;
 	}
 	exec_process(core_data, command);

@@ -6,14 +6,21 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:19:12 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/08 16:28:33 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:30:43 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "error.h"
 
-int	verif_if_quote_closed(const char *prompt)
+static int	print_error_arg(t_error *errors, const char *token)
+{
+	errno = ESYNTAX;
+	perror_switch(errors, "Kikishell", token);
+	return (FAILURE);
+}
+
+int	verif_if_quote_closed(const char *prompt, t_error *errors)
 {
 	int		i;
 	bool	quote;
@@ -34,11 +41,11 @@ int	verif_if_quote_closed(const char *prompt)
 		i++;
 	}
 	if (quote == true)
-		return (print_error_arg(quote_type), FAILURE);
+		return (print_error_arg(errors, &quote_type));
 	return (SUCCESS);
 }
 
-int	verif_if_parenthesis_closed(const char *prompt)
+int	verif_if_parenthesis_closed(const char *prompt, t_error *errors)
 {
 	int	i;
 	int	index_parenthesis;
@@ -65,11 +72,11 @@ int	verif_if_parenthesis_closed(const char *prompt)
 			i++;
 	}
 	if (parenthesis != 0)
-		return (print_error_arg(prompt[index_parenthesis]), FAILURE);
+		return (print_error_arg(errors, &prompt[index_parenthesis]));
 	return (SUCCESS);
 }
 
-int	verif_token_separation(const char *prompt)
+int	verif_token_separation(const char *prompt, t_error *errors)
 {
 	int		i;
 	int		tmp;
@@ -77,7 +84,7 @@ int	verif_token_separation(const char *prompt)
 
 	i = 0;
 	if (verif_before_operator(prompt, &token) == FAILURE)
-		return (print_error_arg(token), FAILURE);
+		return (print_error_arg(errors, &token));
 	while (prompt[i])
 	{
 		if (is_operator(prompt + i) == true || is_pipe(prompt + i) == true)
@@ -86,39 +93,37 @@ int	verif_token_separation(const char *prompt)
 			token = prompt[i];
 			i = place_cursor_after_token(prompt, i);
 			if (i - tmp > 2)
-				return (print_error_arg(token), FAILURE);
+				return (print_error_arg(errors, &token));
 			i = ft_skip_whitespaces(prompt, i);
 			if (is_operator(prompt + i) == true
 				|| is_pipe(prompt + i) == true
 				|| prompt[i] == '\0')
-				return (print_error_arg(token), FAILURE);
+				return (print_error_arg(errors, &token));
 		}
 		i++;
 	}
 	return (SUCCESS);
 }
 
-int	verif_before_operator(const char *prompt, char *token)
+int	verif_arg_parenthesis(const char *prompt, t_error *errors)
 {
-	int		i;
-	int		nb_space;
+	int	i;
 
 	i = 0;
-	nb_space = 0;
 	while (prompt[i])
 	{
-		if (ft_iswhitespace(prompt[i]) == true)
-			nb_space++;
-		if (is_operator(prompt + i) == true || is_pipe(prompt + i) == true)
+		if (is_quote(prompt[i]) == true)
+			i = skip_quote_parenthesis(prompt, i);
+		if (prompt[i] == '(')
 		{
-			if ((nb_space == i && i - 1 != 0) || i - 1 == -1)
+			if (verif_token_before(prompt, i - 1) == FAILURE)
 			{
-				*token = prompt[i];
+				print_error_arg(errors, &(prompt[i]));
 				return (FAILURE);
 			}
-			break ;
 		}
-		i++;
+		if (prompt[i])
+			i++;
 	}
 	return (SUCCESS);
 }

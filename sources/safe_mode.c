@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 20:45:55 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 23:02:50 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:40:36 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ int	init_safe_mode(t_maindata *core_data)
 	core_data->path = take_path();
 	if (core_data->path == NULL)
 	{
-		perror_switch(core_data->errors, "Safe Mode");
+		perror_switch(core_data->errors, "Safe Mode", NULL);
 		return (FAILURE);
 	}
 	if (safe_env(&(core_data->env)) == FAILURE)
 	{
-		perror_switch(core_data->errors, "Safe Mode");
+		perror_switch(core_data->errors, "Safe Mode", NULL);
 		return (FAILURE);
 	}
 	return (SUCCESS);

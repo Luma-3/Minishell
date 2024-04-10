@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 11:18:33 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/09 11:43:25 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:42:12 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ char	*spec_token(t_error *errors)
 	uname = get_uname();
 	if (uname == NULL)
 	{
-		perror_switch(errors, "cd");
+		perror_switch(errors, "cd", NULL);
 		return (NULL);
 	}
 	home = get_home(uname);
 	free(uname);
 	if (home == NULL)
 	{
-		perror_switch(errors, "cd");
+		perror_switch(errors, "cd", NULL);
 		return (NULL);
 	}
 	return (home);
@@ -62,7 +62,7 @@ int	set_pwds(t_list **env, t_error *error)
 	if (pwd == NULL && errno != ENOENT)
 	{
 		free(oldpwd);
-		perror_switch(error, "cd");
+		perror_switch(error, "cd", NULL);
 		return (errno);
 	}
 	if (ms_setenv(env, "PWD", pwd) == FAILURE

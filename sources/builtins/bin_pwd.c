@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:04:59 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/09 11:09:41 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 13:41:59 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ms_pwd(char **args, t_list **envp, void *data)
 	if (!cwd)
 	{
 		errno = ENOMEM;
-		perror_switch((t_error *)data, "pwd");
+		perror_switch((t_error *)data, "pwd", NULL);
 		return (errno);
 	}
 	ft_putendl_fd(cwd, STDOUT_FILENO);
