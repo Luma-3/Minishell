@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:11:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/09 11:35:22 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:51:57 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "core_data.h"
 # include "ms_error.h"
 
-# define NB_BUILTINS 7
+# define NB_BUILTINS 8
 
 typedef struct s_builtin
 {
@@ -54,5 +54,7 @@ int		ms_env(char **args, t_list **envp, void *data);
 int		ms_export(char **args, t_list **envp, void *data);
 
 int		ms_exit(char **args, t_list **envp, void *data);
+
+int		ms_history(char **args, t_list **envp, void *data);
 
 #endif

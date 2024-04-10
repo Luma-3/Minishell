@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 00:18:28 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/10 17:09:46 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:15:13 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,7 @@ static bool	get_last_suffix(char *suffix, char *entry, int j, int i)
 	{
 		suffix_dir = ft_strjoin(suffix + j, "/");
 		if (suffix_dir == NULL)
-		{
 			return (false);
-		}
 		if (decision_file(entry, suffix + j) == true
 			|| decision_directory(entry, suffix_dir) == true)
 		{

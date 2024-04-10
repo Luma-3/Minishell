@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 14:42:37 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:19:08 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ int			init_safe_mode(t_maindata *core_data);
 int			get_history(int fd);
 
 int			open_history(const char *name, const char *uname);
-
-int			ft_add_history(char *input, int fd);
 
 void		verif_add_history(char *input, int fd);
 

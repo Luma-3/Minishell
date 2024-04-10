@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:39:31 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/10 14:42:11 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:22:34 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ static void	ft_trim_end(char *str)
 	str[i] = '\0';
 }
 
-int	ft_add_history(char *input, int fd)
+static int	ft_add_history(char *input, int fd)
 {
+	if (fd == -1)
+		return (errno = EBADFD, FAILURE);
 	ft_putstr_fd(input, fd);
 	write(fd, "\n", 1);
 	add_history(input);

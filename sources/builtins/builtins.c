@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:33:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/09 11:46:19 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:52:24 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	init_builtins(t_builtin *builtins)
 	builtins[4] = (t_builtin){"unset", ms_unset};
 	builtins[5] = (t_builtin){"env", ms_env};
 	builtins[6] = (t_builtin){"exit", ms_exit};
+	builtins[7] = (t_builtin){"history", ms_history};
 }
 
 int	chr_exec_bt(const char **tab_cmd, t_list **env, t_maindata *core_data)
@@ -37,7 +38,8 @@ int	chr_exec_bt(const char **tab_cmd, t_list **env, t_maindata *core_data)
 		if (ft_strncmp(builtins[i].name, tab_cmd[0],
 				ft_strlen(tab_cmd[0])) == 0)
 		{
-			if (ft_strncmp(builtins[i].name, "exit", 4) == 0)
+			if (ft_strncmp(builtins[i].name, "exit", 4) == 0 || ft_strncmp(
+					builtins[i].name, "history", 7) == 0)
 				ret = builtins[i].func((char **)tab_cmd, env, core_data);
 			else
 				ret = builtins[i].func((char **)tab_cmd, env,

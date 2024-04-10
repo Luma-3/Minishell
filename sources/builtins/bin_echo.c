@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:10:35 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/09 17:14:28 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:35:07 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,23 @@
 
 static int	have_flag(char **arg)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 1;
 	while (arg[i])
 	{
-		if (arg[i][0] != '-')
-			break ;
 		j = 1;
-		while (arg[i][j] != '\0')
+		while (arg[i][j] != '\0' && arg[i][0] == '-')
 		{
 			if (arg[i][j] == 'n')
 				j++;
 			else
-				return (i);
+			{
+				if (j > 0)
+					return (i);
+				return (1);
+			}
 		}
 		i++;
 	}

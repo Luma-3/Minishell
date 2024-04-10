@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/10 13:10:55 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/04/10 17:52:45 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,6 +107,7 @@ SRC_BUILTINS_LIST	=	bin_cd.c		\
 						bin_env.c		\
 						bin_exit.c		\
 						bin_export.c	\
+						bin_history.c	\
 						bin_pwd.c		\
 						bin_unset.c		\
 						builtins.c

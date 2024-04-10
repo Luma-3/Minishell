@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 12:18:49 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 17:36:20 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 # define SAFE_MSG 	"toilet -tf future --gay -F border Welcome in SAFEKIKI"
 
 # define PROMPT_SHELL	"\001\033[1;32m┗━━▶\002\033[0m "
+# define HISTORY_FILE	".kiki_history"
 
 // ERRORS
 

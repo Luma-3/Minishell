@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:49:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 16:13:05 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:18:24 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,11 @@ int	init_shell(t_maindata *core_data, t_error *errors, char **envp)
 	ft_bzero(core_data, sizeof(t_maindata));
 	__init_error__(errors);
 	core_data->errors = errors;
-	// init_signal();
+	init_signal();
 	core_data->uname = get_uname();
 	if (core_data->uname == NULL)
 		return (perror_switch(errors, "KikiShell", NULL), FAILURE);
-	core_data->history_fd = open_history(".kiki_history",
+	core_data->history_fd = open_history(HISTORY_FILE,
 			core_data->uname);
 	return (launch_shell(core_data, envp));
 }

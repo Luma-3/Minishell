@@ -24,6 +24,7 @@
 		"ms_error.h": "c",
 		"environement.h": "c",
 		"stackft.h": "c",
-		"unistd.h": "c"
+		"unistd.h": "c",
+		"history.h": "c"
 	}
 }
