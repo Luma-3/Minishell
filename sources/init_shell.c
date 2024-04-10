@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:49:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 18:18:24 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 23:28:03 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*get_uname(void)
 	struct utmp	user;
 	char		*uname;
 
-	fd = open("/run/utmp", O_RDONLY);
+	fd = open("/home/anthony", O_RDONLY);
 	if (fd == -1)
 	{
 		errno = ENOENT;
@@ -87,7 +87,7 @@ int	init_shell(t_maindata *core_data, t_error *errors, char **envp)
 	__init_error__(errors);
 	core_data->errors = errors;
 	init_signal();
-	core_data->uname = get_uname();
+	core_data->uname = ft_strdup("anthony");
 	if (core_data->uname == NULL)
 		return (perror_switch(errors, "KikiShell", NULL), FAILURE);
 	core_data->history_fd = open_history(HISTORY_FILE,

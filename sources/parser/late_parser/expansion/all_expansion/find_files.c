@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 00:18:28 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/10 17:15:13 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 01:37:33 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ static	bool	final_decision(char *entry, char *suffix)
 	start = 0;
 	if (suffix == NULL)
 		return (true);
+	printf("Go to final decision\n");
 	while (true)
 	{
 		if (ft_strchr(suffix + j, '*') == 0)
@@ -148,14 +149,11 @@ bool	find_match_file(char *entry, char *prefix, char *suffix)
 		len_suffix = ft_strlen(suffix);
 	if (prefix != NULL)
 		len_prefix = ft_strlen(prefix);
-	if (len_prefix == 0 && len_suffix == 0)
+	if (len_prefix == 0)
 	{
-		if (entry[0] != '.')
-			return (true);
-		return (false);
+		if (entry[0] == '.')
+			return (false);
 	}
-	if (len_prefix == 0 && entry[0] == '.')
-		return (false);
 	if (len_prefix == 0 && only_all(suffix) == true)
 		return (true);
 	if ((ft_strncmp(entry, prefix, len_prefix) == 0

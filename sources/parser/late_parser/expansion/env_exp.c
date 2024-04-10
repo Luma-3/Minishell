@@ -3,48 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   env_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 11:48:27 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/07 17:52:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/10 23:48:36 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "minishell.h"
 
+static char	*replace_status(t_maindata *core, char *arg, int index)
+{
+	char	*new_arg;
+	char	*status;
+
+	status = ft_itoa(core->last_status);
+	if (status == NULL)
+		return (NULL);
+	new_arg = ft_insert_str(arg, status, "$?", index);
+	free(status);
+	if (new_arg == arg)
+		return (arg);
+	return (free(arg), new_arg);
+}
+
 char	*copy_data_env(t_maindata *core_data, char *arg, int index)
 {
 	char	*new_arg;
 	char	*token;
 	char	*env_value;
-	char	*tmp;
 	int		i;
 
 	i = index + 1;
 	if (arg[i] == '?')
-	{
-		tmp = ft_itoa(core_data->last_status);
-		new_arg = ft_insert_str(arg, tmp, "$?", index);
-		free(tmp);
-		if (new_arg == arg)
-			return (arg);
-		free(arg);
-		return (new_arg);
-	}
+		return (replace_status(core_data, arg, index));
 	while (arg[i] != '\0' && valid_env_char(arg[i]) == true && arg[i] != '$')
 		i++;
 	token = ft_substr(arg, index, i - index);
 	if (token == NULL)
 		return (arg);
 	env_value = ms_getenv(core_data->env, token + 1);
+	if (env_value == NULL)
+	{
+		free(token);
+		return (arg);
+	}
 	new_arg = ft_insert_str(arg, env_value, token, index);
 	free(env_value);
 	if (new_arg == arg)
 		return (free(token), new_arg);
-	free(arg);
-	free(token);
-	return (new_arg);
+	return (free(arg), free(token), new_arg);
 }
 
 char	*handle_env(t_maindata *core_data, const char *arg)

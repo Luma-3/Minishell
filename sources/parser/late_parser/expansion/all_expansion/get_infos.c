@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:40:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 18:15:57 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/11 01:33:56 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,25 @@
 char	*get_path_wildcard(char *arg, int index)
 {
 	char	*path;
+	char	*path_tmp;
 	int		i;
-	int		len;
 
-	path = NULL;
+	path_tmp = getcwd(NULL, 0);
+	if (path_tmp == NULL)
+		return (NULL);
 	i = index;
-	while (i >= 0 && arg[i] != '/')
-	{
-		if (i == 0)
-			return (getcwd(NULL, 0));
+	while (i > 0 && arg[i] != '/')
 		i--;
+	if (arg[i] != '/' && i == 0)
+	{
+		path = ft_strjoin(path_tmp, "/");
+		free(path_tmp);
+		if (path == NULL)
+			return (NULL);
+		return (path);
 	}
-	len = i;
-	if (len == 0)
-		return (ft_strdup("/"));
-	path = ft_strndup(arg, len + 1);
+	free(path_tmp);
+	path = ft_strndup(arg, i + 1);
 	if (path == NULL)
 		return (NULL);
 	return (path);
@@ -41,20 +45,13 @@ char	*get_prefix(char *arg, int index)
 	int		i;
 	char	*prefix;
 
-	prefix = NULL;
-	i = index;
-	while (i >= 0 && arg[i] != '/')
-	{
-		if (i == 0)
-			break ;
-		i--;
-	}
-	if (i == index - 1 && arg[i] == '/')
+	if (index == 0 || arg[index - 1] == '/')
 		return (NULL);
+	i = index;
+	while (i > 0 && arg[i] != '/')
+		i--;
 	if (arg[i] == '/')
 		i++;
-	if (index - i == -1)
-		return (NULL);
 	prefix = ft_strndup(arg + i, index - i);
 	if (prefix == NULL)
 		return (NULL);
@@ -67,10 +64,14 @@ char	*get_suffix(char *arg, int index)
 	int		i;
 
 	suffix = NULL;
-	i = index + 1;
+	while (arg[index] && arg[index] == '*')
+		index++;
+	i = index;
+	if (arg[i] == '\0' || arg[i] == '/')
+		return (NULL);
 	while (arg[i] != '\0' && arg[i] != '/')
 		i++;
-	suffix = ft_strndup(arg + index + 1, i - index);
+	suffix = ft_strndup(arg + index, i - index);
 	if (suffix == NULL)
 		return (NULL);
 	return (suffix);
@@ -78,43 +79,38 @@ char	*get_suffix(char *arg, int index)
 
 char	*get_token(char *prefix, char *suffix)
 {
-	char	*tmp;
-	int		len_prefix;
-	int		len_suffix;
-	int		i;
-	int		j;
+	char	*new_str;
 
-	i = 0;
-	j = 0;
-	len_prefix = 0;
-	len_suffix = 0;
-	if (prefix != NULL)
-		len_prefix = ft_strlen(prefix);
-	if (suffix != NULL)
-		len_suffix = ft_strlen(suffix);
-	tmp = ft_calloc(len_prefix + len_suffix + 2, sizeof(char));
-	if (!tmp)
+	if (prefix == NULL && suffix == NULL)
+	{
+		new_str = ft_strdup("*");
+	}
+	else if (prefix == NULL)
+	{
+		new_str = ft_strjoin("*", suffix);
+	}
+	else if (suffix == NULL)
+	{
+		new_str = ft_strjoin(prefix, "*");
+	}
+	else
+	{
+		char sucide[1];
+		sucide[0] = '\0';
+		new_str = ft_strjoin4(prefix, "*", suffix, sucide);
+		//TODO changer ft-strjoin 4 avec les ft_strle
+	}
+	if (new_str == NULL)
 		return (NULL);
-	while (j < len_prefix)
-		tmp[i++] = prefix[j++];
-	tmp[i++] = '*';
-	j = 0;
-	while (j < len_suffix)
-		tmp[i++] = suffix[j++];
-	return (tmp);
+	return (new_str);
 }
 
 char	*get_replace_token(t_match_file *match_file, t_dstack *stack)
 {
 	char	*token;
-	char	*suffix_tmp;
 
 	match_file->old_data = (char *)d_pop_stk(stack);
-	suffix_tmp = ft_strtrim(match_file->suffix, "/");
-	if (suffix_tmp == NULL)
-		return (NULL);
-	token = get_token(match_file->prefix, suffix_tmp);
-	free(suffix_tmp);
+	token = get_token(match_file->prefix, match_file->suffix);
 	if (token == NULL)
 		return (NULL);
 	return (token);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:35:19 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 14:48:53 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/04/10 23:37:30 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,10 @@ int	expansion_cmd(t_maindata *core_data, t_list **args)
 			if (ft_strchr((const char *)indexer->content, '*') != NULL)
 			{
 				match_files = handle_all(args, indexer);
-				if (match_files != NULL)
-				{
-					indexer = match_files;
-					connect_list(index_prev, match_files, args);
-				}
-				else
+				if (match_files == NULL)
 					return (FAILURE);
+				indexer = match_files;
+				connect_list(index_prev, match_files, args);
 			}
 		}
 		index_prev = indexer;

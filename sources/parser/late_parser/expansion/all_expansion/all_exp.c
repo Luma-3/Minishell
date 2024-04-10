@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 14:08:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/09 17:37:10 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 01:08:08 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@
 
 extern volatile int	g_sigreceiver;
 
+void	free_match_file(t_match_file *match_file)
+{
+	if (match_file->path != NULL)
+		free(match_file->path);
+	if (match_file->prefix != NULL)
+		free(match_file->prefix);
+	if (match_file->suffix != NULL)
+		free(match_file->suffix);
+}
 static int	find_all_files(t_dstack *stack, t_match_file *match_file,
 	t_list **lst, int i)
 {
@@ -24,6 +33,7 @@ static int	find_all_files(t_dstack *stack, t_match_file *match_file,
 
 	if (match_file == NULL || match_file->path == NULL)
 		return (FAILURE);
+	printf("path: %s\n", match_file->path);
 	dir = opendir(match_file->path);
 	if (dir == NULL)
 		return (FAILURE);
@@ -60,16 +70,6 @@ static void	call_recursion(t_match_file *match_file, t_dstack *stack,
 	{
 		rec_all(stack, list);
 	}
-}
-
-void	free_match_file(t_match_file *match_file)
-{
-	if (match_file->path != NULL)
-		free(match_file->path);
-	if (match_file->prefix != NULL)
-		free(match_file->prefix);
-	if (match_file->suffix != NULL)
-		free(match_file->suffix);
 }
 
 void	rec_all(t_dstack *stack, t_list **list)

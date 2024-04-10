@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 11:55:46 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/06 18:17:23 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/10 23:30:48 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ int	place_cursor_quote(const char *prompt, int i)
 {
 	char	c;
 
-	c = prompt[i];
-	i++;
+	c = prompt[i++];
 	while (prompt[i] && prompt[i] != c)
 		i++;
 	return (i);
