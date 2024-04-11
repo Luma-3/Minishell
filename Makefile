@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/11 16:11:31 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/04/11 23:55:32 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,16 +51,16 @@ SRC_DIR				=	sources/
 ##   COMPONENTS SRC   ##
 ########################
 
-COMP_DISPLAY_DIR		=	display/
+COMP_DISPLAY_DIR	=	display/
 COMP_DISPLAY_LIST	=	display.c			\
 						display_utils.c
-COMP_DISPLAY			=	$(addprefix $(COMP_DISPLAY_DIR), $(COMP_DISPLAY_LIST))
+COMP_DISPLAY		=	$(addprefix $(COMP_DISPLAY_DIR), $(COMP_DISPLAY_LIST))
 
 
-COMP_ENV_DIR			=	env/
+COMP_ENV_DIR		=	env/
 COMP_ENV_LIST		=	transform_env.c		\
 						env_utils.c
-COMP_ENV				=	$(addprefix $(COMP_ENV_DIR), $(COMP_ENV_LIST))
+COMP_ENV			=	$(addprefix $(COMP_ENV_DIR), $(COMP_ENV_LIST))
 
 COMP_ERROR_DIR		=	error/
 COMP_ERROR_LIST		=	error.c				\
@@ -69,9 +69,9 @@ COMP_ERROR_LIST		=	error.c				\
 						print_error_msg.c
 COMP_ERROR			=	$(addprefix $(COMP_ERROR_DIR), $(COMP_ERROR_LIST))
 
-COMP_HISTORY_DIR		=	history/
+COMP_HISTORY_DIR	=	history/
 COMP_HISTORY_LIST	=	handle_history.c 
-COMP_HISTORY			=	$(addprefix $(COMP_HISTORY_DIR), $(COMP_HISTORY_LIST))
+COMP_HISTORY		=	$(addprefix $(COMP_HISTORY_DIR), $(COMP_HISTORY_LIST))
 
 COMP_REDIR_DIR		=	redirection/
 COMP_REDIR_LIST		=	opener_kikidoc.c 	\
@@ -102,15 +102,15 @@ COMPONENTS			=	$(addprefix $(COMPONENTS_DIR), $(COMPONENTS_LIST))
 
 
 SRC_BUILTINS_DIR	=	builtins/
-SRC_BUILTINS_LIST	=	bin_cd.c		\
-						cd_utils.c		\
-						bin_echo.c		\
-						bin_env.c		\
-						bin_exit.c		\
-						bin_export.c	\
-						bin_history.c	\
-						bin_pwd.c		\
-						bin_unset.c		\
+SRC_BUILTINS_LIST	=	bin_cd.c			\
+						cd_utils.c			\
+						bin_echo.c			\
+						bin_env.c			\
+						bin_exit.c			\
+						bin_export.c		\
+						bin_history.c		\
+						bin_pwd.c			\
+						bin_unset.c			\
 						builtins.c
 SRC_BUILTINS		=	$(addprefix $(SRC_BUILTINS_DIR), $(SRC_BUILTINS_LIST))
 
@@ -130,16 +130,16 @@ SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 SRC_PARSER_DIR		=	parser/
 
 PRE_PARSER_DIR		=	pre_parser/
-PRE_PARSER_LIST		=	verif_prompt.c			\
-						verif_utils.c			\
+PRE_PARSER_LIST		=	verif_prompt.c		\
+						verif_utils.c		\
 						verif_utils2.c		
 PRE_PARSER			=	$(addprefix $(PRE_PARSER_DIR), $(PRE_PARSER_LIST))
 
 ATS_DIR				=	atomize/
-ATS_LIST			=	atomizer.c				\
-						atomizer_copy.c			\
-						bin_tree.c				\
-						bin_tree_utils.c 		\
+ATS_LIST			=	atomizer.c			\
+						atomizer_copy.c		\
+						bin_tree.c			\
+						bin_tree_utils.c 	\
 						take_redir.c
 ATS					=	$(addprefix $(ATS_DIR), $(ATS_LIST))
 
@@ -150,22 +150,22 @@ ALL_EXPAND_LIST		= 	all_exp.c			\
 						get_infos.c			\
 						find_files.c		\
 						decision.c			\
-						open_files.c			\
+						open_files.c		\
 						utils.c				\
 						lst_utils.c			
 ALL_EXPAND			=	$(addprefix $(ALL_EXPAND_DIR), $(ALL_EXPAND_LIST))
 
 EXPAND_DIR			=	expansion/
-EXPAND_LIST			=	expansion.c 			\
-						env_exp.c				\
-						tilde_exp.c				\
+EXPAND_LIST			=	expansion.c 		\
+						env_exp.c			\
+						tilde_exp.c			\
 						$(ALL_EXPAND)
 EXPAND				=	$(addprefix $(EXPAND_DIR), $(EXPAND_LIST))
 
-POST_PARSER_LIST	=	late_parser.c			\
-						alloc_tab.c				\
-						count_utils.c			\
-						clean_quote.c			\
+POST_PARSER_LIST	=	late_parser.c		\
+						alloc_tab.c			\
+						count_utils.c		\
+						clean_quote.c		\
 						$(EXPAND)
 POST_PARSER			=	$(addprefix $(POST_PARSER_DIR), $(POST_PARSER_LIST))
 
@@ -218,25 +218,30 @@ UNDERLINE		=	\033[4m
 
 TOTAL_SRCS		=	$(words $(SRC))
 COMPILED_SRCS	:=	0
-MAX_PATH_LENGTH := $(shell find . -name '*.c' -exec sh -c 'echo "$$1" | wc -c' _ {} \; | sort -nr | head -n1)
+MAX_PATH_LENGTH := $(shell find $(SRC_DIR) -name '*.c' | awk '{print length}' | sort -nr | head -n1)
+MAX_NAME_LENGTH := $(shell find $(SRC_DIR) -name '*.c' -exec basename {} \; | awk '{ print length }' | sort -nr | head -n1)
+
+define progress_bar
+	printf "\033[2K"; \
+	printf "$(COLOR_BLUE)Compiling: [$(COLOR_GREEN)"; \
+	for i in $$(seq 1 $(4)); do \
+		if [ $$i -le $$(($(1)*$(4)/$(2))) ]; then \
+			printf "#"; \
+		else \
+			printf "."; \
+		fi; \
+	done; \
+	printf "$(COLOR_BLUE)] $(BOLD)$(1)/$(2) $(COLOR_GREEN)$(3)$(COLOR_RESET)\r"
+endef
 
 define print_progress
-	@printf "\033[2K"
-	$(eval WIDTH := $(shell tput cols))
-	$(eval LEN := $(shell expr $(WIDTH) - $(MAX_PATH_LENGTH) - 26))
-
-	@if [ $(LEN) -lt 5 ]; then \
-		printf "$(COLOR_BLUE)$(BOLD)$(1)/$(2)$(COLOR_RESET)\r"; \
+	@$(eval WIDTH := $(shell tput cols))
+	@$(eval LEN := $(shell expr $(WIDTH) - $(MAX_PATH_LENGTH) - 26))
+	
+	if [ $(LEN) -le 10 ]; then \
+		printf "$(COLOR_BLUE)Compiling: $(BOLD)$(1)/$(2)$(COLOR_RESET)$(COLOR_GREEN)$(3)$(COLOR_RESET)\r"; \
 	else \
-		printf "$(COLOR_BLUE)Compiling: [$(COLOR_GREEN)"; \
-		for i in $$(seq 1 $(LEN)); do \
-			if [ $$i -le $$(($(1)*$(LEN)/$(2))) ]; then \
-				printf "#"; \
-			else \
-				printf "."; \
-			fi; \
-		done; \
-		printf "$(COLOR_BLUE)] $(BOLD)$(1)/$(2) $(COLOR_GREEN)$(3)$(COLOR_RESET)\r"; \
+		$(call progress_bar,$(1),$(2),$(3),$(LEN)); \
 	fi
 endef
 
