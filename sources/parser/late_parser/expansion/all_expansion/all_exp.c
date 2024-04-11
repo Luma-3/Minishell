@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 14:08:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 01:08:08 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/11 10:23:34 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	free_match_file(t_match_file *match_file)
 	if (match_file->suffix != NULL)
 		free(match_file->suffix);
 }
+
 static int	find_all_files(t_dstack *stack, t_match_file *match_file,
 	t_list **lst, int i)
 {
