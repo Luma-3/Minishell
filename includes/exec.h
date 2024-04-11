@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:39:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 14:13:05 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:09:08 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,9 @@ void	process_built_in(t_maindata *core_data, t_ast *node, char **args);
 //PATH HANDLING
 
 char	*get_path(char *path, char *tab);
+
+void	clean_child(t_maindata *core, char **args);
+
+void	close_fds(t_maindata *core);
 
 #endif // EXEC_H

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 13:16:43 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 14:12:15 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:40:23 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	dup_in(t_pipe_data *data)
 
 static int	dup_out(t_pipe_data *data)
 {
-	if (close(data->pipe_fd[READ])== FAILURE)
+	if (close(data->pipe_fd[READ]) == FAILURE)
 	{
 		perror("close out read");
 		return (FAILURE);

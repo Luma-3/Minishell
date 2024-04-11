@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 14:13:05 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:15:45 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@
 
 # define READ 0
 # define WRITE 1
+
+# define REDIR_IN 1
+# define REDIR_OUT 2
+# define REDIR_OUT_APPEND 3
+# define REDIR_HEREDOC 4
 
 # define SIGINT 2
 # define SIGQUIT 3

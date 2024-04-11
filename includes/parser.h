@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 15:08:54 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:16:23 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,6 @@
 # define WEIGHT_CMD 1
 # define WEIGHT_AND 2
 # define WEIGHT_OR 2
-
-# define REDIR_IN 1
-# define REDIR_OUT 2
-# define REDIR_OUT_APPEND 3
-# define REDIR_HEREDOC 4
 
 typedef struct s_match_file
 {
@@ -97,7 +92,7 @@ size_t			count_nodes(t_ast *root, size_t count);
 
 int				copy_cmd_operator(t_maindata *ats, int *i_copy, int *i_read);
 
-t_token			*copy_token(t_maindata *ats, const char *prompt, size_t size_copy);
+t_token			*copy_token(t_maindata *core, const char *prompt, size_t len_copy);
 
 t_token			*copy_insert_node(t_maindata *ats, int i_copy, int i_read);
 

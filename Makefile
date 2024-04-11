@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/11 15:09:14 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/04/11 16:11:31 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -123,7 +123,8 @@ SRC_EXEC_LIST		=	exec_builtins.c		\
 						read_ats.c			\
 						exec_command.c		\
 						get_path.c			\
-						pipe_utils.c
+						pipe_utils.c		\
+						utils_exec.c
 SRC_EXEC			=	$(addprefix $(SRC_EXEC_DIR), $(SRC_EXEC_LIST))
 
 SRC_PARSER_DIR		=	parser/

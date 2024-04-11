@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 16:08:23 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:16:38 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	copy_cmd_operator(t_maindata *core, int *i_copy, int *i_read)
 	return (SUCCESS);
 }
 
-t_token	*copy_token(t_maindata *core_data, const char *prompt, size_t size_copy)
+t_token	*copy_token(t_maindata *core, const char *prompt, size_t len_copy)
 {
 	t_token	*token;
 	char	*prompt_copy;
@@ -95,10 +95,10 @@ t_token	*copy_token(t_maindata *core_data, const char *prompt, size_t size_copy)
 	bool	subshell;
 
 	nb_redir = 0;
-	prompt_copy = ft_strndup(prompt, size_copy);
+	prompt_copy = ft_strndup(prompt, len_copy);
 	if (prompt_copy == NULL)
 		return (NULL);
-	prompt_no_redir = take_redir(core_data, prompt_copy, &nb_redir);
+	prompt_no_redir = take_redir(core, prompt_copy, &nb_redir);
 	free(prompt_copy);
 	if (prompt_no_redir == NULL)
 		return (NULL);

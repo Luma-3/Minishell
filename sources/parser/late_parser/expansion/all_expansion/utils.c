@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:49:00 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/11 13:03:58 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/11 15:44:49 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,27 +80,4 @@ bool	verif_suffix_ptr(char *entry, char *suffix, int i)
 	if (ft_findstr(entry, suffix, i) != -1)
 		return (true);
 	return (false);
-}
-
-int	ft_findstr(char *str, char *to_find, int i)
-{
-	int		j;
-
-	j = 0;
-	while (str[i] != '\0')
-	{
-		if (to_find != NULL && str[i] == to_find[j])
-		{
-			while (str[i + j] == to_find[j]
-				&& to_find[j] != '\0')
-			{
-				j++;
-			}
-			if (to_find[j] == '\0')
-				return (i);
-			j = 0;
-		}
-		i++;
-	}
-	return (-1);
 }

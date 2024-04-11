@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 14:13:05 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:34:33 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,30 @@
 
 extern volatile int	g_sigreceiver;
 
-static int	wait_pipeline(t_maindata *core_data, t_ast *node)
+static int	sig_handler(t_maindata *core, t_ast *node, bool is_pipeline)
+{
+	if (g_sigreceiver == SIGQUIT)
+		printf("\r^\\\033[0KQuit (Core dumped)\n");
+	if (is_pipeline == true)
+	{
+		while (node->left != NULL)
+		{
+			kill(node->data->pid, g_sigreceiver);
+			waitpid(node->data->pid, &node->data->exit_code, 0);
+			node = node->left;
+		}
+	}
+	else
+	{
+		kill(node->data->pid, g_sigreceiver);
+		waitpid(node->data->pid, &node->data->exit_code, 0);
+	}
+	core->last_status = g_sigreceiver;
+	g_sigreceiver = 0;
+	return (FAILURE);
+}
+
+static int	wait_pipeline(t_maindata *core, t_ast *node)
 {	
 	int	ret;
 
@@ -28,31 +51,20 @@ static int	wait_pipeline(t_maindata *core_data, t_ast *node)
 			return (FAILURE);
 		if (g_sigreceiver != 0)
 		{
-			if (g_sigreceiver == SIGQUIT)
-			{
-				printf("\r^\\\033[0KQuit (Core dumped)\n");
-			}
-			while (node->left != NULL)
-			{
-				kill(node->data->pid, g_sigreceiver);
-				node = node->left;
-			}
-			g_sigreceiver = 0;
-			node->data->exit_code = g_sigreceiver;
-			core_data->last_status = g_sigreceiver;
-			return (FAILURE);
+			return (sig_handler(core, node, true));
 		}
 	}
+	core->last_status = WEXITSTATUS(node->data->exit_code);
 	return (SUCCESS);
 }
 
-static int	wait_process(t_maindata *core_data, t_ast *node)
+static int	wait_process(t_maindata *core, t_ast *node)
 {
 	int	ret;
 
 	ret = 0;
-	if (core_data->is_pipeline == true && node->data->require_wait == true)
-		return (wait_pipeline(core_data, node));
+	if (core->is_pipeline == true && node->data->require_wait == true)
+		return (wait_pipeline(core, node));
 	while (ret == 0)
 	{
 		ret = waitpid(node->data->pid, &node->data->exit_code, WNOHANG);
@@ -60,20 +72,12 @@ static int	wait_process(t_maindata *core_data, t_ast *node)
 			return (FAILURE);
 		if (ret == node->data->pid)
 		{
-			core_data->last_status = WEXITSTATUS(node->data->exit_code);
+			core->last_status = WEXITSTATUS(node->data->exit_code);
 			return (SUCCESS);
 		}
 		if (g_sigreceiver != 0)
 		{
-			if (g_sigreceiver == SIGQUIT)
-			{
-				printf("\r^\\\033[0KQuit (Core dumped)\n");
-			}
-			kill(node->data->pid, g_sigreceiver);
-			g_sigreceiver = 0;
-			waitpid(node->data->pid, &node->data->exit_code, 0);
-			core_data->last_status = WEXITSTATUS(node->data->exit_code);
-			return (FAILURE);
+			return (sig_handler(core, node, false));
 		}
 	}
 	return (SUCCESS);

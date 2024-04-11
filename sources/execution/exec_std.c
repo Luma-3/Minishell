@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 14:13:05 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:17:11 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,6 @@
 #include "ms_builtins.h"
 #include "redirection.h"
 #include "parser.h"
-
-int	clean_parent(t_maindata *core_data, const t_ast *node)
-{
-	t_redir_data	*free_data_redir;
-	t_kikidoc_data	*free_data_heredoc;
-
-	if (node->data->index - 1 >= 0)
-		close_pipe(core_data);
-	while (node->data->nb_redir > 0)
-	{
-		free_data_redir = (t_redir_data *)ft_dequeue(core_data->q_redir);
-		node->data->nb_redir--;
-		if (free_data_redir->type_redir == REDIR_HEREDOC)
-		{
-			free_data_heredoc = ft_dequeue(core_data->q_kikidoc);
-			free(free_data_heredoc->filename);
-			free(free_data_heredoc->delimiter);
-			free(free_data_heredoc);
-		}
-		free(free_data_redir->filename);
-		free(free_data_redir);
-	}
-	return (SUCCESS);
-}
 
 int	pre_process_exec(t_maindata *core_data, t_ast *node)
 {
@@ -51,7 +27,7 @@ int	pre_process_exec(t_maindata *core_data, t_ast *node)
 	return (SUCCESS);
 }
 
-static void	process_built_out(t_maindata *core_data, t_ast *node, char **args)
+static void	process_built_out(t_maindata *core, t_ast *node, char **args)
 {
 	pid_t	pid;
 	char	*path;
@@ -62,32 +38,19 @@ static void	process_built_out(t_maindata *core_data, t_ast *node, char **args)
 	node->data->pid = pid;
 	if (pid == 0)
 	{
-		if (core_data->history_fd != -1)
-			close(core_data->history_fd);
-		if (core_data->save_stdin != -1)
-			close(core_data->save_stdin);
 		if (args == NULL)
-		{
-			clear_ats(core_data, CORE_ALL);
-			exit (errno);
-		}
-		if (pre_process_exec(core_data, (t_ast *)node) == FAILURE)
-		{
-			ft_rm_split(args);
-			clear_ats(core_data, CORE_ALL);
-			exit (errno);
-		}
-		path = ms_getenv(core_data->env, "PATH");
+			clean_child(core, args);
+		if (pre_process_exec(core, (t_ast *)node) == FAILURE)
+			clean_child(core, args);
+		close_fds(core);
+		path = ms_getenv(core->env, "PATH");
 		if (path == NULL)
-			path = ft_strdup(core_data->path);
-		close_all_pipes(core_data);
-		exec_command(args, &(core_data->env),
-			core_data->errors, path);
-		ft_rm_split(args);
-		clear_ats(core_data, CORE_ALL);
-		exit (errno);
+			path = ft_strdup(core->path);
+		close_all_pipes(core);
+		exec_command(args, &(core->env), core->errors, path);
+		clean_child(core, args);
 	}
-	clean_parent(core_data, node);
+	clean_parent(core, node);
 }
 
 void	exec_std(t_maindata *core_data, const t_ast *node)
@@ -97,7 +60,7 @@ void	exec_std(t_maindata *core_data, const t_ast *node)
 	args = late_parser(core_data, (t_ast *)node);
 	if (errno != 0 && args == NULL)
 	{
-		perror_switch(core_data->errors, "Kikishell: parsing", NULL);
+		perror_switch(core_data->errors, "kikishell", NULL);
 		return ;
 	}
 	if (args != NULL && is_builtin(args[0]) == true)
