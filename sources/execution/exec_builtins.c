@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:50:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 15:55:52 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:45:35 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	process_built_in(t_maindata *core, t_ast *node, char **args)
 	if (node->data->index != -1)
 	{
 		fork_bt(core, node, args);
+		return ;
 	}
 	save_fd = -1;
 	if (ft_strncmp(args[0], "exit", 5) != 0)
