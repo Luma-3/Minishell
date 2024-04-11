@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   decision.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 18:27:09 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/08 12:15:43 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:54:34 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,40 @@ bool	decision_directory(char *entry, char *suffix_dir)
 	return (false);
 }
 
-bool	verif_suffix_ptr(char *entry, char *suffix, int i)
+static bool	check_occurence(char *entry, char *to_find, int *i)
 {
-	if (ft_findstr(entry, suffix, i) != -1)
+	*i = ft_findstr(entry, to_find, *i);
+	if (*i == -1)
+		return (false);
+	*i += ft_strlen(to_find);
+	return (true);
+}
+
+bool	final_decision(char *entry, char *suffix)
+{
+	char	*to_find;
+	int		i;
+	int		j;
+	int		start;
+
+	i = 0;
+	j = 0;
+	start = 0;
+	if (suffix == NULL)
 		return (true);
-	return (false);
+	while (true)
+	{
+		if (ft_strchr(suffix + j, '*') == 0)
+			return (get_last_suffix(suffix, entry, j, i));
+		while (suffix != NULL && suffix[j] != '\0' && suffix[j] != '*')
+			j++;
+		to_find = ft_strndup(suffix + start, j - start);
+		if (to_find == NULL)
+			return (false);
+		if (check_occurence(entry, to_find, &i) == false)
+			return (free(to_find), false);
+		start = ++j;
+		free(to_find);
+	}
+	return (true);
 }

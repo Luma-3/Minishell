@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 16:25:43 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:40:28 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,12 +167,11 @@ bool			check_tilde(const char *arg, const int prev_i,
 
 // expansion_all
 
-void			free_match_file(t_match_file *match_file);
-
 t_list			*get_all_file(t_list **head, t_list *arg);
 
 void			rec_all(t_dstack *stack, t_list **list);
 
+void			free_match_file(t_match_file *match_file);
 // get_infos
 
 char			*get_token(char *prefix, char *suffix);
@@ -187,12 +186,21 @@ char			*get_replace_token(t_match_file *match_file, t_dstack *stack);
 
 // find_files
 
+bool			find_files(t_dstack *stack, t_match_file *match_file, DIR *dir,
+					int i);
+
 bool			find_match_file(char *entry, char *prefix, char *suffix);
 
-bool			find_and_push(t_dstack *stack, t_match_file *match_file,
-					DIR *dir, int i);
+bool			get_last_suffix(char *suffix, char *entry, int j, int i);
+
+// open_file
+
+int				open_files(t_dstack *stack, t_match_file *match_file,
+					t_list **lst, int i);
 
 // decision.c
+
+bool			final_decision(char *entry, char *suffix);
 
 bool			decision_file(char *entry, char *suffix);
 

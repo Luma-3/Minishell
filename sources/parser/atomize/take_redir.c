@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   take_redir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:10:20 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 16:31:37 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 12:00:34 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,8 @@ char	*take_redir(t_maindata *ats, const char *prompt, int *nb_redir)
 		check_quote_parenthesis(prompt[i], &quote, &parenthesis);
 		if (is_redir_type(prompt + i) > 0 && quote == '\0' && parenthesis == 0)
 		{
-			if (add_queue(ats, prompt + i, is_redir_type(prompt + i), &i) == FAILURE)
+			if (add_queue(ats, prompt + i, is_redir_type(prompt + i), &i)
+				== FAILURE)
 				return (free(new_prompt), NULL);
 			*nb_redir += 1;
 		}

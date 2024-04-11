@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:40:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 01:33:56 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/11 11:11:54 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,7 @@ char	*get_token(char *prefix, char *suffix)
 	}
 	else
 	{
-		char sucide[1];
-		sucide[0] = '\0';
-		new_str = ft_strjoin4(prefix, "*", suffix, sucide);
-		//TODO changer ft-strjoin 4 avec les ft_strle
+		new_str = ft_strjoin4(prefix, "*", suffix, "\0");
 	}
 	if (new_str == NULL)
 		return (NULL);
