@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:49:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 10:28:44 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:15:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <utmp.h>
 #include <fcntl.h>
 #include "display.h"
+#include "ms_sig.h"
 
 char	*get_uname(void)
 {
@@ -25,7 +26,7 @@ char	*get_uname(void)
 	if (fd == -1)
 	{
 		errno = ENOENT;
-		return (NULL); // TODO EXIT SHELL
+		return (NULL);
 	}
 	while (read(fd, &user, sizeof(struct utmp)) > 0)
 	{

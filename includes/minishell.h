@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 18:19:08 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:23:48 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include <dirent.h>
 # include <string.h>
-# include <curses.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 // TODO: remove unecessary includes
@@ -30,11 +28,6 @@
 # include "ms_error.h"
 
 # include "environement.h"
-
-# define ERROR_FORMAT "Minishell error"
-
-//SIGNAL
-void		init_signal(void);
 
 void		exec_process(t_maindata *ats, char *input);
 
@@ -53,5 +46,9 @@ void		verif_add_history(char *input, int fd);
 char		*get_home(const char *uname);
 
 char		*get_uname(void);
+
+//UTILS
+
+void		restore_stdin(t_error *errors, int save_fd);
 
 #endif

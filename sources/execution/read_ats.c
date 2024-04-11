@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 12:27:37 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:13:05 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 extern volatile int	g_sigreceiver;
 
-static int	wait_pipeline(t_maindata *core_data, t_ats *node)
+static int	wait_pipeline(t_maindata *core_data, t_ast *node)
 {	
 	int	ret;
 
@@ -46,7 +46,7 @@ static int	wait_pipeline(t_maindata *core_data, t_ats *node)
 	return (SUCCESS);
 }
 
-static int	wait_process(t_maindata *core_data, t_ats *node)
+static int	wait_process(t_maindata *core_data, t_ast *node)
 {
 	int	ret;
 
@@ -79,7 +79,7 @@ static int	wait_process(t_maindata *core_data, t_ats *node)
 	return (SUCCESS);
 }
 
-static int	read_node(t_maindata *core_data, t_ats *node, t_ats *preview_node)
+static int	read_node(t_maindata *core_data, t_ast *node, t_ast *preview_node)
 {
 	if (is_operator(node->data->cmd) == true)
 	{
@@ -101,7 +101,7 @@ static int	read_node(t_maindata *core_data, t_ats *node, t_ats *preview_node)
 	return (SUCCESS);
 }
 
-int	read_ats(t_maindata *core_data, t_ats *root)
+int	read_ats(t_maindata *core_data, t_ast *root)
 {
 	if (root == NULL)
 		return (SUCCESS);

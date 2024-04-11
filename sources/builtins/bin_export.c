@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:16:34 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 13:41:52 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:04:08 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,51 +16,77 @@
 
 static bool	is_valid_name(char *name)
 {
-	while (name && *name)
+	size_t	i;
+
+	i = 0;
+	while (name[i])
 	{
-		if (valid_env_char(*name) == false)
+		if (i == 0 && ft_isdigit(name[i]))
 			return (false);
-		name++;
+		if (valid_env_char(name[i]) == false)
+			return (false);
+		i++;
 	}
 	return (true);
+}
+
+char	*get_name(char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (arg[i] && arg[i] != '=')
+		i++;
+	if (i == 0)
+		return (ft_strdup(arg));
+	return (ft_substr(arg, 0, i));
+}
+
+char	*get_value(char *arg)
+{
+	char	*value;
+	char	*start_value;
+
+	start_value = ft_strchr(arg, '=');
+	if (start_value == NULL)
+		return (ft_strdup(""));
+	value = ft_strndup(start_value + 1, ft_strlen(start_value));
+	return (value);
+}
+
+static int	export_var(char *arg, char *name, t_list **envp)
+{
+	char	*value;
+	int		ret;
+
+	value = get_value(arg);
+	ret = ms_setenv(envp, name, value);
+	free(value);
+	free(name);
+	return (ret);
 }
 
 int	ms_export(char **args, t_list **envp, void *data)
 {
 	int		i;
-	int		j;
 	int		ret;
 	char	*name;
-	char	*value;
 
 	i = 1;
 	ret = 0;
+	(void)data;
 	while (args[i])
 	{
-		j = 0;
-		while (args[i][j] && args[i][j] != '=')
-			j++;
-		if (j == 0)
-			name = ft_strdup(args[i]);
-		else
-			name = ft_substr(args[i], 0, (size_t)j);
+		name = get_name(args[i]);
 		if (name == NULL)
-			return (ENOMEM);
+			return (errno);
 		if (is_valid_name(name) == false)
 		{
-			errno = EINVID;
-			ft_putstr_fd("Kikishell: export: '", STDERR_FILENO);
-			ft_putstr_fd(name, STDERR_FILENO);
-			perror_switch((t_error *)data, "'", NULL);
-			free(name);
-			ret = 1;
-			i++;
-			continue ;
+			printf("Kikishell: export: '%s': not a valid identifier\n", args[i]);
+			(free(name), ret = 1);
 		}
-		value = ft_substr(args[i], (size_t)j + 1, ft_strlen(args[i]) - j - 1);
-		ms_setenv(envp, name, value);
-		free(value);
-		free(name);
+		else
+			ret = export_var(args[i], name, envp);
 		i++;
 	}
 	return (ret);

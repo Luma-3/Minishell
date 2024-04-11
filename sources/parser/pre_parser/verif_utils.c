@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:19:12 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/10 13:30:43 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:23:39 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static int	print_error_arg(t_error *errors, const char *token)
 {
 	errno = ESYNTAX;
-	perror_switch(errors, "Kikishell", token);
+	perror_switch(errors, "kikishell", token);
 	return (FAILURE);
 }
 

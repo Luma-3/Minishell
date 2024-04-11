@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 11:18:33 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 13:42:12 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:29:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,8 @@ int	set_pwds(t_list **env, t_error *error)
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL && errno != ENOENT)
 	{
-		free(oldpwd);
 		perror_switch(error, "cd", NULL);
-		return (errno);
+		return (free(oldpwd), errno);
 	}
 	if (ms_setenv(env, "PWD", pwd) == FAILURE
 		|| ms_setenv(env, "OLDPWD", oldpwd) == FAILURE)

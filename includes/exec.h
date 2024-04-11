@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:39:08 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 00:06:27 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:13:05 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@ int		close_pipe(t_maindata *core_data);
 
 // EXEC
 
-int		pre_process_exec(t_maindata *core_data, t_ats *node);
+int		pre_process_exec(t_maindata *core_data, t_ast *node);
 
-int		read_ats(t_maindata *core_data, t_ats *root);
+int		read_ats(t_maindata *core_data, t_ast *root);
 
-void	exec_std(t_maindata *core_data, const t_ats *node);
+void	exec_std(t_maindata *core_data, const t_ast *node);
 
 void	exec_command(char **tab_cmd, t_list **env, t_error *errors, char *path);
 
-int		exec_subshell(t_maindata *core_data, t_ats *node);
+int		exec_subshell(t_maindata *core_data, t_ast *node);
 
-int		clean_parent(t_maindata *core_data, const t_ats *node);
+int		clean_parent(t_maindata *core_data, const t_ast *node);
 
 // PIPE_UTILS
 
@@ -50,7 +50,7 @@ void	close_all_pipes(t_maindata *core_data);
 
 //BUILTINS
 
-void	process_built_in(t_maindata *core_data, t_ats *node, char **args);
+void	process_built_in(t_maindata *core_data, t_ast *node, char **args);
 
 //PATH HANDLING
 

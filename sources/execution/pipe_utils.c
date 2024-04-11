@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 13:16:43 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 13:43:09 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:12:15 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "redirection.h"
 #include "parser.h"
 
-static int	dup_in(t_queue_pipe *data)
+static int	dup_in(t_pipe_data *data)
 {
 	if (close(data->pipe_fd[WRITE]) == FAILURE)
 	{
@@ -35,7 +35,7 @@ static int	dup_in(t_queue_pipe *data)
 	return (SUCCESS);
 }
 
-static int	dup_out(t_queue_pipe *data)
+static int	dup_out(t_pipe_data *data)
 {
 	if (close(data->pipe_fd[READ])== FAILURE)
 	{
@@ -58,12 +58,12 @@ static int	dup_out(t_queue_pipe *data)
 
 int	dup_pipe(t_maindata *core_data, int index)
 {
-	t_queue_pipe	*data;
+	t_pipe_data	*data;
 
 	data = NULL;
 	if (index - 1 >= 0)
 	{
-		data = ft_dequeue(core_data->queue_pipe);
+		data = ft_dequeue(core_data->q_pipe);
 		if (dup_in(data) == FAILURE)
 		{
 			free(data);
@@ -71,7 +71,7 @@ int	dup_pipe(t_maindata *core_data, int index)
 		}
 	}
 	free(data);
-	data = ft_dequeue(core_data->queue_pipe);
+	data = ft_dequeue(core_data->q_pipe);
 	if (index != (int)count_nodes(core_data->root, 0) - 1)
 	{
 		if (dup_out(data) == FAILURE)
@@ -86,9 +86,9 @@ int	dup_pipe(t_maindata *core_data, int index)
 
 int	close_pipe(t_maindata *core_data)
 {
-	t_queue_pipe	*data;
+	t_pipe_data	*data;
 
-	data = ft_dequeue(core_data->queue_pipe);
+	data = ft_dequeue(core_data->q_pipe);
 	if (data == NULL)
 		return (FAILURE);
 	if (close(data->pipe_fd[READ]) == FAILURE)
@@ -107,11 +107,11 @@ int	close_pipe(t_maindata *core_data)
 
 void	close_all_pipes(t_maindata *core_data)
 {
-	t_queue_pipe	*data;
+	t_pipe_data	*data;
 
 	while (true)
 	{
-		data = ft_dequeue(core_data->queue_pipe);
+		data = ft_dequeue(core_data->q_pipe);
 		if (data == NULL)
 			break ;
 		if (close(data->pipe_fd[READ]) == FAILURE)

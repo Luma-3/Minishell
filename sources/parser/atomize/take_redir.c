@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:10:20 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 16:31:37 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:12:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool	verif_filename(char *filename, t_error *errors)
 	return (true);
 }
 
-static int	take_filename(t_queue_redir *data, const char *prompt,
+static int	take_filename(t_redir_data *data, const char *prompt,
 	t_error *errors)
 {
 	int		i;
@@ -54,9 +54,9 @@ static int	take_filename(t_queue_redir *data, const char *prompt,
 		return (FAILURE);
 	if (verif_filename(name, errors) == false)
 		return (FAILURE);
-	data->file_name = clean_quote(name);
+	data->filename = clean_quote(name);
 	free(name);
-	if (data->file_name == NULL)
+	if (data->filename == NULL)
 		return (FAILURE);
 	return (i);
 }
@@ -64,17 +64,17 @@ static int	take_filename(t_queue_redir *data, const char *prompt,
 static int	add_queue(t_maindata *core_data, const char *prompt, int redir_type,
 	int *i)
 {
-	t_queue_redir	*data;
+	t_redir_data	*data;
 	int				redir_len;
 	int				len_name;
 
-	data = (t_queue_redir *)malloc(sizeof(t_queue_redir));
+	data = (t_redir_data *)malloc(sizeof(t_redir_data));
 	if (!data)
 		return (FAILURE);
-	if (!core_data->queue_redir)
+	if (!core_data->q_redir)
 		return (free(data), FAILURE);
 	data->type_redir = redir_type;
-	ft_enqueue(core_data->queue_redir, data);
+	ft_enqueue(core_data->q_redir, data);
 	if (data->type_redir > 2)
 		redir_len = 2;
 	else

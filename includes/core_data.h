@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 17:36:20 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:13:05 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,22 +74,22 @@ typedef struct s_tree_asterisk
 	char		*data;
 }			t_tree_asterisk;
 
-typedef struct s_ats
+typedef struct s_ast
 {
 	t_token			*data;
-	struct s_ats	*left;
-	struct s_ats	*right;
-}						t_ats;
+	struct s_ast	*left;
+	struct s_ast	*right;
+}						t_ast;
 
 typedef struct s_maindata
 {
-	t_ats		*root;
+	t_ast		*root;
 	t_list		*env;
 	t_error		*errors;
-	t_queue		*queue_heredoc;
-	t_queue		*queue_redir;
-	t_queue		*queue_pipe;
-	int			stdin_fd;
+	t_queue		*q_kikidoc;
+	t_queue		*q_redir;
+	t_queue		*q_pipe;
+	int			save_stdin;
 	int			history_fd;
 	int			last_status;
 	char		*prompt;
@@ -100,22 +100,22 @@ typedef struct s_maindata
 
 // queue
 
-typedef struct s_queue_redir
+typedef struct s_redir_data
 {
 	int		type_redir;
-	char	*file_name;
-}			t_queue_redir;
+	char	*filename;
+}			t_redir_data;
 
-typedef struct s_queue_heredoc
+typedef struct s_kikidoc_data
 {
 	char	*delimiter;
-	char	*file_name;
-}			t_queue_heredoc;
+	char	*filename;
+}			t_kikidoc_data;
 
-typedef struct s_queue_pipe
+typedef struct s_pipe_data
 {
 	int		pipe_fd[2];
 	int		index;
-}			t_queue_pipe;
+}			t_pipe_data;
 
 #endif

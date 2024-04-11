@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 14:39:34 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/08 16:49:59 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 12:34:59 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*path_to_tilde(t_list *env)
 {
 	char	*cwd;
 	char	*home;
-	char 	*path;
+	char	*path;
 	int		i;
 
 	cwd = getcwd(NULL, 0);

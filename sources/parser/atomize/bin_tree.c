@@ -6,18 +6,18 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:10:14 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/03/26 15:11:08 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:13:05 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "minishell.h"
 
-t_ats	*create_node(t_token *data)
+t_ast	*create_node(t_token *data)
 {
-	t_ats	*node;
+	t_ast	*node;
 
-	node = (t_ats *)malloc(sizeof(t_ats));
+	node = (t_ast *)malloc(sizeof(t_ast));
 	if (!node)
 		return (NULL);
 	node->data = data;
@@ -40,10 +40,10 @@ int	compare_token(t_token *data1, t_token *data2)
 	return (find_weight(data1->cmd) - find_weight(data2->cmd));
 }
 
-int	insert_node(t_ats **root, t_token *data,
+int	insert_node(t_ast **root, t_token *data,
 					int (*cmp)(t_token *, t_token *))
 {
-	t_ats	*node;
+	t_ast	*node;
 
 	if (!(*root))
 	{
@@ -70,7 +70,7 @@ int	insert_node(t_ats **root, t_token *data,
 	return (SUCCESS);
 }
 
-void	clear_tree(t_ats *root, void (*free_data)(void *))
+void	clear_tree(t_ast *root, void (*free_data)(void *))
 {
 	if (!root)
 		return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   late_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:46:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 14:50:01 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:13:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static t_list	*split_arg(const char *prompt)
 	return (args_lst);
 }
 
-char	**late_parser(t_maindata *core_data, t_ats *node)
+char	**late_parser(t_maindata *core_data, t_ast *node)
 {
 	t_list	*lst_args;
 	char	**tab_args;

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 14:42:50 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:12:42 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ volatile int	g_sigreceiver = 0;
 static int	init_core_data(t_maindata *core_data, char *prompt)
 {
 	core_data->prompt = prompt;
-	core_data->queue_redir = ft_init_queue();
-	core_data->queue_heredoc = ft_init_queue();
-	core_data->queue_pipe = ft_init_queue();
-	if (core_data->queue_redir == NULL || core_data->queue_heredoc == NULL
-		|| core_data->queue_pipe == NULL)
+	core_data->q_redir = ft_init_queue();
+	core_data->q_kikidoc = ft_init_queue();
+	core_data->q_pipe = ft_init_queue();
+	if (core_data->q_redir == NULL || core_data->q_kikidoc == NULL
+		|| core_data->q_pipe == NULL)
 	{
 		errno = ENOMEM;
 		perror_switch(core_data->errors, "KikiShell", NULL);
@@ -35,19 +35,6 @@ static int	init_core_data(t_maindata *core_data, char *prompt)
 	core_data->root = NULL;
 	core_data->is_pipeline = false;
 	return (SUCCESS);
-}
-
-char	*get_home(const char *uname)
-{
-	char	*home;
-
-	home = ft_strjoin("/home/", uname);
-	if (home == NULL)
-	{
-		errno = ENOMEM;
-		return (NULL);
-	}
-	return (home);
 }
 
 void	exec_process(t_maindata *core_data, char *input)
@@ -74,31 +61,26 @@ static void	read_input(t_maindata *core_data)
 
 	while (true)
 	{
-		core_data->stdin_fd = dup(STDIN_FILENO);
+		core_data->save_stdin = dup(STDIN_FILENO);
 		input = shell_prompt(core_data);
 		if (g_sigreceiver == SIGQUIT)
 			g_sigreceiver = 0;
 		if (g_sigreceiver == SIGINT)
 		{
 			g_sigreceiver = 0;
-			dup2(core_data->stdin_fd, STDIN_FILENO);
-			close(core_data->stdin_fd);
+			restore_stdin(core_data->errors, core_data->save_stdin);
 			continue ;
 		}
 		else if (input == NULL)
 		{
-			free(input);
-			dup2(core_data->stdin_fd, STDIN_FILENO);
-			(close(core_data->stdin_fd), close(core_data->history_fd));
 			display_msg(core_data, BYE_MSG);
 			break ;
 		}
 		verif_add_history(input, core_data->history_fd);
 		exec_process(core_data, input);
-		dup2(core_data->stdin_fd, STDIN_FILENO);
-		close(core_data->stdin_fd);
+		restore_stdin(core_data->errors, core_data->save_stdin);
 	}
-	clear_ats(core_data, CORE_UNAME | CORE_ENV | CORE_PATH);
+	clear_ats(core_data, CORE_ALL);
 }
 
 int	main(int ac, char **av, char **envp)

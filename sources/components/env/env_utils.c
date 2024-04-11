@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:09:50 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/08 17:51:24 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 13:19:12 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,42 +34,45 @@ char	*ms_getenv(t_list *env, const char *name)
 	return (NULL);
 }
 
+static t_list	*find_var(t_list **env, const char *name)
+{
+	t_list	*iterator;
+
+	iterator = *env;
+	while (iterator)
+	{
+		if (strncmp(iterator->content, name, strlen(name)) == 0)
+			return (iterator);
+		iterator = iterator->next;
+	}
+	return (NULL);
+}
+
 int	ms_setenv(t_list **env, const char *name, const char *value)
 {
 	char	*format_name;
 	char	*new_content;
-	t_list	*new_var;
-	t_list	*tmp;
+	t_list	*node_var;
 
 	format_name = ft_strjoin(name, "=");
 	if (!format_name)
 		return (FAILURE);
-	tmp = *env;
-	while (tmp)
-	{
-		if (ft_strncmp(tmp->content, format_name, ft_strlen(format_name)) == 0)
-		{
-			free(tmp->content);
-			if (!value || !*value)
-				tmp->content = ft_strdup(format_name);
-			else
-				tmp->content = ft_strjoin(format_name, value);
-			free(format_name);
-			return (SUCCESS);
-		}
-		tmp = tmp->next;
-	}
 	new_content = ft_strjoin(format_name, value);
-	free(format_name);
 	if (!new_content)
-		return (FAILURE);
-	new_var = ft_lstnew(new_content);
-	if (!new_var)
+		return (free(format_name), FAILURE);
+	node_var = find_var(env, format_name);
+	free(format_name);
+	if (node_var)
 	{
-		free(new_content);
-		return (errno = ENOMEM, FAILURE);
+		node_var->content = new_content;
 	}
-	ft_lstadd_front(env, new_var);
+	else
+	{
+		node_var = ft_lstnew(new_content);
+		if (!node_var)
+			return (free(new_content), FAILURE);
+		ft_lstadd_front(env, node_var);
+	}
 	return (SUCCESS);
 }
 

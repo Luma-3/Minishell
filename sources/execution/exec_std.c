@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 13:42:57 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:13:05 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,31 @@
 #include "redirection.h"
 #include "parser.h"
 
-int	clean_parent(t_maindata *core_data, const t_ats *node)
+int	clean_parent(t_maindata *core_data, const t_ast *node)
 {
-	t_queue_redir	*free_data_redir;
-	t_queue_heredoc	*free_data_heredoc;
+	t_redir_data	*free_data_redir;
+	t_kikidoc_data	*free_data_heredoc;
 
 	if (node->data->index - 1 >= 0)
 		close_pipe(core_data);
 	while (node->data->nb_redir > 0)
 	{
-		free_data_redir = (t_queue_redir *)ft_dequeue(core_data->queue_redir);
+		free_data_redir = (t_redir_data *)ft_dequeue(core_data->q_redir);
 		node->data->nb_redir--;
 		if (free_data_redir->type_redir == REDIR_HEREDOC)
 		{
-			free_data_heredoc = ft_dequeue(core_data->queue_heredoc);
-			free(free_data_heredoc->file_name);
+			free_data_heredoc = ft_dequeue(core_data->q_kikidoc);
+			free(free_data_heredoc->filename);
 			free(free_data_heredoc->delimiter);
 			free(free_data_heredoc);
 		}
-		free(free_data_redir->file_name);
+		free(free_data_redir->filename);
 		free(free_data_redir);
 	}
 	return (SUCCESS);
 }
 
-int	pre_process_exec(t_maindata *core_data, t_ats *node)
+int	pre_process_exec(t_maindata *core_data, t_ast *node)
 {
 	handle_pipeline_redir(core_data);
 	if (open_redir(core_data, node) != SUCCESS)
@@ -51,7 +51,7 @@ int	pre_process_exec(t_maindata *core_data, t_ats *node)
 	return (SUCCESS);
 }
 
-static void	process_built_out(t_maindata *core_data, t_ats *node, char **args)
+static void	process_built_out(t_maindata *core_data, t_ast *node, char **args)
 {
 	pid_t	pid;
 	char	*path;
@@ -64,14 +64,14 @@ static void	process_built_out(t_maindata *core_data, t_ats *node, char **args)
 	{
 		if (core_data->history_fd != -1)
 			close(core_data->history_fd);
-		if (core_data->stdin_fd != -1)
-			close(core_data->stdin_fd);
+		if (core_data->save_stdin != -1)
+			close(core_data->save_stdin);
 		if (args == NULL)
 		{
 			clear_ats(core_data, CORE_ALL);
 			exit (errno);
 		}
-		if (pre_process_exec(core_data, (t_ats *)node) == FAILURE)
+		if (pre_process_exec(core_data, (t_ast *)node) == FAILURE)
 		{
 			ft_rm_split(args);
 			clear_ats(core_data, CORE_ALL);
@@ -90,11 +90,11 @@ static void	process_built_out(t_maindata *core_data, t_ats *node, char **args)
 	clean_parent(core_data, node);
 }
 
-void	exec_std(t_maindata *core_data, const t_ats *node)
+void	exec_std(t_maindata *core_data, const t_ast *node)
 {
 	char	**args;
 
-	args = late_parser(core_data, (t_ats *)node);
+	args = late_parser(core_data, (t_ast *)node);
 	if (errno != 0 && args == NULL)
 	{
 		perror_switch(core_data->errors, "Kikishell: parsing", NULL);
@@ -102,11 +102,11 @@ void	exec_std(t_maindata *core_data, const t_ats *node)
 	}
 	if (args != NULL && is_builtin(args[0]) == true)
 	{
-		process_built_in(core_data, (t_ats *)node, args);
+		process_built_in(core_data, (t_ast *)node, args);
 	}
 	else
 	{
-		process_built_out(core_data, (t_ats *)node, args);
+		process_built_out(core_data, (t_ast *)node, args);
 	}
 	if (args != NULL)
 		ft_rm_split(args);

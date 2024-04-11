@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:52:52 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/07 15:52:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 12:36:27 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,12 @@ t_list	*env_to_lst(char **envp)
 		tmp = ft_strdup(envp[i]);
 		if (!tmp)
 		{
-			errno = ENOMEM;
 			ft_lstclear(&head_env_list, free);
 			return (NULL);
 		}
 		new = ft_lstnew(tmp);
 		if (!new)
 		{
-			errno = ENOMEM;
 			free(tmp);
 			ft_lstclear(&head_env_list, free);
 			return (NULL);

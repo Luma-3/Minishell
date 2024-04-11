@@ -25,6 +25,7 @@
 		"environement.h": "c",
 		"stackft.h": "c",
 		"unistd.h": "c",
-		"history.h": "c"
+		"history.h": "c",
+		"typeinfo": "c"
 	}
 }

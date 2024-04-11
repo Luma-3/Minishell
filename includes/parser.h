@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 16:25:43 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:15:54 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ int				verif_before_operator(const char *prompt, char *token);
 
 int				verif_token_before(const char *prompt, int i);
 
-int				handle_heredoc(const char *prompt, t_maindata *ats);
-
 bool			verif_filename(char *filename, t_error *errors);
 
 /////////////////////////
@@ -68,7 +66,7 @@ long			count_letters(const char *start_word);
 
 char			**list_to_tab(t_list **lst);
 
-char			**late_parser(t_maindata *core_data, t_ats *node);
+char			**late_parser(t_maindata *core_data, t_ast *node);
 // clean
 
 char			*clean_quote(char *word);
@@ -84,16 +82,16 @@ int				atomize_prompt(t_maindata *ats);
 
 // bin_tree.c
 
-t_ats			*create_node(t_token *data);
+t_ast			*create_node(t_token *data);
 
-int				insert_node(t_ats **root, t_token *data,
+int				insert_node(t_ast **root, t_token *data,
 					int (*cmp)(t_token *, t_token *));
 
 int				compare_token(t_token *data1, t_token *data2);
 
-void			clear_tree(t_ats *root, void (*free_data)(void *));
+void			clear_tree(t_ast *root, void (*free_data)(void *));
 
-size_t			count_nodes(t_ats *root, size_t count);
+size_t			count_nodes(t_ast *root, size_t count);
 
 // ats_copy_cmd.c
 

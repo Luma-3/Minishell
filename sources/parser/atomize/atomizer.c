@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/08 16:31:56 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:12:15 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 static int	add_queue_pipe(t_queue *queue, int nb_pipe)
 {
-	t_queue_pipe	*data;
+	t_pipe_data	*data;
 
-	data = malloc(sizeof(t_queue_pipe));
+	data = malloc(sizeof(t_pipe_data));
 	if (data == NULL)
 		return (FAILURE);
 	data->index = nb_pipe;
@@ -39,7 +39,7 @@ static int	copy_cmd_pipe(t_maindata *ats, int i_copy, int i_read, int *nb_pipe)
 		return (FAILURE);
 	data->require_wait = false;
 	data->index = *nb_pipe;
-	if (add_queue_pipe(ats->queue_pipe, *nb_pipe == FAILURE))
+	if (add_queue_pipe(ats->q_pipe, *nb_pipe == FAILURE))
 	{
 		free_data_tree(data);
 		return (FAILURE);

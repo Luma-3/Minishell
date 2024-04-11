@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/11 01:00:59 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/04/11 14:16:48 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,8 @@ COMP_HISTORY_LIST	=	handle_history.c
 COMP_HISTORY			=	$(addprefix $(COMP_HISTORY_DIR), $(COMP_HISTORY_LIST))
 
 COMP_REDIR_DIR		=	redirection/
-COMP_REDIR_LIST		=	heredoc.c 			\
+COMP_REDIR_LIST		=	opener_kikidoc.c 	\
+						init_kikidoc.c		\
 						open_redir.c		\
 						redir_utils.c		\
 						pipe_redir.c
@@ -177,6 +178,7 @@ SRC_PARSER_LIST		=	parser.c			\
 SRC_PARSER			=	$(addprefix $(SRC_PARSER_DIR), $(SRC_PARSER_LIST))
 
 SRC_LIST			=	minishell.c			\
+						minishell_utils.c	\
 						safe_mode.c			\
 						init_shell.c		\
 						$(COMPONENTS)		\

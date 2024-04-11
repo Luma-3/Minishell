@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:50:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 13:42:51 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:13:06 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "ms_builtins.h"
 #include "redirection.h"
 #include "parser.h"
+#include "minishell.h"
 
 static int	copy_stdout(t_maindata *core_data)
 {
@@ -45,7 +46,7 @@ static void	restore_stdout(t_error *errors, int save_fd)
 	}
 }
 
-void	process_built_in(t_maindata *core_data, t_ats *node, char **args)
+void	process_built_in(t_maindata *core_data, t_ast *node, char **args)
 {
 	pid_t	pid;
 	int		error;
@@ -65,8 +66,8 @@ void	process_built_in(t_maindata *core_data, t_ats *node, char **args)
 		{
 			if (core_data->history_fd != -1)
 				close(core_data->history_fd);
-			if (core_data->stdin_fd != -1)
-				close(core_data->stdin_fd);
+			if (core_data->save_stdin != -1)
+				close(core_data->save_stdin);
 			if (pre_process_exec(core_data, node) == FAILURE)
 			{
 				ft_rm_split(args);
