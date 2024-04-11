@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:19:12 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/11 15:35:33 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:00:44 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ int	verif_if_parenthesis_closed(const char *prompt, t_error *errors)
 	int	index_parenthesis;
 	int	parenthesis;
 
-	i = 0;
+	i = -1;
 	parenthesis = 0;
 	index_parenthesis = 0;
-	while (prompt[i++])
+	while (prompt[++i])
 	{
 		if (is_quote(prompt[i]) == true)
 			i = place_cursor_quote(prompt, i);
