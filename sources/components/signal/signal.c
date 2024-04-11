@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:03:56 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 16:46:01 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 18:14:38 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,9 @@ extern volatile int	g_sigreceiver;
 
 static void	sigint_handler(int sig)
 {
-	char	*uname;
-
 	g_sigreceiver = sig;
-	write(STDOUT_FILENO, "\n", 1);
-	uname = get_uname();
 	close(STDIN_FILENO);
-	free(uname);
-	rl_on_new_line();
+	write(STDOUT_FILENO, "\n", 1);
 }
 
 static void	sigquit_handler(int sig)

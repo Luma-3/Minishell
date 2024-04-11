@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 14:12:42 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 18:16:13 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ void	exec_process(t_maindata *core_data, char *input)
 		return ;
 	}
 	read_ats(core_data, core_data->root);
-	if (g_sigreceiver != SIGINT)
-		ft_putchar_fd('\n', 1);
 	clear_ats(core_data, CORE_REDIR | CORE_ROOT | CORE_PROMPT
 		| CORE_HEREDOC | CORE_PIPE);
 }

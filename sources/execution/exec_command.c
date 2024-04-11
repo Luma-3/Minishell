@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:06:49 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/10 13:32:05 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:49:42 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ void	exec_command(char **tab_cmd, t_list **env, t_error *errors, char *path)
 	char		*path_command;
 	char		**env_tab;
 
+	if (path == NULL)
+	{
+		errno = ENOCNF;
+		perror_switch(errors, tab_cmd[0], NULL);
+		return ;
+	}
 	path_command = get_path(path, tab_cmd[0]);
 	if (path_command == NULL)
 	{
