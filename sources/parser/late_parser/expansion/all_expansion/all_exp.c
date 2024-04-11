@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   all_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 14:08:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 10:23:34 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:39:57 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "minishell.h"
 #include "stackft.h"
+#include "ms_error.h"
 
 extern volatile int	g_sigreceiver;
 
@@ -26,32 +27,6 @@ void	free_match_file(t_match_file *match_file)
 		free(match_file->suffix);
 }
 
-static int	find_all_files(t_dstack *stack, t_match_file *match_file,
-	t_list **lst, int i)
-{
-	DIR				*dir;
-	t_list			*tmp;
-
-	if (match_file == NULL || match_file->path == NULL)
-		return (FAILURE);
-	printf("path: %s\n", match_file->path);
-	dir = opendir(match_file->path);
-	if (dir == NULL)
-		return (FAILURE);
-	if (find_and_push(stack, match_file, dir, i) == false)
-	{
-		tmp = ft_lstnew(match_file->old_data);
-		if (tmp != NULL)
-			ft_lstadd_front(lst, tmp);
-		closedir(dir);
-		return (FAILURE);
-	}
-	free(match_file->old_data);
-	if (closedir(dir) == -1)
-		return (FAILURE);
-	return (SUCCESS);
-}
-
 static void	call_recursion(t_match_file *match_file, t_dstack *stack,
 	t_list **list, int i)
 {
@@ -62,7 +37,7 @@ static void	call_recursion(t_match_file *match_file, t_dstack *stack,
 	{
 		len = ft_strlen(match_file->prefix);
 	}
-	if (find_all_files(stack, match_file, list, i - len) == FAILURE)
+	if (open_files(stack, match_file, list, i - len) == FAILURE)
 	{
 		d_drop_stk(stack, free);
 	}

@@ -6,7 +6,7 @@
 /*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 17:49:00 by anthony           #+#    #+#             */
-/*   Updated: 2024/04/11 00:37:23 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/11 11:56:03 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,9 @@ char	*file_to_directory(t_match_file *match_file, char *file_name)
 
 t_match_file	*init_match_file(t_match_file *match_file, char *data, int i)
 {
-	printf("data[i]: %s\n", data + i);
 	match_file->suffix = get_suffix(data, i);
-	printf("suffix: %s\n", match_file->suffix);
 	match_file->path = get_path_wildcard(data, i);
-	printf("path: %s\n", match_file->path);
 	match_file->prefix = get_prefix(data, i);
-	printf("prefix: %s\n", match_file->prefix);
 	match_file->old_data = NULL;
 	return (match_file);
 }
@@ -75,6 +71,13 @@ bool	only_all(char *suffix)
 	while (suffix != NULL && suffix[i] == '*')
 		i++;
 	if (suffix != NULL && suffix[i] == 0)
+		return (true);
+	return (false);
+}
+
+bool	verif_suffix_ptr(char *entry, char *suffix, int i)
+{
+	if (ft_findstr(entry, suffix, i) != -1)
 		return (true);
 	return (false);
 }

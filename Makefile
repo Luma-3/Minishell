@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/11 14:16:48 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/04/11 15:09:14 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -149,6 +149,7 @@ ALL_EXPAND_LIST		= 	all_exp.c			\
 						get_infos.c			\
 						find_files.c		\
 						decision.c			\
+						open_files.c			\
 						utils.c				\
 						lst_utils.c			
 ALL_EXPAND			=	$(addprefix $(ALL_EXPAND_DIR), $(ALL_EXPAND_LIST))
