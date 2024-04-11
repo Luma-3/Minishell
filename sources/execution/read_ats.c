@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_ats.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 16:34:33 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 18:43:30 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	sig_handler(t_maindata *core, t_ast *node, bool is_pipeline)
 }
 
 static int	wait_pipeline(t_maindata *core, t_ast *node)
-{	
+{
 	int	ret;
 
 	ret = 0;

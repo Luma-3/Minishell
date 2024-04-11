@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:16:34 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 15:04:08 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 18:43:05 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int	ms_export(char **args, t_list **envp, void *data)
 			return (errno);
 		if (is_valid_name(name) == false)
 		{
-			printf("Kikishell: export: '%s': not a valid identifier\n", args[i]);
+			printf("Kikishell: export: '%s': not a valid identifier\n",
+				args[i]);
 			(free(name), ret = 1);
 		}
 		else

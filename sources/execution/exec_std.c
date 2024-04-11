@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_std.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 16:17:11 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/11 18:41:10 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ static void	process_built_out(t_maindata *core, t_ast *node, char **args)
 			clean_child(core, args);
 		close_fds(core);
 		path = ms_getenv(core->env, "PATH");
-		if (path == NULL)
-			path = ft_strdup(core->path);
 		close_all_pipes(core);
 		exec_command(args, &(core->env), core->errors, path);
 		clean_child(core, args);
