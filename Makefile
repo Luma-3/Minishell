@@ -6,7 +6,7 @@
 #    By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/28 18:11:36 by jbrousse          #+#    #+#              #
-#    Updated: 2024/04/11 23:55:32 by jbrousse         ###   ########.fr        #
+#    Updated: 2024/04/12 11:40:41 by jbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -216,13 +216,15 @@ UNDERLINE		=	\033[4m
 ##	PROGRESS  ##
 ################
 
-TOTAL_SRCS		=	$(words $(SRC))
-COMPILED_SRCS	:=	0
-MAX_PATH_LENGTH := $(shell find $(SRC_DIR) -name '*.c' | awk '{print length}' | sort -nr | head -n1)
-MAX_NAME_LENGTH := $(shell find $(SRC_DIR) -name '*.c' -exec basename {} \; | awk '{ print length }' | sort -nr | head -n1)
+COMPILED_SRCS		:=	1
+
+TOTAL_SRCS			:=	$(words $(SRC))
+
+
+MAX_PATH_LENGTH 	:=	$(shell find $(SRC_DIR) -name '*.c' | awk '{print length}' | sort -nr | head -n1)
+MAX_NAME_LENGTH 	:=	$(shell find $(SRC_DIR) -name '*.c' -exec basename {} \; | awk '{ print length }' | sort -nr | head -n1)
 
 define progress_bar
-	printf "\033[2K"; \
 	printf "$(COLOR_BLUE)Compiling: [$(COLOR_GREEN)"; \
 	for i in $$(seq 1 $(4)); do \
 		if [ $$i -le $$(($(1)*$(4)/$(2))) ]; then \
@@ -238,8 +240,9 @@ define print_progress
 	@$(eval WIDTH := $(shell tput cols))
 	@$(eval LEN := $(shell expr $(WIDTH) - $(MAX_PATH_LENGTH) - 26))
 	
+	@printf "\033[2K"; \
 	if [ $(LEN) -le 10 ]; then \
-		printf "$(COLOR_BLUE)Compiling: $(BOLD)$(1)/$(2)$(COLOR_RESET)$(COLOR_GREEN)$(3)$(COLOR_RESET)\r"; \
+		printf "$(COLOR_BLUE)Compiling: $(BOLD)$(1)/$(2)$(COLOR_RESET)$(COLOR_GREEN) $(notdir $(3))$(COLOR_RESET)\r"; \
 	else \
 		$(call progress_bar,$(1),$(2),$(3),$(LEN)); \
 	fi
@@ -265,7 +268,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(call print_progress,$(COMPILED_SRCS),$(TOTAL_SRCS), $<)
 
 
-$(NAME): $(OBJ_LIST)
+$(NAME): $(call $(RQ_SRC)) $(OBJ_LIST)
 	@echo "\033[2K$(COLOR_ORANGE)$(BOLD)Compilation complete ! $(COLOR_BLUE)Minishell is Ready !$(COLOR_RESET)"
 	@$(CC) $(CFLAGS) $^ $(INCLUDE) $(LIBFT) $(STACKFT) -o $@ -lreadline -lcurses
 
