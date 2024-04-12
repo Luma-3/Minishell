@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 11:48:27 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 23:48:36 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/12 17:10:35 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,26 +56,35 @@ char	*copy_data_env(t_maindata *core_data, char *arg, int index)
 	return (free(arg), free(token), new_arg);
 }
 
+static bool	valid_condition(char *new_arg, char quote, char single_quote, int i)
+{
+	if (quote != '\0' && single_quote == '\0' && new_arg[i] == '$'
+		&& (ft_iswhitespace(new_arg[i + 1]) == false || new_arg[i + 1] != '\0'))
+		return (true);
+	if (quote == '\0' && single_quote == '\0' && new_arg[i] == '$'
+		&& (ft_iswhitespace(new_arg[i + 1]) == false || new_arg[i + 1] != '\0'))
+		return (true);
+	return (false);
+}
+
 char	*handle_env(t_maindata *core_data, const char *arg)
 {
 	int		i;
 	char	quote;
+	char	single_quote;
 	char	*new_arg;
 
 	i = 0;
 	quote = '\0';
+	single_quote = '\0';
 	new_arg = (char *)arg;
 	while (new_arg[i])
 	{
 		if (new_arg[i] == '\"')
-		{
 			quote = check_quote(quote, new_arg[i]);
-			i++;
-		}
 		if (new_arg[i] == '\'' && quote == '\0')
-			i = skip_quote_parenthesis(new_arg, i);
-		if (new_arg[i] == '$' && (ft_iswhitespace(new_arg[i + 1]) == false
-				|| new_arg[i + 1] != '\0'))
+			single_quote = check_quote(single_quote, new_arg[i]);
+		if (valid_condition(new_arg, quote, single_quote, i) == true)
 		{
 			new_arg = copy_data_env(core_data, new_arg, i);
 		}
