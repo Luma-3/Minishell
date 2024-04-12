@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 14:10:20 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 15:09:19 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:28:31 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ bool	verif_filename(char *filename, t_error *errors)
 	{
 		if (is_quote(filename[i]) == true)
 			i = skip_quote_parenthesis(filename, i);
-		if (filename[i] == '&' || filename[i] == '|' || filename[i] == '(')
+		if (filename[i] == '&' || filename[i] == '|' || filename[i] == '('
+			|| filename[i] == ')')
 		{
 			errno = ESYNTAX;
 			perror_switch(errors, "KikiShell", &filename[i]);

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:39:53 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 16:22:31 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:22:00 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,24 @@ void	__init_error__(t_error *errors)
 
 static void	ft_perror(t_error *errors, const char *str, const char *token)
 {
+	char	*tmp;
+
+	tmp = NULL;
 	ft_putstr_fd((char *)str, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(ft_strerror(errors, errno), 2);
 	if (errno >= ESYNTAX && token)
 	{
-		ft_putstr_fd((char *)token, STDERR_FILENO);
+		tmp = ft_strtrim(token, " \t\n\v\f\r");
+		if (tmp == NULL)
+			return ;
+		ft_putstr_fd((char *)tmp, STDERR_FILENO);
 		ft_putchar_fd('\'', STDERR_FILENO);
 	}
 	if (errno == EEOF)
+	{
 		ft_putstr_fd(")", STDERR_FILENO);
+	}
 	ft_putchar_fd('\n', STDERR_FILENO);
 }
 

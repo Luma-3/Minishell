@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 16:16:38 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:06:13 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,17 @@ static char	*copy_whitout_parenthesis(char *cmd)
 	tmp = ft_strtrim(cmd, " \t\n\v\f\r");
 	if (tmp == NULL)
 		return (NULL);
-	if (*tmp != '(')
-		return (tmp);
-	cmd = ft_strndup(tmp + 1, ft_strlen(tmp) - 2);
-	free(tmp);
-	if (cmd == NULL)
-		return (NULL);
-	return (cmd);
+	if (tmp[0] == '(' && tmp[ft_strlen(tmp) - 1] == ')')
+	{
+		if (*tmp != '(')
+			return (tmp);
+		cmd = ft_strndup(tmp + 1, ft_strlen(tmp) - 2);
+		free(tmp);
+		if (cmd == NULL)
+			return (NULL);
+		return (cmd);
+	}
+	return (tmp);
 }
 
 static t_token	*init_node(const char *cmd)

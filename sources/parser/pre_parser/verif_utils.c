@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verif_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:19:12 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/11 16:00:44 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/12 15:10:07 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ int	verif_if_quote_closed(const char *prompt, t_error *errors)
 		i++;
 	}
 	if (quote == true)
+	{
 		return (print_error_arg(errors, &quote_type));
+	}
 	return (SUCCESS);
 }
 

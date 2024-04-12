@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:43:18 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/10 13:22:14 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:05:56 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ int	verif_token_before(const char *prompt, int i)
 	{
 		if (ft_iswhitespace(prompt[i]) == true)
 			i--;
-		if (prompt[i] == '\0' || is_operator(prompt + i - 1) == true
-			|| is_pipe(prompt + i) == true)
+		if (prompt[i] == '\0'
+			|| (i - 1 >= 0 && is_operator(prompt + i - 1) == true)
+			|| is_pipe(prompt + i) == true
+			|| prompt[i] == '(')
 			return (SUCCESS);
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:11:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/12 11:56:56 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:18:30 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ void	exec_process(t_maindata *core_data, char *input)
 		return ;
 	if (parse_prompt(input, core_data, true) == FAILURE)
 	{
+		core_data->last_status = ESYNTAX;
 		clear_ats(core_data, CORE_REDIR | CORE_ROOT | CORE_PROMPT | CORE_HEREDOC
 			| CORE_PIPE);
+		ft_putchar_fd('\n', 1);
 		return ;
 	}
 	read_ats(core_data, core_data->root);

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:12:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 16:18:50 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 14:39:11 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int	exec_subshell(t_maindata *core_data, t_ast *node)
 	node->data->pid = pid;
 	if (pid == 0)
 	{
-		close(core_data->save_stdin);
-		close(core_data->history_fd);
-		open_redir(core_data, node);
+		close_fds(core_data);
+		if (pre_process_exec(core_data, (t_ast *)node) == FAILURE)
+			clean_child(core_data, NULL);
 		close_all_pipes(core_data);
 		init_new_ats(core_data, &new_ats, node);
 		parse_prompt(new_ats.prompt, &new_ats, false);
