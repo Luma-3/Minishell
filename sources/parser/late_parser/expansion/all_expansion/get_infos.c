@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_infos.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/29 12:40:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 11:11:54 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/12 13:05:25 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,29 @@
 char	*get_path_wildcard(char *arg, int index)
 {
 	char	*path;
-	char	*path_tmp;
-	int		i;
+	char	*tmp_arg;
+	char	*tmp;
 
-	path_tmp = getcwd(NULL, 0);
-	if (path_tmp == NULL)
+	path = NULL;
+	tmp = ft_strdup("./");
+	if (tmp == NULL)
 		return (NULL);
-	i = index;
-	while (i > 0 && arg[i] != '/')
-		i--;
-	if (arg[i] != '/' && i == 0)
+	if (arg[0] != '/')
 	{
-		path = ft_strjoin(path_tmp, "/");
-		free(path_tmp);
+		if (index - 1 <= 0)
+			return (tmp);
+		tmp_arg = ft_strndup(arg, index - 1);
+		if (tmp_arg == NULL)
+			return (tmp);
+		path = ft_strjoin(tmp, tmp_arg);
+		free(tmp_arg);
+		free(tmp);
 		if (path == NULL)
 			return (NULL);
 		return (path);
 	}
-	free(path_tmp);
-	path = ft_strndup(arg, i + 1);
-	if (path == NULL)
-		return (NULL);
-	return (path);
+	tmp_arg = ft_strndup(arg, index);
+	return (free(tmp), tmp_arg);
 }
 
 char	*get_prefix(char *arg, int index)

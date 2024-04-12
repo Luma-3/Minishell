@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all_exp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 14:08:11 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 11:39:57 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/12 12:44:49 by antgabri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ void	rec_all(t_dstack *stack, t_list **list)
 	}
 	init_match_file(&match_file, data, i);
 	if (access(match_file.path, F_OK) == FAILURE)
+	{
 		return (no_access_file(stack, list, &match_file));
+	}
 	if (g_sigreceiver == SIGINT)
 		return (free_match_file(&match_file));
 	call_recursion(&match_file, stack, list, i);
