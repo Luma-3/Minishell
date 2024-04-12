@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:10:14 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 14:13:05 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:37:51 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,5 @@ void	clear_tree(t_ast *root, void (*free_data)(void *))
 	clear_tree(root->right, free_data);
 	free_data(root->data);
 	free(root);
+	root = NULL;
 }

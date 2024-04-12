@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:50:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 16:45:35 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:17:12 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ static int	fork_bt(t_maindata *core, t_ast *node, char **args)
 	pid = fork();
 	if (pid == FAILURE)
 	{
-		perror_switch(core->errors, "fork", NULL);
+		ft_rm_split(args);
+		perror_switch(core->errors, "kikishell", NULL);
 		return (FAILURE);
 	}
 	node->data->pid = pid;
@@ -62,28 +63,26 @@ static int	fork_bt(t_maindata *core, t_ast *node, char **args)
 	{
 		if (pre_process_exec(core, node) == FAILURE)
 		{
-			ft_rm_split(args);
-			clear_ats(core, CORE_ALL);
+			clean_child(core, args);
 			exit(1);
 		}
 		error = chr_exec_bt((const char **)args, &(core->env), core);
-		(close_all_pipes(core), ft_rm_split(args));
-		clear_ats(core, CORE_ALL);
+		close_all_pipes(core);
+		clean_child(core, args);
 		exit(error);
 	}
-	clean_parent(core, node);
+	clean_parent(core, node, args);
 	return (SUCCESS);
 }
 
-void	process_built_in(t_maindata *core, t_ast *node, char **args)
+int	process_built_in(t_maindata *core, t_ast *node, char **args)
 {
 	int		error;
 	int		save_fd;
 
 	if (node->data->index != -1)
 	{
-		fork_bt(core, node, args);
-		return ;
+		return (fork_bt(core, node, args));
 	}
 	save_fd = -1;
 	if (ft_strncmp(args[0], "exit", 5) != 0)
@@ -92,7 +91,7 @@ void	process_built_in(t_maindata *core, t_ast *node, char **args)
 	{
 		node->data->exit_code = 1;
 		restore_stdout(core->errors, save_fd);
-		return ;
+		return (FAILURE);
 	}
 	error = chr_exec_bt((const char **)args, &(core->env), core);
 	node->data->require_wait = false;
@@ -100,4 +99,5 @@ void	process_built_in(t_maindata *core, t_ast *node, char **args)
 	if (node->data->index > 0)
 		close_pipe(core);
 	restore_stdout(core->errors, save_fd);
+	return (SUCCESS);
 }

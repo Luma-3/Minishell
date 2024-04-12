@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_ats.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 18:43:30 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/12 18:23:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,9 @@ static int	wait_process(t_maindata *core, t_ast *node)
 
 static int	read_node(t_maindata *core_data, t_ast *node, t_ast *preview_node)
 {
+	int	ret;
+
+	ret = 0;
 	if (is_operator(node->data->cmd) == true)
 	{
 		node->data->exit_code = preview_node->data->exit_code;
@@ -92,17 +95,18 @@ static int	read_node(t_maindata *core_data, t_ast *node, t_ast *preview_node)
 	}
 	else if (node->data->is_subshell == true)
 	{
-		exec_subshell(core_data, node);
+		ret = exec_subshell(core_data, node);
 	}
 	else
 	{
-		exec_std(core_data, node);
+		ret = exec_std(core_data, node);
 	}
-	if (node->data->pid >= 0 && node->data->require_wait == true)
+	if (node->data->pid >= 0 && node->data->require_wait == true
+		&& ret == SUCCESS)
 		return (wait_process(core_data, node));
 	else
 		core_data->last_status = node->data->exit_code;
-	return (SUCCESS);
+	return (ret);
 }
 
 int	read_ats(t_maindata *core_data, t_ast *root)

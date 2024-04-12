@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 16:07:05 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 16:15:19 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 18:02:55 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@ void	close_fds(t_maindata *core)
 		close(core->save_stdin);
 }
 
-int	clean_parent(t_maindata *core_data, const t_ast *node)
+int	clean_parent(t_maindata *core_data, const t_ast *node, char **args)
 {
 	t_redir_data	*free_data_redir;
 	t_kikidoc_data	*free_data_heredoc;
 
 	if (node->data->index - 1 >= 0)
 		close_pipe(core_data);
+	if (args != NULL)
+		ft_rm_split(args);
 	while (node->data->nb_redir > 0)
 	{
 		free_data_redir = (t_redir_data *)ft_dequeue(core_data->q_redir);

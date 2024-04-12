@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:52:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 14:12:42 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:52:19 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ static void	clear_pipe_queue(void *content)
 	t_pipe_data	*pipe;
 
 	pipe = (t_pipe_data *)content;
+	if (pipe->pipe_fd[READ] != -1)
+		close(pipe->pipe_fd[0]);
+	if (pipe->pipe_fd[WRITE] != -1)
+		close(pipe->pipe_fd[1]);
 	free(pipe);
 }
 

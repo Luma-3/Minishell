@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:46:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 14:13:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 18:27:41 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ char	**late_parser(t_maindata *core_data, t_ast *node)
 		return (NULL);
 	if (expansion_cmd(core_data, &lst_args) == FAILURE)
 		return (NULL);
+	// TODO Expend
 	tab_args = list_to_tab(&lst_args);
 	return (tab_args);
 }

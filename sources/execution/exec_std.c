@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 22:10:06 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 18:23:24 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,22 @@ int	pre_process_exec(t_maindata *core_data, t_ast *node)
 	return (SUCCESS);
 }
 
-static void	process_built_out(t_maindata *core, t_ast *node, char **args)
+static int	process_built_out(t_maindata *core, t_ast *node, char **args)
 {
 	pid_t	pid;
 	char	*path;
 
 	pid = fork();
 	if (pid < 0)
-		return ;
+	{
+		ft_rm_split(args);
+		perror_switch(core->errors, "kikishell", NULL);
+		return (FAILURE);
+	}
 	node->data->pid = pid;
 	if (pid == 0)
 	{
-		if (args == NULL)
-			clean_child(core, args);
-		if (pre_process_exec(core, (t_ast *)node) == FAILURE)
+		if (args == NULL || pre_process_exec(core, node) == FAILURE)
 			clean_child(core, args);
 		close_fds(core);
 		path = ms_getenv(core->env, "PATH");
@@ -50,10 +52,11 @@ static void	process_built_out(t_maindata *core, t_ast *node, char **args)
 		exec_command(args, &(core->env), core->errors, path);
 		clean_child(core, args);
 	}
-	clean_parent(core, node);
+	clean_parent(core, node, args);
+	return (SUCCESS);
 }
 
-void	exec_std(t_maindata *core_data, const t_ast *node)
+int	exec_std(t_maindata *core_data, const t_ast *node)
 {
 	char	**args;
 
@@ -61,16 +64,15 @@ void	exec_std(t_maindata *core_data, const t_ast *node)
 	if (errno != 0 && args == NULL)
 	{
 		perror_switch(core_data->errors, "kikishell", NULL);
-		return ;
+		return (FAILURE);
 	}
 	if (args != NULL && is_builtin(args[0]) == true)
 	{
-		process_built_in(core_data, (t_ast *)node, args);
+		return (process_built_in(core_data, (t_ast *)node, args));
 	}
 	else
 	{
-		process_built_out(core_data, (t_ast *)node, args);
+		return (process_built_out(core_data, (t_ast *)node, args));
 	}
-	if (args != NULL)
-		ft_rm_split(args);
+	return (SUCCESS);
 }

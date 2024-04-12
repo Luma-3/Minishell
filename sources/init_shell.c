@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:49:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 18:45:03 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/12 18:23:07 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ static int	launch_shell(t_maindata *core_data, char **envp)
 
 	env = NULL;
 	printf("\033]0;KikiShell\007");
+	core_data->path = ft_strdup("./");
+	if (core_data->path == NULL)
+		return (perror_switch(core_data->errors, "KikiShell", NULL), FAILURE);
 	get_history(core_data->history_fd);
 	if (core_data->history_fd == FAILURE)
 		return (perror_switch(core_data->errors, "KikiShell", NULL), FAILURE);

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 13:04:47 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 14:22:55 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:39:29 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ static int	open_heredoc(const char *delimiter, int fd, t_error *errors)
 		if (g_sigreceiver == SIGINT)
 		{
 			g_sigreceiver = 0;
-			break ;
+			free(heredoc_display);
+			restore_stdin(errors, stdin_fd);
+			return (close(fd), FAILURE);
 		}
 		if (stop_heredoc(line, delimiter, errors) == true)
 			break ;
@@ -69,8 +71,7 @@ static int	open_heredoc(const char *delimiter, int fd, t_error *errors)
 		free(line);
 	}
 	restore_stdin(errors, stdin_fd);
-	close(fd);
-	return (free(heredoc_display), SUCCESS);
+	return (free(heredoc_display), close(fd), SUCCESS);
 }
 
 static int	enqueue_kikidoc(t_queue *kikidoc_queue, t_kikidoc_data *kikidoc,

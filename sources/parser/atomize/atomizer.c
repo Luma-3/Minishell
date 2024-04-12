@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 11:47:04 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 14:12:15 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:45:27 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@ static int	copy_cmd_pipe(t_maindata *ats, int i_copy, int i_read, int *nb_pipe)
 		return (FAILURE);
 	data->require_wait = false;
 	data->index = *nb_pipe;
-	if (add_queue_pipe(ats->q_pipe, *nb_pipe == FAILURE))
+	if (add_queue_pipe(ats->q_pipe, *nb_pipe) == FAILURE)
 	{
-		free_data_tree(data);
 		return (FAILURE);
 	}
 	(*nb_pipe)++;
