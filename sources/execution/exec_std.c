@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_std.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/12 19:56:48 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/14 15:01:00 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	process_built_out(t_maindata *core, t_ast *node, char **args)
 	node->data->pid = pid;
 	if (pid == 0)
 	{
-		if (args == NULL || pre_process_exec(core, node) == FAILURE)
+		if (pre_process_exec(core, node) == FAILURE || args == NULL)
 			clean_child(core, args);
 		close_fds(core);
 		path = ms_getenv(core->env, "PATH");

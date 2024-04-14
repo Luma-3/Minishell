@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:11:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 17:51:57 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/14 15:12:18 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,15 @@ int		ms_env(char **args, t_list **envp, void *data);
 
 int		ms_export(char **args, t_list **envp, void *data);
 
+bool	is_valid_name(char *name);
+
+char	*get_name(char *arg);
+
+char	*get_value(char *arg);
+
 int		ms_exit(char **args, t_list **envp, void *data);
+
+void	print_error_exit(char **args);
 
 int		ms_history(char **args, t_list **envp, void *data);
 

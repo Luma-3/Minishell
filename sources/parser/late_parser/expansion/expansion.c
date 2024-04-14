@@ -3,15 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:35:19 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 23:37:30 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/14 15:45:07 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "minishell.h"
+
+static int	cmp_lst(void *a, void *b)
+{
+	char	lower_a;
+	char	lower_b;
+
+	while (*(char *)a && *(char *)b)
+	{
+		lower_a = ft_tolower(*(char *)a);
+		lower_b = ft_tolower(*(char *)b);
+		if (lower_a != lower_b)
+			return (lower_a - lower_b);
+		a++;
+		b++;
+	}
+	return (0);
+}
 
 static t_list	*handle_all(t_list **lst, t_list *current_index)
 {
@@ -77,6 +94,7 @@ int	expansion_cmd(t_maindata *core_data, t_list **args)
 				match_files = handle_all(args, indexer);
 				if (match_files == NULL)
 					return (FAILURE);
+				ft_lstsort(&match_files, &cmp_lst);
 				indexer = match_files;
 				connect_list(index_prev, match_files, args);
 			}

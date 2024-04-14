@@ -3,55 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   bin_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:16:34 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 18:43:05 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/14 15:47:07 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ms_builtins.h"
 #include "environement.h"
 #include "parser.h"
+#include <limits.h>
 
-static bool	is_valid_name(char *name)
+static int	cmp_lst(void *a, void *b)
 {
-	size_t	i;
+	char	lower_a;
+	char	lower_b;
 
-	i = 0;
-	while (name[i])
+	while (*(char *)a && *(char *)b)
 	{
-		if (i == 0 && ft_isdigit(name[i]))
-			return (false);
-		if (valid_env_char(name[i]) == false)
-			return (false);
-		i++;
+		lower_a = ft_tolower(*(char *)a);
+		lower_b = ft_tolower(*(char *)b);
+		if (lower_a != lower_b)
+			return (lower_a - lower_b);
+		a++;
+		b++;
 	}
-	return (true);
+	return (0);
 }
 
-char	*get_name(char *arg)
+static void	*dup_content(void *content)
 {
-	int	i;
-
-	i = 0;
-	while (arg[i] && arg[i] != '=')
-		i++;
-	if (i == 0)
-		return (ft_strdup(arg));
-	return (ft_substr(arg, 0, i));
+	return (ft_strdup((char *)content));
 }
 
-char	*get_value(char *arg)
+static void	print_export(t_list *envp)
 {
-	char	*value;
-	char	*start_value;
+	t_list	*copy;
+	t_list	*iterator;
 
-	start_value = ft_strchr(arg, '=');
-	if (start_value == NULL)
-		return (ft_strdup(""));
-	value = ft_strndup(start_value + 1, ft_strlen(start_value));
-	return (value);
+	copy = ft_lstmap(envp, &dup_content, &free);
+	ft_lstsort(&copy, &cmp_lst);
+	iterator = copy;
+	while (iterator)
+	{
+		printf("declare -x %s\n", (char *)iterator->content);
+		iterator = iterator->next;
+	}
+	ft_lstclear(&copy, &free);
 }
 
 static int	export_var(char *arg, char *name, t_list **envp)
@@ -59,10 +58,24 @@ static int	export_var(char *arg, char *name, t_list **envp)
 	char	*value;
 	int		ret;
 
+	if (is_valid_name(name) == false)
+	{
+		printf("Kikishell: export: '%s': not a valid identifier\n", arg);
+		free(name);
+		return (1);
+	}
 	value = get_value(arg);
-	ret = ms_setenv(envp, name, value);
-	free(value);
-	free(name);
+	if (value == NULL && errno != 0)
+	{
+		free(name);
+		return (errno);
+	}
+	else if (value != NULL)
+	{
+		ret = ms_setenv(envp, name, value);
+		free(value);
+		free(name);
+	}
 	return (ret);
 }
 
@@ -75,19 +88,17 @@ int	ms_export(char **args, t_list **envp, void *data)
 	i = 1;
 	ret = 0;
 	(void)data;
+	if (args[1] == NULL)
+	{
+		print_export(*envp);
+		return (0);
+	}
 	while (args[i])
 	{
 		name = get_name(args[i]);
 		if (name == NULL)
 			return (errno);
-		if (is_valid_name(name) == false)
-		{
-			printf("Kikishell: export: '%s': not a valid identifier\n",
-				args[i]);
-			(free(name), ret = 1);
-		}
-		else
-			ret = export_var(args[i], name, envp);
+		ret = export_var(args[i], name, envp);
 		i++;
 	}
 	return (ret);

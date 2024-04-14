@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:27:38 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 14:51:42 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/14 15:15:37 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "environement.h"
 #include <signal.h>
 #include "display.h"
+#include <limits.h>
 
 static void	kill_all_processes(t_ast *node)
 {
@@ -50,10 +51,23 @@ static int	clear_kikishell(t_maindata *core)
 	return (ret);
 }
 
+static unsigned long	str_to_ul(const char *str)
+{
+	unsigned long	ret;
+
+	ret = 0;
+	while (*str)
+	{
+		ret = ret * 10 + (*str - '0');
+		str++;
+	}
+	return (ret);
+}
+
 int	ms_exit(char **args, t_list **envp, void *data)
 {
-	int			ret;
-	t_maindata	*core;
+	unsigned long	ret;
+	t_maindata		*core;
 
 	(void)envp;
 	core = (t_maindata *)data;
@@ -66,15 +80,13 @@ int	ms_exit(char **args, t_list **envp, void *data)
 	if (args[1])
 	{
 		if (is_all_digit(args[1]) == false)
-		{
-			printf("exit: %s: numeric argument required\n", args[1]);
-			ft_rm_split(args);
-			exit(2);
-		}
-		ret = ft_atoi(args[1]);
+			print_error_exit(args);
+		ret = str_to_ul(args[1]);
+		if (ret > UINT_MAX)
+			print_error_exit(args);
 		ft_rm_split(args);
-		exit(ret);
+		exit((unsigned int)ret);
 	}
 	ft_rm_split(args);
-	exit(ret);
+	exit((unsigned int)ret);
 }
