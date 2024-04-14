@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 14:00:31 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/09 11:37:51 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:09:49 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,7 @@ int	ms_cd(char **args, t_list **env, void *data)
 	else if (chdir(chdir_path) == -1)
 	{
 		free(chdir_path);
-		perror("cd");
-		ft_putstr_fd(": ", STDERR_FILENO);
-		ft_putendl_fd(args[1], STDERR_FILENO);
+		printf("kikishell: cd: %s: %s\n", args[1], strerror(errno));
 		return (errno);
 	}
 	free(chdir_path);

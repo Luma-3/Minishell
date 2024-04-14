@@ -19,9 +19,9 @@
 # include "environement.h"
 # include "color.h"
 
-void	display_msg(t_maindata *core_data, char *msg);
+void	display_msg(t_core *core_data, char *msg);
 
-char	*shell_prompt(t_maindata *core_data);
+char	*shell_prompt(t_core *core_data);
 
 char	*path_to_tilde(t_list *env);
 

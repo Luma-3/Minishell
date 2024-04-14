@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:27:38 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/14 15:15:37 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:22:20 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static bool	is_all_digit(char *str)
 	return (true);
 }
 
-static int	clear_kikishell(t_maindata *core)
+static int	clear_kikishell(t_core *core)
 {
 	int	ret;
 
@@ -67,10 +67,10 @@ static unsigned long	str_to_ul(const char *str)
 int	ms_exit(char **args, t_list **envp, void *data)
 {
 	unsigned long	ret;
-	t_maindata		*core;
+	t_core			*core;
 
 	(void)envp;
-	core = (t_maindata *)data;
+	core = (t_core *)data;
 	if (args[1] && args[2])
 	{
 		ft_putstr_fd("exit: too many arguments\n", STDERR_FILENO);

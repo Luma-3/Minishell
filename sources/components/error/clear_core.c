@@ -47,7 +47,7 @@ static void	clear_pipe_queue(void *content)
 	free(pipe);
 }
 
-static void	clear_else(t_maindata *core_data, int flag)
+static void	clear_else(t_core *core_data, int flag)
 {
 	if (flag & CORE_PIPE && core_data->q_pipe != NULL)
 	{
@@ -76,7 +76,7 @@ static void	clear_else(t_maindata *core_data, int flag)
 	}
 }
 
-void	clear_ats(t_maindata *core_data, int flag)
+void	clear_ats(t_core *core_data, int flag)
 {
 	if (flag & CORE_ROOT && core_data->root != NULL)
 	{

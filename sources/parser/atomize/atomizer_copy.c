@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/14 14:55:22 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:18:31 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static t_token	*init_node(const char *cmd)
 	return (data);
 }
 
-t_token	*copy_insert_node(t_maindata *core_data, int i_copy, int i_read)
+t_token	*copy_insert_node(t_core *core_data, int i_copy, int i_read)
 {
 	t_token	*data;
 
@@ -66,7 +66,7 @@ t_token	*copy_insert_node(t_maindata *core_data, int i_copy, int i_read)
 	return (data);
 }
 
-int	copy_cmd_operator(t_maindata *core, int *i_copy, int *i_read)
+int	copy_cmd_operator(t_core *core, int *i_copy, int *i_read)
 {
 	t_token	*data;
 
@@ -90,7 +90,7 @@ int	copy_cmd_operator(t_maindata *core, int *i_copy, int *i_read)
 	return (SUCCESS);
 }
 
-t_token	*copy_token(t_maindata *core, const char *prompt, size_t len_copy)
+t_token	*copy_token(t_core *core, const char *prompt, size_t len_copy)
 {
 	t_token	*token;
 	char	*prompt_copy;

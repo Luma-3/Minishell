@@ -67,7 +67,7 @@ static void	connect_list(t_list *index_prev, t_list *match_files, t_list **args)
 	ft_lstadd_back(&match_files, tmp);
 }
 
-static void	first_expansions(t_maindata *core_data, t_list *indexer)
+static void	first_expansions(t_core *core_data, t_list *indexer)
 {
 	if (ft_strchr((const char *)indexer->content, '~') != NULL)
 		indexer->content = (void *)handle_tilde(indexer->content,
@@ -76,7 +76,7 @@ static void	first_expansions(t_maindata *core_data, t_list *indexer)
 		indexer->content = (void *)handle_env(core_data, indexer->content);
 }
 
-int	expansion_cmd(t_maindata *core_data, t_list **args)
+int	expansion_cmd(t_core *core_data, t_list **args)
 {
 	t_list	*indexer;
 	t_list	*match_files;

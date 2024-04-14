@@ -31,7 +31,7 @@ typedef struct s_builtin
 
 bool	is_builtin(const char *cmd);
 
-int		chr_exec_bt(const char **tab_cmd, t_list **env, t_maindata *core_data);
+int		chr_exec_bt(const char **tab_cmd, t_list **env, t_core *core_data);
 
 // BUILTINS
 

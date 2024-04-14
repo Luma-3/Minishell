@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antgabri <antgabri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/12 13:09:24 by antgabri         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:18:31 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ long			count_letters(const char *start_word);
 
 char			**list_to_tab(t_list **lst);
 
-char			**late_parser(t_maindata *core_data, t_ast *node);
+char			**late_parser(t_core *core_data, t_ast *node);
 // clean
 
 char			*clean_quote(char *word);
@@ -70,10 +70,10 @@ char			*clean_quote(char *word);
 ////// ATOMIC PARSER //////
 ///////////////////////////
 
-int				parse_prompt(char *prompt, t_maindata *core_data,
+int				parse_prompt(char *prompt, t_core *core_data,
 					bool check_arg);
 
-int				atomize_prompt(t_maindata *ats);
+int				atomize_prompt(t_core *ats);
 
 // bin_tree.c
 
@@ -90,16 +90,16 @@ size_t			count_nodes(t_ast *root, size_t count);
 
 // ats_copy_cmd.c
 
-int				copy_cmd_operator(t_maindata *ats, int *i_copy, int *i_read);
+int				copy_cmd_operator(t_core *ats, int *i_copy, int *i_read);
 
-t_token			*copy_token(t_maindata *core, const char *prompt,
+t_token			*copy_token(t_core *core, const char *prompt,
 					size_t len_copy);
 
-t_token			*copy_insert_node(t_maindata *ats, int i_copy, int i_read);
+t_token			*copy_insert_node(t_core *ats, int i_copy, int i_read);
 
 // take_redir.c
 
-char			*take_redir(t_maindata *ats, const char *prompt, int *nb_redir);
+char			*take_redir(t_core *ats, const char *prompt, int *nb_redir);
 
 //////////////////////////
 ////// PARSER UTILS //////
@@ -142,13 +142,13 @@ int				check_parenthesis(char parenthesis);
 /////// EXPANSION  ///////
 //////////////////////////
 
-int				expansion_cmd(t_maindata *core_data, t_list **args);
+int				expansion_cmd(t_core *core_data, t_list **args);
 
 // expansion_env
 
-char			*handle_env(t_maindata *core_data, const char *arg);
+char			*handle_env(t_core *core_data, const char *arg);
 
-char			*copy_data_env(t_maindata *core_data, char *arg, int index);
+char			*copy_data_env(t_core *core_data, char *arg, int index);
 
 // expansion_tilde
 

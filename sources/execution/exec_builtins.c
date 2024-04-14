@@ -16,7 +16,7 @@
 #include "parser.h"
 #include "minishell.h"
 
-static int	copy_stdout(t_maindata *core_data)
+static int	copy_stdout(t_core *core_data)
 {
 	int	fd;
 
@@ -46,7 +46,7 @@ static void	restore_stdout(t_error *errors, int save_fd)
 	}
 }
 
-static int	fork_bt(t_maindata *core, t_ast *node, char **args)
+static int	fork_bt(t_core *core, t_ast *node, char **args)
 {
 	pid_t	pid;
 	int		error;
@@ -75,7 +75,7 @@ static int	fork_bt(t_maindata *core, t_ast *node, char **args)
 	return (SUCCESS);
 }
 
-int	process_built_in(t_maindata *core, t_ast *node, char **args)
+int	process_built_in(t_core *core, t_ast *node, char **args)
 {
 	int		error;
 	int		save_fd;

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 16:15:45 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:18:32 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 # include <errno.h>
 # include <sys/wait.h>
 # include <stdbool.h>
+
+// if you want print new line before and after the prompt : set to '\n'
+// if don't want print new line before and after the prompt : set to '\0'
+// initial value is '\n'
+# define NEW_LINE_PRINT	'\n'
 
 # define CORE_REDIR		0x01
 # define CORE_HEREDOC	0x02
@@ -86,7 +91,7 @@ typedef struct s_ast
 	struct s_ast	*right;
 }						t_ast;
 
-typedef struct s_maindata
+typedef struct s_core
 {
 	t_ast		*root;
 	t_list		*env;
@@ -101,7 +106,7 @@ typedef struct s_maindata
 	char		*uname;
 	char		*path;
 	bool		is_pipeline;
-}				t_maindata;
+}				t_core;
 
 // queue
 

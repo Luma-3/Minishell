@@ -65,7 +65,7 @@ static int	safe_env(t_list **env)
 	return (SUCCESS);
 }
 
-int	init_safe_mode(t_maindata *core_data)
+int	init_safe_mode(t_core *core_data)
 {
 	core_data->path = take_path();
 	if (core_data->path == NULL)

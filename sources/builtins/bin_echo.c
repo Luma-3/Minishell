@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:10:35 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 10:41:18 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:11:30 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ int	ms_echo(char **args, t_list **envp, void *data)
 	end_flag = have_flag(args);
 	print_arg(args + end_flag);
 	if (end_flag == 1)
-		write(1, "\n", 2);
+		ft_putchar_fd('\n', 1);
 	return (EXIT_SUCCESS);
 }

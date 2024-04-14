@@ -95,7 +95,7 @@ static int	enqueue_kikidoc(t_queue *kikidoc_queue, t_kikidoc_data *kikidoc,
 	return (open_heredoc(kikidoc->delimiter, fd, errors));
 }
 
-int	handle_kikidoc(const char *prompt, t_maindata *core)
+int	handle_kikidoc(const char *prompt, t_core *core)
 {
 	int				i;
 	int				id;

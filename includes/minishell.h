@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 11:23:48 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:18:31 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@
 
 # include "environement.h"
 
-void		exec_process(t_maindata *ats, char *input);
+void		exec_process(t_core *ats, char *input);
 
-int			init_shell(t_maindata *core_data, t_error *errors, char **envp);
+int			init_shell(t_core *core_data, t_error *errors, char **envp);
 
-int			init_safe_mode(t_maindata *core_data);
+int			init_safe_mode(t_core *core_data);
 
 //HISTORY
 

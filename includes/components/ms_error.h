@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_error.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:52:44 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 11:40:12 by anthony          ###   ########.fr       */
+/*   Updated: 2024/04/14 16:18:32 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	print_error_why(void);
 
 // CLEARTOOL
 
-void	clear_ats(t_maindata *ats, int flag);
+void	clear_ats(t_core *ats, int flag);
 
 void	free_data_tree(void *content);
 

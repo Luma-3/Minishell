@@ -56,7 +56,7 @@ static int	dup_out(t_pipe_data *data)
 	return (SUCCESS);
 }
 
-int	dup_pipe(t_maindata *core_data, int index)
+int	dup_pipe(t_core *core_data, int index)
 {
 	t_pipe_data	*data;
 
@@ -84,7 +84,7 @@ int	dup_pipe(t_maindata *core_data, int index)
 	return (SUCCESS);
 }
 
-int	close_pipe(t_maindata *core_data)
+int	close_pipe(t_core *core_data)
 {
 	t_pipe_data	*data;
 
@@ -105,7 +105,7 @@ int	close_pipe(t_maindata *core_data)
 	return (SUCCESS);
 }
 
-void	close_all_pipes(t_maindata *core_data)
+void	close_all_pipes(t_core *core_data)
 {
 	t_pipe_data	*data;
 

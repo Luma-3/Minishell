@@ -26,7 +26,7 @@ static int	open_redir_type(t_redir_data *node, t_queue *heredoc)
 	return (FAILURE);
 }
 
-static void	expand_redir(t_maindata *core_data, t_redir_data *node)
+static void	expand_redir(t_core *core_data, t_redir_data *node)
 {
 	char	*tmp;
 
@@ -44,7 +44,7 @@ static void	expand_redir(t_maindata *core_data, t_redir_data *node)
 	node->filename = tmp;
 }
 
-int	open_redir(t_maindata *core_data, const t_ast *node)
+int	open_redir(t_core *core_data, const t_ast *node)
 {
 	t_redir_data	*node_redir;
 	int				index;

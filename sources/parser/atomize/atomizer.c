@@ -30,7 +30,7 @@ static int	add_queue_pipe(t_queue *queue, int nb_pipe)
 	return (SUCCESS);
 }
 
-static int	copy_cmd_pipe(t_maindata *ats, int i_copy, int i_read, int *nb_pipe)
+static int	copy_cmd_pipe(t_core *ats, int i_copy, int i_read, int *nb_pipe)
 {
 	t_token	*data;
 
@@ -47,7 +47,7 @@ static int	copy_cmd_pipe(t_maindata *ats, int i_copy, int i_read, int *nb_pipe)
 	return (SUCCESS);
 }
 
-static int	atomize_pipeline(t_maindata *ats)
+static int	atomize_pipeline(t_core *ats)
 {
 	int				i_read;
 	int				i_copy;
@@ -76,7 +76,7 @@ static int	atomize_pipeline(t_maindata *ats)
 	return (SUCCESS);
 }
 
-int	atomize_prompt(t_maindata *core_data)
+int	atomize_prompt(t_core *core_data)
 {
 	int		i_copy;
 	int		i_read;

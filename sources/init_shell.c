@@ -59,7 +59,7 @@ static bool	has_path(t_list *env)
 	return (true);
 }
 
-static int	launch_shell(t_maindata *core_data, char **envp)
+static int	launch_shell(t_core *core_data, char **envp)
 {
 	t_list	*env;
 
@@ -85,9 +85,9 @@ static int	launch_shell(t_maindata *core_data, char **envp)
 	return (SUCCESS);
 }
 
-int	init_shell(t_maindata *core_data, t_error *errors, char **envp)
+int	init_shell(t_core *core_data, t_error *errors, char **envp)
 {
-	ft_bzero(core_data, sizeof(t_maindata));
+	ft_bzero(core_data, sizeof(t_core));
 	__init_error__(errors);
 	core_data->errors = errors;
 	init_signal();

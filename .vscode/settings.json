@@ -26,6 +26,7 @@
 		"stackft.h": "c",
 		"unistd.h": "c",
 		"history.h": "c",
-		"typeinfo": "c"
+		"typeinfo": "c",
+		"errno.h": "c"
 	}
 }

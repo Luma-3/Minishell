@@ -13,7 +13,7 @@
 #include "parser.h"
 #include "redirection.h"
 
-int	parse_prompt(char *prompt, t_maindata *core_data, bool check_arg)
+int	parse_prompt(char *prompt, t_core *core_data, bool check_arg)
 {
 	char	*tmp;
 

@@ -13,7 +13,7 @@
 #include "exec.h"
 #include "redirection.h"
 
-void	clean_child(t_maindata *core, char **args)
+void	clean_child(t_core *core, char **args)
 {
 	if (args != NULL)
 		ft_rm_split(args);
@@ -21,7 +21,7 @@ void	clean_child(t_maindata *core, char **args)
 	exit (errno);
 }
 
-void	close_fds(t_maindata *core)
+void	close_fds(t_core *core)
 {
 	if (core->history_fd != -1)
 		close(core->history_fd);
@@ -29,7 +29,7 @@ void	close_fds(t_maindata *core)
 		close(core->save_stdin);
 }
 
-int	clean_parent(t_maindata *core_data, const t_ast *node, char **args)
+int	clean_parent(t_core *core_data, const t_ast *node, char **args)
 {
 	t_redir_data	*free_data_redir;
 	t_kikidoc_data	*free_data_heredoc;

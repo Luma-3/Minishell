@@ -21,9 +21,9 @@
 # include <stdbool.h>
 # include <fcntl.h>
 
-int				open_redir(t_maindata *core_data, const t_ast *node);
+int				open_redir(t_core *core_data, const t_ast *node);
 
-void			handle_pipeline_redir(t_maindata *core_data);
+void			handle_pipeline_redir(t_core *core_data);
 
 int				open_redir_out(t_redir_data *redir);
 
@@ -33,7 +33,7 @@ int				open_redir_append(t_redir_data *redir);
 
 int				open_redir_heredoc(t_queue *queue_heredoc);
 
-int				handle_kikidoc(const char *prompt, t_maindata *core);
+int				handle_kikidoc(const char *prompt, t_core *core);
 
 t_kikidoc_data	*creat_kikidoc(int id, const char *prompt, int index,
 					t_error *errors);

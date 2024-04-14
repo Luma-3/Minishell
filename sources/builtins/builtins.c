@@ -25,7 +25,7 @@ static void	init_builtins(t_builtin *builtins)
 	builtins[7] = (t_builtin){"history", ms_history};
 }
 
-int	chr_exec_bt(const char **tab_cmd, t_list **env, t_maindata *core_data)
+int	chr_exec_bt(const char **tab_cmd, t_list **env, t_core *core_data)
 {
 	t_builtin	builtins[NB_BUILTINS];
 	int			i;

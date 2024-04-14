@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 17:19:54 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/10 18:53:41 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:20:14 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	have_flag(char **arg)
 	return (i);
 }
 
-static int	ft_clear_history(const char *path, t_maindata *core)
+static int	ft_clear_history(const char *path, t_core *core)
 {
 	rl_clear_history();
 	if (unlink(path) == FAILURE)
@@ -114,13 +114,13 @@ static int	print_history(const char *path, t_error *errors)
 
 int	ms_history(char **args, t_list **envp, void *data)
 {
-	t_maindata	*core;
-	int			flag;
-	int			ret;
-	char		*path;
+	t_core	*core;
+	int		flag;
+	int		ret;
+	char	*path;
 
 	(void)envp;
-	core = (t_maindata *)data;
+	core = (t_core *)data;
 	flag = have_flag(args);
 	if (flag == FAILURE)
 	{

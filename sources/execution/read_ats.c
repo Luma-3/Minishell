@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/14 14:58:47 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:18:31 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 extern volatile int	g_sigreceiver;
 
-static int	sig_handler(t_maindata *core, t_ast *node, bool is_pipeline)
+static int	sig_handler(t_core *core, t_ast *node, bool is_pipeline)
 {
 	if (g_sigreceiver == SIGQUIT)
 		printf("\r^\\\033[0KQuit (Core dumped)\n");
@@ -39,7 +39,7 @@ static int	sig_handler(t_maindata *core, t_ast *node, bool is_pipeline)
 	return (FAILURE);
 }
 
-static int	wait_pipeline(t_maindata *core, t_ast *node)
+static int	wait_pipeline(t_core *core, t_ast *node)
 {
 	int	ret;
 
@@ -58,7 +58,7 @@ static int	wait_pipeline(t_maindata *core, t_ast *node)
 	return (SUCCESS);
 }
 
-static int	wait_process(t_maindata *core, t_ast *node)
+static int	wait_process(t_core *core, t_ast *node)
 {
 	int	ret;
 
@@ -83,7 +83,7 @@ static int	wait_process(t_maindata *core, t_ast *node)
 	return (SUCCESS);
 }
 
-static int	read_node(t_maindata *core_data, t_ast *node, t_ast *preview_node)
+static int	read_node(t_core *core_data, t_ast *node, t_ast *preview_node)
 {
 	int	ret;
 
@@ -109,7 +109,7 @@ static int	read_node(t_maindata *core_data, t_ast *node, t_ast *preview_node)
 	return (ret);
 }
 
-int	read_ats(t_maindata *core_data, t_ast *root)
+int	read_ats(t_core *core_data, t_ast *root)
 {
 	if (root == NULL)
 		return (SUCCESS);

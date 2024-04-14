@@ -13,7 +13,7 @@
 #include "parser.h"
 #include "minishell.h"
 
-static char	*replace_status(t_maindata *core, char *arg, int index)
+static char	*replace_status(t_core *core, char *arg, int index)
 {
 	char	*new_arg;
 	char	*status;
@@ -28,7 +28,7 @@ static char	*replace_status(t_maindata *core, char *arg, int index)
 	return (free(arg), new_arg);
 }
 
-char	*copy_data_env(t_maindata *core_data, char *arg, int index)
+char	*copy_data_env(t_core *core_data, char *arg, int index)
 {
 	char	*new_arg;
 	char	*token;
@@ -56,7 +56,7 @@ char	*copy_data_env(t_maindata *core_data, char *arg, int index)
 	return (free(arg), free(token), new_arg);
 }
 
-char	*handle_env(t_maindata *core_data, const char *arg)
+char	*handle_env(t_core *core_data, const char *arg)
 {
 	int		i;
 	char	quote;

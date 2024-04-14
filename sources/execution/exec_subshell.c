@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 16:12:10 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/12 17:19:11 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:19:27 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "minishell.h"
 #include "redirection.h"
 
-static void	init_new_ats(t_maindata *core_data, t_maindata *new_core,
+static void	init_new_ats(t_core *core_data, t_core *new_core,
 		t_ast *node)
 {
 	new_core->prompt = ft_strdup(node->data->cmd);
@@ -34,11 +34,11 @@ static void	init_new_ats(t_maindata *core_data, t_maindata *new_core,
 	new_core->is_pipeline = false;
 }
 
-int	exec_subshell(t_maindata *core_data, t_ast *node)
+int	exec_subshell(t_core *core_data, t_ast *node)
 {
-	t_maindata		new_ats;
-	pid_t			pid;
-	int				status;
+	t_core		new_ats;
+	pid_t		pid;
+	int			status;
 
 	pid = fork();
 	if (pid == -1)

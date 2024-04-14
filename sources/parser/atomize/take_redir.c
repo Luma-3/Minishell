@@ -62,7 +62,7 @@ static int	take_filename(t_redir_data *data, const char *prompt,
 	return (i);
 }
 
-static int	add_queue(t_maindata *core_data, const char *prompt, int redir_type,
+static int	add_queue(t_core *core_data, const char *prompt, int redir_type,
 	int *i)
 {
 	t_redir_data	*data;
@@ -96,7 +96,7 @@ static void	check_quote_parenthesis(const char c, char *quote, int *parenthesis)
 		*parenthesis += check_parenthesis(c);
 }
 
-char	*take_redir(t_maindata *ats, const char *prompt, int *nb_redir)
+char	*take_redir(t_core *ats, const char *prompt, int *nb_redir)
 {
 	char	*new_prompt;
 	int		i;

@@ -12,7 +12,7 @@
 
 #include "display.h"
 
-void	display_msg(t_maindata *core_data, char *msg)
+void	display_msg(t_core *core_data, char *msg)
 {
 	char	*command;
 
@@ -77,7 +77,7 @@ static char	*get_params_prompt(t_list *env, char *uname, int last_status,
 	return (free_params(cwd, path, status_ret), prompt);
 }
 
-char	*shell_prompt(t_maindata *core_data)
+char	*shell_prompt(t_core *core_data)
 {
 	char	*input;
 	char	*prompt;

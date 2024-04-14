@@ -14,7 +14,7 @@
 #include "redirection.h"
 #include "parser.h"
 
-void	handle_pipeline_redir(t_maindata *core_data)
+void	handle_pipeline_redir(t_core *core_data)
 {
 	size_t			index;
 	int				fd;

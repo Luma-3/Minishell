@@ -58,7 +58,7 @@ static t_list	*split_arg_lst(t_list *args_lst)
 	return (new_lst);
 }
 
-char	**late_parser(t_maindata *core_data, t_ast *node)
+char	**late_parser(t_core *core_data, t_ast *node)
 {
 	t_list	*lst_args;
 	t_list	*lst_final;
