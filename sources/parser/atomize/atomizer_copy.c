@@ -6,12 +6,11 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/14 16:18:31 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:27:48 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-// #include "minishell.h"
 
 static char	*copy_whitout_parenthesis(char *cmd)
 {

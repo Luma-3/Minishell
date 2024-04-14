@@ -6,22 +6,16 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 13:23:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/14 16:18:31 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:29:02 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
 # include <string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-// TODO: remove unecessary includes
 
 # include "libft.h"
 # include "core_data.h"

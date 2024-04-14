@@ -6,11 +6,11 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:33:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/11 10:33:34 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:30:08 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h" // TODO TRIER LES INCLUDES
+#include "minishell.h"
 #include "ms_builtins.h"
 
 static void	init_builtins(t_builtin *builtins)

@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 14:50:23 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/14 16:18:32 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/14 16:28:54 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <errno.h>
 # include <sys/wait.h>
 # include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 // if you want print new line before and after the prompt : set to '\n'
 // if don't want print new line before and after the prompt : set to '\0'
