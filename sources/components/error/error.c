@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:39:53 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/12 15:22:00 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 20:19:31 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	ft_perror(t_error *errors, const char *str, const char *token)
 		ft_putstr_fd(")", STDERR_FILENO);
 	}
 	ft_putchar_fd('\n', STDERR_FILENO);
+	free(tmp);
 }
 
 char	*ft_strerror(t_error *errors, int code)

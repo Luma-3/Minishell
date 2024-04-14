@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   late_parser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:46:36 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/12 18:27:41 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 19:47:56 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,31 @@ static t_list	*split_arg(const char *prompt)
 	return (args_lst);
 }
 
+static t_list	*split_arg_lst(t_list *args_lst)
+{
+	t_list	*new_lst;
+	t_list	*tmp_lst;
+	t_list	*tmp;
+
+	new_lst = NULL;
+	tmp = args_lst;
+	while (tmp)
+	{
+		tmp_lst = split_arg((char *)tmp->content);
+		ft_lstadd_back(&new_lst, tmp_lst);
+		tmp = tmp->next;
+	}
+	return (new_lst);
+}
+
 char	**late_parser(t_maindata *core_data, t_ast *node)
 {
 	t_list	*lst_args;
+	t_list	*lst_final;
 	char	**tab_args;
 
 	tab_args = NULL;
+	lst_final = NULL;
 	errno = 0;
 	if (node->data->cmd == NULL)
 		return (NULL);
@@ -55,7 +74,8 @@ char	**late_parser(t_maindata *core_data, t_ast *node)
 		return (NULL);
 	if (expansion_cmd(core_data, &lst_args) == FAILURE)
 		return (NULL);
-	// TODO Expend
-	tab_args = list_to_tab(&lst_args);
+	lst_final = split_arg_lst(lst_args);
+	ft_lstclear(&lst_args, free);
+	tab_args = list_to_tab(&lst_final);
 	return (tab_args);
 }

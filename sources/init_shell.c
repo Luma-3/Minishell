@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:49:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/12 18:23:07 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 19:34:26 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	init_shell(t_maindata *core_data, t_error *errors, char **envp)
 	__init_error__(errors);
 	core_data->errors = errors;
 	init_signal();
-	core_data->uname = get_uname();
+	core_data->uname = ft_strdup("anthony");
 	if (core_data->uname == NULL)
 		return (perror_switch(errors, "KikiShell", NULL), FAILURE);
 	core_data->history_fd = open_history(HISTORY_FILE,

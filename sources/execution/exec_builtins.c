@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 16:50:00 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/12 17:17:12 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 20:02:12 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ int	process_built_in(t_maindata *core, t_ast *node, char **args)
 	if (node->data->index > 0)
 		close_pipe(core);
 	restore_stdout(core->errors, save_fd);
+	ft_rm_split(args);
 	return (SUCCESS);
 }

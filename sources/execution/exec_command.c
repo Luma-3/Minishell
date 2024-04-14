@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anthony <anthony@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 12:06:49 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/12 18:11:00 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/12 19:35:41 by anthony          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	exec_command(char **tab_cmd, t_list **env, t_error *errors, char *path)
 	struct stat	stat_path;
 	char		*path_command;
 
-	printf("path = %s\n", path);
 	if (path == NULL)
 	{
 		errno = ENOCNF;
