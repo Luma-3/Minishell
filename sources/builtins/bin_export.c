@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:16:34 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/14 15:47:07 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/15 10:20:23 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static int	export_var(char *arg, char *name, t_list **envp)
 	char	*value;
 	int		ret;
 
+	ret = 0;
 	if (is_valid_name(name) == false)
 	{
 		printf("Kikishell: export: '%s': not a valid identifier\n", arg);
