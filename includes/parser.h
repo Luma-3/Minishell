@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:57:07 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/14 16:29:47 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/15 12:09:24 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int				verif_token_separation(const char *prompt, t_error *errors);
 int				verif_before_operator(const char *prompt, char *token);
 
 int				verif_token_before(const char *prompt, int i);
+
+int				verif_token_after(const char *prompt, int i);
 
 bool			verif_filename(char *filename, t_error *errors);
 

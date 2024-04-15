@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 11:01:21 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/14 16:18:31 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/15 12:04:52 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 extern volatile int	g_sigreceiver;
 
-static int	sig_handler(t_core *core, t_ast *node, bool is_pipeline)
+static int	sig_waitkill(t_core *core, t_ast *node, bool is_pipeline)
 {
 	if (g_sigreceiver == SIGQUIT)
 		printf("\r^\\\033[0KQuit (Core dumped)\n");
@@ -44,17 +44,24 @@ static int	wait_pipeline(t_core *core, t_ast *node)
 	int	ret;
 
 	ret = 0;
-	while (ret >= 0)
+	while (ret == 0)
 	{
-		ret = wait3(NULL, WNOHANG, NULL);
-		if (ret == FAILURE)
-			return (FAILURE);
+		ret = waitpid(node->data->pid, &node->data->exit_code, WNOHANG);
 		if (g_sigreceiver != 0)
 		{
-			return (sig_handler(core, node, true));
+			return (sig_waitkill(core, node, true));
 		}
 	}
 	core->last_status = WEXITSTATUS(node->data->exit_code);
+	ret = 0;
+	while (ret >= 0)
+	{
+		ret = wait3(NULL, WNOHANG, NULL);
+		if (g_sigreceiver != 0)
+		{
+			return (sig_waitkill(core, node, true));
+		}
+	}
 	return (SUCCESS);
 }
 
@@ -77,7 +84,7 @@ static int	wait_process(t_core *core, t_ast *node)
 		}
 		if (g_sigreceiver != 0)
 		{
-			return (sig_handler(core, node, false));
+			return (sig_waitkill(core, node, false));
 		}
 	}
 	return (SUCCESS);

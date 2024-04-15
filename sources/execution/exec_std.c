@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 12:03:26 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/14 16:18:31 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/15 13:17:00 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@
 
 int	pre_process_exec(t_core *core_data, t_ast *node)
 {
-	handle_pipeline_redir(core_data);
+	if (node->data->index != -1)
+		dup_pipe(core_data, node->data->index);
+	if (core_data->is_pipeline == true)
+		handle_pipeline_redir(core_data);
 	if (open_redir(core_data, node) != SUCCESS)
 	{
 		return (FAILURE);
 	}
-	if (node->data->index != -1)
-		dup_pipe(core_data, node->data->index);
 	return (SUCCESS);
 }
 

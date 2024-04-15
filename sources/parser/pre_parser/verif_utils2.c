@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 12:43:18 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/12 15:05:56 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/15 12:12:31 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,15 @@ int	verif_token_before(const char *prompt, int i)
 		}
 	}
 	return (SUCCESS);
+}
+
+int	verif_token_after(const char *prompt, int i)
+{
+	i = ft_skip_whitespaces(prompt, i);
+	if (is_operator(prompt + i) == true || is_pipe(prompt + i) == true
+		|| prompt[i] == '\0' || is_redir_type(prompt + i) > 0)
+		return (SUCCESS);
+	return (FAILURE);
 }
 
 int	verif_before_operator(const char *prompt, char *token)

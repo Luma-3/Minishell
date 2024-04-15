@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:17:41 by jbrousse          #+#    #+#             */
-/*   Updated: 2024/04/14 16:27:48 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/15 12:45:27 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,13 @@ static t_token	*init_node(const char *cmd)
 	data->is_subshell = false;
 	if (is_subshell(cmd) == true)
 		data->is_subshell = true;
-	data->cmd = copy_whitout_parenthesis((char *)cmd);
-	free((char *)cmd);
+	if (is_pipeline(cmd) == false)
+	{
+		data->cmd = copy_whitout_parenthesis((char *)cmd);
+		free((char *)cmd);
+	}
+	else
+		data->cmd = (char *)cmd;
 	if (data->cmd == NULL)
 		return (free_data_tree(data), NULL);
 	data->require_wait = true;
@@ -101,7 +106,10 @@ t_token	*copy_token(t_core *core, const char *prompt, size_t len_copy)
 	prompt_copy = ft_strndup(prompt, len_copy);
 	if (prompt_copy == NULL)
 		return (NULL);
-	prompt_no_redir = take_redir(core, prompt_copy, &nb_redir);
+	if (is_pipeline(prompt_copy) == false)
+		prompt_no_redir = take_redir(core, prompt_copy, &nb_redir);
+	else
+		prompt_no_redir = ft_strdup(prompt_copy);
 	free(prompt_copy);
 	if (prompt_no_redir == NULL)
 		return (NULL);
@@ -110,9 +118,7 @@ t_token	*copy_token(t_core *core, const char *prompt, size_t len_copy)
 	if (token == NULL)
 		return (NULL);
 	if (token->is_subshell == false)
-	{
 		token->is_subshell = subshell;
-	}
 	token->nb_redir = nb_redir;
 	return (token);
 }

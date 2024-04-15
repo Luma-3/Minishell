@@ -6,7 +6,7 @@
 /*   By: jbrousse <jbrousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:19:12 by antgabri          #+#    #+#             */
-/*   Updated: 2024/04/12 15:10:07 by jbrousse         ###   ########.fr       */
+/*   Updated: 2024/04/15 12:09:45 by jbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,14 @@ int	verif_arg_parenthesis(const char *prompt, t_error *errors)
 		if (prompt[i] == '(')
 		{
 			if (verif_token_before(prompt, i - 1) == FAILURE)
+			{
+				print_error_arg(errors, &(prompt[i]));
+				return (FAILURE);
+			}
+		}
+		else if (prompt[i] == ')')
+		{
+			if (verif_token_after(prompt, i + 1) == FAILURE)
 			{
 				print_error_arg(errors, &(prompt[i]));
 				return (FAILURE);
