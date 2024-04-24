@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-	<img src="https://github.com/luma-3/Minishell/blob/main/img/minishelle.png" alt="mimishell_logo" />
+	<img src="https://github.com/luma-3/Minishell/blob/main/img/minishellm.png" alt="mimishell_logo" />
 </p>
 
 ---
@@ -39,6 +39,26 @@ Key features of the shell implementation include:
 - some built-ins
 
 Additionally, the bonus part of the project requires the implementation of advanced features like handling of `&&`, `||`, `()`, and `*`.
+
+## 📥 Installation
+
+Installation and compilation commands :
+
+```
+git clone --recurse-submodules https://github.com/Luma-3/Minishell.git
+cd Minishell
+make
+```
+
+
+## 🦆 Usage
+
+For launch Kikishell :
+```
+./minishell
+```
+
+
 
 
 This work is published under the terms of **[42 Unlicense](https://github.com/gcamerli/42unlicense)**.
