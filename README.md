@@ -11,6 +11,14 @@
 </p>
 
 ---
+<p align="center">
+	<img src="https://img.shields.io/badge/Score-125-blue?style=flat-square&logo=42" alt="Score project :125"/>
+	<img alt="Static Badge" src="https://img.shields.io/badge/Outstanding-3-blue?style=flat-square&logo=42">
+	<img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/Luma-3/Minishell?style=flat-square&logo=github">
+</p>
+
+
+
 
 ## Overview
 
