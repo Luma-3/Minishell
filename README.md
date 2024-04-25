@@ -58,7 +58,20 @@ For launch Kikishell :
 ./minishell
 ```
 
+Launch Shell :
+<p align="center">
+	<img src="https://github.com/Luma-3/Minishell/blob/main/img/Screenshot%20from%202024-04-24%2017-51-33.png" alt="launch shell"/>
+</p>
 
+Execute Command :
+<p align="center">
+	<img src="https://github.com/Luma-3/Minishell/blob/main/img/Screenshot%20from%202024-04-24%2017-52-28.png" alt="CMD exec"/>
+</p>
+
+Exit Shell :
+<p align="center">
+	<img src="https://github.com/Luma-3/Minishell/blob/main/img/Screenshot%20from%202024-04-24%2017-50-21.png" alt="exit shell"/>
+</p>
 
 
 This work is published under the terms of **[42 Unlicense](https://github.com/gcamerli/42unlicense)**.
