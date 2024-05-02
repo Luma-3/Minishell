@@ -53,7 +53,7 @@ Additionally, the bonus part of the project requires the implementation of advan
 Installation and compilation commands :
 
 ```
-git clone --recurse-submodules https://github.com/Luma-3/Minishell.git
+git clone --recursive https://github.com/Luma-3/Minishell.git
 cd Minishell
 make
 ```
