@@ -1,3 +1,4 @@
+![Minishell](https://github.com/user-attachments/assets/bc9d3626-f764-40b8-ac2c-9750540e6f1b)
 <h1 align="center">
 	42 Project - Minishell
 </h1>
