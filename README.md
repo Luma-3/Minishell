@@ -35,19 +35,41 @@ This project is a collaborative effort between two students:
 [antgabri](https://profile.intra.42.fr/users/antgabri)
 
 
-## 📄 Description
+## 📄 Features
 
-This project aims to create a simple shell as part of the curriculum at 42 School. The shell serves as an interpreter and executor for commands and programs.
+### Mandatory Features
+- Display a prompt and maintain history in interactive mode
+- Execute commands using:
+  - PATH resolution or absolute/relative paths
+- Input/output redirection:
+  - `<` (input)
+  - `>` (output overwrite)
+  - `>>` (output append)
+  - `<<` here-doc (reading until delimiter)
+- Pipelines using `|`
+- Environment variable expansion: `$VAR`, `$?`
+- Signal handling for Ctrl-C (interrupt), Ctrl-D (EOF), Ctrl-\ (SIGQUIT)
+- Built-in commands:
+  - `echo` (supports `-n`)
+  - `cd` (relative/absolute paths)
+  - `pwd`
+  - `export`
+  - `unset`
+  - `env`
+  - `exit`
 
-Key features of the shell implementation include:
-- Signal management
-- Environment handling
-- Working history
-- Redirection
-- pipeline
-- some built-ins
+### Bonus Features
+- Logical operators `&&` and `||`, with parentheses to define execution order
+- Wildcard (`*`) expansion in the current working directory
 
-Additionally, the bonus part of the project requires the implementation of advanced features like handling of `&&`, `||`, `()`, and `*`.
+## Requirements
+- Written in C, following the [42 School Norm]
+- No memory leaks or crashes permitted
+- Code must compile without warnings or errors (`-Wall -Wextra -Werror` flags)
+- One global variable allowed (for signal tracking only)
+- Use of `libft` is allowed if included and compiled properly
+- Essential Makefile targets:
+  - `all`, `clean`, `fclean`, `re`, `bonus` (for optional features)
 
 ## 📥 Installation
 
